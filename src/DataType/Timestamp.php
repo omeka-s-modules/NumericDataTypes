@@ -197,7 +197,7 @@ class Timestamp extends AbstractDataType
             $date['year'],
             $date['month_normalized'],
             $date['day_normalized']
-        )->setTime(0, 0, 0, 0);
+        )->setTime(0, 0, 0);
         return $date;
     }
 
