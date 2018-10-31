@@ -18,7 +18,7 @@ class Timestamp extends AbstractDataType
      * integer.
      */
     const YEAR_MIN = -292277022656;
-    const YEAR_MAX = 292277026596;
+    const YEAR_MAX = 292277026595;
 
     public function getName()
     {
