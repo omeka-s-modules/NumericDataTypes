@@ -13,12 +13,13 @@ use Zend\View\Renderer\PhpRenderer;
 class Timestamp extends AbstractDataType
 {
     /**
-     * Minimum and maximum years. When converted to Unix timestamps, anything
-     * outside this range would exceed the minimum or maximum range for a 64-bit
-     * integer.
+     * Minimum and maximum years.
+     *
+     * When converted to Unix timestamps, anything outside this range would
+     * exceed the minimum or maximum range for a 64-bit integer.
      */
     const YEAR_MIN = -292277022656;
-    const YEAR_MAX = 292277026595;
+    const YEAR_MAX =  292277026595;
 
     public function getName()
     {

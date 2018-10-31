@@ -11,6 +11,20 @@ use Zend\View\Renderer\PhpRenderer;
 
 class Integer extends AbstractDataType
 {
+    /**
+     * Minimum and maximum integers.
+     *
+     * Anything outside this range would exceed the safe minimum or maximum
+     * range for JavaScript. Ideally we'd use the larger PHP_INT_MIN and
+     * PHP_INT_MAX for the range, but since the data may be processed in the
+     * browser (e.g. when decoding JSON and validating number inputs) we have to
+     * settle on browser limitations.
+     *
+     * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MIN_SAFE_INTEGER
+     */
+    const MIN_SAFE_INT = -9007199254740991;
+    const MAX_SAFE_INT =  9007199254740991;
+
     public function getName()
     {
         return 'numeric:integer';
@@ -35,6 +49,8 @@ class Integer extends AbstractDataType
         $valueInput->setAttributes([
             'data-value-key' => '@value',
             'step' => 1,
+            'min' => self::MIN_SAFE_INT,
+            'max' => self::MAX_SAFE_INT,
         ]);
         return $view->formNumber($valueInput);
     }
@@ -49,8 +65,8 @@ class Integer extends AbstractDataType
 
     public function isValid(array $valueObject)
     {
-        return ($valueObject['@value'] <= PHP_INT_MAX)
-            && ($valueObject['@value'] >= ~PHP_INT_MAX);
+        return ($valueObject['@value'] <= self::MAX_SAFE_INT)
+            && ($valueObject['@value'] >= self::MIN_SAFE_INT);
     }
 
     public function render(PhpRenderer $view, ValueRepresentation $value)
