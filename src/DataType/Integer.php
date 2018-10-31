@@ -71,7 +71,7 @@ class Integer extends AbstractDataType
 
     public function render(PhpRenderer $view, ValueRepresentation $value)
     {
-        return $value->value();
+        return number_format($value->value());
     }
 
     public function getEntityClass()
