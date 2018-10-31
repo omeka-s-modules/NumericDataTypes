@@ -1,0 +1,154 @@
+<?php
+$this->headScript()->appendFile($this->assetUrl('js/numeric-data-types.js', 'NumericDataTypes'));
+?>
+
+<div class="field">
+    <div class="field-meta">
+        <label for=""><?php echo $this->translate('Date comes before'); ?></label>
+    </div>
+    <div class="inputs">
+        <?php
+        echo $this->numericPropertySelect([
+            'name' => 'numeric[ts][lt][pid]',
+            'attributes' => [
+                'id' => 'timestamp-before-pid',
+                'class' => 'chosen-select',
+            ],
+            'options' => [
+                'numeric_data_type' => 'timestamp',
+            ],
+        ]);
+        ?>
+        <input type="text" id="timestamp-before-year" placeholder="<?php echo $this->translate('Enter year'); ?>">
+        <select id="timestamp-before-month">
+            <option value=""><?php echo $this->translate('Select month'); ?></option>
+            <option value="1"><?php echo $this->translate('January'); ?></option>
+            <option value="2"><?php echo $this->translate('February'); ?></option>>
+            <option value="3"><?php echo $this->translate('March'); ?></option>>
+            <option value="4"><?php echo $this->translate('April'); ?></option>>
+            <option value="5"><?php echo $this->translate('May'); ?></option>>
+            <option value="6"><?php echo $this->translate('June'); ?></option>>
+            <option value="7"><?php echo $this->translate('July'); ?></option>>
+            <option value="8"><?php echo $this->translate('August'); ?></option>>
+            <option value="9"><?php echo $this->translate('September'); ?></option>>
+            <option value="10"><?php echo $this->translate('October'); ?></option>>
+            <option value="11"><?php echo $this->translate('November'); ?></option>>
+            <option value="12"><?php echo $this->translate('December'); ?></option>>
+        </select>
+        <select id="timestamp-before-day">
+            <option value=""><?php echo $this->translate('Select day'); ?></option>
+            <?php foreach (range(1, 31) as $day): ?>
+            <option value="<?php echo $day; ?>"><?php echo $day; ?></option>
+            <?php endforeach; ?>
+        </select>
+        <input type="hidden" id="timestamp-before-ts" name="numeric[ts][lt][val]">
+    </div>
+</div>
+
+<div class="field">
+    <div class="field-meta">
+        <label for=""><?php echo $this->translate('Date comes after'); ?></label>
+    </div>
+    <div class="inputs">
+        <?php
+        echo $this->numericPropertySelect([
+            'name' => 'numeric[ts][gt][pid]',
+            'attributes' => [
+                'id' => 'timestamp-after-pid',
+                'class' => 'chosen-select',
+            ],
+            'options' => [
+                'numeric_data_type' => 'timestamp',
+            ],
+        ]);
+        ?>
+        <input type="text" id="timestamp-after-year" placeholder="<?php echo $this->translate('Enter year'); ?>">
+        <select id="timestamp-after-month">
+            <option value=""><?php echo $this->translate('Select month'); ?></option>
+            <option value="1"><?php echo $this->translate('January'); ?></option>
+            <option value="2"><?php echo $this->translate('February'); ?></option>>
+            <option value="3"><?php echo $this->translate('March'); ?></option>>
+            <option value="4"><?php echo $this->translate('April'); ?></option>>
+            <option value="5"><?php echo $this->translate('May'); ?></option>>
+            <option value="6"><?php echo $this->translate('June'); ?></option>>
+            <option value="7"><?php echo $this->translate('July'); ?></option>>
+            <option value="8"><?php echo $this->translate('August'); ?></option>>
+            <option value="9"><?php echo $this->translate('September'); ?></option>>
+            <option value="10"><?php echo $this->translate('October'); ?></option>>
+            <option value="11"><?php echo $this->translate('November'); ?></option>>
+            <option value="12"><?php echo $this->translate('December'); ?></option>>
+        </select>
+        <select id="timestamp-after-day">
+            <option value=""><?php echo $this->translate('Select day'); ?></option>
+            <?php foreach (range(1, 31) as $day): ?>
+            <option value="<?php echo $day; ?>"><?php echo $day; ?></option>
+            <?php endforeach; ?>
+        </select>
+        <input type="hidden" id="timestamp-after-ts" name="numeric[ts][gt][val]">
+    </div>
+</div>
+
+<div class="field">
+    <div class="field-meta">
+        <label for=""><?php echo $this->translate('Value is less than'); ?></label>
+    </div>
+    <div class="inputs">
+        <?php
+        echo $this->numericPropertySelect([
+            'name' => 'numeric[int][lt][pid]',
+            'attributes' => [
+                'class' => 'chosen-select',
+            ],
+            'options' => [
+                'numeric_data_type' => 'integer',
+            ],
+        ]);
+        ?>
+        <input type="number" step="1" name="numeric[int][lt][val]" placeholder="<?php echo $this->translate('Enter integer'); ?>">    </div>
+</div>
+
+<div class="field">
+    <div class="field-meta">
+        <label for=""><?php echo $this->translate('Value is greater than'); ?></label>
+    </div>
+    <div class="inputs">
+        <?php
+        echo $this->numericPropertySelect([
+            'name' => 'numeric[int][gt][pid]',
+            'attributes' => [
+                'class' => 'chosen-select',
+            ],
+            'options' => [
+                'numeric_data_type' => 'integer',
+            ],
+        ]);
+        ?>
+        <input type="number" step="1" name="numeric[int][gt][val]" placeholder="<?php echo $this->translate('Enter integer'); ?>">    </div>
+</div>
+
+<script>
+$(function() {
+    $('form#advanced-search').on('submit', function (e) {
+        var before = $('#timestamp-before-ts');
+        var after = $('#timestamp-after-ts');
+        setDateValue(
+            before,
+            $('#timestamp-before-year'),
+            $('#timestamp-before-month'),
+            $('#timestamp-before-day')
+        );
+        setDateValue(
+            after,
+            $('#timestamp-after-year'),
+            $('#timestamp-after-month'),
+            $('#timestamp-after-day')
+        );
+        if ('' === before.val()) {
+            before.prop('disabled', true);
+        }
+        if ('' === after.val()) {
+            after.prop('disabled', true);
+        }
+    });
+})
+</script>
