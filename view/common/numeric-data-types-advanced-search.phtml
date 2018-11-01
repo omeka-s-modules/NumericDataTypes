@@ -2,6 +2,59 @@
 use NumericDataTypes\DataType\Timestamp;
 
 $this->headScript()->appendFile($this->assetUrl('js/numeric-data-types.js', 'NumericDataTypes'));
+
+// Set default values.
+$ltTimestamp = [
+    'pid' => isset($query['numeric']['ts']['lt']['pid']) ? $query['numeric']['ts']['lt']['pid'] : null,
+    'val' => isset($query['numeric']['ts']['lt']['val']) ? $query['numeric']['ts']['lt']['val'] : null,
+    'year' => null,
+    'month' =>  null,
+    'day' => null,
+];
+$gtTimestamp = [
+    'pid' => isset($query['numeric']['ts']['gt']['pid']) ? $query['numeric']['ts']['gt']['pid'] : null,
+    'val' => isset($query['numeric']['ts']['gt']['val']) ? $query['numeric']['ts']['gt']['val'] : null,
+    'year' => null,
+    'month' =>  null,
+    'day' => null,
+];
+$ltInteger = [
+    'pid' => isset($query['numeric']['int']['lt']['pid']) ? $query['numeric']['int']['lt']['pid'] : null,
+    'val' => isset($query['numeric']['int']['lt']['val']) ? $query['numeric']['int']['lt']['val'] : null,
+];
+$gtInteger = [
+    'pid' => isset($query['numeric']['int']['gt']['pid']) ? $query['numeric']['int']['gt']['pid'] : null,
+    'val' => isset($query['numeric']['int']['gt']['val']) ? $query['numeric']['int']['gt']['val'] : null,
+];
+
+// Prepare passed values.
+if (isset($ltTimestamp['val'])) {
+    $date = explode('-', $ltTimestamp['val']);
+    $ltTimestamp['year'] = $date[0];
+    $ltTimestamp['month'] = isset($date[1]) ? $date[1] : null;
+    $ltTimestamp['day'] = isset($date[2]) ? $date[2] : null;
+}
+if (isset($gtTimestamp['val'])) {
+    $date = explode('-', $gtTimestamp['val']);
+    $gtTimestamp['year'] = $date[0];
+    $gtTimestamp['month'] = isset($date[1]) ? $date[1] : null;
+    $gtTimestamp['day'] = isset($date[2]) ? $date[2] : null;
+}
+
+$months = [
+    1 => $this->translate('January'),
+    2 => $this->translate('February'),
+    3 => $this->translate('March'),
+    4 => $this->translate('April'),
+    5 => $this->translate('May'),
+    6 => $this->translate('June'),
+    7 => $this->translate('July'),
+    8 => $this->translate('August'),
+    9 => $this->translate('September'),
+    10 => $this->translate('October'),
+    11 => $this->translate('November'),
+    12 => $this->translate('December'),
+];
 ?>
 
 <div class="field">
@@ -15,29 +68,21 @@ $this->headScript()->appendFile($this->assetUrl('js/numeric-data-types.js', 'Num
             'attributes' => [
                 'id' => 'timestamp-before-pid',
                 'class' => 'chosen-select',
+                'value' => $ltTimestamp['pid'],
             ],
             'options' => [
                 'numeric_data_type' => 'timestamp',
             ],
         ]);
         ?>
-        <input type="number" id="timestamp-before-year" step="1" min="<?php echo Timestamp::YEAR_MIN; ?>" max="<?php echo Timestamp::YEAR_MAX; ?>" placeholder="<?php echo $this->translate('Enter year'); ?>">
+        <input type="number" value="<?php echo $this->escapeHtml($ltTimestamp['year']); ?>" id="timestamp-before-year" step="1" min="<?php echo Timestamp::YEAR_MIN; ?>" max="<?php echo Timestamp::YEAR_MAX; ?>" placeholder="<?php echo $this->translate('Enter year'); ?>">
         <select id="timestamp-before-month">
             <option value=""><?php echo $this->translate('Select month'); ?></option>
-            <option value="1"><?php echo $this->translate('January'); ?></option>
-            <option value="2"><?php echo $this->translate('February'); ?></option>>
-            <option value="3"><?php echo $this->translate('March'); ?></option>>
-            <option value="4"><?php echo $this->translate('April'); ?></option>>
-            <option value="5"><?php echo $this->translate('May'); ?></option>>
-            <option value="6"><?php echo $this->translate('June'); ?></option>>
-            <option value="7"><?php echo $this->translate('July'); ?></option>>
-            <option value="8"><?php echo $this->translate('August'); ?></option>>
-            <option value="9"><?php echo $this->translate('September'); ?></option>>
-            <option value="10"><?php echo $this->translate('October'); ?></option>>
-            <option value="11"><?php echo $this->translate('November'); ?></option>>
-            <option value="12"><?php echo $this->translate('December'); ?></option>>
+            <?php foreach ($months as $index => $month): ?>
+            <option value="<?php echo $index; ?>"<?php echo ($index == $ltTimestamp['month']) ? ' selected' : null; ?>><?php echo $month; ?></option>
+            <?php endforeach; ?>
         </select>
-        <input type="number" id="timestamp-before-day" step="1" min="1" max="31" placeholder="<?php echo $this->translate('Enter day'); ?>">
+        <input type="number" value="<?php echo $this->escapeHtml($ltTimestamp['day']); ?>" id="timestamp-before-day" step="1" min="1" max="31" placeholder="<?php echo $this->translate('Enter day'); ?>">
         <input type="hidden" id="timestamp-before-ts" name="numeric[ts][lt][val]">
     </div>
 </div>
@@ -53,29 +98,21 @@ $this->headScript()->appendFile($this->assetUrl('js/numeric-data-types.js', 'Num
             'attributes' => [
                 'id' => 'timestamp-after-pid',
                 'class' => 'chosen-select',
+                'value' => $gtTimestamp['pid'],
             ],
             'options' => [
                 'numeric_data_type' => 'timestamp',
             ],
         ]);
         ?>
-        <input type="number" id="timestamp-after-year" step="1" min="<?php echo Timestamp::YEAR_MIN; ?>" max="<?php echo Timestamp::YEAR_MAX; ?>" placeholder="<?php echo $this->translate('Enter year'); ?>">
+        <input type="number" value="<?php echo $this->escapeHtml($gtTimestamp['year']); ?>" id="timestamp-after-year" step="1" min="<?php echo Timestamp::YEAR_MIN; ?>" max="<?php echo Timestamp::YEAR_MAX; ?>" placeholder="<?php echo $this->translate('Enter year'); ?>">
         <select id="timestamp-after-month">
             <option value=""><?php echo $this->translate('Select month'); ?></option>
-            <option value="1"><?php echo $this->translate('January'); ?></option>
-            <option value="2"><?php echo $this->translate('February'); ?></option>>
-            <option value="3"><?php echo $this->translate('March'); ?></option>>
-            <option value="4"><?php echo $this->translate('April'); ?></option>>
-            <option value="5"><?php echo $this->translate('May'); ?></option>>
-            <option value="6"><?php echo $this->translate('June'); ?></option>>
-            <option value="7"><?php echo $this->translate('July'); ?></option>>
-            <option value="8"><?php echo $this->translate('August'); ?></option>>
-            <option value="9"><?php echo $this->translate('September'); ?></option>>
-            <option value="10"><?php echo $this->translate('October'); ?></option>>
-            <option value="11"><?php echo $this->translate('November'); ?></option>>
-            <option value="12"><?php echo $this->translate('December'); ?></option>>
+            <?php foreach ($months as $index => $month): ?>
+            <option value="<?php echo $index; ?>"<?php echo ($index == $gtTimestamp['month']) ? ' selected' : null; ?>><?php echo $month; ?></option>
+            <?php endforeach; ?>
         </select>
-        <input type="number" id="timestamp-after-day" step="1" min="1" max="31" placeholder="<?php echo $this->translate('Enter day'); ?>">
+        <input type="number" value="<?php echo $this->escapeHtml($gtTimestamp['day']); ?>" id="timestamp-after-day" step="1" min="1" max="31" placeholder="<?php echo $this->translate('Enter day'); ?>">
         <input type="hidden" id="timestamp-after-ts" name="numeric[ts][gt][val]">
     </div>
 </div>
@@ -90,13 +127,14 @@ $this->headScript()->appendFile($this->assetUrl('js/numeric-data-types.js', 'Num
             'name' => 'numeric[int][lt][pid]',
             'attributes' => [
                 'class' => 'chosen-select',
+                'value' => $ltInteger['pid'],
             ],
             'options' => [
                 'numeric_data_type' => 'integer',
             ],
         ]);
         ?>
-        <input type="number" step="1" name="numeric[int][lt][val]" placeholder="<?php echo $this->translate('Enter integer'); ?>">    </div>
+        <input type="number" value="<?php echo $this->escapeHtml($ltInteger['val']); ?>" step="1" name="numeric[int][lt][val]" placeholder="<?php echo $this->translate('Enter integer'); ?>">    </div>
 </div>
 
 <div class="field">
@@ -109,13 +147,14 @@ $this->headScript()->appendFile($this->assetUrl('js/numeric-data-types.js', 'Num
             'name' => 'numeric[int][gt][pid]',
             'attributes' => [
                 'class' => 'chosen-select',
+                'value' => $gtInteger['pid'],
             ],
             'options' => [
                 'numeric_data_type' => 'integer',
             ],
         ]);
         ?>
-        <input type="number" step="1" name="numeric[int][gt][val]" placeholder="<?php echo $this->translate('Enter integer'); ?>">    </div>
+        <input type="number" value="<?php echo $this->escapeHtml($gtInteger['val']); ?>" step="1" name="numeric[int][gt][val]" placeholder="<?php echo $this->translate('Enter integer'); ?>">    </div>
 </div>
 
 <script>
