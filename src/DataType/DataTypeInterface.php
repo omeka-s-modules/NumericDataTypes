@@ -16,6 +16,9 @@ interface DataTypeInterface
     /**
      * Get the number to be stored from the passed value.
      *
+     * Should throw \InvalidArgumentException if the passed value is invalid.
+     *
+     * @throws \InvalidArgumentException
      * @param string $value
      * @return int
      */

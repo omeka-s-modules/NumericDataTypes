@@ -102,39 +102,19 @@ class Integer extends AbstractDataType
     {
         if (isset($query['numeric']['int']['lt']['val'])
             && isset($query['numeric']['int']['lt']['pid'])
-            && is_numeric($query['numeric']['int']['lt']['val'])
             && is_numeric($query['numeric']['int']['lt']['pid'])
         ) {
-            $alias = $adapter->createAlias();
-            $qb->leftJoin(
-                $this->getEntityClass(), $alias, 'WITH',
-                $qb->expr()->andX(
-                    $qb->expr()->eq("$alias.resource", $adapter->getEntityClass() . '.id'),
-                    $qb->expr()->eq("$alias.property", (int) $query['numeric']['int']['lt']['pid'])
-                )
-            );
-            $qb->andWhere($qb->expr()->lt(
-                "$alias.value",
-                $adapter->createNamedParameter($qb, $this->getNumberFromValue($query['numeric']['int']['lt']['val']))
-            ));
+            $value = $query['numeric']['int']['lt']['val'];
+            $propertyId = $query['numeric']['int']['lt']['pid'];
+            $this->addLessThanQuery($adapter, $qb, $propertyId, $value);
         }
         if (isset($query['numeric']['int']['gt']['val'])
             && isset($query['numeric']['int']['gt']['pid'])
-            && is_numeric($query['numeric']['int']['gt']['val'])
             && is_numeric($query['numeric']['int']['gt']['pid'])
         ) {
-            $alias = $adapter->createAlias();
-            $qb->leftJoin(
-                $this->getEntityClass(), $alias, 'WITH',
-                $qb->expr()->andX(
-                    $qb->expr()->eq("$alias.resource", $adapter->getEntityClass() . '.id'),
-                    $qb->expr()->eq("$alias.property", (int) $query['numeric']['int']['gt']['pid'])
-                )
-            );
-            $qb->andWhere($qb->expr()->gt(
-                "$alias.value",
-                $adapter->createNamedParameter($qb, $this->getNumberFromValue($query['numeric']['int']['gt']['val']))
-            ));
+            $value = $query['numeric']['int']['gt']['val'];
+            $propertyId = $query['numeric']['int']['gt']['pid'];
+            $this->addGreaterThanQuery($adapter, $qb, $propertyId, $value);
         }
     }
 
