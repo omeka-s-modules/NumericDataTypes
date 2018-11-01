@@ -65,8 +65,9 @@ class Integer extends AbstractDataType
 
     public function isValid(array $valueObject)
     {
-        return ($valueObject['@value'] <= self::MAX_SAFE_INT)
-            && ($valueObject['@value'] >= self::MIN_SAFE_INT);
+        return is_numeric($valueObject['@value'])
+            && ((int) $valueObject['@value'] <= self::MAX_SAFE_INT)
+            && ((int) $valueObject['@value'] >= self::MIN_SAFE_INT);
     }
 
     public function render(PhpRenderer $view, ValueRepresentation $value)
@@ -87,6 +88,9 @@ class Integer extends AbstractDataType
      */
     public function getNumberFromValue($value)
     {
+        if (!$this->isValid(['@value' => $value])) {
+            throw new \InvalidArgumentException('Invalid integer');
+        }
         return (int) $value;
     }
 
