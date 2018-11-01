@@ -162,13 +162,13 @@ $(function() {
     $('form#advanced-search').on('submit', function (e) {
         var before = $('#timestamp-before-ts');
         var after = $('#timestamp-after-ts');
-        setDateValue(
+        NumericDataTypes.setDateValue(
             before,
             $('#timestamp-before-year'),
             $('#timestamp-before-month'),
             $('#timestamp-before-day')
         );
-        setDateValue(
+        NumericDataTypes.setDateValue(
             after,
             $('#timestamp-after-year'),
             $('#timestamp-after-month'),
@@ -181,5 +181,5 @@ $(function() {
             after.prop('disabled', true);
         }
     });
-})
+});
 </script>
