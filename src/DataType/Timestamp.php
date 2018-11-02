@@ -52,11 +52,11 @@ class Timestamp extends AbstractDataType
             'step' => 1,
             'min' => self::YEAR_MIN,
             'max' => self::YEAR_MAX,
-            'placeholder' => 'Enter year', // @translate
+            'placeholder' => 'Year', // @translate
         ]);
 
         $monthSelect = new Element\Select('numeric-timestamp-month');
-        $monthSelect->setEmptyOption('Select month'); // @translate
+        $monthSelect->setEmptyOption('Month'); // @translate
         $monthSelect->setValueOptions([
             1 => 'January', // @translate
             2 => 'February', // @translate
@@ -77,7 +77,7 @@ class Timestamp extends AbstractDataType
             'step' => 1,
             'min' => 1,
             'max' => 31,
-            'placeholder' => 'Enter day', // @translate
+            'placeholder' => 'Day', // @translate
         ]);
 
         $hourInput = new Element\Number('numeric-timestamp-hour');
@@ -85,7 +85,7 @@ class Timestamp extends AbstractDataType
             'step' => 1,
             'min' => 0,
             'max' => 23,
-            'placeholder' => 'Enter hour', // @translate
+            'placeholder' => 'Hour', // @translate
         ]);
 
         $minuteInput = new Element\Number('numeric-timestamp-minute');
@@ -93,7 +93,7 @@ class Timestamp extends AbstractDataType
             'step' => 1,
             'min' => 0,
             'max' => 59,
-            'placeholder' => 'Enter minute', // @translate
+            'placeholder' => 'Minute', // @translate
         ]);
 
         $secondInput = new Element\Number('numeric-timestamp-second');
@@ -101,19 +101,36 @@ class Timestamp extends AbstractDataType
             'step' => 1,
             'min' => 0,
             'max' => 59,
-            'placeholder' => 'Enter second', // @translate
+            'placeholder' => 'Second', // @translate
         ]);
 
-        return '<div class="timestamp-datetime-inputs"><div class="timestamp-date-inputs">'
-            . $view->formNumber($yearInput)
-            . $view->formSelect($monthSelect)
-            . $view->formNumber($dayInput)
-            . '</div><div class="timestamp-time-inputs">'
-            . $view->formNumber($hourInput)
-            . $view->formNumber($minuteInput)
-            . $view->formNumber($secondInput)
-            . '</div></div>'
-            . $view->formHidden($valueInput);
+        $html = <<<HTML
+<div class="timestamp-datetime-inputs">
+    %s
+    <div class="timestamp-date-inputs">
+        %s
+        %s
+        %s
+        <a href="#" class="timestamp-toggle-time">%s</a>
+    </div>
+    <div class="timestamp-time-inputs">
+        %s
+        %s
+        %s
+    </div>
+</div>
+HTML;
+        return sprintf(
+            $html,
+            $view->formHidden($valueInput),
+            $view->formNumber($yearInput),
+            $view->formSelect($monthSelect),
+            $view->formNumber($dayInput),
+            $view->translate('time'),
+            $view->formNumber($hourInput),
+            $view->formNumber($minuteInput),
+            $view->formNumber($secondInput)
+        );
     }
 
     public function isValid(array $valueObject)

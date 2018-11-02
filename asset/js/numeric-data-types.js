@@ -71,5 +71,17 @@ $(document).on('o:prepare-value', function(e, type, value) {
         s.on('change', function(e) {
             NumericDataTypes.setDateValue(v, y, m, d, h, mi, s);
         });
+
+        // By default, show time inputs only if there's an hour.
+        var timeInputs = value.find('.timestamp-time-inputs');
+        h.val() ? timeInputs.show() : timeInputs.hide();
     }
+});
+
+$(function() {
+    $(document).find('.timestamp-toggle-time').on('click', function(e) {
+        // Toggle visibility of time inputs.
+        e.preventDefault();
+        $(this).closest('.timestamp-datetime-inputs').find('.timestamp-time-inputs').toggle();
+    });
 });
