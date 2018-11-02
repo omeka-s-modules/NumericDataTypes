@@ -2,6 +2,7 @@
 namespace NumericDataTypes\DataType;
 
 use DateTime;
+use DateTimeZone;
 use Doctrine\ORM\QueryBuilder;
 use Omeka\Api\Adapter\AbstractEntityAdapter;
 use Omeka\Api\Adapter\AdapterInterface;
@@ -229,8 +230,11 @@ class Timestamp extends AbstractDataType
         if ((0 > $date['second_normalized']) || (59 < $date['second_normalized'])) {
             throw new \InvalidArgumentException('Invalid second');
         }
-        // Adding the date object here to reduce code duplication.
-        $date['date'] = new DateTime;
+        // Adding the DateTime object here to reduce code duplication. To ensure
+        // consistency, assume that the passed ISO 8601 value has already been
+        // adjusted to Coordinated Universal Time (UTC). This avoids automatic
+        // adjustments based on the server's default timezone.
+        $date['date'] = new DateTime(null, new DateTimeZone('UTC'));
         $date['date']->setDate(
             $date['year'],
             $date['month_normalized'],
