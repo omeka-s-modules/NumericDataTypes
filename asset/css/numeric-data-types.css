@@ -1,0 +1,25 @@
+.timestamp-date-inputs,
+.timestamp-time-inputs {
+    display: flex;
+    margin-top: 6px;
+}
+
+.timestamp-datetime-inputs select {
+    margin: 0;
+    width: auto;
+}
+
+.timestamp-datetime-inputs input {
+    min-width: 4em;
+    width: 8em;
+}
+
+.timestamp-datetime-inputs input:not(:last-child),
+.timestamp-datetime-inputs select:not(:last-child) {
+    margin-right: 4px;
+}
+
+#resource-values .timestamp-date-inputs {
+    margin-top: 0;
+}
+

@@ -104,12 +104,15 @@ class Timestamp extends AbstractDataType
             'placeholder' => 'Enter second', // @translate
         ]);
 
-        return $view->formNumber($yearInput)
+        return '<div class="timestamp-datetime-inputs"><div class="timestamp-date-inputs">'
+            . $view->formNumber($yearInput)
             . $view->formSelect($monthSelect)
             . $view->formNumber($dayInput)
+            . '</div><div class="timestamp-time-inputs">'
             . $view->formNumber($hourInput)
             . $view->formNumber($minuteInput)
             . $view->formNumber($secondInput)
+            . '</div></div>'
             . $view->formHidden($valueInput);
     }
 

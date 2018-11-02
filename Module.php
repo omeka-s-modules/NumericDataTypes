@@ -118,7 +118,7 @@ DROP TABLE IF EXISTS numeric_data_types_timestamp;
     public function prepareResourceForm(Event $event)
     {
         $view = $event->getTarget();
-        //~ $view->headLink()->appendStylesheet($view->assetUrl('css/numeric-data-types.css', 'NumericDataTypes'));
+        $view->headLink()->appendStylesheet($view->assetUrl('css/numeric-data-types.css', 'NumericDataTypes'));
         $view->headScript()->appendFile($view->assetUrl('js/numeric-data-types.js', 'NumericDataTypes'));
     }
 

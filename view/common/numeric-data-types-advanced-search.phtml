@@ -2,6 +2,7 @@
 use NumericDataTypes\DataType\Timestamp;
 
 $this->headScript()->appendFile($this->assetUrl('js/numeric-data-types.js', 'NumericDataTypes'));
+$this->headLink()->appendStylesheet($this->assetUrl('css/numeric-data-types.css', 'NumericDataTypes'));
 
 // Set default values.
 $ltTimestamp = [
@@ -87,17 +88,23 @@ $months = [
             ],
         ]);
         ?>
-        <input type="number" value="<?php echo $this->escapeHtml($ltTimestamp['year']); ?>" id="timestamp-before-year" step="1" min="<?php echo Timestamp::YEAR_MIN; ?>" max="<?php echo Timestamp::YEAR_MAX; ?>" placeholder="<?php echo $this->translate('Enter year'); ?>">
-        <select id="timestamp-before-month">
-            <option value=""><?php echo $this->translate('Select month'); ?></option>
-            <?php foreach ($months as $index => $month): ?>
-            <option value="<?php echo $index; ?>"<?php echo ($index == $ltTimestamp['month']) ? ' selected' : null; ?>><?php echo $month; ?></option>
-            <?php endforeach; ?>
-        </select>
-        <input type="number" value="<?php echo $this->escapeHtml($ltTimestamp['day']); ?>" id="timestamp-before-day" step="1" min="1" max="31" placeholder="<?php echo $this->translate('Enter day'); ?>">
-        <input type="number" value="<?php echo $this->escapeHtml($ltTimestamp['hour']); ?>" id="timestamp-before-hour" step="1" min="0" max="59" placeholder="<?php echo $this->translate('Enter hour'); ?>">
-        <input type="number" value="<?php echo $this->escapeHtml($ltTimestamp['minute']); ?>" id="timestamp-before-minute" step="1" min="0" max="59" placeholder="<?php echo $this->translate('Enter minute'); ?>">
-        <input type="number" value="<?php echo $this->escapeHtml($ltTimestamp['second']); ?>" id="timestamp-before-second" step="1" min="0" max="59" placeholder="<?php echo $this->translate('Enter second'); ?>">
+        <div class="timestamp-datetime-inputs">
+            <div class="timestamp-date-inputs">
+                <input type="number" value="<?php echo $this->escapeHtml($ltTimestamp['year']); ?>" id="timestamp-before-year" step="1" min="<?php echo Timestamp::YEAR_MIN; ?>" max="<?php echo Timestamp::YEAR_MAX; ?>" placeholder="<?php echo $this->translate('Enter year'); ?>">
+                <select id="timestamp-before-month">
+                    <option value=""><?php echo $this->translate('Select month'); ?></option>
+                    <?php foreach ($months as $index => $month): ?>
+                    <option value="<?php echo $index; ?>"<?php echo ($index == $ltTimestamp['month']) ? ' selected' : null; ?>><?php echo $month; ?></option>
+                    <?php endforeach; ?>
+                </select>
+                <input type="number" value="<?php echo $this->escapeHtml($ltTimestamp['day']); ?>" id="timestamp-before-day" step="1" min="1" max="31" placeholder="<?php echo $this->translate('Enter day'); ?>">
+            </div>
+            <div class="timestamp-time-inputs">
+                <input type="number" value="<?php echo $this->escapeHtml($ltTimestamp['hour']); ?>" id="timestamp-before-hour" step="1" min="0" max="59" placeholder="<?php echo $this->translate('Enter hour'); ?>">
+                <input type="number" value="<?php echo $this->escapeHtml($ltTimestamp['minute']); ?>" id="timestamp-before-minute" step="1" min="0" max="59" placeholder="<?php echo $this->translate('Enter minute'); ?>">
+                <input type="number" value="<?php echo $this->escapeHtml($ltTimestamp['second']); ?>" id="timestamp-before-second" step="1" min="0" max="59" placeholder="<?php echo $this->translate('Enter second'); ?>">
+            </div>
+        </div>
         <input type="hidden" id="timestamp-before-ts" name="numeric[ts][lt][val]">
     </div>
 </div>
@@ -120,17 +127,23 @@ $months = [
             ],
         ]);
         ?>
-        <input type="number" value="<?php echo $this->escapeHtml($gtTimestamp['year']); ?>" id="timestamp-after-year" step="1" min="<?php echo Timestamp::YEAR_MIN; ?>" max="<?php echo Timestamp::YEAR_MAX; ?>" placeholder="<?php echo $this->translate('Enter year'); ?>">
-        <select id="timestamp-after-month">
-            <option value=""><?php echo $this->translate('Select month'); ?></option>
-            <?php foreach ($months as $index => $month): ?>
-            <option value="<?php echo $index; ?>"<?php echo ($index == $gtTimestamp['month']) ? ' selected' : null; ?>><?php echo $month; ?></option>
-            <?php endforeach; ?>
-        </select>
-        <input type="number" value="<?php echo $this->escapeHtml($gtTimestamp['day']); ?>" id="timestamp-after-day" step="1" min="1" max="31" placeholder="<?php echo $this->translate('Enter day'); ?>">
-        <input type="number" value="<?php echo $this->escapeHtml($gtTimestamp['hour']); ?>" id="timestamp-after-hour" step="1" min="0" max="59" placeholder="<?php echo $this->translate('Enter hour'); ?>">
-        <input type="number" value="<?php echo $this->escapeHtml($gtTimestamp['minute']); ?>" id="timestamp-after-minute" step="1" min="0" max="59" placeholder="<?php echo $this->translate('Enter minute'); ?>">
-        <input type="number" value="<?php echo $this->escapeHtml($gtTimestamp['second']); ?>" id="timestamp-after-second" step="1" min="0" max="59" placeholder="<?php echo $this->translate('Enter second'); ?>">
+        <div class="timestamp-datetime-inputs">
+            <div class="timestamp-date-inputs">
+                <input type="number" value="<?php echo $this->escapeHtml($gtTimestamp['year']); ?>" id="timestamp-after-year" step="1" min="<?php echo Timestamp::YEAR_MIN; ?>" max="<?php echo Timestamp::YEAR_MAX; ?>" placeholder="<?php echo $this->translate('Enter year'); ?>">
+                <select id="timestamp-after-month">
+                    <option value=""><?php echo $this->translate('Select month'); ?></option>
+                    <?php foreach ($months as $index => $month): ?>
+                    <option value="<?php echo $index; ?>"<?php echo ($index == $gtTimestamp['month']) ? ' selected' : null; ?>><?php echo $month; ?></option>
+                    <?php endforeach; ?>
+                </select>
+                <input type="number" value="<?php echo $this->escapeHtml($gtTimestamp['day']); ?>" id="timestamp-after-day" step="1" min="1" max="31" placeholder="<?php echo $this->translate('Enter day'); ?>">
+            </div>
+            <div class="timestamp-time-inputs">
+                <input type="number" value="<?php echo $this->escapeHtml($gtTimestamp['hour']); ?>" id="timestamp-after-hour" step="1" min="0" max="59" placeholder="<?php echo $this->translate('Enter hour'); ?>">
+                <input type="number" value="<?php echo $this->escapeHtml($gtTimestamp['minute']); ?>" id="timestamp-after-minute" step="1" min="0" max="59" placeholder="<?php echo $this->translate('Enter minute'); ?>">
+                <input type="number" value="<?php echo $this->escapeHtml($gtTimestamp['second']); ?>" id="timestamp-after-second" step="1" min="0" max="59" placeholder="<?php echo $this->translate('Enter second'); ?>">
+            </div>
+        </div>
         <input type="hidden" id="timestamp-after-ts" name="numeric[ts][gt][val]">
     </div>
 </div>
