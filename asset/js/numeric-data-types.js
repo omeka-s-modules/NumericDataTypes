@@ -41,9 +41,11 @@ $(document).on('o:prepare-value', function(e, type, value) {
         var h = value.find('input[name="numeric-timestamp-hour"]');
         var mi = value.find('input[name="numeric-timestamp-minute"]');
         var s = value.find('input[name="numeric-timestamp-second"]');
+        // Match against ISO 8601, allowing for reduced accuracy.
         var matches = /(-?\d+)(-(\d{2}))?(-(\d{2}))?(T(\d{2}))?(:(\d{2}))?(:(\d{2}))?/.exec(v.val());
-        // Set existing year, month, day, hour, minute, second during initial load.
         if (matches) {
+            // Set existing year, month, day, hour, minute, second during
+            // initial load.
             y.val(parseInt(matches[1]));
             m.val(matches[3] ? parseInt(matches[3]) : null);
             d.val(matches[5] ? parseInt(matches[5]) : null);

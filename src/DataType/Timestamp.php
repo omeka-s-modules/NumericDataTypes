@@ -193,7 +193,8 @@ class Timestamp extends AbstractDataType
      */
     public static function getDateTimeFromValue($value)
     {
-        $isMatch = preg_match('/^(?<year>-?(\d+))(-(?<month>\d{2}))?(?:-(?<day>\d{2}))?(?:T(?<hour>\d{2}))?(?::(?<minute>\d{2}))?(?::(?<second>\d{2}))?$/', $value, $matches);
+        // Match against ISO 8601, allowing for reduced accuracy.
+        $isMatch = preg_match('/^(?<year>-?\d+)(?:-(?<month>\d{2}))?(?:-(?<day>\d{2}))?(?:T(?<hour>\d{2}))?(?::(?<minute>\d{2}))?(?::(?<second>\d{2}))?$/', $value, $matches);
         if (!$isMatch) {
             throw new \InvalidArgumentException('Invalid datetime string, must use ISO 8601');
         }
