@@ -10,6 +10,9 @@ $ltTimestamp = [
     'year' => null,
     'month' =>  null,
     'day' => null,
+    'hour' => null,
+    'minute' => null,
+    'second' => null,
 ];
 $gtTimestamp = [
     'pid' => isset($query['numeric']['ts']['gt']['pid']) ? $query['numeric']['ts']['gt']['pid'] : null,
@@ -17,6 +20,9 @@ $gtTimestamp = [
     'year' => null,
     'month' =>  null,
     'day' => null,
+    'hour' => null,
+    'minute' => null,
+    'second' => null,
 ];
 $ltInteger = [
     'pid' => isset($query['numeric']['int']['lt']['pid']) ? $query['numeric']['int']['lt']['pid'] : null,
@@ -29,16 +35,22 @@ $gtInteger = [
 
 // Prepare passed values.
 if (isset($ltTimestamp['val'])) {
-    $date = explode('-', $ltTimestamp['val']);
-    $ltTimestamp['year'] = $date[0];
-    $ltTimestamp['month'] = isset($date[1]) ? $date[1] : null;
-    $ltTimestamp['day'] = isset($date[2]) ? $date[2] : null;
+    $date = Timestamp::getDateTimeFromValue($ltTimestamp['val']);
+    $ltTimestamp['year'] = $date['year'];
+    $ltTimestamp['month'] = $date['month'];
+    $ltTimestamp['day'] = $date['day'];
+    $ltTimestamp['hour'] = $date['hour'];
+    $ltTimestamp['minute'] = $date['minute'];
+    $ltTimestamp['second'] = $date['second'];
 }
 if (isset($gtTimestamp['val'])) {
-    $date = explode('-', $gtTimestamp['val']);
-    $gtTimestamp['year'] = $date[0];
-    $gtTimestamp['month'] = isset($date[1]) ? $date[1] : null;
-    $gtTimestamp['day'] = isset($date[2]) ? $date[2] : null;
+    $date = Timestamp::getDateTimeFromValue($gtTimestamp['val']);
+    $gtTimestamp['year'] = $date['year'];
+    $gtTimestamp['month'] = $date['month'];
+    $gtTimestamp['day'] = $date['day'];
+    $gtTimestamp['hour'] = $date['hour'];
+    $gtTimestamp['minute'] = $date['minute'];
+    $gtTimestamp['second'] = $date['second'];
 }
 
 $months = [
@@ -83,6 +95,9 @@ $months = [
             <?php endforeach; ?>
         </select>
         <input type="number" value="<?php echo $this->escapeHtml($ltTimestamp['day']); ?>" id="timestamp-before-day" step="1" min="1" max="31" placeholder="<?php echo $this->translate('Enter day'); ?>">
+        <input type="number" value="<?php echo $this->escapeHtml($ltTimestamp['hour']); ?>" id="timestamp-before-hour" step="1" min="0" max="59" placeholder="<?php echo $this->translate('Enter hour'); ?>">
+        <input type="number" value="<?php echo $this->escapeHtml($ltTimestamp['minute']); ?>" id="timestamp-before-minute" step="1" min="0" max="59" placeholder="<?php echo $this->translate('Enter minute'); ?>">
+        <input type="number" value="<?php echo $this->escapeHtml($ltTimestamp['second']); ?>" id="timestamp-before-second" step="1" min="0" max="59" placeholder="<?php echo $this->translate('Enter second'); ?>">
         <input type="hidden" id="timestamp-before-ts" name="numeric[ts][lt][val]">
     </div>
 </div>
@@ -113,6 +128,9 @@ $months = [
             <?php endforeach; ?>
         </select>
         <input type="number" value="<?php echo $this->escapeHtml($gtTimestamp['day']); ?>" id="timestamp-after-day" step="1" min="1" max="31" placeholder="<?php echo $this->translate('Enter day'); ?>">
+        <input type="number" value="<?php echo $this->escapeHtml($gtTimestamp['hour']); ?>" id="timestamp-after-hour" step="1" min="0" max="59" placeholder="<?php echo $this->translate('Enter hour'); ?>">
+        <input type="number" value="<?php echo $this->escapeHtml($gtTimestamp['minute']); ?>" id="timestamp-after-minute" step="1" min="0" max="59" placeholder="<?php echo $this->translate('Enter minute'); ?>">
+        <input type="number" value="<?php echo $this->escapeHtml($gtTimestamp['second']); ?>" id="timestamp-after-second" step="1" min="0" max="59" placeholder="<?php echo $this->translate('Enter second'); ?>">
         <input type="hidden" id="timestamp-after-ts" name="numeric[ts][gt][val]">
     </div>
 </div>
@@ -166,13 +184,19 @@ $(function() {
             before,
             $('#timestamp-before-year'),
             $('#timestamp-before-month'),
-            $('#timestamp-before-day')
+            $('#timestamp-before-day'),
+            $('#timestamp-before-hour'),
+            $('#timestamp-before-minute'),
+            $('#timestamp-before-second')
         );
         NumericDataTypes.setDateValue(
             after,
             $('#timestamp-after-year'),
             $('#timestamp-after-month'),
-            $('#timestamp-after-day')
+            $('#timestamp-after-day'),
+            $('#timestamp-after-hour'),
+            $('#timestamp-after-minute'),
+            $('#timestamp-after-second')
         );
         if ('' === before.val()) {
             before.prop('disabled', true);

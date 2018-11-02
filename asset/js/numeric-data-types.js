@@ -7,14 +7,23 @@ var NumericDataTypes = {
      * @param m Month select
      * @param d Day input
      */
-    setDateValue : function(v, y, m, d) {
+    setDateValue : function(v, y, m, d, h, mi, s) {
         var year = y.val();;
         var month = m.val();
         var day = d.val();
-        if (year && month && day) {
-            v.val(`${year}-${month}-${day}`);
+        var hour = h.val();
+        var minute = mi.val();
+        var second = s.val();
+        if (year && month && day && hour && minute && second) {
+            v.val(`${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}T${hour.padStart(2, '0')}:${minute.padStart(2, '0')}:${second.padStart(2, '0')}`);
+        } else if (year && month && day && hour && minute) {
+            v.val(`${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}T${hour.padStart(2, '0')}:${minute.padStart(2, '0')}`);
+        } else if (year && month && day && hour) {
+            v.val(`${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}T${hour.padStart(2, '0')}`);
+        } else if (year && month && day) {
+            v.val(`${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`);
         } else if (year && month) {
-            v.val(`${year}-${month}`);
+            v.val(`${year}-${month.padStart(2, '0')}`);
         } else if (year) {
             v.val(year);
         } else {
@@ -29,21 +38,36 @@ $(document).on('o:prepare-value', function(e, type, value) {
         var y = value.find('input[name="numeric-timestamp-year"]');
         var m = value.find('select[name="numeric-timestamp-month"]');
         var d = value.find('input[name="numeric-timestamp-day"]');
-        var matches = /(-?\d+)(-(\d{1,2}))?(-(\d{1,2}))?/.exec(v.val());
-        // Set existing year, month, and day during initial load.
+        var h = value.find('input[name="numeric-timestamp-hour"]');
+        var mi = value.find('input[name="numeric-timestamp-minute"]');
+        var s = value.find('input[name="numeric-timestamp-second"]');
+        var matches = /(-?\d+)(-(\d{2}))?(-(\d{2}))?(T(\d{2}))?(:(\d{2}))?(:(\d{2}))?/.exec(v.val());
+        // Set existing year, month, day, hour, minute, second during initial load.
         if (matches) {
             y.val(parseInt(matches[1]));
             m.val(matches[3] ? parseInt(matches[3]) : null);
             d.val(matches[5] ? parseInt(matches[5]) : null);
+            h.val(matches[7] ? parseInt(matches[7]) : null);
+            mi.val(matches[9] ? parseInt(matches[9]) : null);
+            s.val(matches[11] ? parseInt(matches[11]) : null);
         }
         y.on('input', function(e) {
-            NumericDataTypes.setDateValue(v, y, m, d);
+            NumericDataTypes.setDateValue(v, y, m, d, h, mi, s);
         });
         m.on('change', function(e) {
-            NumericDataTypes.setDateValue(v, y, m, d);
+            NumericDataTypes.setDateValue(v, y, m, d, h, mi, s);
         });
         d.on('input', function(e) {
-            NumericDataTypes.setDateValue(v, y, m, d);
+            NumericDataTypes.setDateValue(v, y, m, d, h, mi, s);
+        });
+        h.on('input', function(e) {
+            NumericDataTypes.setDateValue(v, y, m, d, h, mi, s);
+        });
+        mi.on('change', function(e) {
+            NumericDataTypes.setDateValue(v, y, m, d, h, mi, s);
+        });
+        s.on('change', function(e) {
+            NumericDataTypes.setDateValue(v, y, m, d, h, mi, s);
         });
     }
 });

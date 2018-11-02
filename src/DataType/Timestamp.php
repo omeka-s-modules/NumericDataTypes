@@ -33,17 +33,9 @@ class Timestamp extends AbstractDataType
 
     public function getJsonLd(ValueRepresentation $value)
     {
-        $date = $this->getDateFromValue($value->value());
-        if (isset($date['month']) && isset($date['day'])) {
-            $dataType = 'date';
-        } elseif (isset($date['month'])) {
-            $dataType = 'gYearMonth';
-        } else {
-            $dataType = 'gYear';
-        }
         return [
             '@value' => $value->value(),
-            '@type' => sprintf('o-module-numeric-xsd:%s', $dataType),
+            '@type' => 'o-module-numeric-xsd:dateTime',
         ];
     }
 
@@ -87,19 +79,43 @@ class Timestamp extends AbstractDataType
             'placeholder' => 'Enter day', // @translate
         ]);
 
-        return sprintf(
-            '%s%s%s%s',
-            $view->formNumber($yearInput),
-            $view->formSelect($monthSelect),
-            $view->formNumber($dayInput),
-            $view->formHidden($valueInput)
-        );
+        $hourInput = new Element\Number('numeric-timestamp-hour');
+        $hourInput->setAttributes([
+            'step' => 1,
+            'min' => 0,
+            'max' => 23,
+            'placeholder' => 'Enter hour', // @translate
+        ]);
+
+        $minuteInput = new Element\Number('numeric-timestamp-minute');
+        $minuteInput->setAttributes([
+            'step' => 1,
+            'min' => 0,
+            'max' => 59,
+            'placeholder' => 'Enter minute', // @translate
+        ]);
+
+        $secondInput = new Element\Number('numeric-timestamp-second');
+        $secondInput->setAttributes([
+            'step' => 1,
+            'min' => 0,
+            'max' => 59,
+            'placeholder' => 'Enter second', // @translate
+        ]);
+
+        return $view->formNumber($yearInput)
+            . $view->formSelect($monthSelect)
+            . $view->formNumber($dayInput)
+            . $view->formNumber($hourInput)
+            . $view->formNumber($minuteInput)
+            . $view->formNumber($secondInput)
+            . $view->formHidden($valueInput);
     }
 
     public function isValid(array $valueObject)
     {
         try {
-            $this->getDateFromValue($valueObject['@value']);
+            $this->getDateTimeFromValue($valueObject['@value']);
         } catch (\InvalidArgumentException $e) {
             return false;
         }
@@ -108,14 +124,18 @@ class Timestamp extends AbstractDataType
 
     public function hydrate(array $valueObject, Value $value, AbstractEntityAdapter $adapter)
     {
-        // Normalize the date for value storage. The passed value may include
-        // zero-padding on month and day. This removes zero-padding to ensure
-        // consistent format.
-        $date = $this->getDateFromValue($valueObject['@value']);
-        if (isset($date['month']) && isset($date['day'])) {
-            $dateFormat = 'Y-n-j';
+        // Store the datetime in ISO 8601, allowing for reduced accuracy.
+        $date = $this->getDateTimeFromValue($valueObject['@value']);
+        if (isset($date['month']) && isset($date['day']) && isset($date['hour']) && isset($date['minute']) && isset($date['second'])) {
+            $dateFormat = sprintf('Y-m-d\TH:i:s', $date['minute'], $date['second']);
+        } elseif (isset($date['month']) && isset($date['day']) && isset($date['hour']) && isset($date['minute'])) {
+            $dateFormat = sprintf('Y-m-d\TH:i', $date['minute']);
+        } elseif (isset($date['month']) && isset($date['day']) && isset($date['hour'])) {
+            $dateFormat = 'Y-m-d\TH';
+        } elseif (isset($date['month']) && isset($date['day'])) {
+            $dateFormat = 'Y-m-d';
         } elseif (isset($date['month'])) {
-            $dateFormat = 'Y-n';
+            $dateFormat = 'Y-m';
         } else {
             $dateFormat = 'Y';
         }
@@ -127,8 +147,15 @@ class Timestamp extends AbstractDataType
 
     public function render(PhpRenderer $view, ValueRepresentation $value)
     {
-        $date = $this->getDateFromValue($value->value());
-        if (isset($date['month']) && isset($date['day'])) {
+        // Render the datetime, allowing for reduced accuracy.
+        $date = $this->getDateTimeFromValue($value->value());
+        if (isset($date['month']) && isset($date['day']) && isset($date['hour']) && isset($date['minute']) && isset($date['second'])) {
+            $dateFormat = 'F j, Y H:i:s';
+        } elseif (isset($date['month']) && isset($date['day']) && isset($date['hour']) && isset($date['minute'])) {
+            $dateFormat = 'F j, Y H:i';
+        } elseif (isset($date['month']) && isset($date['day']) && isset($date['hour'])) {
+            $dateFormat = 'F j, Y H';
+        } elseif (isset($date['month']) && isset($date['day'])) {
             $dateFormat = 'F j, Y';
         } elseif (isset($date['month'])) {
             $dateFormat = 'F Y';
@@ -151,36 +178,37 @@ class Timestamp extends AbstractDataType
      */
     public function getNumberFromValue($value)
     {
-        $date = $this->getDateFromValue($value);
+        $date = $this->getDateTimeFromValue($value);
         return $date['date']->getTimestamp();
     }
 
     /**
-     * Get the decomposed date and DateTime object from the value.
+     * Get the decomposed datetime and DateTime object from an ISO 8601 value.
      *
-     * Also used to validate the date since validation is a side effect of
-     * parsing the value into its component date pieces.
-     *
-     * At this granularity (yyyy-mm-dd) the date range is "-292277022656-12-31"
-     * to "292277026596-12-4" which when converted to Unix timestamps reach
-     * minimum and maximum 64-bit integers. However, for simplicity's sake, we
-     * use the date range "-292277022656-12-31" to "292277026595-12-31".
+     * Also used to validate the datetime since validation is a side effect of
+     * parsing the value into its component datetime pieces.
      *
      * @param string $value
-     * @return array|false Returns false if the date is invalid
+     * @return array|false Returns false if the datetime is invalid
      */
-    public function getDateFromValue($value)
+    public static function getDateTimeFromValue($value)
     {
-        $isMatch = preg_match('/^(?<year>-?(\d+))(-(?<month>\d{1,2}))?(?:-(?<day>\d{1,2}))?$/', $value, $matches);
+        $isMatch = preg_match('/^(?<year>-?(\d+))(-(?<month>\d{2}))?(?:-(?<day>\d{2}))?(?:T(?<hour>\d{2}))?(?::(?<minute>\d{2}))?(?::(?<second>\d{2}))?$/', $value, $matches);
         if (!$isMatch) {
-            throw new \InvalidArgumentException('Invalid date string');
+            throw new \InvalidArgumentException('Invalid datetime string, must use ISO 8601');
         }
         $date = [
             'year' => (int) $matches['year'],
             'month' => isset($matches['month']) ? (int) $matches['month'] : null,
             'day' => isset($matches['day']) ? (int) $matches['day'] : null,
+            'hour' => isset($matches['hour']) ? (int) $matches['hour'] : null,
+            'minute' => isset($matches['minute']) ? (int) $matches['minute'] : null,
+            'second' => isset($matches['second']) ? (int) $matches['second'] : null,
             'month_normalized' => isset($matches['month']) ? (int) $matches['month'] : 1,
             'day_normalized' => isset($matches['day']) ? (int) $matches['day'] : 1,
+            'hour_normalized' => isset($matches['hour']) ? (int) $matches['hour'] : 0,
+            'minute_normalized' => isset($matches['minute']) ? (int) $matches['minute'] : 0,
+            'second_normalized' => isset($matches['second']) ? (int) $matches['second'] : 0,
         ];
         if ((self::YEAR_MIN > $date['year']) || (self::YEAR_MAX < $date['year'])) {
             throw new \InvalidArgumentException('Invalid year');
@@ -191,13 +219,26 @@ class Timestamp extends AbstractDataType
         if ((1 > $date['day_normalized']) || (31 < $date['day_normalized'])) {
             throw new \InvalidArgumentException('Invalid day');
         }
+        if ((0 > $date['hour_normalized']) || (23 < $date['hour_normalized'])) {
+            throw new \InvalidArgumentException('Invalid hour');
+        }
+        if ((0 > $date['minute_normalized']) || (59 < $date['minute_normalized'])) {
+            throw new \InvalidArgumentException('Invalid minute');
+        }
+        if ((0 > $date['second_normalized']) || (59 < $date['second_normalized'])) {
+            throw new \InvalidArgumentException('Invalid second');
+        }
         // Adding the date object here to reduce code duplication.
         $date['date'] = new DateTime;
         $date['date']->setDate(
             $date['year'],
             $date['month_normalized'],
             $date['day_normalized']
-        )->setTime(0, 0, 0);
+        )->setTime(
+            $date['hour_normalized'],
+            $date['minute_normalized'],
+            $date['second_normalized']
+        );
         return $date;
     }
 
