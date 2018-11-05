@@ -34,10 +34,26 @@ class Timestamp extends AbstractDataType
 
     public function getJsonLd(ValueRepresentation $value)
     {
-        return [
-            '@value' => $value->value(),
-            '@type' => 'o-module-numeric-xsd:dateTime',
-        ];
+        $date = $this->getDateTimeFromValue($value->value());
+        $type = null;
+        if (isset($date['month']) && isset($date['day']) && isset($date['hour']) && isset($date['minute']) && isset($date['second'])) {
+            $type = 'o-module-numeric-xsd:dateTime';
+        } elseif (isset($date['month']) && isset($date['day']) && isset($date['hour']) && isset($date['minute'])) {
+            $type = null; // XSD has no datatype for truncated seconds
+        } elseif (isset($date['month']) && isset($date['day']) && isset($date['hour'])) {
+            $type = null; // XSD has no datatype for truncated minutes/seconds
+        } elseif (isset($date['month']) && isset($date['day'])) {
+            $type = 'o-module-numeric-xsd:date';
+        } elseif (isset($date['month'])) {
+            $type = 'o-module-numeric-xsd:gYearMonth';
+        } else {
+            $type = 'o-module-numeric-xsd:gYear';
+        }
+        $jsonLd = ['@value' => $value->value()];
+        if ($type) {
+            $jsonLd['@type'] = $type;
+        }
+        return $jsonLd;
     }
 
     public function form(PhpRenderer $view)
@@ -215,7 +231,7 @@ HTML;
     public static function getDateTimeFromValue($value)
     {
         // Match against ISO 8601, allowing for reduced accuracy.
-        $isMatch = preg_match('/^(?<year>-?\d+)(?:-(?<month>\d{2}))?(?:-(?<day>\d{2}))?(?:T(?<hour>\d{2}))?(?::(?<minute>\d{2}))?(?::(?<second>\d{2}))?$/', $value, $matches);
+        $isMatch = preg_match('/^(?<year>-?\d{4,})(?:-(?<month>\d{2}))?(?:-(?<day>\d{2}))?(?:T(?<hour>\d{2}))?(?::(?<minute>\d{2}))?(?::(?<second>\d{2}))?$/', $value, $matches);
         if (!$isMatch) {
             throw new \InvalidArgumentException('Invalid datetime string, must use ISO 8601');
         }

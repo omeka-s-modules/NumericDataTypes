@@ -8,24 +8,26 @@ var NumericDataTypes = {
      * @param d Day input
      */
     setDateValue : function(v, y, m, d, h, mi, s) {
-        var year = y.val();;
+        var yearMatches = /^(-?)(\d+)$/.exec(y.val());
+        var yearSign = yearMatches ? yearMatches[1] : null;
+        var year = yearMatches ? yearMatches[2] : null;
         var month = m.val();
         var day = d.val();
         var hour = h.val();
         var minute = mi.val();
         var second = s.val();
         if (year && month && day && hour && minute && second) {
-            v.val(`${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}T${hour.padStart(2, '0')}:${minute.padStart(2, '0')}:${second.padStart(2, '0')}`);
+            v.val(`${yearSign}${year.padStart(4, '0')}-${month.padStart(2, '0')}-${day.padStart(2, '0')}T${hour.padStart(2, '0')}:${minute.padStart(2, '0')}:${second.padStart(2, '0')}`);
         } else if (year && month && day && hour && minute) {
-            v.val(`${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}T${hour.padStart(2, '0')}:${minute.padStart(2, '0')}`);
+            v.val(`${yearSign}${year.padStart(4, '0')}-${month.padStart(2, '0')}-${day.padStart(2, '0')}T${hour.padStart(2, '0')}:${minute.padStart(2, '0')}`);
         } else if (year && month && day && hour) {
-            v.val(`${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}T${hour.padStart(2, '0')}`);
+            v.val(`${yearSign}${year.padStart(4, '0')}-${month.padStart(2, '0')}-${day.padStart(2, '0')}T${hour.padStart(2, '0')}`);
         } else if (year && month && day) {
-            v.val(`${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`);
+            v.val(`${yearSign}${year.padStart(4, '0')}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`);
         } else if (year && month) {
-            v.val(`${year}-${month.padStart(2, '0')}`);
+            v.val(`${yearSign}${year.padStart(4, '0')}-${month.padStart(2, '0')}`);
         } else if (year) {
-            v.val(year);
+            v.val(`${yearSign}${year.padStart(4, '0')}`);
         } else {
             v.val(null); // must have year
         }
@@ -42,7 +44,7 @@ $(document).on('o:prepare-value', function(e, type, value) {
         var mi = value.find('input[name="numeric-timestamp-minute"]');
         var s = value.find('input[name="numeric-timestamp-second"]');
         // Match against ISO 8601, allowing for reduced accuracy.
-        var matches = /(-?\d+)(-(\d{2}))?(-(\d{2}))?(T(\d{2}))?(:(\d{2}))?(:(\d{2}))?/.exec(v.val());
+        var matches = /^(-?\d{4,})(-(\d{2}))?(-(\d{2}))?(T(\d{2}))?(:(\d{2}))?(:(\d{2}))?$/.exec(v.val());
         if (matches) {
             // Set existing year, month, day, hour, minute, second during
             // initial load.
