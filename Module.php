@@ -104,15 +104,6 @@ DROP TABLE IF EXISTS numeric_data_types_timestamp;
                 $event->setParam('partials', $partials);
             }
         );
-        $sharedEventManager->attach(
-            '*',
-            'api.context',
-            function (Event $event) {
-                $context = $event->getParam('context');
-                $context['o-module-numeric-xsd'] = 'http://www.w3.org/2001/XMLSchema#';
-                $event->setParam('context', $context);
-            }
-        );
     }
 
     public function prepareResourceForm(Event $event)

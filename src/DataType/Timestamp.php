@@ -37,17 +37,17 @@ class Timestamp extends AbstractDataType
         $date = $this->getDateTimeFromValue($value->value());
         $type = null;
         if (isset($date['month']) && isset($date['day']) && isset($date['hour']) && isset($date['minute']) && isset($date['second'])) {
-            $type = 'o-module-numeric-xsd:dateTime';
+            $type = 'http://www.w3.org/2001/XMLSchema#dateTime';
         } elseif (isset($date['month']) && isset($date['day']) && isset($date['hour']) && isset($date['minute'])) {
             $type = null; // XSD has no datatype for truncated seconds
         } elseif (isset($date['month']) && isset($date['day']) && isset($date['hour'])) {
             $type = null; // XSD has no datatype for truncated minutes/seconds
         } elseif (isset($date['month']) && isset($date['day'])) {
-            $type = 'o-module-numeric-xsd:date';
+            $type = 'http://www.w3.org/2001/XMLSchema#date';
         } elseif (isset($date['month'])) {
-            $type = 'o-module-numeric-xsd:gYearMonth';
+            $type = 'http://www.w3.org/2001/XMLSchema#gYearMonth';
         } else {
-            $type = 'o-module-numeric-xsd:gYear';
+            $type = 'http://www.w3.org/2001/XMLSchema#gYear';
         }
         $jsonLd = ['@value' => $value->value()];
         if ($type) {
