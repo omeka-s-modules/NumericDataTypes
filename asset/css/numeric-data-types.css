@@ -23,3 +23,6 @@
     margin-top: 0;
 }
 
+.value[data-data-type="numeric:timestamp"] .input-body {
+    background-color: transparent;
+}
