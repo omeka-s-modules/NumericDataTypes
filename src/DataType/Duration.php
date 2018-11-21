@@ -19,7 +19,7 @@ class Duration extends AbstractDataType
 
     public function getLabel()
     {
-        return 'Duration';
+        return 'Duration'; // @translate
     }
 
     public function form(PhpRenderer $view)
@@ -33,14 +33,14 @@ class Duration extends AbstractDataType
         $yearsInput->setAttributes([
             'step' => 1,
             'min' => 0,
-            'placeholder' => 'Years (365 days)', // @translate
+            'placeholder' => 'Years (365 days each)', // @translate
         ]);
 
         $monthsInput = new Element\Number('numeric-duration-months');
         $monthsInput->setAttributes([
             'step' => 1,
             'min' => 0,
-            'placeholder' => 'Months (30 days)', // @translate
+            'placeholder' => 'Months (30 days each)', // @translate
         ]);
 
         $daysInput = new Element\Number('numeric-duration-days');
@@ -157,20 +157,38 @@ HTML;
         return 'NumericDataTypes\Entity\NumericDataTypesDuration';
     }
 
+    /**
+     * Get the total seconds from the duration string.
+     *
+     * @param string $value
+     * @return int
+     */
     public function getNumberFromValue($value)
     {
         $duration = $this->getDurationFromValue($value);
         return $duration['total_seconds'];
     }
 
+    /**
+     * Get the normalized duration, total seconds, and DateInterval object from
+     * an ISO 8601 duration string.
+     *
+     * Note that DateInterval does not allow fractions or negatives for any
+     * parts of a duration. Also, it ignores weeks if days are given, and
+     * converts weeks into days if days are not given.
+     *
+     * Also used to validate the duration string since validation is a side
+     * effect of parsing the string.
+     *
+     * @param string $value
+     * @return array
+     */
     public function getDurationFromValue($value)
     {
         try {
-            // Note that DateInterval does not allow fractions for any parts of
-            // a duration
             $interval = new DateInterval($value);
         } catch (\Exception $e) {
-            throw new \InvalidArgumentException('Invalid duration string, must use ISO 8601');
+            throw new \InvalidArgumentException('Invalid duration string, must use ISO 8601 without fractions or negatives');
         }
 
         // Calculate the total seconds of the duration.
@@ -185,9 +203,7 @@ HTML;
             throw new \InvalidArgumentException('Invalid integer');
         }
 
-        // Normalize the duration string by removing weeks. DateInterval ignores
-        // weeks if days are given, and converts weeks to days if days are not
-        // given.
+        // Normalize the duration string by removing weeks.
         $date = '';
         if ($interval->y) $date .= sprintf('%sY', $interval->y);
         if ($interval->m) $date .= sprintf('%sM', $interval->m);
