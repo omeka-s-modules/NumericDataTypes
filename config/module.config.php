@@ -17,6 +17,7 @@ return [
         'invokables' => [
             'numeric:timestamp' => NumericDataTypes\DataType\Timestamp::class,
             'numeric:integer' => NumericDataTypes\DataType\Integer::class,
+            'numeric:duration' => NumericDataTypes\DataType\Duration::class,
         ],
     ],
     'view_helpers' => [

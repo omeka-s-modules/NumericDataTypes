@@ -31,6 +31,48 @@ var NumericDataTypes = {
         } else {
             v.val(null); // must have year
         }
+    },
+    /**
+     * Set a duration to a value.
+     *
+     * @param v Value input
+     * @param y Years input
+     * @param m Months input
+     * @param w Weeks input
+     * @param d Days input
+     * @param mi Minutes input
+     * @param s Seconds input
+     */
+    setDurationValue : function(v, y, m, d, h, i, s) {
+        var years = y.val();
+        var months = m.val();
+        var days = d.val();
+        var hours = h.val();
+        var minutes = i.val();
+        var seconds = s.val();
+        var value = 'P';
+        if (years) {
+            value = `${value}${years}Y`;
+        }
+        if (months) {
+            value = `${value}${months}M`;
+        }
+        if (days) {
+            value = `${value}${days}D`;
+        }
+        if (hours || minutes || seconds) {
+            value = `${value}T`;
+        }
+        if (hours) {
+            value = `${value}${hours}H`;
+        }
+        if (minutes) {
+            value = `${value}${minutes}M`;
+        }
+        if (seconds) {
+            value = `${value}${seconds}S`;
+        }
+        v.val(value);
     }
 };
 
@@ -77,6 +119,29 @@ $(document).on('o:prepare-value', function(e, type, value) {
         // By default, show time inputs only if there's an hour.
         var timeInputs = value.find('.timestamp-time-inputs');
         h.val() ? timeInputs.show() : timeInputs.hide();
+    }
+    if ('numeric:duration' === type) {
+        var v = value.find('input[data-value-key="@value"]');
+        var y = value.find('input[name="numeric-duration-years"]');
+        var m = value.find('input[name="numeric-duration-months"]');
+        var d = value.find('input[name="numeric-duration-days"]');
+        var h = value.find('input[name="numeric-duration-hours"]');
+        var i = value.find('input[name="numeric-duration-minutes"]');
+        var s = value.find('input[name="numeric-duration-seconds"]');
+        // Match against ISO 8601, allowing for reduced precision.
+        var matches = /^P(\d+Y)?(\d+M)?(\d+D)?(T(\d+H)?(\d+M)?(\d+S)?)?$/.exec(v.val());
+        if (matches) {
+            // Set existing values during initial load.
+            y.val(matches[1] ? parseInt(matches[1].slice(0, -1)) : null);
+            m.val(matches[2] ? parseInt(matches[2].slice(0, -1)) : null);
+            d.val(matches[3] ? parseInt(matches[3].slice(0, -1)) : null);
+            h.val(matches[5] ? parseInt(matches[5].slice(0, -1)) : null);
+            i.val(matches[6] ? parseInt(matches[6].slice(0, -1)) : null);
+            s.val(matches[7] ? parseInt(matches[7].slice(0, -1)) : null);
+        }
+        y.add(m).add(d).add(h).add(i).add(s).on('input', function(e) {
+            NumericDataTypes.setDurationValue(v, y, m, d, h, i, s);
+        });
     }
 });
 
