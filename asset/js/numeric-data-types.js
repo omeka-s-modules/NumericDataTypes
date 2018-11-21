@@ -50,7 +50,7 @@ var NumericDataTypes = {
         var hours = h.val();
         var minutes = i.val();
         var seconds = s.val();
-        var value = 'P';
+        var value = '';
         if (years) {
             value = `${value}${years}Y`;
         }
@@ -71,6 +71,9 @@ var NumericDataTypes = {
         }
         if (seconds) {
             value = `${value}${seconds}S`;
+        }
+        if (value) {
+            value = `P${value}`;
         }
         v.val(value);
     }

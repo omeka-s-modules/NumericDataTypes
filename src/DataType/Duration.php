@@ -72,7 +72,19 @@ class Duration extends AbstractDataType
         ]);
 
         $html = <<<HTML
-    %s%s%s%s%s%s%s
+<div class="duration-datetime-inputs">
+    %s
+    <div class="timestamp-date-inputs">
+        %s
+        %s
+        %s
+    </div>
+    <div class="timestamp-time-inputs">
+        %s
+        %s
+        %s
+    </div>
+</div>
 HTML;
         return sprintf(
             $html,
@@ -183,7 +195,7 @@ HTML;
      * @param string $value
      * @return array
      */
-    public function getDurationFromValue($value)
+    public static function getDurationFromValue($value)
     {
         try {
             $interval = new DateInterval($value);
@@ -224,9 +236,37 @@ HTML;
 
     public function buildQuery(AdapterInterface $adapter, QueryBuilder $qb, array $query)
     {
+        if (isset($query['numeric']['dur']['lt']['val'])
+            && isset($query['numeric']['dur']['lt']['pid'])
+            && is_numeric($query['numeric']['dur']['lt']['pid'])
+        ) {
+            $value = $query['numeric']['dur']['lt']['val'];
+            $propertyId = $query['numeric']['dur']['lt']['pid'];
+            $this->addLessThanQuery($adapter, $qb, $propertyId, $value);
+        }
+        if (isset($query['numeric']['dur']['gt']['val'])
+            && isset($query['numeric']['dur']['gt']['pid'])
+            && is_numeric($query['numeric']['dur']['gt']['pid'])
+        ) {
+            $value = $query['numeric']['dur']['gt']['val'];
+            $propertyId = $query['numeric']['dur']['gt']['pid'];
+            $this->addGreaterThanQuery($adapter, $qb, $propertyId, $value);
+        }
     }
 
     public function sortQuery(AdapterInterface $adapter, QueryBuilder $qb, array $query, $type, $propertyId)
     {
+        if ('duration' === $type) {
+            $alias = $adapter->createAlias();
+            $qb->addSelect("MIN($alias.value) as HIDDEN numeric_value");
+            $qb->leftJoin(
+                $this->getEntityClass(), $alias, 'WITH',
+                $qb->expr()->andX(
+                    $qb->expr()->eq("$alias.resource", $adapter->getEntityClass() . '.id'),
+                    $qb->expr()->eq("$alias.property", $propertyId)
+                )
+            );
+            $qb->addOrderBy('numeric_value', $query['sort_order']);
+        }
     }
 }
