@@ -12,6 +12,15 @@ use Zend\View\Renderer\PhpRenderer;
 
 class Duration extends AbstractDataType
 {
+    /**
+     * Seconds in a timespan
+     */
+    const SECONDS_YEAR = 31536000; // 365 day year
+    const SECONDS_MONTH = 2592000; // 30 day month
+    const SECONDS_DAY = 86400;
+    const SECONDS_HOUR = 3600;
+    const SECONDS_MINUTE = 60;
+
     public function getName()
     {
         return 'numeric:duration';
@@ -187,7 +196,8 @@ HTML;
      *
      * Note that DateInterval does not allow fractions or negatives for any
      * parts of a duration. Also, it ignores weeks if days are given, and
-     * converts weeks into days if days are not given.
+     * converts weeks into days if days are not given. We accept these
+     * limitations for expediency.
      *
      * Also used to validate the duration string since validation is a side
      * effect of parsing the string.
@@ -198,6 +208,7 @@ HTML;
     public static function getDurationFromValue($value)
     {
         try {
+            // Use DateInterval to parse and validate ISO 8601 specs.
             $interval = new DateInterval($value);
         } catch (\Exception $e) {
             throw new \InvalidArgumentException('Invalid duration string, must use ISO 8601 without fractions or negatives');
@@ -205,14 +216,14 @@ HTML;
 
         // Calculate the total seconds of the duration.
         $totalSeconds =
-              ($interval->y * 31536000) // 365 day year
-            + ($interval->m * 2592000) // 30 day month
-            + ($interval->d * 86400)
-            + ($interval->h * 3600)
-            + ($interval->i * 60)
+              ($interval->y * self::SECONDS_YEAR)
+            + ($interval->m * self::SECONDS_MONTH)
+            + ($interval->d * self::SECONDS_DAY)
+            + ($interval->h * self::SECONDS_HOUR)
+            + ($interval->i * self::SECONDS_MINUTE)
             + $interval->s;
         if (Integer::MAX_SAFE_INT < $totalSeconds) {
-            throw new \InvalidArgumentException('Invalid integer');
+            throw new \InvalidArgumentException('Invalid duration, exceeds maximum safe integer');
         }
 
         // Normalize the duration string by removing weeks.
