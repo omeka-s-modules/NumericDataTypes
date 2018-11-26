@@ -42,67 +42,73 @@ class Duration extends AbstractDataType
         $yearsInput->setAttributes([
             'step' => 1,
             'min' => 0,
-            'placeholder' => 'Years (365 days each)', // @translate
         ]);
 
         $monthsInput = new Element\Number('numeric-duration-months');
         $monthsInput->setAttributes([
             'step' => 1,
             'min' => 0,
-            'placeholder' => 'Months (30 days each)', // @translate
         ]);
 
         $daysInput = new Element\Number('numeric-duration-days');
         $daysInput->setAttributes([
             'step' => 1,
             'min' => 0,
-            'placeholder' => 'Days', // @translate
         ]);
 
         $hoursInput = new Element\Number('numeric-duration-hours');
         $hoursInput->setAttributes([
             'step' => 1,
             'min' => 0,
-            'placeholder' => 'Hours', // @translate
         ]);
 
         $minutesInput = new Element\Number('numeric-duration-minutes');
         $minutesInput->setAttributes([
             'step' => 1,
             'min' => 0,
-            'placeholder' => 'Minutes', // @translate
         ]);
 
         $secondsInput = new Element\Number('numeric-duration-seconds');
         $secondsInput->setAttributes([
             'step' => 1,
             'min' => 0,
-            'placeholder' => 'Seconds', // @translate
         ]);
 
         $html = <<<HTML
-<div class="duration-datetime-inputs">
     %s
-    <div class="timestamp-date-inputs">
-        %s
-        %s
-        %s
+    <div class="input">
+        <label class="value">%s%s</label>
     </div>
-    <div class="timestamp-time-inputs">
-        %s
-        %s
-        %s
+    <div class="input">
+        <label class="value">%s%s</label>
     </div>
-</div>
+    <div class="input">
+        <label class="value">%s%s</label>
+    </div>
+    <div class="input">
+        <label class="value">%s%s</label>
+    </div>
+    <div class="input">
+        <label class="value">%s%s</label>
+    </div>
+    <div class="input">
+        <label class="value">%s%s</label>
+    </div>
 HTML;
         return sprintf(
             $html,
             $view->formHidden($valueInput),
+            $view->translate('Years'),
             $view->formNumber($yearsInput),
+            $view->translate('Months'),
             $view->formNumber($monthsInput),
+            $view->translate('Days'),
             $view->formNumber($daysInput),
+            $view->translate('Hours'),
             $view->formNumber($hoursInput),
+            $view->translate('Minutes'),
             $view->formNumber($minutesInput),
+            $view->translate('Seconds'),
             $view->formNumber($secondsInput)
         );
     }
