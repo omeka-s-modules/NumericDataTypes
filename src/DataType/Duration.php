@@ -120,8 +120,7 @@ HTML;
     public function hydrate(array $valueObject, Value $value, AbstractEntityAdapter $adapter)
     {
         // Store the duration in ISO 8601, allowing for reduced precision.
-        $duration = $this->getDurationFromValue($valueObject['@value']);
-        $value->setValue($duration['duration_normalized']);
+        $value->setValue($valueObject['@value']);
         $value->setLang(null);
         $value->setUri(null);
         $value->setValueResource(null);
@@ -129,40 +128,39 @@ HTML;
 
     public function render(PhpRenderer $view, ValueRepresentation $value)
     {
-        $duration = $this->getDurationFromValue($value);
-        $interval = $duration['interval'];
-        $duration = [];
-        if ($interval->y) {
-            $duration[] = (1 === $interval->y)
-                ? sprintf($view->translate('%s year'), $interval->y)
-                : sprintf($view->translate('%s years'), $interval->y);
+        $duration = $this->getDurationFromValue($value->value());
+        $output = [];
+        if (null !== $duration['years']) {
+            $output[] = (1 === $duration['years'])
+                ? sprintf($view->translate('%s year'), $duration['years'])
+                : sprintf($view->translate('%s years'), $duration['years']);
         }
-        if ($interval->m) {
-            $duration[] = (1 === $interval->m)
-                ? sprintf($view->translate('%s month'), $interval->m)
-                : sprintf($view->translate('%s months'), $interval->m);
+        if (null !== $duration['months']) {
+            $output[] = (1 === $duration['months'])
+                ? sprintf($view->translate('%s month'), $duration['months'])
+                : sprintf($view->translate('%s months'), $duration['months']);
         }
-        if ($interval->d) {
-            $duration[] = (1 === $interval->d)
-                ? sprintf($view->translate('%s day'), $interval->d)
-                : sprintf($view->translate('%s days'), $interval->d);
+        if (null !== $duration['days']) {
+            $output[] = (1 === $duration['days'])
+                ? sprintf($view->translate('%s day'), $duration['days'])
+                : sprintf($view->translate('%s days'), $duration['days']);
         }
-        if ($interval->h) {
-            $duration[] = (1 === $interval->h)
-                ? sprintf($view->translate('%s hour'), $interval->h)
-                : sprintf($view->translate('%s hours'), $interval->h);
+        if (null !== $duration['hours']) {
+            $output[] = (1 === $duration['hours'])
+                ? sprintf($view->translate('%s hour'), $duration['hours'])
+                : sprintf($view->translate('%s hours'), $duration['hours']);
         }
-        if ($interval->i) {
-            $duration[] = (1 === $interval->i)
-                ? sprintf($view->translate('%s minute'), $interval->i)
-                : sprintf($view->translate('%s minutes'), $interval->i);
+        if (null !== $duration['minutes']) {
+            $output[] = (1 === $duration['minutes'])
+                ? sprintf($view->translate('%s minute'), $duration['minutes'])
+                : sprintf($view->translate('%s minutes'), $duration['minutes']);
         }
-        if ($interval->s) {
-            $duration[] = (1 === $interval->s)
-                ? sprintf($view->translate('%s second'), $interval->s)
-                : sprintf($view->translate('%s seconds'), $interval->s);
+        if (null !== $duration['seconds']) {
+            $output[] = (1 === $duration['seconds'])
+                ? sprintf($view->translate('%s second'), $duration['seconds'])
+                : sprintf($view->translate('%s seconds'), $duration['seconds']);
         }
-        return implode(', ', $duration);
+        return implode(', ', $output);
     }
 
     public function getJsonLd(ValueRepresentation $value)
@@ -191,13 +189,11 @@ HTML;
     }
 
     /**
-     * Get the normalized duration, total seconds, and DateInterval object from
-     * an ISO 8601 duration string.
+     * Get the decomposed duration and the total seconds from an ISO 8601
+     * duration string.
      *
-     * Note that DateInterval does not allow fractions or negatives for any
-     * parts of a duration. Also, it ignores weeks if days are given, and
-     * converts weeks into days if days are not given. We accept these
-     * limitations for expediency.
+     * Note that we do not allow fractions or negatives for any parts of a
+     * duration, nor do we allow weeks.
      *
      * Also used to validate the duration string since validation is a side
      * effect of parsing the string.
@@ -207,42 +203,38 @@ HTML;
      */
     public static function getDurationFromValue($value)
     {
-        try {
-            // Use DateInterval to parse and validate ISO 8601 specs.
-            $interval = new DateInterval($value);
-        } catch (\Exception $e) {
-            throw new \InvalidArgumentException('Invalid duration string, must use ISO 8601 without fractions or negatives');
+        // @see https://stackoverflow.com/a/32045167
+        $isMatch = preg_match('/^P(?!$)(?:(?<years>\d+)Y)?(?:(?<months>\d+)M)?(?:(?<days>\d+)D)?(T(?=\d)(?:(?<hours>\d+)H)?(?:(?<minutes>\d+)M)?(?:(?<seconds>\d+)S)?)?$/', $value, $matches);
+        if (!$isMatch) {
+            throw new \InvalidArgumentException('Invalid duration string, must use ISO 8601 without fractions, negatives, or weeks');
         }
-
+        $duration = [
+            'years' => (isset($matches['years']) && '' !== $matches['years']) ? (int) $matches['years'] : null,
+            'months' => (isset($matches['months']) && '' !== $matches['months']) ? (int) $matches['months'] : null,
+            'days' => (isset($matches['days']) && '' !== $matches['days']) ? (int) $matches['days'] : null,
+            'hours' => (isset($matches['hours']) && '' !== $matches['hours']) ? (int) $matches['hours'] : null,
+            'minutes' => (isset($matches['minutes']) && '' !== $matches['minutes']) ? (int) $matches['minutes'] : null,
+            'seconds' => (isset($matches['seconds']) && '' !== $matches['seconds']) ? (int) $matches['seconds'] : null,
+        ];
+        $duration['years_normalized'] = isset($duration['years']) ? $duration['years'] : 0;
+        $duration['months_normalized'] = isset($duration['months']) ? $duration['months'] : 0;
+        $duration['days_normalized'] = isset($duration['days']) ? $duration['days'] : 0;
+        $duration['hours_normalized'] = isset($duration['hours']) ? $duration['hours'] : 0;
+        $duration['minutes_normalized'] = isset($duration['minutes']) ? $duration['minutes'] : 0;
+        $duration['seconds_normalized'] = isset($duration['seconds']) ? $duration['seconds'] : 0;
         // Calculate the total seconds of the duration.
         $totalSeconds =
-              ($interval->y * self::SECONDS_YEAR)
-            + ($interval->m * self::SECONDS_MONTH)
-            + ($interval->d * self::SECONDS_DAY)
-            + ($interval->h * self::SECONDS_HOUR)
-            + ($interval->i * self::SECONDS_MINUTE)
-            + $interval->s;
+              ($duration['years_normalized'] * self::SECONDS_YEAR)
+            + ($duration['months_normalized'] * self::SECONDS_MONTH)
+            + ($duration['days_normalized'] * self::SECONDS_DAY)
+            + ($duration['hours_normalized'] * self::SECONDS_HOUR)
+            + ($duration['minutes_normalized'] * self::SECONDS_MINUTE)
+            + $duration['seconds_normalized'];
         if (Integer::MAX_SAFE_INT < $totalSeconds) {
             throw new \InvalidArgumentException('Invalid duration, exceeds maximum safe integer');
         }
-
-        // Normalize the duration string by removing weeks.
-        $date = '';
-        if ($interval->y) $date .= sprintf('%sY', $interval->y);
-        if ($interval->m) $date .= sprintf('%sM', $interval->m);
-        if ($interval->d) $date .= sprintf('%sD', $interval->d);
-        $time = '';
-        if ($interval->h) $time .= sprintf('%sH', $interval->h);
-        if ($interval->i) $time .= sprintf('%sM', $interval->i);
-        if ($interval->s) $time .= sprintf('%sS', $interval->s);
-        if ($time) $time = sprintf('T%s', $time);
-        $durationNormalized = sprintf('P%s%s', $date, $time);
-
-        return [
-            'interval' => $interval,
-            'total_seconds' => $totalSeconds,
-            'duration_normalized' => $durationNormalized,
-        ];
+        $duration['total_seconds'] = $totalSeconds;
+        return $duration;
     }
 
     public function buildQuery(AdapterInterface $adapter, QueryBuilder $qb, array $query)
