@@ -1,0 +1,127 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-11-27 14:23-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/DataType/Timestamp.php:145
+#: view/common/numeric-data-types-advanced-search.phtml:101
+#: view/common/numeric-data-types-advanced-search.phtml:141
+msgid "time"
+msgstr ""
+
+#: view/common/numeric-data-types-advanced-search.phtml:58
+msgid "January"
+msgstr ""
+
+#: view/common/numeric-data-types-advanced-search.phtml:59
+msgid "February"
+msgstr ""
+
+#: view/common/numeric-data-types-advanced-search.phtml:60
+msgid "March"
+msgstr ""
+
+#: view/common/numeric-data-types-advanced-search.phtml:61
+msgid "April"
+msgstr ""
+
+#: view/common/numeric-data-types-advanced-search.phtml:62
+msgid "May"
+msgstr ""
+
+#: view/common/numeric-data-types-advanced-search.phtml:63
+msgid "June"
+msgstr ""
+
+#: view/common/numeric-data-types-advanced-search.phtml:64
+msgid "July"
+msgstr ""
+
+#: view/common/numeric-data-types-advanced-search.phtml:65
+msgid "August"
+msgstr ""
+
+#: view/common/numeric-data-types-advanced-search.phtml:66
+msgid "September"
+msgstr ""
+
+#: view/common/numeric-data-types-advanced-search.phtml:67
+msgid "October"
+msgstr ""
+
+#: view/common/numeric-data-types-advanced-search.phtml:68
+msgid "November"
+msgstr ""
+
+#: view/common/numeric-data-types-advanced-search.phtml:69
+msgid "December"
+msgstr ""
+
+#: view/common/numeric-data-types-advanced-search.phtml:75
+msgid "Date comes before"
+msgstr ""
+
+#: view/common/numeric-data-types-advanced-search.phtml:93
+#: view/common/numeric-data-types-advanced-search.phtml:133
+msgid "Year"
+msgstr ""
+
+#: view/common/numeric-data-types-advanced-search.phtml:95
+#: view/common/numeric-data-types-advanced-search.phtml:135
+msgid "Month"
+msgstr ""
+
+#: view/common/numeric-data-types-advanced-search.phtml:100
+#: view/common/numeric-data-types-advanced-search.phtml:140
+msgid "Day"
+msgstr ""
+
+#: view/common/numeric-data-types-advanced-search.phtml:104
+#: view/common/numeric-data-types-advanced-search.phtml:144
+msgid "Hour"
+msgstr ""
+
+#: view/common/numeric-data-types-advanced-search.phtml:105
+#: view/common/numeric-data-types-advanced-search.phtml:145
+msgid "Minute"
+msgstr ""
+
+#: view/common/numeric-data-types-advanced-search.phtml:106
+#: view/common/numeric-data-types-advanced-search.phtml:146
+msgid "Second"
+msgstr ""
+
+#: view/common/numeric-data-types-advanced-search.phtml:115
+msgid "Date comes after"
+msgstr ""
+
+#: view/common/numeric-data-types-advanced-search.phtml:155
+msgid "Value is less than"
+msgstr ""
+
+#: view/common/numeric-data-types-advanced-search.phtml:170
+#: view/common/numeric-data-types-advanced-search.phtml:190
+msgid "Enter integer"
+msgstr ""
+
+#: view/common/numeric-data-types-advanced-search.phtml:175
+msgid "Value is greater than"
+msgstr ""
+
+#: src/DataType/AbstractDataType.php:14
+msgid "Numeric"
+msgstr ""
