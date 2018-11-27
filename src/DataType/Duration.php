@@ -196,10 +196,13 @@ HTML;
 
     /**
      * Get the decomposed duration and the total seconds from an ISO 8601
-     * duration string.
+     * duration string. Note that we do not allow fractions or negatives for any
+     * parts of a duration, nor do we allow weeks.
      *
-     * Note that we do not allow fractions or negatives for any parts of a
-     * duration, nor do we allow weeks.
+     * PHP's DateInterval accepts the ISO 8601 duration spec, but we don't use
+     * it here becuase it converts omitted duration components to zero, with no
+     * indication that the component was omitted. We'd have to use a regex to
+     * decompose the string anyway, so DateInterval would be redundant.
      *
      * Also used to validate the duration string since validation is a side
      * effect of parsing the string.
