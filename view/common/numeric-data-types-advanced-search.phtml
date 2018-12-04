@@ -111,46 +111,6 @@ $months = [
 
 <div class="field">
     <div class="field-meta">
-        <label for=""><?php echo $this->translate('Date comes before'); ?></label>
-    </div>
-    <div class="inputs">
-        <?php
-        echo $this->numericPropertySelect([
-            'name' => 'numeric[ts][lt][pid]',
-            'attributes' => [
-                'id' => 'timestamp-before-pid',
-                'class' => 'chosen-select',
-                'value' => $ltTimestamp['pid'],
-            ],
-            'options' => [
-                'numeric_data_type' => 'timestamp',
-            ],
-        ]);
-        ?>
-        <div class="timestamp-datetime-inputs">
-            <div class="timestamp-date-inputs">
-                <input type="number" value="<?php echo $this->escapeHtml($ltTimestamp['year']); ?>" id="timestamp-before-year" step="1" min="<?php echo Timestamp::YEAR_MIN; ?>" max="<?php echo Timestamp::YEAR_MAX; ?>" placeholder="<?php echo $this->translate('Year'); ?>">
-                <select id="timestamp-before-month">
-                    <option value=""><?php echo $this->translate('Month'); ?></option>
-                    <?php foreach ($months as $index => $month): ?>
-                    <option value="<?php echo $index; ?>"<?php echo ($index == $ltTimestamp['month']) ? ' selected' : null; ?>><?php echo $month; ?></option>
-                    <?php endforeach; ?>
-                </select>
-                <input type="number" value="<?php echo $this->escapeHtml($ltTimestamp['day']); ?>" id="timestamp-before-day" step="1" min="1" max="31" placeholder="<?php echo $this->translate('Day'); ?>">
-                <a href="#" class="timestamp-toggle-time"><?php echo $this->translate('time'); ?></a>
-            </div>
-            <div class="timestamp-time-inputs">
-                <input type="number" value="<?php echo $this->escapeHtml($ltTimestamp['hour']); ?>" id="timestamp-before-hour" step="1" min="0" max="59" placeholder="<?php echo $this->translate('Hour'); ?>">
-                <input type="number" value="<?php echo $this->escapeHtml($ltTimestamp['minute']); ?>" id="timestamp-before-minute" step="1" min="0" max="59" placeholder="<?php echo $this->translate('Minute'); ?>">
-                <input type="number" value="<?php echo $this->escapeHtml($ltTimestamp['second']); ?>" id="timestamp-before-second" step="1" min="0" max="59" placeholder="<?php echo $this->translate('Second'); ?>">
-            </div>
-        </div>
-        <input type="hidden" id="timestamp-before-ts" name="numeric[ts][lt][val]">
-    </div>
-</div>
-
-<div class="field">
-    <div class="field-meta">
         <label for=""><?php echo $this->translate('Date comes after'); ?></label>
     </div>
     <div class="inputs">
@@ -191,34 +151,41 @@ $months = [
 
 <div class="field">
     <div class="field-meta">
-        <label for=""><?php echo $this->translate('Duration is less than'); ?></label>
+        <label for=""><?php echo $this->translate('Date comes before'); ?></label>
     </div>
     <div class="inputs">
         <?php
         echo $this->numericPropertySelect([
-            'name' => 'numeric[dur][lt][pid]',
+            'name' => 'numeric[ts][lt][pid]',
             'attributes' => [
+                'id' => 'timestamp-before-pid',
                 'class' => 'chosen-select',
-                'value' => $ltDuration['pid'],
+                'value' => $ltTimestamp['pid'],
             ],
             'options' => [
-                'numeric_data_type' => 'duration',
+                'numeric_data_type' => 'timestamp',
             ],
         ]);
         ?>
-        <div class="duration-datetime-inputs">
-            <div class="duration-date-inputs">
-                <input type="number" value="<?php echo $this->escapeHtml($ltDuration['years']); ?>" id="duration-lt-years" step="1" min="0" placeholder="<?php echo $this->translate('Years (365 days each)'); ?>">
-                <input type="number" value="<?php echo $this->escapeHtml($ltDuration['months']); ?>" id="duration-lt-months" step="1" min="0" placeholder="<?php echo $this->translate('Months (30 days each)'); ?>">
-                <input type="number" value="<?php echo $this->escapeHtml($ltDuration['days']); ?>" id="duration-lt-days" step="1" min="0" placeholder="<?php echo $this->translate('Days'); ?>">
+        <div class="timestamp-datetime-inputs">
+            <div class="timestamp-date-inputs">
+                <input type="number" value="<?php echo $this->escapeHtml($ltTimestamp['year']); ?>" id="timestamp-before-year" step="1" min="<?php echo Timestamp::YEAR_MIN; ?>" max="<?php echo Timestamp::YEAR_MAX; ?>" placeholder="<?php echo $this->translate('Year'); ?>">
+                <select id="timestamp-before-month">
+                    <option value=""><?php echo $this->translate('Month'); ?></option>
+                    <?php foreach ($months as $index => $month): ?>
+                    <option value="<?php echo $index; ?>"<?php echo ($index == $ltTimestamp['month']) ? ' selected' : null; ?>><?php echo $month; ?></option>
+                    <?php endforeach; ?>
+                </select>
+                <input type="number" value="<?php echo $this->escapeHtml($ltTimestamp['day']); ?>" id="timestamp-before-day" step="1" min="1" max="31" placeholder="<?php echo $this->translate('Day'); ?>">
+                <a href="#" class="timestamp-toggle-time"><?php echo $this->translate('time'); ?></a>
             </div>
-            <div class="duration-time-inputs">
-                <input type="number" value="<?php echo $this->escapeHtml($ltDuration['hours']); ?>" id="duration-lt-hours" step="1" min="0" placeholder="<?php echo $this->translate('Hours'); ?>">
-                <input type="number" value="<?php echo $this->escapeHtml($ltDuration['minutes']); ?>" id="duration-lt-minutes" step="1" min="0" placeholder="<?php echo $this->translate('Minutes'); ?>">
-                <input type="number" value="<?php echo $this->escapeHtml($ltDuration['seconds']); ?>" id="duration-lt-seconds" step="1" min="0" placeholder="<?php echo $this->translate('Seconds'); ?>">
+            <div class="timestamp-time-inputs">
+                <input type="number" value="<?php echo $this->escapeHtml($ltTimestamp['hour']); ?>" id="timestamp-before-hour" step="1" min="0" max="59" placeholder="<?php echo $this->translate('Hour'); ?>">
+                <input type="number" value="<?php echo $this->escapeHtml($ltTimestamp['minute']); ?>" id="timestamp-before-minute" step="1" min="0" max="59" placeholder="<?php echo $this->translate('Minute'); ?>">
+                <input type="number" value="<?php echo $this->escapeHtml($ltTimestamp['second']); ?>" id="timestamp-before-second" step="1" min="0" max="59" placeholder="<?php echo $this->translate('Second'); ?>">
             </div>
         </div>
-        <input type="hidden" id="duration-lt" name="numeric[dur][lt][val]">
+        <input type="hidden" id="timestamp-before-ts" name="numeric[ts][lt][val]">
     </div>
 </div>
 
@@ -257,22 +224,35 @@ $months = [
 
 <div class="field">
     <div class="field-meta">
-        <label for=""><?php echo $this->translate('Value is less than'); ?></label>
+        <label for=""><?php echo $this->translate('Duration is less than'); ?></label>
     </div>
     <div class="inputs">
         <?php
         echo $this->numericPropertySelect([
-            'name' => 'numeric[int][lt][pid]',
+            'name' => 'numeric[dur][lt][pid]',
             'attributes' => [
                 'class' => 'chosen-select',
-                'value' => $ltInteger['pid'],
+                'value' => $ltDuration['pid'],
             ],
             'options' => [
-                'numeric_data_type' => 'integer',
+                'numeric_data_type' => 'duration',
             ],
         ]);
         ?>
-        <input type="number" value="<?php echo $this->escapeHtml($ltInteger['val']); ?>" step="1" name="numeric[int][lt][val]" placeholder="<?php echo $this->translate('Enter integer'); ?>">    </div>
+        <div class="duration-datetime-inputs">
+            <div class="duration-date-inputs">
+                <input type="number" value="<?php echo $this->escapeHtml($ltDuration['years']); ?>" id="duration-lt-years" step="1" min="0" placeholder="<?php echo $this->translate('Years (365 days each)'); ?>">
+                <input type="number" value="<?php echo $this->escapeHtml($ltDuration['months']); ?>" id="duration-lt-months" step="1" min="0" placeholder="<?php echo $this->translate('Months (30 days each)'); ?>">
+                <input type="number" value="<?php echo $this->escapeHtml($ltDuration['days']); ?>" id="duration-lt-days" step="1" min="0" placeholder="<?php echo $this->translate('Days'); ?>">
+            </div>
+            <div class="duration-time-inputs">
+                <input type="number" value="<?php echo $this->escapeHtml($ltDuration['hours']); ?>" id="duration-lt-hours" step="1" min="0" placeholder="<?php echo $this->translate('Hours'); ?>">
+                <input type="number" value="<?php echo $this->escapeHtml($ltDuration['minutes']); ?>" id="duration-lt-minutes" step="1" min="0" placeholder="<?php echo $this->translate('Minutes'); ?>">
+                <input type="number" value="<?php echo $this->escapeHtml($ltDuration['seconds']); ?>" id="duration-lt-seconds" step="1" min="0" placeholder="<?php echo $this->translate('Seconds'); ?>">
+            </div>
+        </div>
+        <input type="hidden" id="duration-lt" name="numeric[dur][lt][val]">
+    </div>
 </div>
 
 <div class="field">
@@ -293,6 +273,26 @@ $months = [
         ]);
         ?>
         <input type="number" value="<?php echo $this->escapeHtml($gtInteger['val']); ?>" step="1" name="numeric[int][gt][val]" placeholder="<?php echo $this->translate('Enter integer'); ?>">    </div>
+</div>
+
+<div class="field">
+    <div class="field-meta">
+        <label for=""><?php echo $this->translate('Value is less than'); ?></label>
+    </div>
+    <div class="inputs">
+        <?php
+        echo $this->numericPropertySelect([
+            'name' => 'numeric[int][lt][pid]',
+            'attributes' => [
+                'class' => 'chosen-select',
+                'value' => $ltInteger['pid'],
+            ],
+            'options' => [
+                'numeric_data_type' => 'integer',
+            ],
+        ]);
+        ?>
+        <input type="number" value="<?php echo $this->escapeHtml($ltInteger['val']); ?>" step="1" name="numeric[int][lt][val]" placeholder="<?php echo $this->translate('Enter integer'); ?>">    </div>
 </div>
 
 <script>
