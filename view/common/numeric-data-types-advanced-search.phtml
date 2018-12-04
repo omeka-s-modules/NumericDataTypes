@@ -76,23 +76,21 @@ if (isset($gtTimestamp['val'])) {
 }
 if (isset($ltDuration['val'])) {
     $duration = Duration::getDurationFromValue($ltDuration['val']);
-    $interval = $duration['interval'];
-    $ltDuration['years'] = $interval->y ?: null;
-    $ltDuration['months'] = $interval->m ?: null;
-    $ltDuration['days'] = $interval->d ?: null;
-    $ltDuration['hours'] = $interval->h ?: null;
-    $ltDuration['minutes'] = $interval->i ?: null;
-    $ltDuration['seconds'] = $interval->s ?: null;
+    $ltDuration['years'] = $duration['years'];
+    $ltDuration['months'] = $duration['months'];
+    $ltDuration['days'] = $duration['days'];
+    $ltDuration['hours'] = $duration['hours'];
+    $ltDuration['minutes'] = $duration['minutes'];
+    $ltDuration['seconds'] = $duration['seconds'];
 }
 if (isset($gtDuration['val'])) {
     $duration = Duration::getDurationFromValue($gtDuration['val']);
-    $interval = $duration['interval'];
-    $gtDuration['years'] = $interval->y ?: null;
-    $gtDuration['months'] = $interval->m ?: null;
-    $gtDuration['days'] = $interval->d ?: null;
-    $gtDuration['hours'] = $interval->h ?: null;
-    $gtDuration['minutes'] = $interval->i ?: null;
-    $gtDuration['seconds'] = $interval->s ?: null;
+    $gtDuration['years'] = $duration['years'];
+    $gtDuration['months'] = $duration['months'];
+    $gtDuration['days'] = $duration['days'];
+    $gtDuration['hours'] = $duration['hours'];
+    $gtDuration['minutes'] = $duration['minutes'];
+    $gtDuration['seconds'] = $duration['seconds'];
 }
 
 $months = [
