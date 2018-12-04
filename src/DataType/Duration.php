@@ -1,0 +1,284 @@
+<?php
+namespace NumericDataTypes\DataType;
+
+use DateInterval;
+use Doctrine\ORM\QueryBuilder;
+use Omeka\Entity\Value;
+use Omeka\Api\Adapter\AbstractEntityAdapter;
+use Omeka\Api\Adapter\AdapterInterface;
+use Omeka\Api\Representation\ValueRepresentation;
+use Zend\Form\Element;
+use Zend\View\Renderer\PhpRenderer;
+
+class Duration extends AbstractDataType
+{
+    /**
+     * Seconds in a timespan
+     */
+    const SECONDS_YEAR = 31536000; // 365 day year
+    const SECONDS_MONTH = 2592000; // 30 day month
+    const SECONDS_DAY = 86400;
+    const SECONDS_HOUR = 3600;
+    const SECONDS_MINUTE = 60;
+
+    public function getName()
+    {
+        return 'numeric:duration';
+    }
+
+    public function getLabel()
+    {
+        return 'Duration'; // @translate
+    }
+
+    public function form(PhpRenderer $view)
+    {
+        $valueInput = new Element\Hidden('numeric-duration-value');
+        $valueInput->setAttributes([
+            'data-value-key' => '@value',
+        ]);
+
+        $yearsInput = new Element\Number('numeric-duration-years');
+        $yearsInput->setAttributes([
+            'step' => 1,
+            'min' => 0,
+        ]);
+
+        $monthsInput = new Element\Number('numeric-duration-months');
+        $monthsInput->setAttributes([
+            'step' => 1,
+            'min' => 0,
+        ]);
+
+        $daysInput = new Element\Number('numeric-duration-days');
+        $daysInput->setAttributes([
+            'step' => 1,
+            'min' => 0,
+        ]);
+
+        $hoursInput = new Element\Number('numeric-duration-hours');
+        $hoursInput->setAttributes([
+            'step' => 1,
+            'min' => 0,
+        ]);
+
+        $minutesInput = new Element\Number('numeric-duration-minutes');
+        $minutesInput->setAttributes([
+            'step' => 1,
+            'min' => 0,
+        ]);
+
+        $secondsInput = new Element\Number('numeric-duration-seconds');
+        $secondsInput->setAttributes([
+            'step' => 1,
+            'min' => 0,
+        ]);
+
+        $html = <<<HTML
+    %s
+    <div class="input">
+        <label class="value">%s%s</label>
+    </div>
+    <div class="input">
+        <label class="value">%s%s</label>
+    </div>
+    <div class="input">
+        <label class="value">%s%s</label>
+    </div>
+    <div class="input">
+        <label class="value">%s%s</label>
+    </div>
+    <div class="input">
+        <label class="value">%s%s</label>
+    </div>
+    <div class="input">
+        <label class="value">%s%s</label>
+    </div>
+HTML;
+        return sprintf(
+            $html,
+            $view->formHidden($valueInput),
+            $view->translate('Years'),
+            $view->formNumber($yearsInput),
+            $view->translate('Months'),
+            $view->formNumber($monthsInput),
+            $view->translate('Days'),
+            $view->formNumber($daysInput),
+            $view->translate('Hours'),
+            $view->formNumber($hoursInput),
+            $view->translate('Minutes'),
+            $view->formNumber($minutesInput),
+            $view->translate('Seconds'),
+            $view->formNumber($secondsInput)
+        );
+    }
+
+    public function isValid(array $valueObject)
+    {
+        try {
+            $this->getDurationFromValue($valueObject['@value']);
+        } catch (\InvalidArgumentException $e) {
+            return false;
+        }
+        return true;
+    }
+
+    public function hydrate(array $valueObject, Value $value, AbstractEntityAdapter $adapter)
+    {
+        // Store the duration in ISO 8601, allowing for reduced precision.
+        $value->setValue($valueObject['@value']);
+        $value->setLang(null);
+        $value->setUri(null);
+        $value->setValueResource(null);
+    }
+
+    public function render(PhpRenderer $view, ValueRepresentation $value)
+    {
+        $duration = $this->getDurationFromValue($value->value());
+        $output = [];
+        if (null !== $duration['years']) {
+            $output[] = (1 === $duration['years'])
+                ? sprintf($view->translate('%s year'), $duration['years'])
+                : sprintf($view->translate('%s years'), $duration['years']);
+        }
+        if (null !== $duration['months']) {
+            $output[] = (1 === $duration['months'])
+                ? sprintf($view->translate('%s month'), $duration['months'])
+                : sprintf($view->translate('%s months'), $duration['months']);
+        }
+        if (null !== $duration['days']) {
+            $output[] = (1 === $duration['days'])
+                ? sprintf($view->translate('%s day'), $duration['days'])
+                : sprintf($view->translate('%s days'), $duration['days']);
+        }
+        if (null !== $duration['hours']) {
+            $output[] = (1 === $duration['hours'])
+                ? sprintf($view->translate('%s hour'), $duration['hours'])
+                : sprintf($view->translate('%s hours'), $duration['hours']);
+        }
+        if (null !== $duration['minutes']) {
+            $output[] = (1 === $duration['minutes'])
+                ? sprintf($view->translate('%s minute'), $duration['minutes'])
+                : sprintf($view->translate('%s minutes'), $duration['minutes']);
+        }
+        if (null !== $duration['seconds']) {
+            $output[] = (1 === $duration['seconds'])
+                ? sprintf($view->translate('%s second'), $duration['seconds'])
+                : sprintf($view->translate('%s seconds'), $duration['seconds']);
+        }
+        return implode(', ', $output);
+    }
+
+    public function getJsonLd(ValueRepresentation $value)
+    {
+        return [
+            '@value' => $value->value(),
+            '@type' => 'http://www.w3.org/2001/XMLSchema#duration',
+        ];
+    }
+
+    public function getEntityClass()
+    {
+        return 'NumericDataTypes\Entity\NumericDataTypesDuration';
+    }
+
+    /**
+     * Get the total seconds from the duration string.
+     *
+     * @param string $value
+     * @return int
+     */
+    public function getNumberFromValue($value)
+    {
+        $duration = $this->getDurationFromValue($value);
+        return $duration['total_seconds'];
+    }
+
+    /**
+     * Get the decomposed duration and the total seconds from an ISO 8601
+     * duration string. Note that we do not allow fractions or negatives for any
+     * parts of a duration, nor do we allow weeks.
+     *
+     * PHP's DateInterval accepts the ISO 8601 duration spec, but we don't use
+     * it here becuase it converts omitted duration components to zero, with no
+     * indication that the component was omitted. We'd have to use a regex to
+     * decompose the string anyway, so DateInterval would be redundant.
+     *
+     * Also used to validate the duration string since validation is a side
+     * effect of parsing the string.
+     *
+     * @param string $value
+     * @return array
+     */
+    public static function getDurationFromValue($value)
+    {
+        // @see https://stackoverflow.com/a/32045167
+        $isMatch = preg_match('/^P(?!$)(?:(?<years>\d+)Y)?(?:(?<months>\d+)M)?(?:(?<days>\d+)D)?(T(?=\d)(?:(?<hours>\d+)H)?(?:(?<minutes>\d+)M)?(?:(?<seconds>\d+)S)?)?$/', $value, $matches);
+        if (!$isMatch) {
+            throw new \InvalidArgumentException('Invalid duration string, must use ISO 8601 without fractions, negatives, or weeks');
+        }
+        $duration = [
+            'years' => (isset($matches['years']) && '' !== $matches['years']) ? (int) $matches['years'] : null,
+            'months' => (isset($matches['months']) && '' !== $matches['months']) ? (int) $matches['months'] : null,
+            'days' => (isset($matches['days']) && '' !== $matches['days']) ? (int) $matches['days'] : null,
+            'hours' => (isset($matches['hours']) && '' !== $matches['hours']) ? (int) $matches['hours'] : null,
+            'minutes' => (isset($matches['minutes']) && '' !== $matches['minutes']) ? (int) $matches['minutes'] : null,
+            'seconds' => (isset($matches['seconds']) && '' !== $matches['seconds']) ? (int) $matches['seconds'] : null,
+        ];
+        $duration['years_normalized'] = isset($duration['years']) ? $duration['years'] : 0;
+        $duration['months_normalized'] = isset($duration['months']) ? $duration['months'] : 0;
+        $duration['days_normalized'] = isset($duration['days']) ? $duration['days'] : 0;
+        $duration['hours_normalized'] = isset($duration['hours']) ? $duration['hours'] : 0;
+        $duration['minutes_normalized'] = isset($duration['minutes']) ? $duration['minutes'] : 0;
+        $duration['seconds_normalized'] = isset($duration['seconds']) ? $duration['seconds'] : 0;
+        // Calculate the total seconds of the duration.
+        $totalSeconds =
+              ($duration['years_normalized'] * self::SECONDS_YEAR)
+            + ($duration['months_normalized'] * self::SECONDS_MONTH)
+            + ($duration['days_normalized'] * self::SECONDS_DAY)
+            + ($duration['hours_normalized'] * self::SECONDS_HOUR)
+            + ($duration['minutes_normalized'] * self::SECONDS_MINUTE)
+            + $duration['seconds_normalized'];
+        if (Integer::MAX_SAFE_INT < $totalSeconds) {
+            throw new \InvalidArgumentException('Invalid duration, exceeds maximum safe integer');
+        }
+        $duration['total_seconds'] = $totalSeconds;
+        return $duration;
+    }
+
+    public function buildQuery(AdapterInterface $adapter, QueryBuilder $qb, array $query)
+    {
+        if (isset($query['numeric']['dur']['lt']['val'])
+            && isset($query['numeric']['dur']['lt']['pid'])
+            && is_numeric($query['numeric']['dur']['lt']['pid'])
+        ) {
+            $value = $query['numeric']['dur']['lt']['val'];
+            $propertyId = $query['numeric']['dur']['lt']['pid'];
+            $this->addLessThanQuery($adapter, $qb, $propertyId, $value);
+        }
+        if (isset($query['numeric']['dur']['gt']['val'])
+            && isset($query['numeric']['dur']['gt']['pid'])
+            && is_numeric($query['numeric']['dur']['gt']['pid'])
+        ) {
+            $value = $query['numeric']['dur']['gt']['val'];
+            $propertyId = $query['numeric']['dur']['gt']['pid'];
+            $this->addGreaterThanQuery($adapter, $qb, $propertyId, $value);
+        }
+    }
+
+    public function sortQuery(AdapterInterface $adapter, QueryBuilder $qb, array $query, $type, $propertyId)
+    {
+        if ('duration' === $type) {
+            $alias = $adapter->createAlias();
+            $qb->addSelect("MIN($alias.value) as HIDDEN numeric_value");
+            $qb->leftJoin(
+                $this->getEntityClass(), $alias, 'WITH',
+                $qb->expr()->andX(
+                    $qb->expr()->eq("$alias.resource", $adapter->getEntityClass() . '.id'),
+                    $qb->expr()->eq("$alias.property", $propertyId)
+                )
+            );
+            $qb->addOrderBy('numeric_value', $query['sort_order']);
+        }
+    }
+}

@@ -1,4 +1,5 @@
 <?php
+use NumericDataTypes\DataType\Duration;
 use NumericDataTypes\DataType\Timestamp;
 
 $this->headScript()->appendFile($this->assetUrl('js/numeric-data-types.js', 'NumericDataTypes'));
@@ -24,6 +25,26 @@ $gtTimestamp = [
     'hour' => null,
     'minute' => null,
     'second' => null,
+];
+$ltDuration = [
+    'pid' => isset($query['numeric']['dur']['lt']['pid']) ? $query['numeric']['dur']['lt']['pid'] : null,
+    'val' => isset($query['numeric']['dur']['lt']['val']) ? $query['numeric']['dur']['lt']['val'] : null,
+    'years' => null,
+    'months' =>  null,
+    'days' => null,
+    'hours' => null,
+    'minutes' => null,
+    'seconds' => null,
+];
+$gtDuration = [
+    'pid' => isset($query['numeric']['dur']['gt']['pid']) ? $query['numeric']['dur']['gt']['pid'] : null,
+    'val' => isset($query['numeric']['dur']['gt']['val']) ? $query['numeric']['dur']['gt']['val'] : null,
+    'years' => null,
+    'months' =>  null,
+    'days' => null,
+    'hours' => null,
+    'minutes' => null,
+    'seconds' => null,
 ];
 $ltInteger = [
     'pid' => isset($query['numeric']['int']['lt']['pid']) ? $query['numeric']['int']['lt']['pid'] : null,
@@ -52,6 +73,24 @@ if (isset($gtTimestamp['val'])) {
     $gtTimestamp['hour'] = $date['hour'];
     $gtTimestamp['minute'] = $date['minute'];
     $gtTimestamp['second'] = $date['second'];
+}
+if (isset($ltDuration['val'])) {
+    $duration = Duration::getDurationFromValue($ltDuration['val']);
+    $ltDuration['years'] = $duration['years'];
+    $ltDuration['months'] = $duration['months'];
+    $ltDuration['days'] = $duration['days'];
+    $ltDuration['hours'] = $duration['hours'];
+    $ltDuration['minutes'] = $duration['minutes'];
+    $ltDuration['seconds'] = $duration['seconds'];
+}
+if (isset($gtDuration['val'])) {
+    $duration = Duration::getDurationFromValue($gtDuration['val']);
+    $gtDuration['years'] = $duration['years'];
+    $gtDuration['months'] = $duration['months'];
+    $gtDuration['days'] = $duration['days'];
+    $gtDuration['hours'] = $duration['hours'];
+    $gtDuration['minutes'] = $duration['minutes'];
+    $gtDuration['seconds'] = $duration['seconds'];
 }
 
 $months = [
@@ -152,6 +191,72 @@ $months = [
 
 <div class="field">
     <div class="field-meta">
+        <label for=""><?php echo $this->translate('Duration is less than'); ?></label>
+    </div>
+    <div class="inputs">
+        <?php
+        echo $this->numericPropertySelect([
+            'name' => 'numeric[dur][lt][pid]',
+            'attributes' => [
+                'class' => 'chosen-select',
+                'value' => $ltDuration['pid'],
+            ],
+            'options' => [
+                'numeric_data_type' => 'duration',
+            ],
+        ]);
+        ?>
+        <div class="duration-datetime-inputs">
+            <div class="duration-date-inputs">
+                <input type="number" value="<?php echo $this->escapeHtml($ltDuration['years']); ?>" id="duration-lt-years" step="1" min="0" placeholder="<?php echo $this->translate('Years (365 days each)'); ?>">
+                <input type="number" value="<?php echo $this->escapeHtml($ltDuration['months']); ?>" id="duration-lt-months" step="1" min="0" placeholder="<?php echo $this->translate('Months (30 days each)'); ?>">
+                <input type="number" value="<?php echo $this->escapeHtml($ltDuration['days']); ?>" id="duration-lt-days" step="1" min="0" placeholder="<?php echo $this->translate('Days'); ?>">
+            </div>
+            <div class="duration-time-inputs">
+                <input type="number" value="<?php echo $this->escapeHtml($ltDuration['hours']); ?>" id="duration-lt-hours" step="1" min="0" placeholder="<?php echo $this->translate('Hours'); ?>">
+                <input type="number" value="<?php echo $this->escapeHtml($ltDuration['minutes']); ?>" id="duration-lt-minutes" step="1" min="0" placeholder="<?php echo $this->translate('Minutes'); ?>">
+                <input type="number" value="<?php echo $this->escapeHtml($ltDuration['seconds']); ?>" id="duration-lt-seconds" step="1" min="0" placeholder="<?php echo $this->translate('Seconds'); ?>">
+            </div>
+        </div>
+        <input type="hidden" id="duration-lt" name="numeric[dur][lt][val]">
+    </div>
+</div>
+
+<div class="field">
+    <div class="field-meta">
+        <label for=""><?php echo $this->translate('Duration is greater than'); ?></label>
+    </div>
+    <div class="inputs">
+        <?php
+        echo $this->numericPropertySelect([
+            'name' => 'numeric[dur][gt][pid]',
+            'attributes' => [
+                'class' => 'chosen-select',
+                'value' => $gtDuration['pid'],
+            ],
+            'options' => [
+                'numeric_data_type' => 'duration',
+            ],
+        ]);
+        ?>
+        <div class="duration-datetime-inputs">
+            <div class="duration-date-inputs">
+                <input type="number" value="<?php echo $this->escapeHtml($gtDuration['years']); ?>" id="duration-gt-years" step="1" min="0" placeholder="<?php echo $this->translate('Years (365 days each)'); ?>">
+                <input type="number" value="<?php echo $this->escapeHtml($gtDuration['months']); ?>" id="duration-gt-months" step="1" min="0" placeholder="<?php echo $this->translate('Months (30 days each)'); ?>">
+                <input type="number" value="<?php echo $this->escapeHtml($gtDuration['days']); ?>" id="duration-gt-days" step="1" min="0" placeholder="<?php echo $this->translate('Days'); ?>">
+            </div>
+            <div class="duration-time-inputs">
+                <input type="number" value="<?php echo $this->escapeHtml($gtDuration['hours']); ?>" id="duration-gt-hours" step="1" min="0" placeholder="<?php echo $this->translate('Hours'); ?>">
+                <input type="number" value="<?php echo $this->escapeHtml($gtDuration['minutes']); ?>" id="duration-gt-minutes" step="1" min="0" placeholder="<?php echo $this->translate('Minutes'); ?>">
+                <input type="number" value="<?php echo $this->escapeHtml($gtDuration['seconds']); ?>" id="duration-gt-seconds" step="1" min="0" placeholder="<?php echo $this->translate('Seconds'); ?>">
+            </div>
+        </div>
+        <input type="hidden" id="duration-gt" name="numeric[dur][gt][val]">
+    </div>
+</div>
+
+<div class="field">
+    <div class="field-meta">
         <label for=""><?php echo $this->translate('Value is less than'); ?></label>
     </div>
     <div class="inputs">
@@ -225,6 +330,34 @@ $(function() {
         }
         if ('' === after.val()) {
             after.prop('disabled', true);
+        }
+    });
+    $('form#advanced-search').on('submit', function (e) {
+        var durationLt = $('#duration-lt');
+        var durationGt = $('#duration-gt');
+        NumericDataTypes.setDurationValue(
+            durationLt,
+            $('#duration-lt-years'),
+            $('#duration-lt-months'),
+            $('#duration-lt-days'),
+            $('#duration-lt-hours'),
+            $('#duration-lt-minutes'),
+            $('#duration-lt-seconds'),
+        );
+        NumericDataTypes.setDurationValue(
+            durationGt,
+            $('#duration-gt-years'),
+            $('#duration-gt-months'),
+            $('#duration-gt-days'),
+            $('#duration-gt-hours'),
+            $('#duration-gt-minutes'),
+            $('#duration-gt-seconds'),
+        );
+        if ('' === durationLt.val()) {
+            durationLt.prop('disabled', true);
+        }
+        if ('' === durationGt.val()) {
+            durationGt.prop('disabled', true);
         }
     });
 });
