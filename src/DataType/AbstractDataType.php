@@ -2,10 +2,12 @@
 namespace NumericDataTypes\DataType;
 
 use Doctrine\ORM\QueryBuilder;
+use NumericDataTypes\Entity\NumericDataTypesNumber;
 use Omeka\Api\Adapter\AdapterInterface;
 use Omeka\Api\Representation\ValueRepresentation;
 use Omeka\DataType\AbstractDataType as BaseAbstractDataType;
 use Omeka\Entity\Property;
+use Omeka\Entity\Value;
 
 abstract class AbstractDataType extends BaseAbstractDataType implements DataTypeInterface
 {
@@ -20,6 +22,30 @@ abstract class AbstractDataType extends BaseAbstractDataType implements DataType
 
     public function sortQuery(AdapterInterface $adapter, QueryBuilder $qb, array $query, $type, $propertyId)
     {
+    }
+
+    public function setEntityValues(NumericDataTypesNumber $entity, Value $value)
+    {
+        // The default behavior is to assume the number entity has one value,
+        // and that value is derived from self::getNumberFromValue().
+        $entity->setValue($this->getNumberFromValue($value->getValue()));
+    }
+
+    /**
+     * Get the number to be stored from the passed value.
+     *
+     * Should throw \InvalidArgumentException if the passed value is invalid.
+     *
+     * @throws \InvalidArgumentException
+     * @param string $value
+     * @return int
+     */
+    public function getNumberFromValue($value)
+    {
+        throw new \RuntimeException(sprintf(
+            'The %s data type does not support getNumberFromValue().',
+            get_class($this)
+        ));
     }
 
     /**

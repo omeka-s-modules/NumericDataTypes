@@ -1,29 +1,30 @@
-.timestamp-date-inputs,
-.timestamp-time-inputs {
+.numeric-date-inputs,
+.numeric-time-inputs {
     display: flex;
     margin-top: 6px;
 }
 
-.timestamp-datetime-inputs select {
+.numeric-datetime-inputs select {
     margin: 0;
     width: auto;
 }
 
-.timestamp-datetime-inputs input {
+.numeric-datetime-inputs input {
     min-width: 4em;
     width: 8em;
 }
 
-.timestamp-datetime-inputs input:not(:last-child),
-.timestamp-datetime-inputs select:not(:last-child) {
+.numeric-datetime-inputs input:not(:last-child),
+.numeric-datetime-inputs select:not(:last-child) {
     margin-right: 4px;
 }
 
-#resource-values .timestamp-date-inputs {
+#resource-values .numeric-date-inputs {
     margin-top: 0;
 }
 
-.value[data-data-type="numeric:timestamp"] .input-body {
+.value[data-data-type="numeric:timestamp"] .input-body,
+.value[data-data-type="numeric:interval"] .input-body {
     background-color: transparent;
 }
 
