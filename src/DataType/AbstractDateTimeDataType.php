@@ -34,7 +34,7 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
      *
      * @throws \InvalidArgumentException
      * @param string $value
-     * @param string $normalize self::NORMALIZE_EARLIEST|self::NORMALIZE_LATEST
+     * @param int $normalize self::NORMALIZE_EARLIEST|self::NORMALIZE_LATEST
      * @return array
      */
     public static function getDateTimeFromValue($value, $normalize = self::NORMALIZE_EARLIEST)
@@ -53,20 +53,22 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
             'second' => isset($matches['second']) ? (int) $matches['second'] : null,
             'month_normalized' => isset($matches['month'])
                 ? (int) $matches['month']
-                : ((self::NORMALIZE_LATEST === $normalize) ? 12 : 1),
-            'day_normalized' => isset($matches['day'])
-                ? (int) $matches['day']
-                : ((self::NORMALIZE_LATEST === $normalize) ? 31 : 1),
+                : ((self::NORMALIZE_LATEST === $normalize) ? 12 : 1), // default month
             'hour_normalized' => isset($matches['hour'])
                 ? (int) $matches['hour']
-                : ((self::NORMALIZE_LATEST === $normalize) ? 23 : 0),
+                : ((self::NORMALIZE_LATEST === $normalize) ? 23 : 0), // default hour
             'minute_normalized' => isset($matches['minute'])
                 ? (int) $matches['minute']
-                : ((self::NORMALIZE_LATEST === $normalize) ? 59 : 0),
+                : ((self::NORMALIZE_LATEST === $normalize) ? 59 : 0), // default minute
             'second_normalized' => isset($matches['second'])
                 ? (int) $matches['second']
-                : ((self::NORMALIZE_LATEST === $normalize) ? 59 : 0),
+                : ((self::NORMALIZE_LATEST === $normalize) ? 59 : 0), // default second
         ];
+        // The default day takes special handling, as it depends on year/month.
+        $date['day_normalized'] = isset($matches['day'])
+            ? (int) $matches['day']
+            : self::getDefaultDay($date['year'], $date['month_normalized'], $normalize);
+
         if ((self::YEAR_MIN > $date['year']) || (self::YEAR_MAX < $date['year'])) {
             throw new \InvalidArgumentException('Invalid year');
         }
@@ -133,6 +135,39 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
             $date['second_normalized']
         );
         return $date;
+    }
+
+    /**
+     * Get the default day given a month.
+     *
+     * Accounts for self::NORMALIZE_LATEST by returning the last day in the
+     * specified year/month.
+     *
+     * @param int $year
+     * @param int $month
+     * @param int $normalize self::NORMALIZE_EARLIEST|self::NORMALIZE_LATEST
+     */
+    public static function getDefaultDay($year, $month, $normalize)
+    {
+        if (self::NORMALIZE_LATEST === $normalize) {
+            switch ($month) {
+                case 2:
+                    // February (accounting for leap year)
+                    $leap = date('L', mktime(0, 0, 0, 1, 1, $year));
+                    return $leap ? 29 : 28;
+                case 4:
+                case 6:
+                case 9:
+                case 11:
+                    // April, June, September, November
+                    return 30;
+                default:
+                    // January, March, May, July, August, October, December
+                    return 31;
+            }
+        } else {
+            return 1;
+        }
     }
 
     /**
