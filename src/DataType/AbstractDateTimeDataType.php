@@ -17,22 +17,27 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
     const YEAR_MAX =  292277026595;
 
     /**
-     * Get the decomposed datetime and DateTime object from an ISO 8601 value.
+     * Date normalization flags.
      *
-     * Use $normalizeType to normalize each datetime component to its earliest
-     * or latest possible integer, if the specific component is not passed with
-     * the value. Use "earliest" or "latest". The default normalization is
-     * "earliest".
+     * Use when calling self::getDateTimeFromValue() to normalize each datetime
+     * component to its earliest or latest possible integer, if the specific
+     * component is not passed with the value.
+     */
+    const NORMALIZE_EARLIEST = 1;
+    const NORMALIZE_LATEST = 2;
+
+    /**
+     * Get the decomposed datetime and DateTime object from an ISO 8601 value.
      *
      * Also used to validate the datetime since validation is a side effect of
      * parsing the value into its component datetime pieces.
      *
      * @throws \InvalidArgumentException
      * @param string $value
-     * @param string $normalizeType earliest|latest
+     * @param string $normalize self::NORMALIZE_EARLIEST|self::NORMALIZE_LATEST
      * @return array
      */
-    public static function getDateTimeFromValue($value, $normalizeType = 'earliest')
+    public static function getDateTimeFromValue($value, $normalize = self::NORMALIZE_EARLIEST)
     {
         // Match against ISO 8601, allowing for reduced accuracy.
         $isMatch = preg_match('/^(?<year>-?\d{4,})(?:-(?<month>\d{2}))?(?:-(?<day>\d{2}))?(?:T(?<hour>\d{2}))?(?::(?<minute>\d{2}))?(?::(?<second>\d{2}))?$/', $value, $matches);
@@ -48,19 +53,19 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
             'second' => isset($matches['second']) ? (int) $matches['second'] : null,
             'month_normalized' => isset($matches['month'])
                 ? (int) $matches['month']
-                : (('latest' === $normalizeType) ? 12 : 1),
+                : ((self::NORMALIZE_LATEST === $normalize) ? 12 : 1),
             'day_normalized' => isset($matches['day'])
                 ? (int) $matches['day']
-                : (('latest' === $normalizeType) ? 31 : 1),
+                : ((self::NORMALIZE_LATEST === $normalize) ? 31 : 1),
             'hour_normalized' => isset($matches['hour'])
                 ? (int) $matches['hour']
-                : (('latest' === $normalizeType) ? 23 : 0),
+                : ((self::NORMALIZE_LATEST === $normalize) ? 23 : 0),
             'minute_normalized' => isset($matches['minute'])
                 ? (int) $matches['minute']
-                : (('latest' === $normalizeType) ? 59 : 0),
+                : ((self::NORMALIZE_LATEST === $normalize) ? 59 : 0),
             'second_normalized' => isset($matches['second'])
                 ? (int) $matches['second']
-                : (('latest' === $normalizeType) ? 59 : 0),
+                : ((self::NORMALIZE_LATEST === $normalize) ? 59 : 0),
         ];
         if ((self::YEAR_MIN > $date['year']) || (self::YEAR_MAX < $date['year'])) {
             throw new \InvalidArgumentException('Invalid year');

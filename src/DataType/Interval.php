@@ -114,7 +114,7 @@ HTML;
     {
         list($intervalStart, $intervalEnd) = explode('/', $valueObject['@value']);
         $dateStart = $this->getDateTimeFromValue($intervalStart);
-        $dateEnd = $this->getDateTimeFromValue($intervalEnd, 'latest');
+        $dateEnd = $this->getDateTimeFromValue($intervalEnd, self::NORMALIZE_LATEST);
         $interval = sprintf(
             '%s/%s',
             $dateStart['date']->format($dateStart['format_iso8601']),
@@ -130,7 +130,7 @@ HTML;
     {
         list($intervalStart, $intervalEnd) = explode('/', $value->value());
         $dateStart = $this->getDateTimeFromValue($intervalStart);
-        $dateEnd = $this->getDateTimeFromValue($intervalEnd, 'latest');
+        $dateEnd = $this->getDateTimeFromValue($intervalEnd, self::NORMALIZE_LATEST);
         return sprintf(
             '%s – %s',
             $dateStart['date']->format($dateStart['format_render']),
@@ -147,7 +147,7 @@ HTML;
     {
         list($intervalStart, $intervalEnd) = explode('/', $value->getValue());
         $dateStart = $this->getDateTimeFromValue($intervalStart);
-        $dateEnd = $this->getDateTimeFromValue($intervalEnd, 'latest');
+        $dateEnd = $this->getDateTimeFromValue($intervalEnd, self::NORMALIZE_LATEST);
         $entity->setValue($dateStart['date']->getTimestamp());
         $entity->setValue2($dateEnd['date']->getTimestamp());
     }
@@ -160,26 +160,28 @@ HTML;
         ) {
             $value = $query['numeric']['ivl']['val'];
             $propertyId = $query['numeric']['ivl']['pid'];
-            if ($this->isValid(['@value' => $value])) {
+            try {
                 $date = $this->getDateTimeFromValue($value);
                 $number = $date['date']->getTimestamp();
-                $alias = $adapter->createAlias();
-                $qb->leftJoin(
-                    $this->getEntityClass(), $alias, 'WITH',
-                    $qb->expr()->andX(
-                        $qb->expr()->eq("$alias.resource", $adapter->getEntityClass() . '.id'),
-                        $qb->expr()->eq("$alias.property", (int) $propertyId)
-                    )
-                );
-                $qb->andWhere($qb->expr()->lte(
-                    "$alias.value",
-                    $adapter->createNamedParameter($qb, $number)
-                ));
-                $qb->andWhere($qb->expr()->gte(
-                    "$alias.value2",
-                    $adapter->createNamedParameter($qb, $number)
-                ));
+            } catch (\InvalidArgumentException $e) {
+                return; // invalid value
             }
+            $alias = $adapter->createAlias();
+            $qb->leftJoin(
+                $this->getEntityClass(), $alias, 'WITH',
+                $qb->expr()->andX(
+                    $qb->expr()->eq("$alias.resource", $adapter->getEntityClass() . '.id'),
+                    $qb->expr()->eq("$alias.property", (int) $propertyId)
+                )
+            );
+            $qb->andWhere($qb->expr()->lte(
+                "$alias.value",
+                $adapter->createNamedParameter($qb, $number)
+            ));
+            $qb->andWhere($qb->expr()->gte(
+                "$alias.value2",
+                $adapter->createNamedParameter($qb, $number)
+            ));
         }
     }
 }
