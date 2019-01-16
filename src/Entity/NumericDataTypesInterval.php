@@ -16,6 +16,16 @@ class NumericDataTypesInterval extends NumericDataTypesNumber
      */
     protected $value2;
 
+    public function setValue($value)
+    {
+        $this->value = (int) $value;
+    }
+
+    public function getValue()
+    {
+        return $this->value;
+    }
+
     public function setValue2($value2)
     {
         $this->value2 = (int) $value2;

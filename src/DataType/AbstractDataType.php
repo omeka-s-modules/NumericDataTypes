@@ -2,7 +2,6 @@
 namespace NumericDataTypes\DataType;
 
 use Doctrine\ORM\QueryBuilder;
-use NumericDataTypes\Entity\NumericDataTypesNumber;
 use Omeka\Api\Adapter\AdapterInterface;
 use Omeka\Api\Representation\ValueRepresentation;
 use Omeka\DataType\AbstractDataType as BaseAbstractDataType;
@@ -24,30 +23,6 @@ abstract class AbstractDataType extends BaseAbstractDataType implements DataType
     {
     }
 
-    public function setEntityValues(NumericDataTypesNumber $entity, Value $value)
-    {
-        // The default behavior is to assume the number entity has one value,
-        // and that value is derived from self::getNumberFromValue().
-        $entity->setValue($this->getNumberFromValue($value->getValue()));
-    }
-
-    /**
-     * Get the number to be stored from the passed value.
-     *
-     * Should throw \InvalidArgumentException if the passed value is invalid.
-     *
-     * @throws \InvalidArgumentException
-     * @param string $value
-     * @return int
-     */
-    public function getNumberFromValue($value)
-    {
-        throw new \RuntimeException(sprintf(
-            'The %s data type does not support getNumberFromValue().',
-            get_class($this)
-        ));
-    }
-
     /**
      * Add a less-than query.
      *
@@ -56,15 +31,10 @@ abstract class AbstractDataType extends BaseAbstractDataType implements DataType
      * @param AdapterInterface $adapter
      * @param QueryBuilder $qb
      * @param int propertyId
-     * @param string $value
+     * @param int $number
      */
-    public function addLessThanQuery(AdapterInterface $adapter, QueryBuilder $qb, $propertyId, $value)
+    public function addLessThanQuery(AdapterInterface $adapter, QueryBuilder $qb, $propertyId, $number)
     {
-        try {
-            $number = $this->getNumberFromValue($value);
-        } catch (\InvalidArgumentException $e) {
-            return; // invalid value
-        }
         $alias = $adapter->createAlias();
         $qb->leftJoin(
             $this->getEntityClass(), $alias, 'WITH',
@@ -87,15 +57,10 @@ abstract class AbstractDataType extends BaseAbstractDataType implements DataType
      * @param AdapterInterface $adapter
      * @param QueryBuilder $qb
      * @param int propertyId
-     * @param string $value
+     * @param int $number
      */
-    public function addGreaterThanQuery(AdapterInterface $adapter, QueryBuilder $qb, $propertyId, $value)
+    public function addGreaterThanQuery(AdapterInterface $adapter, QueryBuilder $qb, $propertyId, $number)
     {
-        try {
-            $number = $this->getNumberFromValue($value);
-        } catch (\InvalidArgumentException $e) {
-            return; // invalid value
-        }
         $alias = $adapter->createAlias();
         $qb->leftJoin(
             $this->getEntityClass(), $alias, 'WITH',

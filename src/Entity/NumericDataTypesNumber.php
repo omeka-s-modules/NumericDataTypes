@@ -69,14 +69,4 @@ class NumericDataTypesNumber extends AbstractEntity
     {
         return $this->property;
     }
-
-    public function setValue($value)
-    {
-        $this->value = (int) $value;
-    }
-
-    public function getValue()
-    {
-        return $this->value;
-    }
 }

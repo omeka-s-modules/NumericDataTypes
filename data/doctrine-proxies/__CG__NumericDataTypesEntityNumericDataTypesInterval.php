@@ -176,6 +176,28 @@ class NumericDataTypesInterval extends \NumericDataTypes\Entity\NumericDataTypes
     /**
      * {@inheritDoc}
      */
+    public function setValue($value)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setValue', [$value]);
+
+        return parent::setValue($value);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getValue()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getValue', []);
+
+        return parent::getValue();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function setValue2($value2)
     {
 
@@ -252,28 +274,6 @@ class NumericDataTypesInterval extends \NumericDataTypes\Entity\NumericDataTypes
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getProperty', []);
 
         return parent::getProperty();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setValue($value)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setValue', [$value]);
-
-        return parent::setValue($value);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getValue()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getValue', []);
-
-        return parent::getValue();
     }
 
     /**

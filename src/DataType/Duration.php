@@ -3,6 +3,7 @@ namespace NumericDataTypes\DataType;
 
 use DateInterval;
 use Doctrine\ORM\QueryBuilder;
+use NumericDataTypes\Entity\NumericDataTypesNumber;
 use Omeka\Entity\Value;
 use Omeka\Api\Adapter\AbstractEntityAdapter;
 use Omeka\Api\Adapter\AdapterInterface;
@@ -182,16 +183,10 @@ HTML;
         return 'NumericDataTypes\Entity\NumericDataTypesDuration';
     }
 
-    /**
-     * Get the total seconds from the duration string.
-     *
-     * @param string $value
-     * @return int
-     */
-    public function getNumberFromValue($value)
+    public function setEntityValues(NumericDataTypesNumber $entity, Value $value)
     {
-        $duration = $this->getDurationFromValue($value);
-        return $duration['total_seconds'];
+        $duration = $this->getDurationFromValue($value->getValue());
+        $entity->setValue($duration['total_seconds']);
     }
 
     /**
@@ -254,7 +249,11 @@ HTML;
         ) {
             $value = $query['numeric']['dur']['lt']['val'];
             $propertyId = $query['numeric']['dur']['lt']['pid'];
-            $this->addLessThanQuery($adapter, $qb, $propertyId, $value);
+            if ($this->isValid(['@value' => $value])) {
+                $duration = $this->getDurationFromValue($value);
+                $number = $duration['total_seconds'];
+                $this->addLessThanQuery($adapter, $qb, $propertyId, $number);
+            }
         }
         if (isset($query['numeric']['dur']['gt']['val'])
             && isset($query['numeric']['dur']['gt']['pid'])
@@ -262,7 +261,11 @@ HTML;
         ) {
             $value = $query['numeric']['dur']['gt']['val'];
             $propertyId = $query['numeric']['dur']['gt']['pid'];
-            $this->addGreaterThanQuery($adapter, $qb, $propertyId, $value);
+            if ($this->isValid(['@value' => $value])) {
+                $duration = $this->getDurationFromValue($value);
+                $number = $duration['total_seconds'];
+                $this->addGreaterThanQuery($adapter, $qb, $propertyId, $number);
+            }
         }
     }
 

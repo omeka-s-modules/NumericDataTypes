@@ -146,32 +146,28 @@ HTML;
             && isset($query['numeric']['ivl']['pid'])
             && is_numeric($query['numeric']['ivl']['pid'])
         ) {
-            try {
-                $date = $this->getDateTimeFromValue($query['numeric']['ivl']['val']);
+            $value = $query['numeric']['ivl']['val'];
+            $propertyId = $query['numeric']['ivl']['pid'];
+            if ($this->isValid(['@value' => $value])) {
+                $date = $this->getDateTimeFromValue($value);
                 $number = $date['date']->getTimestamp();
-            } catch (\InvalidArgumentException $e) {
-                return; // invalid value
+                $alias = $adapter->createAlias();
+                $qb->leftJoin(
+                    $this->getEntityClass(), $alias, 'WITH',
+                    $qb->expr()->andX(
+                        $qb->expr()->eq("$alias.resource", $adapter->getEntityClass() . '.id'),
+                        $qb->expr()->eq("$alias.property", (int) $propertyId)
+                    )
+                );
+                $qb->andWhere($qb->expr()->lte(
+                    "$alias.value",
+                    $adapter->createNamedParameter($qb, $number)
+                ));
+                $qb->andWhere($qb->expr()->gte(
+                    "$alias.value2",
+                    $adapter->createNamedParameter($qb, $number)
+                ));
             }
-            $alias = $adapter->createAlias();
-            $qb->leftJoin(
-                $this->getEntityClass(), $alias, 'WITH',
-                $qb->expr()->andX(
-                    $qb->expr()->eq("$alias.resource", $adapter->getEntityClass() . '.id'),
-                    $qb->expr()->eq("$alias.property", (int) $query['numeric']['ivl']['pid'])
-                )
-            );
-            $qb->andWhere($qb->expr()->lte(
-                "$alias.value",
-                $adapter->createNamedParameter($qb, $number)
-            ));
-            $qb->andWhere($qb->expr()->gte(
-                "$alias.value2",
-                $adapter->createNamedParameter($qb, $number)
-            ));
         }
-    }
-
-    public function sortQuery(AdapterInterface $adapter, QueryBuilder $qb, array $query, $type, $propertyId)
-    {
     }
 }

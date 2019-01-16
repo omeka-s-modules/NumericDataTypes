@@ -176,6 +176,28 @@ class NumericDataTypesInteger extends \NumericDataTypes\Entity\NumericDataTypesI
     /**
      * {@inheritDoc}
      */
+    public function setValue($value)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setValue', [$value]);
+
+        return parent::setValue($value);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getValue()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getValue', []);
+
+        return parent::getValue();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getId()
     {
         if ($this->__isInitialized__ === false) {
@@ -230,28 +252,6 @@ class NumericDataTypesInteger extends \NumericDataTypes\Entity\NumericDataTypesI
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getProperty', []);
 
         return parent::getProperty();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setValue($value)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setValue', [$value]);
-
-        return parent::setValue($value);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getValue()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getValue', []);
-
-        return parent::getValue();
     }
 
     /**

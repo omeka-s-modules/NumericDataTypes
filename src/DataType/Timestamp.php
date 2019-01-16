@@ -2,6 +2,7 @@
 namespace NumericDataTypes\DataType;
 
 use Doctrine\ORM\QueryBuilder;
+use NumericDataTypes\Entity\NumericDataTypesNumber;
 use Omeka\Api\Adapter\AbstractEntityAdapter;
 use Omeka\Api\Adapter\AdapterInterface;
 use Omeka\Api\Representation\ValueRepresentation;
@@ -107,16 +108,10 @@ HTML;
         return 'NumericDataTypes\Entity\NumericDataTypesTimestamp';
     }
 
-    /**
-     * Get the Unix timestamp from the value.
-     *
-     * @param string $value
-     * @return int
-     */
-    public function getNumberFromValue($value)
+    public function setEntityValues(NumericDataTypesNumber $entity, Value $value)
     {
-        $date = $this->getDateTimeFromValue($value);
-        return $date['date']->getTimestamp();
+        $date = $this->getDateTimeFromValue($value->getValue());
+        $entity->setValue($date['date']->getTimestamp());
     }
 
     /**
@@ -135,7 +130,11 @@ HTML;
         ) {
             $value = $query['numeric']['ts']['lt']['val'];
             $propertyId = $query['numeric']['ts']['lt']['pid'];
-            $this->addLessThanQuery($adapter, $qb, $propertyId, $value);
+            if ($this->isValid(['@value' => $value])) {
+                $date = $this->getDateTimeFromValue($value);
+                $number = $date['date']->getTimestamp();
+                $this->addLessThanQuery($adapter, $qb, $propertyId, $number);
+            }
         }
         if (isset($query['numeric']['ts']['gt']['val'])
             && isset($query['numeric']['ts']['gt']['pid'])
@@ -143,7 +142,11 @@ HTML;
         ) {
             $value = $query['numeric']['ts']['gt']['val'];
             $propertyId = $query['numeric']['ts']['gt']['pid'];
-            $this->addGreaterThanQuery($adapter, $qb, $propertyId, $value);
+            if ($this->isValid(['@value' => $value])) {
+                $date = $this->getDateTimeFromValue($value);
+                $number = $date['date']->getTimestamp();
+                $this->addGreaterThanQuery($adapter, $qb, $propertyId, $number);
+            }
         }
     }
 
