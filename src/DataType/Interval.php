@@ -82,6 +82,18 @@ HTML;
         );
     }
 
+    /**
+     * Is an interval value valid?
+     *
+     * Per the ISO 8601 specification, time intervals can be expressed in a few
+     * ways, including <start>/<end>, <start>/<duration>, and <duration>/<end>,
+     * but we only accept the <start>/<end> expression because it's easier for
+     * users to convert a duration to a datetime than vice versa. The spec also
+     * allows for concise representations of the end time point, but we do not
+     * so we can reuse existing code.
+     *
+     * @param array $valueObject
+     */
     public function isValid(array $valueObject)
     {
         $intervalPoints = explode('/', $valueObject['@value']);
