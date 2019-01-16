@@ -19,14 +19,20 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
     /**
      * Get the decomposed datetime and DateTime object from an ISO 8601 value.
      *
+     * Use $normalizeType to normalize each datetime component to its earliest
+     * or latest possible integer, if the specific component is not passed with
+     * the value. Use "earliest" or "latest". The default normalization is
+     * "earliest".
+     *
      * Also used to validate the datetime since validation is a side effect of
      * parsing the value into its component datetime pieces.
      *
      * @throws \InvalidArgumentException
      * @param string $value
+     * @param string $normalizeType earliest|latest
      * @return array
      */
-    public static function getDateTimeFromValue($value)
+    public static function getDateTimeFromValue($value, $normalizeType = 'earliest')
     {
         // Match against ISO 8601, allowing for reduced accuracy.
         $isMatch = preg_match('/^(?<year>-?\d{4,})(?:-(?<month>\d{2}))?(?:-(?<day>\d{2}))?(?:T(?<hour>\d{2}))?(?::(?<minute>\d{2}))?(?::(?<second>\d{2}))?$/', $value, $matches);
@@ -40,11 +46,21 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
             'hour' => isset($matches['hour']) ? (int) $matches['hour'] : null,
             'minute' => isset($matches['minute']) ? (int) $matches['minute'] : null,
             'second' => isset($matches['second']) ? (int) $matches['second'] : null,
-            'month_normalized' => isset($matches['month']) ? (int) $matches['month'] : 1,
-            'day_normalized' => isset($matches['day']) ? (int) $matches['day'] : 1,
-            'hour_normalized' => isset($matches['hour']) ? (int) $matches['hour'] : 0,
-            'minute_normalized' => isset($matches['minute']) ? (int) $matches['minute'] : 0,
-            'second_normalized' => isset($matches['second']) ? (int) $matches['second'] : 0,
+            'month_normalized' => isset($matches['month'])
+                ? (int) $matches['month']
+                : (('latest' === $normalizeType) ? 12 : 1),
+            'day_normalized' => isset($matches['day'])
+                ? (int) $matches['day']
+                : (('latest' === $normalizeType) ? 31 : 1),
+            'hour_normalized' => isset($matches['hour'])
+                ? (int) $matches['hour']
+                : (('latest' === $normalizeType) ? 23 : 0),
+            'minute_normalized' => isset($matches['minute'])
+                ? (int) $matches['minute']
+                : (('latest' === $normalizeType) ? 59 : 0),
+            'second_normalized' => isset($matches['second'])
+                ? (int) $matches['second']
+                : (('latest' === $normalizeType) ? 59 : 0),
         ];
         if ((self::YEAR_MIN > $date['year']) || (self::YEAR_MAX < $date['year'])) {
             throw new \InvalidArgumentException('Invalid year');
@@ -114,6 +130,12 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
         return $date;
     }
 
+    /**
+     * Get the value form element.
+     *
+     * @param string $name
+     * @return Element\Hidden
+     */
     public function getFormElementValue($name)
     {
         $valueInput = new Element\Hidden($name);
@@ -123,6 +145,12 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
         return $valueInput;
     }
 
+    /**
+     * Get the year form element.
+     *
+     * @param string $name
+     * @return Element\Number
+     */
     public function getFormElementYear($name)
     {
         $yearInput = new Element\Number($name);
@@ -135,6 +163,12 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
         return $yearInput;
     }
 
+    /**
+     * Get the month form element.
+     *
+     * @param string $name
+     * @return Element\Select
+     */
     public function getFormElementMonth($name)
     {
         $monthSelect = new Element\Select($name);
@@ -156,6 +190,12 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
         return $monthSelect;
     }
 
+    /**
+     * Get the day form element.
+     *
+     * @param string $name
+     * @return Element\Number
+     */
     public function getFormElementDay($name)
     {
         $dayInput = new Element\Number($name);
@@ -168,6 +208,12 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
         return $dayInput;
     }
 
+    /**
+     * Get the hour form element.
+     *
+     * @param string $name
+     * @return Element\Number
+     */
     public function getFormElementHour($name)
     {
         $hourInput = new Element\Number($name);
@@ -180,6 +226,12 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
         return $hourInput;
     }
 
+    /**
+     * Get the minute form element.
+     *
+     * @param string $name
+     * @return Element\Number
+     */
     public function getFormElementMinute($name)
     {
         $minuteInput = new Element\Number($name);
@@ -192,6 +244,12 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
         return $minuteInput;
     }
 
+    /**
+     * Get the second form element.
+     *
+     * @param string $name
+     * @return Element\Number
+     */
     public function getFormElementSecond($name)
     {
         $secondInput = new Element\Number($name);

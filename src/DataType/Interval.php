@@ -102,7 +102,7 @@ HTML;
     {
         list($intervalStart, $intervalEnd) = explode('/', $valueObject['@value']);
         $dateStart = $this->getDateTimeFromValue($intervalStart);
-        $dateEnd = $this->getDateTimeFromValue($intervalEnd);
+        $dateEnd = $this->getDateTimeFromValue($intervalEnd, 'latest');
         $interval = sprintf(
             '%s/%s',
             $dateStart['date']->format($dateStart['format_iso8601']),
@@ -118,7 +118,7 @@ HTML;
     {
         list($intervalStart, $intervalEnd) = explode('/', $value->value());
         $dateStart = $this->getDateTimeFromValue($intervalStart);
-        $dateEnd = $this->getDateTimeFromValue($intervalEnd);
+        $dateEnd = $this->getDateTimeFromValue($intervalEnd, 'latest');
         return sprintf(
             '%s – %s',
             $dateStart['date']->format($dateStart['format_render']),
@@ -135,7 +135,7 @@ HTML;
     {
         list($intervalStart, $intervalEnd) = explode('/', $value->getValue());
         $dateStart = $this->getDateTimeFromValue($intervalStart);
-        $dateEnd = $this->getDateTimeFromValue($intervalEnd);
+        $dateEnd = $this->getDateTimeFromValue($intervalEnd, 'latest');
         $entity->setValue($dateStart['date']->getTimestamp());
         $entity->setValue2($dateEnd['date']->getTimestamp());
     }
@@ -160,11 +160,11 @@ HTML;
                     $qb->expr()->eq("$alias.property", (int) $query['numeric']['ivl']['pid'])
                 )
             );
-            $qb->andWhere($qb->expr()->lt(
+            $qb->andWhere($qb->expr()->lte(
                 "$alias.value",
                 $adapter->createNamedParameter($qb, $number)
             ));
-            $qb->andWhere($qb->expr()->gt(
+            $qb->andWhere($qb->expr()->gte(
                 "$alias.value2",
                 $adapter->createNamedParameter($qb, $number)
             ));
