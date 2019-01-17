@@ -114,7 +114,7 @@ HTML;
     {
         list($intervalStart, $intervalEnd) = explode('/', $valueObject['@value']);
         $dateStart = $this->getDateTimeFromValue($intervalStart);
-        $dateEnd = $this->getDateTimeFromValue($intervalEnd, self::NORMALIZE_LATEST);
+        $dateEnd = $this->getDateTimeFromValue($intervalEnd, false);
         $interval = sprintf(
             '%s/%s',
             $dateStart['date']->format($dateStart['format_iso8601']),
@@ -130,7 +130,7 @@ HTML;
     {
         list($intervalStart, $intervalEnd) = explode('/', $value->value());
         $dateStart = $this->getDateTimeFromValue($intervalStart);
-        $dateEnd = $this->getDateTimeFromValue($intervalEnd, self::NORMALIZE_LATEST);
+        $dateEnd = $this->getDateTimeFromValue($intervalEnd, false);
         return sprintf(
             '%s – %s',
             $dateStart['date']->format($dateStart['format_render']),
@@ -147,7 +147,7 @@ HTML;
     {
         list($intervalStart, $intervalEnd) = explode('/', $value->getValue());
         $dateStart = $this->getDateTimeFromValue($intervalStart);
-        $dateEnd = $this->getDateTimeFromValue($intervalEnd, self::NORMALIZE_LATEST);
+        $dateEnd = $this->getDateTimeFromValue($intervalEnd, false);
         $entity->setValue($dateStart['date']->getTimestamp());
         $entity->setValue2($dateEnd['date']->getTimestamp());
     }

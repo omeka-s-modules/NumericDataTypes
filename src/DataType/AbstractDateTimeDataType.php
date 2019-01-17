@@ -17,27 +17,21 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
     const YEAR_MAX =  292277026595;
 
     /**
-     * Date normalization flags.
-     *
-     * Use when calling self::getDateTimeFromValue() to normalize each datetime
-     * component to its earliest or latest possible integer, if the specific
-     * component is not passed with the value.
-     */
-    const NORMALIZE_EARLIEST = 1;
-    const NORMALIZE_LATEST = 2;
-
-    /**
      * Get the decomposed datetime and DateTime object from an ISO 8601 value.
+     *
+     * Use $defaultFirst to set the default of each datetime component to its
+     * first (true) or last (false) possible integer, if the specific component
+     * is not passed with the value.
      *
      * Also used to validate the datetime since validation is a side effect of
      * parsing the value into its component datetime pieces.
      *
      * @throws \InvalidArgumentException
      * @param string $value
-     * @param int $normalize self::NORMALIZE_EARLIEST|self::NORMALIZE_LATEST
+     * @param bool $first
      * @return array
      */
-    public static function getDateTimeFromValue($value, $normalize = self::NORMALIZE_EARLIEST)
+    public static function getDateTimeFromValue($value, $defaultFirst = true)
     {
         // Match against ISO 8601, allowing for reduced accuracy.
         $isMatch = preg_match('/^(?<year>-?\d{4,})(?:-(?<month>\d{2}))?(?:-(?<day>\d{2}))?(?:T(?<hour>\d{2}))?(?::(?<minute>\d{2}))?(?::(?<second>\d{2}))?$/', $value, $matches);
@@ -53,21 +47,21 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
             'second' => isset($matches['second']) ? (int) $matches['second'] : null,
             'month_normalized' => isset($matches['month'])
                 ? (int) $matches['month']
-                : ((self::NORMALIZE_LATEST === $normalize) ? 12 : 1), // default month
+                : ($defaultFirst ? 1 : 12), // default month
             'hour_normalized' => isset($matches['hour'])
                 ? (int) $matches['hour']
-                : ((self::NORMALIZE_LATEST === $normalize) ? 23 : 0), // default hour
+                : ($defaultFirst ? 0 : 23), // default hour
             'minute_normalized' => isset($matches['minute'])
                 ? (int) $matches['minute']
-                : ((self::NORMALIZE_LATEST === $normalize) ? 59 : 0), // default minute
+                : ($defaultFirst ? 0 : 59), // default minute
             'second_normalized' => isset($matches['second'])
                 ? (int) $matches['second']
-                : ((self::NORMALIZE_LATEST === $normalize) ? 59 : 0), // default second
+                : ($defaultFirst ? 0 : 59), // default second
         ];
-        // The default day takes special handling, as it depends on year/month.
+        // The last day takes special handling, as it depends on year/month.
         $date['day_normalized'] = isset($matches['day'])
             ? (int) $matches['day']
-            : self::getDefaultDay($date['year'], $date['month_normalized'], $normalize);
+            : ($defaultFirst ? 1 : self::getLastDay($date['year'], $date['month_normalized'])); // default day
 
         if ((self::YEAR_MIN > $date['year']) || (self::YEAR_MAX < $date['year'])) {
             throw new \InvalidArgumentException('Invalid year');
@@ -138,35 +132,28 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
     }
 
     /**
-     * Get the default day given a month.
-     *
-     * Accounts for self::NORMALIZE_LATEST by returning the last day in the
-     * specified year/month.
+     * Get the last day of a given year/month.
      *
      * @param int $year
      * @param int $month
-     * @param int $normalize self::NORMALIZE_EARLIEST|self::NORMALIZE_LATEST
+     * @return int
      */
-    public static function getDefaultDay($year, $month, $normalize)
+    public static function getLastDay($year, $month)
     {
-        if (self::NORMALIZE_LATEST === $normalize) {
-            switch ($month) {
-                case 2:
-                    // February (accounting for leap year)
-                    $leap = date('L', mktime(0, 0, 0, 1, 1, $year));
-                    return $leap ? 29 : 28;
-                case 4:
-                case 6:
-                case 9:
-                case 11:
-                    // April, June, September, November
-                    return 30;
-                default:
-                    // January, March, May, July, August, October, December
-                    return 31;
-            }
-        } else {
-            return 1;
+        switch ($month) {
+            case 2:
+                // February (accounting for leap year)
+                $leapYear = date('L', mktime(0, 0, 0, 1, 1, $year));
+                return $leapYear ? 29 : 28;
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                // April, June, September, November
+                return 30;
+            default:
+                // January, March, May, July, August, October, December
+                return 31;
         }
     }
 
