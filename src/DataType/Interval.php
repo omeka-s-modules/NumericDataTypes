@@ -98,14 +98,21 @@ HTML;
     {
         $intervalPoints = explode('/', $valueObject['@value']);
         if (2 !== count($intervalPoints)) {
+            // There must be a <start> point and an <end> point.
             return false;
         }
-        foreach ($intervalPoints as $intervalPoint) {
-            try {
-                $this->getDateTimeFromValue($intervalPoint);
-            } catch (\InvalidArgumentException $e) {
-                return false;
-            }
+        try {
+            $dateStart = $this->getDateTimeFromValue($intervalPoints[0]);
+            $dateEnd = $this->getDateTimeFromValue($intervalPoints[1], false);
+        } catch (\InvalidArgumentException $e) {
+            // At least one point is invalid.
+            return false;
+        }
+        $timestampStart = $dateStart['date']->getTimestamp();
+        $timestampEnd = $dateEnd['date']->getTimestamp();
+        if ($timestampStart >= $timestampEnd) {
+            // The <start> point must be less than the <end> point.
+            return false;
         }
         return true;
     }
