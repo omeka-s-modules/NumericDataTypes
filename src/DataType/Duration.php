@@ -22,6 +22,11 @@ class Duration extends AbstractDataType
     const SECONDS_HOUR = 3600;
     const SECONDS_MINUTE = 60;
 
+    /**
+     * @var array Cache of durations
+     */
+    protected static $durations = [];
+
     public function getName()
     {
         return 'numeric:duration';
@@ -207,6 +212,9 @@ HTML;
      */
     public static function getDurationFromValue($value)
     {
+        if (isset(self::$durations[$value])) {
+            return self::$durations[$value];
+        }
         // @see https://stackoverflow.com/a/32045167
         $isMatch = preg_match('/^P(?!$)(?:(?<years>\d+)Y)?(?:(?<months>\d+)M)?(?:(?<days>\d+)D)?(T(?=\d)(?:(?<hours>\d+)H)?(?:(?<minutes>\d+)M)?(?:(?<seconds>\d+)S)?)?$/', $value, $matches);
         if (!$isMatch) {
@@ -238,6 +246,7 @@ HTML;
             throw new \InvalidArgumentException('Invalid duration, exceeds maximum safe integer');
         }
         $duration['total_seconds'] = $totalSeconds;
+        self::$durations[$value] = $duration; // Cache the duration
         return $duration;
     }
 
