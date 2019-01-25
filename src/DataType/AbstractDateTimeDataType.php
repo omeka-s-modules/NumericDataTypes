@@ -33,7 +33,7 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
      *
      * @throws \InvalidArgumentException
      * @param string $value
-     * @param bool $first
+     * @param bool $defaultFirst
      * @return array
      */
     public static function getDateTimeFromValue($value, $defaultFirst = true)
