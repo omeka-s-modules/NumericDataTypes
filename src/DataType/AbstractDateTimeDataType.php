@@ -38,8 +38,8 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
      */
     public static function getDateTimeFromValue($value, $defaultFirst = true)
     {
-        if (isset(self::$dateTimes[$value])) {
-            return self::$dateTimes[$value];
+        if (isset(self::$dateTimes[$value][$defaultFirst ? 'first' : 'last'])) {
+            return self::$dateTimes[$value][$defaultFirst ? 'first' : 'last'];
         }
         // Match against ISO 8601, allowing for reduced accuracy.
         $isMatch = preg_match('/^(?<year>-?\d{4,})(?:-(?<month>\d{2}))?(?:-(?<day>\d{2}))?(?:T(?<hour>\d{2}))?(?::(?<minute>\d{2}))?(?::(?<second>\d{2}))?$/', $value, $matches);
@@ -136,7 +136,7 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
             $dateTime['minute_normalized'],
             $dateTime['second_normalized']
         );
-        self::$dateTimes[$value] = $dateTime; // Cache the date/time
+        self::$dateTimes[$value][$defaultFirst ? 'first' : 'last'] = $dateTime; // Cache the date/time
         return $dateTime;
     }
 
