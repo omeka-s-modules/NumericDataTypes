@@ -168,7 +168,7 @@ HTML;
             $value = $query['numeric']['ivl']['val'];
             $propertyId = $query['numeric']['ivl']['pid'];
             try {
-                $date = $this->getDateTimeFromValue($value, false);
+                $date = $this->getDateTimeFromValue($value);
                 $number = $date['date']->getTimestamp();
             } catch (\InvalidArgumentException $e) {
                 return; // invalid value
