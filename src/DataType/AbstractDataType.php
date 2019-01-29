@@ -6,6 +6,7 @@ use Omeka\Api\Adapter\AdapterInterface;
 use Omeka\Api\Representation\ValueRepresentation;
 use Omeka\DataType\AbstractDataType as BaseAbstractDataType;
 use Omeka\Entity\Property;
+use Omeka\Entity\Value;
 
 abstract class AbstractDataType extends BaseAbstractDataType implements DataTypeInterface
 {
@@ -30,15 +31,10 @@ abstract class AbstractDataType extends BaseAbstractDataType implements DataType
      * @param AdapterInterface $adapter
      * @param QueryBuilder $qb
      * @param int propertyId
-     * @param string $value
+     * @param int $number
      */
-    public function addLessThanQuery(AdapterInterface $adapter, QueryBuilder $qb, $propertyId, $value)
+    public function addLessThanQuery(AdapterInterface $adapter, QueryBuilder $qb, $propertyId, $number)
     {
-        try {
-            $number = $this->getNumberFromValue($value);
-        } catch (\InvalidArgumentException $e) {
-            return; // invalid value
-        }
         $alias = $adapter->createAlias();
         $qb->leftJoin(
             $this->getEntityClass(), $alias, 'WITH',
@@ -61,15 +57,10 @@ abstract class AbstractDataType extends BaseAbstractDataType implements DataType
      * @param AdapterInterface $adapter
      * @param QueryBuilder $qb
      * @param int propertyId
-     * @param string $value
+     * @param int $number
      */
-    public function addGreaterThanQuery(AdapterInterface $adapter, QueryBuilder $qb, $propertyId, $value)
+    public function addGreaterThanQuery(AdapterInterface $adapter, QueryBuilder $qb, $propertyId, $number)
     {
-        try {
-            $number = $this->getNumberFromValue($value);
-        } catch (\InvalidArgumentException $e) {
-            return; // invalid value
-        }
         $alias = $adapter->createAlias();
         $qb->leftJoin(
             $this->getEntityClass(), $alias, 'WITH',

@@ -2,6 +2,7 @@
 namespace NumericDataTypes\DataType;
 
 use Doctrine\ORM\QueryBuilder;
+use NumericDataTypes\Entity\NumericDataTypesNumber;
 use Omeka\Api\Adapter\AbstractEntityAdapter;
 use Omeka\Api\Adapter\AdapterInterface;
 use Omeka\Api\Representation\ValueRepresentation;
@@ -80,18 +81,9 @@ class Integer extends AbstractDataType
         return 'NumericDataTypes\Entity\NumericDataTypesInteger';
     }
 
-    /**
-     * Get the integer from the value.
-     *
-     * @param string $value
-     * @return int
-     */
-    public function getNumberFromValue($value)
+    public function setEntityValues(NumericDataTypesNumber $entity, Value $value)
     {
-        if (!$this->isValid(['@value' => $value])) {
-            throw new \InvalidArgumentException('Invalid integer');
-        }
-        return (int) $value;
+        $entity->setValue((int) $value->getValue());
     }
 
     /**
@@ -110,7 +102,10 @@ class Integer extends AbstractDataType
         ) {
             $value = $query['numeric']['int']['lt']['val'];
             $propertyId = $query['numeric']['int']['lt']['pid'];
-            $this->addLessThanQuery($adapter, $qb, $propertyId, $value);
+            if ($this->isValid(['@value' => $value])) {
+                $number = (int) $value;
+                $this->addLessThanQuery($adapter, $qb, $propertyId, $number);
+            }
         }
         if (isset($query['numeric']['int']['gt']['val'])
             && isset($query['numeric']['int']['gt']['pid'])
@@ -118,7 +113,10 @@ class Integer extends AbstractDataType
         ) {
             $value = $query['numeric']['int']['gt']['val'];
             $propertyId = $query['numeric']['int']['gt']['pid'];
-            $this->addGreaterThanQuery($adapter, $qb, $propertyId, $value);
+            if ($this->isValid(['@value' => $value])) {
+                $number = (int) $value;
+                $this->addGreaterThanQuery($adapter, $qb, $propertyId, $number);
+            }
         }
     }
 

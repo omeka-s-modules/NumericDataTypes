@@ -2,7 +2,9 @@
 namespace NumericDataTypes\DataType;
 
 use Doctrine\ORM\QueryBuilder;
+use NumericDataTypes\Entity\NumericDataTypesNumber;
 use Omeka\Api\Adapter\AdapterInterface;
+use Omeka\Entity\Value;
 
 interface DataTypeInterface
 {
@@ -14,15 +16,12 @@ interface DataTypeInterface
     public function getEntityClass();
 
     /**
-     * Get the number to be stored from the passed value.
+     * Set the number value(s) to a number entity.
      *
-     * Should throw \InvalidArgumentException if the passed value is invalid.
-     *
-     * @throws \InvalidArgumentException
-     * @param string $value
-     * @return int
+     * @param NumericDataTypesNumber $entity
+     * @param Value $value
      */
-    public function getNumberFromValue($value);
+    public function setEntityValues(NumericDataTypesNumber $entity, Value $value);
 
     /**
      * Build a numeric query.

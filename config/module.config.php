@@ -18,6 +18,7 @@ return [
             'numeric:timestamp' => NumericDataTypes\DataType\Timestamp::class,
             'numeric:integer' => NumericDataTypes\DataType\Integer::class,
             'numeric:duration' => NumericDataTypes\DataType\Duration::class,
+            'numeric:interval' => NumericDataTypes\DataType\Interval::class,
         ],
     ],
     'view_helpers' => [

@@ -3,6 +3,7 @@ namespace NumericDataTypes\DataType;
 
 use DateInterval;
 use Doctrine\ORM\QueryBuilder;
+use NumericDataTypes\Entity\NumericDataTypesNumber;
 use Omeka\Entity\Value;
 use Omeka\Api\Adapter\AbstractEntityAdapter;
 use Omeka\Api\Adapter\AdapterInterface;
@@ -20,6 +21,11 @@ class Duration extends AbstractDataType
     const SECONDS_DAY = 86400;
     const SECONDS_HOUR = 3600;
     const SECONDS_MINUTE = 60;
+
+    /**
+     * @var array Cache of durations
+     */
+    protected static $durations = [];
 
     public function getName()
     {
@@ -182,16 +188,10 @@ HTML;
         return 'NumericDataTypes\Entity\NumericDataTypesDuration';
     }
 
-    /**
-     * Get the total seconds from the duration string.
-     *
-     * @param string $value
-     * @return int
-     */
-    public function getNumberFromValue($value)
+    public function setEntityValues(NumericDataTypesNumber $entity, Value $value)
     {
-        $duration = $this->getDurationFromValue($value);
-        return $duration['total_seconds'];
+        $duration = $this->getDurationFromValue($value->getValue());
+        $entity->setValue($duration['total_seconds']);
     }
 
     /**
@@ -212,6 +212,9 @@ HTML;
      */
     public static function getDurationFromValue($value)
     {
+        if (isset(self::$durations[$value])) {
+            return self::$durations[$value];
+        }
         // @see https://stackoverflow.com/a/32045167
         $isMatch = preg_match('/^P(?!$)(?:(?<years>\d+)Y)?(?:(?<months>\d+)M)?(?:(?<days>\d+)D)?(T(?=\d)(?:(?<hours>\d+)H)?(?:(?<minutes>\d+)M)?(?:(?<seconds>\d+)S)?)?$/', $value, $matches);
         if (!$isMatch) {
@@ -243,6 +246,7 @@ HTML;
             throw new \InvalidArgumentException('Invalid duration, exceeds maximum safe integer');
         }
         $duration['total_seconds'] = $totalSeconds;
+        self::$durations[$value] = $duration; // Cache the duration
         return $duration;
     }
 
@@ -254,7 +258,11 @@ HTML;
         ) {
             $value = $query['numeric']['dur']['lt']['val'];
             $propertyId = $query['numeric']['dur']['lt']['pid'];
-            $this->addLessThanQuery($adapter, $qb, $propertyId, $value);
+            if ($this->isValid(['@value' => $value])) {
+                $duration = $this->getDurationFromValue($value);
+                $number = $duration['total_seconds'];
+                $this->addLessThanQuery($adapter, $qb, $propertyId, $number);
+            }
         }
         if (isset($query['numeric']['dur']['gt']['val'])
             && isset($query['numeric']['dur']['gt']['pid'])
@@ -262,7 +270,11 @@ HTML;
         ) {
             $value = $query['numeric']['dur']['gt']['val'];
             $propertyId = $query['numeric']['dur']['gt']['pid'];
-            $this->addGreaterThanQuery($adapter, $qb, $propertyId, $value);
+            if ($this->isValid(['@value' => $value])) {
+                $duration = $this->getDurationFromValue($value);
+                $number = $duration['total_seconds'];
+                $this->addGreaterThanQuery($adapter, $qb, $propertyId, $number);
+            }
         }
     }
 
