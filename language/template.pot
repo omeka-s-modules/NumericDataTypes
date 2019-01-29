@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-27 14:23-0500\n"
+"POT-Creation-Date: 2019-01-29 15:01-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,111 +17,245 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/DataType/Timestamp.php:145
-#: view/common/numeric-data-types-advanced-search.phtml:101
-#: view/common/numeric-data-types-advanced-search.phtml:141
+#: src/DataType/Duration.php:107
+msgid "Years"
+msgstr ""
+
+#: src/DataType/Duration.php:109
+msgid "Months"
+msgstr ""
+
+#: src/DataType/Duration.php:111
+#: view/common/numeric-data-types-advanced-search.phtml:232
+#: view/common/numeric-data-types-advanced-search.phtml:265
+msgid "Days"
+msgstr ""
+
+#: src/DataType/Duration.php:113
+#: view/common/numeric-data-types-advanced-search.phtml:235
+#: view/common/numeric-data-types-advanced-search.phtml:268
+msgid "Hours"
+msgstr ""
+
+#: src/DataType/Duration.php:115
+#: view/common/numeric-data-types-advanced-search.phtml:236
+#: view/common/numeric-data-types-advanced-search.phtml:269
+msgid "Minutes"
+msgstr ""
+
+#: src/DataType/Duration.php:117
+#: view/common/numeric-data-types-advanced-search.phtml:237
+#: view/common/numeric-data-types-advanced-search.phtml:270
+msgid "Seconds"
+msgstr ""
+
+#: src/DataType/Duration.php:147
+#, php-format
+msgid "%s year"
+msgstr ""
+
+#: src/DataType/Duration.php:148
+#, php-format
+msgid "%s years"
+msgstr ""
+
+#: src/DataType/Duration.php:152
+#, php-format
+msgid "%s month"
+msgstr ""
+
+#: src/DataType/Duration.php:153
+#, php-format
+msgid "%s months"
+msgstr ""
+
+#: src/DataType/Duration.php:157
+#, php-format
+msgid "%s day"
+msgstr ""
+
+#: src/DataType/Duration.php:158
+#, php-format
+msgid "%s days"
+msgstr ""
+
+#: src/DataType/Duration.php:162
+#, php-format
+msgid "%s hour"
+msgstr ""
+
+#: src/DataType/Duration.php:163
+#, php-format
+msgid "%s hours"
+msgstr ""
+
+#: src/DataType/Duration.php:167
+#, php-format
+msgid "%s minute"
+msgstr ""
+
+#: src/DataType/Duration.php:168
+#, php-format
+msgid "%s minutes"
+msgstr ""
+
+#: src/DataType/Duration.php:172
+#, php-format
+msgid "%s second"
+msgstr ""
+
+#: src/DataType/Duration.php:173
+#, php-format
+msgid "%s seconds"
+msgstr ""
+
+#: src/DataType/Interval.php:66
+msgid "Start:"
+msgstr ""
+
+#: src/DataType/Interval.php:70 src/DataType/Interval.php:78
+#: src/DataType/Timestamp.php:72
+#: view/common/numeric-data-types-advanced-search.phtml:159
+#: view/common/numeric-data-types-advanced-search.phtml:199
+#: view/common/numeric-data-types-advanced-search.phtml:305
 msgid "time"
 msgstr ""
 
-#: view/common/numeric-data-types-advanced-search.phtml:58
+#: src/DataType/Interval.php:74
+msgid "End:"
+msgstr ""
+
+#: view/common/numeric-data-types-advanced-search.phtml:116
 msgid "January"
 msgstr ""
 
-#: view/common/numeric-data-types-advanced-search.phtml:59
+#: view/common/numeric-data-types-advanced-search.phtml:117
 msgid "February"
 msgstr ""
 
-#: view/common/numeric-data-types-advanced-search.phtml:60
+#: view/common/numeric-data-types-advanced-search.phtml:118
 msgid "March"
 msgstr ""
 
-#: view/common/numeric-data-types-advanced-search.phtml:61
+#: view/common/numeric-data-types-advanced-search.phtml:119
 msgid "April"
 msgstr ""
 
-#: view/common/numeric-data-types-advanced-search.phtml:62
+#: view/common/numeric-data-types-advanced-search.phtml:120
 msgid "May"
 msgstr ""
 
-#: view/common/numeric-data-types-advanced-search.phtml:63
+#: view/common/numeric-data-types-advanced-search.phtml:121
 msgid "June"
 msgstr ""
 
-#: view/common/numeric-data-types-advanced-search.phtml:64
+#: view/common/numeric-data-types-advanced-search.phtml:122
 msgid "July"
 msgstr ""
 
-#: view/common/numeric-data-types-advanced-search.phtml:65
+#: view/common/numeric-data-types-advanced-search.phtml:123
 msgid "August"
 msgstr ""
 
-#: view/common/numeric-data-types-advanced-search.phtml:66
+#: view/common/numeric-data-types-advanced-search.phtml:124
 msgid "September"
 msgstr ""
 
-#: view/common/numeric-data-types-advanced-search.phtml:67
+#: view/common/numeric-data-types-advanced-search.phtml:125
 msgid "October"
 msgstr ""
 
-#: view/common/numeric-data-types-advanced-search.phtml:68
+#: view/common/numeric-data-types-advanced-search.phtml:126
 msgid "November"
 msgstr ""
 
-#: view/common/numeric-data-types-advanced-search.phtml:69
+#: view/common/numeric-data-types-advanced-search.phtml:127
 msgid "December"
 msgstr ""
 
-#: view/common/numeric-data-types-advanced-search.phtml:75
-msgid "Date comes before"
-msgstr ""
-
-#: view/common/numeric-data-types-advanced-search.phtml:93
 #: view/common/numeric-data-types-advanced-search.phtml:133
-msgid "Year"
-msgstr ""
-
-#: view/common/numeric-data-types-advanced-search.phtml:95
-#: view/common/numeric-data-types-advanced-search.phtml:135
-msgid "Month"
-msgstr ""
-
-#: view/common/numeric-data-types-advanced-search.phtml:100
-#: view/common/numeric-data-types-advanced-search.phtml:140
-msgid "Day"
-msgstr ""
-
-#: view/common/numeric-data-types-advanced-search.phtml:104
-#: view/common/numeric-data-types-advanced-search.phtml:144
-msgid "Hour"
-msgstr ""
-
-#: view/common/numeric-data-types-advanced-search.phtml:105
-#: view/common/numeric-data-types-advanced-search.phtml:145
-msgid "Minute"
-msgstr ""
-
-#: view/common/numeric-data-types-advanced-search.phtml:106
-#: view/common/numeric-data-types-advanced-search.phtml:146
-msgid "Second"
-msgstr ""
-
-#: view/common/numeric-data-types-advanced-search.phtml:115
 msgid "Date comes after"
 msgstr ""
 
-#: view/common/numeric-data-types-advanced-search.phtml:155
-msgid "Value is less than"
+#: view/common/numeric-data-types-advanced-search.phtml:151
+#: view/common/numeric-data-types-advanced-search.phtml:191
+#: view/common/numeric-data-types-advanced-search.phtml:297
+msgid "Year"
 msgstr ""
 
-#: view/common/numeric-data-types-advanced-search.phtml:170
-#: view/common/numeric-data-types-advanced-search.phtml:190
-msgid "Enter integer"
+#: view/common/numeric-data-types-advanced-search.phtml:153
+#: view/common/numeric-data-types-advanced-search.phtml:193
+#: view/common/numeric-data-types-advanced-search.phtml:299
+msgid "Month"
 msgstr ""
 
-#: view/common/numeric-data-types-advanced-search.phtml:175
+#: view/common/numeric-data-types-advanced-search.phtml:158
+#: view/common/numeric-data-types-advanced-search.phtml:198
+#: view/common/numeric-data-types-advanced-search.phtml:304
+msgid "Day"
+msgstr ""
+
+#: view/common/numeric-data-types-advanced-search.phtml:162
+#: view/common/numeric-data-types-advanced-search.phtml:202
+#: view/common/numeric-data-types-advanced-search.phtml:308
+msgid "Hour"
+msgstr ""
+
+#: view/common/numeric-data-types-advanced-search.phtml:163
+#: view/common/numeric-data-types-advanced-search.phtml:203
+#: view/common/numeric-data-types-advanced-search.phtml:309
+msgid "Minute"
+msgstr ""
+
+#: view/common/numeric-data-types-advanced-search.phtml:164
+#: view/common/numeric-data-types-advanced-search.phtml:204
+#: view/common/numeric-data-types-advanced-search.phtml:310
+msgid "Second"
+msgstr ""
+
+#: view/common/numeric-data-types-advanced-search.phtml:173
+msgid "Date comes before"
+msgstr ""
+
+#: view/common/numeric-data-types-advanced-search.phtml:213
+msgid "Duration is greater than"
+msgstr ""
+
+#: view/common/numeric-data-types-advanced-search.phtml:230
+#: view/common/numeric-data-types-advanced-search.phtml:263
+msgid "Years (365 days each)"
+msgstr ""
+
+#: view/common/numeric-data-types-advanced-search.phtml:231
+#: view/common/numeric-data-types-advanced-search.phtml:264
+msgid "Months (30 days each)"
+msgstr ""
+
+#: view/common/numeric-data-types-advanced-search.phtml:246
+msgid "Duration is less than"
+msgstr ""
+
+#: view/common/numeric-data-types-advanced-search.phtml:279
+msgid "Date in interval"
+msgstr ""
+
+#: view/common/numeric-data-types-advanced-search.phtml:319
 msgid "Value is greater than"
 msgstr ""
 
-#: src/DataType/AbstractDataType.php:14
+#: view/common/numeric-data-types-advanced-search.phtml:334
+#: view/common/numeric-data-types-advanced-search.phtml:354
+msgid "Enter integer"
+msgstr ""
+
+#: view/common/numeric-data-types-advanced-search.phtml:339
+msgid "Value is less than"
+msgstr ""
+
+#: src/DataType/Duration.php:37
+msgid "Duration"
+msgstr ""
+
+#: src/DataType/AbstractDataType.php:15
 msgid "Numeric"
 msgstr ""
