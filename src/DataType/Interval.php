@@ -3,6 +3,7 @@ namespace NumericDataTypes\DataType;
 
 use Doctrine\ORM\QueryBuilder;
 use NumericDataTypes\Entity\NumericDataTypesNumber;
+use NumericDataTypes\Form\Element\DateTime as DateTimeElement;
 use Omeka\Api\Adapter\AbstractEntityAdapter;
 use Omeka\Api\Adapter\AdapterInterface;
 use Omeka\Api\Representation\ValueRepresentation;
@@ -29,57 +30,9 @@ class Interval extends AbstractDateTimeDataType
 
     public function form(PhpRenderer $view)
     {
-        $html = <<<HTML
-%s
-<div class="numeric-datetime-inputs">
-    <span>%s</span>
-    <div class="numeric-date-inputs">
-        %s
-        %s
-        %s
-        <a href="#" class="numeric-toggle-time">%s</a>
-    </div>
-    <div class="numeric-time-inputs">
-        %s
-        %s
-        %s
-    </div>
-</div>
-<div class="numeric-datetime-inputs">
-    <span>%s</span>
-    <div class="numeric-date-inputs">
-        %s
-        %s
-        %s
-        <a href="#" class="numeric-toggle-time">%s</a>
-    </div>
-    <div class="numeric-time-inputs">
-        %s
-        %s
-        %s
-    </div>
-</div>
-HTML;
-        return sprintf(
-            $html,
-            $view->formHidden($this->getFormElementValue('numeric-interval-value')),
-            $view->translate('Start:'),
-            $view->formNumber($this->getFormElementYear('numeric-interval-start-year')),
-            $view->formSelect($this->getFormElementMonth('numeric-interval-start-month')),
-            $view->formNumber($this->getFormElementDay('numeric-interval-start-day')),
-            $view->translate('time'),
-            $view->formNumber($this->getFormElementHour('numeric-interval-start-hour')),
-            $view->formNumber($this->getFormElementMinute('numeric-interval-start-minute')),
-            $view->formNumber($this->getFormElementSecond('numeric-interval-start-second')),
-            $view->translate('End:'),
-            $view->formNumber($this->getFormElementYear('numeric-interval-end-year')),
-            $view->formSelect($this->getFormElementMonth('numeric-interval-end-month')),
-            $view->formNumber($this->getFormElementDay('numeric-interval-end-day')),
-            $view->translate('time'),
-            $view->formNumber($this->getFormElementHour('numeric-interval-end-hour')),
-            $view->formNumber($this->getFormElementMinute('numeric-interval-end-minute')),
-            $view->formNumber($this->getFormElementSecond('numeric-interval-end-second'))
-        );
+        $element = new DateTimeElement('numeric-interval-value');
+        $element->getValueElement()->setAttribute('data-value-key', '@value');
+        return $view->formNumericInterval($element);
     }
 
     /**

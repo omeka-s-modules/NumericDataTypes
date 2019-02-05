@@ -3,6 +3,7 @@ namespace NumericDataTypes\DataType;
 
 use Doctrine\ORM\QueryBuilder;
 use NumericDataTypes\Entity\NumericDataTypesNumber;
+use NumericDataTypes\Form\Element\DateTime as DateTimeElement;
 use Omeka\Api\Adapter\AbstractEntityAdapter;
 use Omeka\Api\Adapter\AdapterInterface;
 use Omeka\Api\Representation\ValueRepresentation;
@@ -47,33 +48,9 @@ class Timestamp extends AbstractDateTimeDataType
 
     public function form(PhpRenderer $view)
     {
-        $html = <<<HTML
-%s
-<div class="numeric-datetime-inputs">
-    <div class="numeric-date-inputs">
-        %s
-        %s
-        %s
-        <a href="#" class="numeric-toggle-time">%s</a>
-    </div>
-    <div class="numeric-time-inputs">
-        %s
-        %s
-        %s
-    </div>
-</div>
-HTML;
-        return sprintf(
-            $html,
-            $view->formHidden($this->getFormElementValue('numeric-timestamp-value')),
-            $view->formNumber($this->getFormElementYear('numeric-timestamp-year')),
-            $view->formSelect($this->getFormElementMonth('numeric-timestamp-month')),
-            $view->formNumber($this->getFormElementDay('numeric-timestamp-day')),
-            $view->translate('time'),
-            $view->formNumber($this->getFormElementHour('numeric-timestamp-hour')),
-            $view->formNumber($this->getFormElementMinute('numeric-timestamp-minute')),
-            $view->formNumber($this->getFormElementSecond('numeric-timestamp-second'))
-        );
+        $element = new DateTimeElement('numeric-timestamp-value');
+        $element->getValueElement()->setAttribute('data-value-key', '@value');
+        return $view->formNumericTimestamp($element);
     }
 
     public function isValid(array $valueObject)
