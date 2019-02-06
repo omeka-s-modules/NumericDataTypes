@@ -58,36 +58,6 @@ ALTER TABLE numeric_data_types_interval ADD CONSTRAINT FK_7E2C936B549213EC FOREI
     public function attachListeners(SharedEventManagerInterface $sharedEventManager)
     {
         $sharedEventManager->attach(
-            'Omeka\Controller\Admin\Item',
-            'view.add.after',
-            [$this, 'prepareResourceForm']
-        );
-        $sharedEventManager->attach(
-            'Omeka\Controller\Admin\Item',
-            'view.edit.after',
-            [$this, 'prepareResourceForm']
-        );
-        $sharedEventManager->attach(
-            'Omeka\Controller\Admin\ItemSet',
-            'view.add.after',
-            [$this, 'prepareResourceForm']
-        );
-        $sharedEventManager->attach(
-            'Omeka\Controller\Admin\ItemSet',
-            'view.edit.after',
-            [$this, 'prepareResourceForm']
-        );
-        $sharedEventManager->attach(
-            'Omeka\Controller\Admin\Media',
-            'view.add.after',
-            [$this, 'prepareResourceForm']
-        );
-        $sharedEventManager->attach(
-            'Omeka\Controller\Admin\Media',
-            'view.edit.after',
-            [$this, 'prepareResourceForm']
-        );
-        $sharedEventManager->attach(
             'Omeka\Api\Adapter\ItemAdapter',
             'api.search.query',
             [$this, 'buildQueries']
@@ -125,13 +95,6 @@ ALTER TABLE numeric_data_types_interval ADD CONSTRAINT FK_7E2C936B549213EC FOREI
                 $event->setParam('partials', $partials);
             }
         );
-    }
-
-    public function prepareResourceForm(Event $event)
-    {
-        $view = $event->getTarget();
-        $view->headLink()->appendStylesheet($view->assetUrl('css/numeric-data-types.css', 'NumericDataTypes'));
-        $view->headScript()->appendFile($view->assetUrl('js/numeric-data-types.js', 'NumericDataTypes'));
     }
 
     /**

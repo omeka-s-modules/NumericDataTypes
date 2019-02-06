@@ -14,6 +14,12 @@ class Duration extends AbstractHelper
     public function render(ElementInterface $element)
     {
         $view = $this->getView();
+        $view->headLink()->appendStylesheet(
+            $view->assetUrl('css/numeric-data-types.css', 'NumericDataTypes')
+        );
+        $view->headScript()->appendFile(
+            $view->assetUrl('js/numeric-data-types.js', 'NumericDataTypes')
+        );
         $html = <<<HTML
 <div class="numeric-duration">
     %s
