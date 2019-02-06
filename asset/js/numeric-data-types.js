@@ -126,6 +126,11 @@ var NumericDataTypes = {
      */
     enableTimestamp : function(container) {
         var v = container.find('.numeric-datetime-value');
+        var numericContainer = v.closest('.numeric-timestamp');
+        if (numericContainer.hasClass('numeric-enabled')) {
+            return; // Enable only once.
+        }
+        numericContainer.addClass('numeric-enabled')
         var y = container.find('.numeric-datetime-year');
         var m = container.find('.numeric-datetime-month');
         var d = container.find('.numeric-datetime-day');
@@ -160,6 +165,11 @@ var NumericDataTypes = {
      */
     enableInterval : function(container) {
         var v = container.find('.numeric-datetime-value');
+        var numericContainer = v.closest('.numeric-interval');
+        if (numericContainer.hasClass('numeric-enabled')) {
+            return; // Enable only once.
+        }
+        numericContainer.addClass('numeric-enabled')
         var yStart = container.find('.numeric-interval-start .numeric-datetime-year');
         var mStart = container.find('.numeric-interval-start .numeric-datetime-month');
         var dStart = container.find('.numeric-interval-start .numeric-datetime-day');
@@ -218,6 +228,11 @@ var NumericDataTypes = {
      */
     enableDuration : function(container) {
         var v = container.find('.numeric-duration-value');
+        var numericContainer = v.closest('.numeric-duration');
+        if (numericContainer.hasClass('numeric-enabled')) {
+            return; // Enable only once.
+        }
+        numericContainer.addClass('numeric-enabled')
         var y = container.find('.numeric-duration-years');
         var m = container.find('.numeric-duration-months');
         var d = container.find('.numeric-duration-days');
@@ -241,6 +256,7 @@ var NumericDataTypes = {
     }
 };
 
+// Enable numeric controls when preparing values on the resource form.
 $(document).on('o:prepare-value', function(e, type, value) {
     if ('numeric:timestamp' === type) {
         NumericDataTypes.enableTimestamp(value);
@@ -254,8 +270,18 @@ $(document).on('o:prepare-value', function(e, type, value) {
 });
 
 $(function() {
+     // Automatically enable numeric controls that exist on the page.
+    $(document).find('.numeric-timestamp:visible').each(function() {
+        NumericDataTypes.enableTimestamp($(this));
+    });
+    $(document).find('.numeric-interval:visible').each(function() {
+        NumericDataTypes.enableInterval($(this));
+    });
+    $(document).find('.numeric-duration:visible').each(function() {
+        NumericDataTypes.enableDuration($(this));
+    });
+    // Toggle visibility of time inputs.
     $(document).find('.numeric-toggle-time').on('click', function(e) {
-        // Toggle visibility of time inputs.
         e.preventDefault();
         $(this).closest('.numeric-datetime-inputs').find('.numeric-time-inputs').toggle();
     });

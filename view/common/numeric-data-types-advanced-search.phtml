@@ -167,13 +167,3 @@ $this->headLink()->appendStylesheet($this->assetUrl('css/numeric-data-types.css'
         ?>
         <input type="number" value="<?php echo $this->escapeHtml($value); ?>" step="1" name="numeric[int][lt][val]" placeholder="<?php echo $this->translate('Enter integer'); ?>">    </div>
 </div>
-
-<script>
-$(function() {
-    NumericDataTypes.enableTimestamp($('#numeric-timestamp-after'));
-    NumericDataTypes.enableTimestamp($('#numeric-timestamp-before'));
-    NumericDataTypes.enableDuration($('#numeric-duration-gt'));
-    NumericDataTypes.enableDuration($('#numeric-duration-lt'));
-    NumericDataTypes.enableTimestamp($('#numeric-interval'));
-});
-</script>
