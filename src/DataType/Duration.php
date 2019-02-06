@@ -42,7 +42,7 @@ class Duration extends AbstractDataType
     {
         $element = new DurationElement('numeric-duration-value');
         $element->getValueElement()->setAttribute('data-value-key', '@value');
-        return $view->formNumericDuration($element);
+        return $view->formElement($element);
     }
 
     public function isValid(array $valueObject)

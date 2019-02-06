@@ -30,6 +30,11 @@ return [
         'factories' => [
             'numericPropertySelect' => NumericDataTypes\Service\ViewHelper\NumericPropertySelectFactory::class,
         ],
+        'delegators' => [
+            'Zend\Form\View\Helper\FormElement' => [
+                NumericDataTypes\Service\Delegator\FormElementDelegatorFactory::class,
+            ],
+        ],
     ],
     'form_elements' => [
         'factories' => [

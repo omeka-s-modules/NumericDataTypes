@@ -3,7 +3,7 @@ namespace NumericDataTypes\DataType;
 
 use Doctrine\ORM\QueryBuilder;
 use NumericDataTypes\Entity\NumericDataTypesNumber;
-use NumericDataTypes\Form\Element\DateTime as DateTimeElement;
+use NumericDataTypes\Form\Element\Timestamp as TimestampElement;
 use Omeka\Api\Adapter\AbstractEntityAdapter;
 use Omeka\Api\Adapter\AdapterInterface;
 use Omeka\Api\Representation\ValueRepresentation;
@@ -48,9 +48,9 @@ class Timestamp extends AbstractDateTimeDataType
 
     public function form(PhpRenderer $view)
     {
-        $element = new DateTimeElement('numeric-timestamp-value');
+        $element = new TimestampElement('numeric-timestamp-value');
         $element->getValueElement()->setAttribute('data-value-key', '@value');
-        return $view->formNumericTimestamp($element);
+        return $view->formElement($element);
     }
 
     public function isValid(array $valueObject)

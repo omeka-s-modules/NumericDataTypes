@@ -3,7 +3,7 @@ namespace NumericDataTypes\DataType;
 
 use Doctrine\ORM\QueryBuilder;
 use NumericDataTypes\Entity\NumericDataTypesNumber;
-use NumericDataTypes\Form\Element\DateTime as DateTimeElement;
+use NumericDataTypes\Form\Element\Interval as IntervalElement;
 use Omeka\Api\Adapter\AbstractEntityAdapter;
 use Omeka\Api\Adapter\AdapterInterface;
 use Omeka\Api\Representation\ValueRepresentation;
@@ -30,9 +30,9 @@ class Interval extends AbstractDateTimeDataType
 
     public function form(PhpRenderer $view)
     {
-        $element = new DateTimeElement('numeric-interval-value');
+        $element = new IntervalElement('numeric-interval-value');
         $element->getValueElement()->setAttribute('data-value-key', '@value');
-        return $view->formNumericInterval($element);
+        return $view->formElement($element);
     }
 
     /**
