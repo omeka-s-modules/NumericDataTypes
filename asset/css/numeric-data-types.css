@@ -24,7 +24,8 @@
 }
 
 .value[data-data-type="numeric:timestamp"] .input-body,
-.value[data-data-type="numeric:interval"] .input-body {
+.value[data-data-type="numeric:interval"] .input-body,
+.value[data-data-type="numeric:integer"] .input-body {
     background-color: transparent;
 }
 
