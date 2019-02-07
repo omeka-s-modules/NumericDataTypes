@@ -102,6 +102,7 @@ class DateTime extends Element
             15 => '15 (3 pm)', // @translate
             16 => '16 (4 pm)', // @translate
             17 => '17 (5 pm)', // @translate
+            18 => '18 (6 pm)', // @translate
             19 => '19 (7 pm)', // @translate
             20 => '20 (8 pm)', // @translate
             21 => '21 (9 pm)', // @translate
