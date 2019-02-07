@@ -43,11 +43,11 @@ HTML;
             $view->formHidden($element->getValueElement()),
             $view->formNumber($element->getYearElement()),
             $view->formSelect($element->getMonthElement()),
-            $view->formNumber($element->getDayElement()),
+            $view->formSelect($element->getDayElement()),
             $view->translate('time'),
-            $view->formNumber($element->getHourElement()),
-            $view->formNumber($element->getMinuteElement()),
-            $view->formNumber($element->getSecondElement())
+            $view->formSelect($element->getHourElement()),
+            $view->formSelect($element->getMinuteElement()),
+            $view->formSelect($element->getSecondElement())
         );
     }
 }

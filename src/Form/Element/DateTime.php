@@ -26,26 +26,41 @@ class DateTime extends Element
     {
         parent::__construct($name, $options);
 
-        $this->valueElement = new Element\Hidden($name);
-        $this->valueElement->setAttributes([
-            'class' => 'numeric-datetime-value',
-        ]);
+        $this->valueElement = (new Element\Hidden($name))
+            ->setAttribute('class', 'numeric-datetime-value');
+        $this->yearElement = (new Element\Number('year'))
+            ->setAttributes([
+                'class' => 'numeric-datetime-year',
+                'step' => 1,
+                'min' => self::YEAR_MIN,
+                'max' => self::YEAR_MAX,
+                'placeholder' => 'Year', // @translate
+            ]);
+        $this->monthElement = (new Element\Select('month'))
+            ->setAttribute('class', 'numeric-datetime-month')
+            ->setEmptyOption('Month') // @translate
+            ->setValueOptions($this->getMonthValueOptions());
+        $this->dayElement = (new Element\Select('day'))
+            ->setAttribute('class', 'numeric-datetime-day')
+            ->setEmptyOption('Day') // @translate
+            ->setValueOptions($this->getDayValueOptions());
+        $this->hourElement = (new Element\Select('hour'))
+            ->setAttribute('class', 'numeric-datetime-hour')
+            ->setEmptyOption('Hour') // @translate
+            ->setValueOptions($this->getHourValueOptions());
+        $this->minuteElement = (new Element\Select('minute'))
+            ->setAttribute('class', 'numeric-datetime-minute')
+            ->setEmptyOption('Minute') // @translate
+            ->setValueOptions($this->getMinuteSecondValueOptions());
+        $this->secondElement = (new Element\Select('second'))
+            ->setAttribute('class', 'numeric-datetime-second')
+            ->setEmptyOption('Second') // @translate
+            ->setValueOptions($this->getMinuteSecondValueOptions());
+    }
 
-        $this->yearElement = new Element\Number('year');
-        $this->yearElement->setAttributes([
-            'class' => 'numeric-datetime-year',
-            'step' => 1,
-            'min' => self::YEAR_MIN,
-            'max' => self::YEAR_MAX,
-            'placeholder' => 'Year', // @translate
-        ]);
-
-        $this->monthElement = new Element\Select('month');
-        $this->monthElement->setAttributes([
-            'class' => 'numeric-datetime-month',
-        ]);
-        $this->monthElement->setEmptyOption('Month'); // @translate
-        $this->monthElement->setValueOptions([
+    public function getMonthValueOptions()
+    {
+        return [
             1 => 'January', // @translate
             2 => 'February', // @translate
             3 => 'March', // @translate
@@ -58,43 +73,46 @@ class DateTime extends Element
             10 => 'October', // @translate
             11 => 'November', // @translate
             12 => 'December', // @translate
-        ]);
+        ];
+    }
 
-        $this->dayElement = new Element\Number('day');
-        $this->dayElement->setAttributes([
-            'class' => 'numeric-datetime-day',
-            'step' => 1,
-            'min' => 1,
-            'max' => 31,
-            'placeholder' => 'Day', // @translate
-        ]);
+    public function getDayValueOptions()
+    {
+        return array_combine(range(1, 31), range(1, 31));
+    }
 
-        $this->hourElement = new Element\Number('hour');
-        $this->hourElement->setAttributes([
-            'class' => 'numeric-datetime-hour',
-            'step' => 1,
-            'min' => 0,
-            'max' => 23,
-            'placeholder' => 'Hour', // @translate
-        ]);
+    public function getHourValueOptions()
+    {
+        return [
+            0 => '00 (12 am)', // @translate
+            1 => '01 (1 am)', // @translate
+            2 => '02 (2 am)', // @translate
+            3 => '03 (3 am)', // @translate
+            4 => '04 (4 am)', // @translate
+            5 => '05 (5 am)', // @translate
+            6 => '06 (6 am)', // @translate
+            7 => '07 (7 am)', // @translate
+            8 => '08 (8 am)', // @translate
+            9 => '09 (9 am)', // @translate
+            10 => '10 (10 am)', // @translate
+            11 => '11 (11 am)', // @translate
+            12 => '12 (12 pm)', // @translate
+            13 => '13 (1 pm)', // @translate
+            14 => '14 (2 pm)', // @translate
+            15 => '15 (3 pm)', // @translate
+            16 => '16 (4 pm)', // @translate
+            17 => '17 (5 pm)', // @translate
+            19 => '19 (7 pm)', // @translate
+            20 => '20 (8 pm)', // @translate
+            21 => '21 (9 pm)', // @translate
+            22 => '22 (10 pm)', // @translate
+            23 => '23 (11 pm)', // @translate
+        ];
+    }
 
-        $this->minuteElement = new Element\Number('minute');
-        $this->minuteElement->setAttributes([
-            'class' => 'numeric-datetime-minute',
-            'step' => 1,
-            'min' => 0,
-            'max' => 59,
-            'placeholder' => 'Minute', // @translate
-        ]);
-
-        $this->secondElement = new Element\Number('second');
-        $this->secondElement->setAttributes([
-            'class' => 'numeric-datetime-second',
-            'step' => 1,
-            'min' => 0,
-            'max' => 59,
-            'placeholder' => 'Second', // @translate
-        ]);
+    public function getMinuteSecondValueOptions()
+    {
+        return array_map(function($n) {return sprintf('%02d', $n);}, range(0, 59));
     }
 
     public function getValueElement()

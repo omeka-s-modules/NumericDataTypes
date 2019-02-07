@@ -137,10 +137,7 @@ var NumericDataTypes = {
         var h = container.find('.numeric-datetime-hour');
         var mi = container.find('.numeric-datetime-minute');
         var s = container.find('.numeric-datetime-second');
-        y.add(d).add(h).add(mi).add(s).on('input', function(e) {
-            NumericDataTypes.setTimestampValue(v, y, m, d, h, mi, s);
-        });
-        m.on('change', function(e) {
+        y.add(m).add(d).add(h).add(mi).add(s).on('input', function(e) {
             NumericDataTypes.setTimestampValue(v, y, m, d, h, mi, s);
         });
         // Match against ISO 8601, allowing for reduced accuracy.
@@ -182,20 +179,8 @@ var NumericDataTypes = {
         var hEnd = container.find('.numeric-interval-end .numeric-datetime-hour');
         var miEnd = container.find('.numeric-interval-end .numeric-datetime-minute');
         var sEnd = container.find('.numeric-interval-end .numeric-datetime-second');
-        yStart.add(dStart).add(hStart).add(miStart).add(sStart)
-            .add(yEnd).add(dEnd).add(hEnd).add(miEnd).add(sEnd)
-            .on('input', function(e)
-        {
-            NumericDataTypes.setIntervalValue(
-                v, yStart, mStart, dStart, hStart, miStart, sStart,
-                yEnd, mEnd, dEnd, hEnd, miEnd, sEnd
-            );
-        });
-        mStart.add(mEnd).on('change', function(e) {
-            NumericDataTypes.setIntervalValue(
-                v, yStart, mStart, dStart, hStart, miStart, sStart,
-                yEnd, mEnd, dEnd, hEnd, miEnd, sEnd
-            );
+        yStart.add(mStart).add(dStart).add(hStart).add(miStart).add(sStart).add(yEnd).add(mEnd).add(dEnd).add(hEnd).add(miEnd).add(sEnd).on('input', function(e) {
+            NumericDataTypes.setIntervalValue(v, yStart, mStart, dStart, hStart, miStart, sStart, yEnd, mEnd, dEnd, hEnd, miEnd, sEnd);
         });
         // Match against ISO 8601, allowing for reduced accuracy.
         var matches = /^(-?\d{4,})(-(\d{2}))?(-(\d{2}))?(T(\d{2}))?(:(\d{2}))?(:(\d{2}))?\/(-?\d{4,})(-(\d{2}))?(-(\d{2}))?(T(\d{2}))?(:(\d{2}))?(:(\d{2}))?$/.exec(v.val());
