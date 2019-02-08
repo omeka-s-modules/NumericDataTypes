@@ -3,11 +3,19 @@ namespace NumericDataTypes\DataType;
 
 use DateTime;
 use DateTimeZone;
-use NumericDataTypes\Form\Element\DateTime as DateTimeElement;
 use Zend\Form\Element;
 
 abstract class AbstractDateTimeDataType extends AbstractDataType
 {
+    /**
+     * Minimum and maximum years.
+     *
+     * When converted to Unix timestamps, anything outside this range would
+     * exceed the minimum or maximum range for a 64-bit integer.
+     */
+    const YEAR_MIN = -292277022656;
+    const YEAR_MAX =  292277026595;
+
     /**
      * @var array Cache of date/times
      */
@@ -63,7 +71,7 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
             ? (int) $matches['day']
             : ($defaultFirst ? 1 : self::getLastDay($dateTime['year'], $dateTime['month_normalized'])); // default day
 
-        if ((DateTimeElement::YEAR_MIN > $dateTime['year']) || (DateTimeElement::YEAR_MAX < $dateTime['year'])) {
+        if ((self::YEAR_MIN > $dateTime['year']) || (self::YEAR_MAX < $dateTime['year'])) {
             throw new \InvalidArgumentException('Invalid year');
         }
         if ((1 > $dateTime['month_normalized']) || (12 < $dateTime['month_normalized'])) {

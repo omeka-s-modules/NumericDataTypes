@@ -1,19 +1,11 @@
 <?php
 namespace NumericDataTypes\Form\Element;
 
+use NumericDataTypes\DataType\Timestamp as TimestampDataType;
 use Zend\Form\Element;
 
 class DateTime extends Element
 {
-    /**
-     * Minimum and maximum years.
-     *
-     * When converted to Unix timestamps, anything outside this range would
-     * exceed the minimum or maximum range for a 64-bit integer.
-     */
-    const YEAR_MIN = -292277022656;
-    const YEAR_MAX =  292277026595;
-
     protected $valueElement;
     protected $yearElement;
     protected $monthElement;
@@ -32,8 +24,8 @@ class DateTime extends Element
             ->setAttributes([
                 'class' => 'numeric-datetime-year',
                 'step' => 1,
-                'min' => self::YEAR_MIN,
-                'max' => self::YEAR_MAX,
+                'min' => TimestampDataType::YEAR_MIN,
+                'max' => TimestampDataType::YEAR_MAX,
                 'placeholder' => 'Year', // @translate
             ]);
         $this->monthElement = (new Element\Select('month'))
