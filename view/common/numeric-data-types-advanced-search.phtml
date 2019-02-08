@@ -1,8 +1,10 @@
 <?php
 use NumericDataTypes\DataType\Duration;
 use NumericDataTypes\DataType\Timestamp;
-use NumericDataTypes\Form\Element\DateTime as DateTimeElement;
+use NumericDataTypes\Form\Element\Timestamp as TimestampElement;
+use NumericDataTypes\Form\Element\Interval as IntervalElement;
 use NumericDataTypes\Form\Element\Duration as DurationElement;
+use NumericDataTypes\Form\Element\Integer as IntegerElement;
 
 $this->headScript()->appendFile($this->assetUrl('js/numeric-data-types.js', 'NumericDataTypes'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/numeric-data-types.css', 'NumericDataTypes'));
@@ -25,9 +27,9 @@ $this->headLink()->appendStylesheet($this->assetUrl('css/numeric-data-types.css'
                 'numeric_data_type' => 'timestamp',
             ],
         ]);
-        $element = new DateTimeElement('numeric[ts][gt][val]');
+        $element = new TimestampElement('numeric[ts][gt][val]');
         $element->setValue(isset($query['numeric']['ts']['gt']['val']) ? $query['numeric']['ts']['gt']['val'] : null);
-        echo $this->formNumericTimestamp($element);
+        echo $this->formElement($element);
         ?>
     </div>
 </div>
@@ -49,9 +51,9 @@ $this->headLink()->appendStylesheet($this->assetUrl('css/numeric-data-types.css'
                 'numeric_data_type' => 'timestamp',
             ],
         ]);
-        $element = new DateTimeElement('numeric[ts][lt][val]');
+        $element = new TimestampElement('numeric[ts][lt][val]');
         $element->setValue(isset($query['numeric']['ts']['lt']['val']) ? $query['numeric']['ts']['lt']['val'] : null);
-        echo $this->formNumericTimestamp($element);
+        echo $this->formElement($element);
         ?>
     </div>
 </div>
@@ -74,7 +76,7 @@ $this->headLink()->appendStylesheet($this->assetUrl('css/numeric-data-types.css'
         ]);
         $element = new DurationElement('numeric[dur][gt][val]');
         $element->setValue(isset($query['numeric']['dur']['gt']['val']) ? $query['numeric']['dur']['gt']['val'] : null);
-        echo $this->formNumericDuration($element);
+        echo $this->formElement($element);
         ?>
     </div>
 </div>
@@ -97,7 +99,7 @@ $this->headLink()->appendStylesheet($this->assetUrl('css/numeric-data-types.css'
         ]);
         $element = new DurationElement('numeric[dur][lt][val]');
         $element->setValue(isset($query['numeric']['dur']['lt']['val']) ? $query['numeric']['dur']['lt']['val'] : null);
-        echo $this->formNumericDuration($element);
+        echo $this->formElement($element);
         ?>
     </div>
 </div>
@@ -119,9 +121,9 @@ $this->headLink()->appendStylesheet($this->assetUrl('css/numeric-data-types.css'
                 'numeric_data_type' => 'interval',
             ],
         ]);
-        $element = new DateTimeElement('numeric[ivl][val]');
+        $element = new TimestampElement('numeric[ivl][val]');
         $element->setValue(isset($query['numeric']['ivl']['val']) ? $query['numeric']['ivl']['val'] : null);
-        echo $this->formNumericTimestamp($element);
+        echo $this->formElement($element);
         ?>
     </div>
 </div>
@@ -142,9 +144,11 @@ $this->headLink()->appendStylesheet($this->assetUrl('css/numeric-data-types.css'
                 'numeric_data_type' => 'integer',
             ],
         ]);
-        $value = isset($query['numeric']['int']['gt']['val']) ? $query['numeric']['int']['gt']['val'] : null;
+        $element = new IntegerElement('numeric[int][gt][val]');
+        $element->setValue(isset($query['numeric']['int']['gt']['val']) ? $query['numeric']['int']['gt']['val'] : null);
+        echo $this->formElement($element);
         ?>
-        <input type="number" value="<?php echo $this->escapeHtml($value); ?>" step="1" name="numeric[int][gt][val]" placeholder="<?php echo $this->translate('Enter integer'); ?>">    </div>
+    </div>
 </div>
 
 <div class="field">
@@ -163,7 +167,9 @@ $this->headLink()->appendStylesheet($this->assetUrl('css/numeric-data-types.css'
                 'numeric_data_type' => 'integer',
             ],
         ]);
-        $value = isset($query['numeric']['int']['lt']['val']) ? $query['numeric']['int']['lt']['val'] : null;
+        $element = new IntegerElement('numeric[int][lt][val]');
+        $element->setValue(isset($query['numeric']['int']['lt']['val']) ? $query['numeric']['int']['lt']['val'] : null);
+        echo $this->formElement($element);
         ?>
-        <input type="number" value="<?php echo $this->escapeHtml($value); ?>" step="1" name="numeric[int][lt][val]" placeholder="<?php echo $this->translate('Enter integer'); ?>">    </div>
+    </div>
 </div>

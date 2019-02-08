@@ -3,6 +3,7 @@ namespace NumericDataTypes\DataType;
 
 use Doctrine\ORM\QueryBuilder;
 use NumericDataTypes\Entity\NumericDataTypesNumber;
+use NumericDataTypes\Form\Element\Integer as IntegerElement;
 use Omeka\Api\Adapter\AbstractEntityAdapter;
 use Omeka\Api\Adapter\AdapterInterface;
 use Omeka\Api\Representation\ValueRepresentation;
@@ -46,14 +47,9 @@ class Integer extends AbstractDataType
 
     public function form(PhpRenderer $view)
     {
-        $valueInput = new Element\Number('numeric-integer-value');
-        $valueInput->setAttributes([
-            'data-value-key' => '@value',
-            'step' => 1,
-            'min' => self::MIN_SAFE_INT,
-            'max' => self::MAX_SAFE_INT,
-        ]);
-        return $view->formNumber($valueInput);
+        $element = new IntegerElement('numeric-integer-value');
+        $element->setAttribute('data-value-key', '@value');
+        return $view->formElement($element);
     }
 
     public function hydrate(array $valueObject, Value $value, AbstractEntityAdapter $adapter)
