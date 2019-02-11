@@ -222,11 +222,12 @@ ALTER TABLE numeric_data_types_interval ADD CONSTRAINT FK_7E2C936B549213EC FOREI
             $query->setParameter('dataType', $dataType->getName());
             foreach ($query->getResult() as $templateProperty) {
                 $property = $templateProperty->getProperty();
+                $template = $templateProperty->getResourceTemplate();
                 $value = sprintf('%s:%s', $dataType->getName(), $property->getId());
                 if (!isset($numericSortBy[$value])) {
                     $numericSortBy[$value] = [
                         'value' => $value,
-                        'label' => $property->getLabel(),
+                        'label' => sprintf('%s (%s)', $property->getLabel(), $template->getLabel()),
                         'alternate_labels' => [],
                     ];
                 }

@@ -47,9 +47,10 @@ class NumericPropertySelect extends Select
         $valueOptions = [];
         foreach ($query->getResult() as $templateProperty) {
             $property = $templateProperty->getProperty();
+            $template = $templateProperty->getResourceTemplate();
             if (!isset($valueOptions[$property->getId()])) {
                 $valueOptions[$property->getId()] = [
-                    'label' => $property->getLabel(),
+                    'label' => sprintf('%s (%s)', $property->getLabel(), $template->getLabel()),
                     'value' => $property->getId(),
                     'alternate_labels' => [],
                 ];
