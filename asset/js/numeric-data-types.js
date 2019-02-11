@@ -238,6 +238,9 @@ var NumericDataTypes = {
             i.val(matches[6] ? parseInt(matches[6].slice(0, -1)) : null);
             s.val(matches[7] ? parseInt(matches[7].slice(0, -1)) : null);
         }
+        // By default, show time inputs only if there's an hour.
+        var timeInputs = h.closest('.numeric-time-inputs');
+        h.val() ? timeInputs.show() : timeInputs.hide();
     }
 };
 

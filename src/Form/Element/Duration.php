@@ -27,6 +27,7 @@ class Duration extends Element
             'class' => 'numeric-duration-years',
             'step' => 1,
             'min' => 0,
+            'placeholder' => 'Years', // @translate
         ]);
 
         $this->monthsElement = new Element\Number('months');
@@ -34,6 +35,7 @@ class Duration extends Element
             'class' => 'numeric-duration-months',
             'step' => 1,
             'min' => 0,
+            'placeholder' => 'Months', // @translate
         ]);
 
         $this->daysElement = new Element\Number('days');
@@ -41,6 +43,7 @@ class Duration extends Element
             'class' => 'numeric-duration-days',
             'step' => 1,
             'min' => 0,
+            'placeholder' => 'Days', // @translate
         ]);
 
         $this->hoursElement = new Element\Number('hours');
@@ -48,6 +51,7 @@ class Duration extends Element
             'class' => 'numeric-duration-hours',
             'step' => 1,
             'min' => 0,
+            'placeholder' => 'Hours', // @translate
         ]);
 
         $this->minutesElement = new Element\Number('minutes');
@@ -55,6 +59,7 @@ class Duration extends Element
             'class' => 'numeric-duration-minutes',
             'step' => 1,
             'min' => 0,
+            'placeholder' => 'Minutes', // @translate
         ]);
 
         $this->secondsElement = new Element\Number('seconds');
@@ -62,6 +67,7 @@ class Duration extends Element
             'class' => 'numeric-duration-seconds',
             'step' => 1,
             'min' => 0,
+            'placeholder' => 'Seconds', // @translate
         ]);
     }
 

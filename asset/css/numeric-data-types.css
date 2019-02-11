@@ -25,32 +25,7 @@
 
 .value[data-data-type="numeric:timestamp"] .input-body,
 .value[data-data-type="numeric:interval"] .input-body,
+.value[data-data-type="numeric:duration"] .input-body,
 .value[data-data-type="numeric:integer"] .input-body {
     background-color: transparent;
-}
-
-/* numeric:duration */
-[data-data-type="numeric:duration"] .input {
-    position:relative;
-    clear:both;
-    border-bottom:1px solid #dfdfdf;
-}
-[data-data-type="numeric:duration"] .input-body {
-    border:1px solid #dfdfdf;
-}
-[data-data-type="numeric:duration"] label {
-    padding:6px 0 6px 6px;
-    z-index:1;
-    font-weight:bold;
-    color:rgba(0,0,0,0.35);
-    width:auto;
-    display:flex;
-}
-[data-data-type="numeric:duration"] .input-body input {
-    margin:-6px 0 -6px 6px;
-    height:36px;
-    border:0;
-    padding:6px;
-    font-weight:normal;
-    width: 100%;
 }

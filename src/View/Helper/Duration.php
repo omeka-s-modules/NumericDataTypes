@@ -23,40 +23,30 @@ class Duration extends AbstractHelper
         $html = <<<HTML
 <div class="numeric-duration">
     %s
-    <div class="input">
-        <label class="value">%s%s</label>
-    </div>
-    <div class="input">
-        <label class="value">%s%s</label>
-    </div>
-    <div class="input">
-        <label class="value">%s%s</label>
-    </div>
-    <div class="input">
-        <label class="value">%s%s</label>
-    </div>
-    <div class="input">
-        <label class="value">%s%s</label>
-    </div>
-    <div class="input">
-        <label class="value">%s%s</label>
+    <div class="numeric-datetime-inputs">
+        <div class="numeric-date-inputs">
+            %s
+            %s
+            %s
+            <a href="#" class="numeric-toggle-time">%s</a>
+        </div>
+        <div class="numeric-time-inputs">
+            %s
+            %s
+            %s
+        </div>
     </div>
 </div>
 HTML;
         return sprintf(
             $html,
             $view->formHidden($element->getValueElement()),
-            $view->translate('Years'),
             $view->formNumber($element->getYearsElement()),
-            $view->translate('Months'),
             $view->formNumber($element->getMonthsElement()),
-            $view->translate('Days'),
             $view->formNumber($element->getDaysElement()),
-            $view->translate('Hours'),
+            $view->translate('time'),
             $view->formNumber($element->getHoursElement()),
-            $view->translate('Minutes'),
             $view->formNumber($element->getMinutesElement()),
-            $view->translate('Seconds'),
             $view->formNumber($element->getSecondsElement())
         );
     }
