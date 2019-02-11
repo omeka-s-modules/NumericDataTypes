@@ -22,8 +22,18 @@ return [
         ],
     ],
     'view_helpers' => [
+        'invokables' => [
+            'formNumericTimestamp' =>  NumericDataTypes\View\Helper\Timestamp::class,
+            'formNumericInterval' =>  NumericDataTypes\View\Helper\Interval::class,
+            'formNumericDuration' =>  NumericDataTypes\View\Helper\Duration::class,
+        ],
         'factories' => [
             'numericPropertySelect' => NumericDataTypes\Service\ViewHelper\NumericPropertySelectFactory::class,
+        ],
+        'delegators' => [
+            'Zend\Form\View\Helper\FormElement' => [
+                NumericDataTypes\Service\Delegator\FormElementDelegatorFactory::class,
+            ],
         ],
     ],
     'form_elements' => [

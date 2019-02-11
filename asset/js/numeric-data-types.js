@@ -118,23 +118,32 @@ var NumericDataTypes = {
             value = `P${value}`;
         }
         v.val(value);
-    }
-};
-
-$(document).on('o:prepare-value', function(e, type, value) {
-    if ('numeric:timestamp' === type) {
-        var v = value.find('input[data-value-key="@value"]');
-        var y = value.find('input[name="numeric-timestamp-year"]');
-        var m = value.find('select[name="numeric-timestamp-month"]');
-        var d = value.find('input[name="numeric-timestamp-day"]');
-        var h = value.find('input[name="numeric-timestamp-hour"]');
-        var mi = value.find('input[name="numeric-timestamp-minute"]');
-        var s = value.find('input[name="numeric-timestamp-second"]');
+    },
+    /**
+     * Enable the timestamp controls.
+     *
+     * @param container
+     */
+    enableTimestamp : function(container) {
+        var v = container.find('.numeric-datetime-value');
+        var numericContainer = v.closest('.numeric-timestamp');
+        if (numericContainer.hasClass('numeric-enabled')) {
+            return; // Enable only once.
+        }
+        numericContainer.addClass('numeric-enabled')
+        var y = container.find('.numeric-datetime-year');
+        var m = container.find('.numeric-datetime-month');
+        var d = container.find('.numeric-datetime-day');
+        var h = container.find('.numeric-datetime-hour');
+        var mi = container.find('.numeric-datetime-minute');
+        var s = container.find('.numeric-datetime-second');
+        y.add(m).add(d).add(h).add(mi).add(s).on('input', function(e) {
+            NumericDataTypes.setTimestampValue(v, y, m, d, h, mi, s);
+        });
         // Match against ISO 8601, allowing for reduced accuracy.
         var matches = /^(-?\d{4,})(-(\d{2}))?(-(\d{2}))?(T(\d{2}))?(:(\d{2}))?(:(\d{2}))?$/.exec(v.val());
         if (matches) {
-            // Set existing year, month, day, hour, minute, second during
-            // initial load.
+            // Set existing date/time during initial load.
             y.val(parseInt(matches[1]));
             m.val(matches[3] ? parseInt(matches[3]) : null);
             d.val(matches[5] ? parseInt(matches[5]) : null);
@@ -142,34 +151,40 @@ $(document).on('o:prepare-value', function(e, type, value) {
             mi.val(matches[9] ? parseInt(matches[9]) : null);
             s.val(matches[11] ? parseInt(matches[11]) : null);
         }
-        y.add(d).add(h).on('input', function(e) {
-            NumericDataTypes.setTimestampValue(v, y, m, d, h, mi, s);
-        });
-        m.add(mi).add(s).on('change', function(e) {
-            NumericDataTypes.setTimestampValue(v, y, m, d, h, mi, s);
-        });
         // By default, show time inputs only if there's an hour.
         var timeInputs = h.closest('.numeric-time-inputs');
         h.val() ? timeInputs.show() : timeInputs.hide();
-    }
-    if ('numeric:interval' === type) {
-        var v = value.find('input[data-value-key="@value"]');
-        var yStart = value.find('input[name="numeric-interval-start-year"]');
-        var mStart = value.find('select[name="numeric-interval-start-month"]');
-        var dStart = value.find('input[name="numeric-interval-start-day"]');
-        var hStart = value.find('input[name="numeric-interval-start-hour"]');
-        var miStart = value.find('input[name="numeric-interval-start-minute"]');
-        var sStart = value.find('input[name="numeric-interval-start-second"]');
-        var yEnd = value.find('input[name="numeric-interval-end-year"]');
-        var mEnd = value.find('select[name="numeric-interval-end-month"]');
-        var dEnd = value.find('input[name="numeric-interval-end-day"]');
-        var hEnd = value.find('input[name="numeric-interval-end-hour"]');
-        var miEnd = value.find('input[name="numeric-interval-end-minute"]');
-        var sEnd = value.find('input[name="numeric-interval-end-second"]');
+    },
+    /**
+     * Enable the interval controls.
+     *
+     * @param container
+     */
+    enableInterval : function(container) {
+        var v = container.find('.numeric-datetime-value');
+        var numericContainer = v.closest('.numeric-interval');
+        if (numericContainer.hasClass('numeric-enabled')) {
+            return; // Enable only once.
+        }
+        numericContainer.addClass('numeric-enabled')
+        var yStart = container.find('.numeric-interval-start .numeric-datetime-year');
+        var mStart = container.find('.numeric-interval-start .numeric-datetime-month');
+        var dStart = container.find('.numeric-interval-start .numeric-datetime-day');
+        var hStart = container.find('.numeric-interval-start .numeric-datetime-hour');
+        var miStart = container.find('.numeric-interval-start .numeric-datetime-minute');
+        var sStart = container.find('.numeric-interval-start .numeric-datetime-second');
+        var yEnd = container.find('.numeric-interval-end .numeric-datetime-year');
+        var mEnd = container.find('.numeric-interval-end .numeric-datetime-month');
+        var dEnd = container.find('.numeric-interval-end .numeric-datetime-day');
+        var hEnd = container.find('.numeric-interval-end .numeric-datetime-hour');
+        var miEnd = container.find('.numeric-interval-end .numeric-datetime-minute');
+        var sEnd = container.find('.numeric-interval-end .numeric-datetime-second');
+        yStart.add(mStart).add(dStart).add(hStart).add(miStart).add(sStart).add(yEnd).add(mEnd).add(dEnd).add(hEnd).add(miEnd).add(sEnd).on('input', function(e) {
+            NumericDataTypes.setIntervalValue(v, yStart, mStart, dStart, hStart, miStart, sStart, yEnd, mEnd, dEnd, hEnd, miEnd, sEnd);
+        });
         // Match against ISO 8601, allowing for reduced accuracy.
         var matches = /^(-?\d{4,})(-(\d{2}))?(-(\d{2}))?(T(\d{2}))?(:(\d{2}))?(:(\d{2}))?\/(-?\d{4,})(-(\d{2}))?(-(\d{2}))?(T(\d{2}))?(:(\d{2}))?(:(\d{2}))?$/.exec(v.val());
         if (matches) {
-            console.log(matches);
             // Set existing year, month, day, hour, minute, second during
             // initial load.
             yStart.val(parseInt(matches[1]));
@@ -185,26 +200,33 @@ $(document).on('o:prepare-value', function(e, type, value) {
             miEnd.val(matches[20] ? parseInt(matches[20]) : null);
             sEnd.val(matches[22] ? parseInt(matches[22]) : null);
         }
-        yStart.add(dStart).add(hStart).add(yEnd).add(dEnd).add(hEnd).on('input', function(e) {
-            NumericDataTypes.setIntervalValue(v, yStart, mStart, dStart, hStart, miStart, sStart, yEnd, mEnd, dEnd, hEnd, miEnd, sEnd);
-        });
-        mStart.add(miStart).add(sStart).add(mEnd).add(miEnd).add(sEnd).on('change', function(e) {
-            NumericDataTypes.setIntervalValue(v, yStart, mStart, dStart, hStart, miStart, sStart, yEnd, mEnd, dEnd, hEnd, miEnd, sEnd);
-        });
         // By default, show time inputs only if there's an hour.
         var timeInputsStart = hStart.closest('.numeric-time-inputs');
         hStart.val() ? timeInputsStart.show() : timeInputsStart.hide();
         var timeInputsEnd = hEnd.closest('.numeric-time-inputs');
         hEnd.val() ? timeInputsEnd.show() : timeInputsEnd.hide();
-    }
-    if ('numeric:duration' === type) {
-        var v = value.find('input[data-value-key="@value"]');
-        var y = value.find('input[name="numeric-duration-years"]');
-        var m = value.find('input[name="numeric-duration-months"]');
-        var d = value.find('input[name="numeric-duration-days"]');
-        var h = value.find('input[name="numeric-duration-hours"]');
-        var i = value.find('input[name="numeric-duration-minutes"]');
-        var s = value.find('input[name="numeric-duration-seconds"]');
+    },
+    /**
+     * Enable the duration controls.
+     *
+     * @param container
+     */
+    enableDuration : function(container) {
+        var v = container.find('.numeric-duration-value');
+        var numericContainer = v.closest('.numeric-duration');
+        if (numericContainer.hasClass('numeric-enabled')) {
+            return; // Enable only once.
+        }
+        numericContainer.addClass('numeric-enabled')
+        var y = container.find('.numeric-duration-years');
+        var m = container.find('.numeric-duration-months');
+        var d = container.find('.numeric-duration-days');
+        var h = container.find('.numeric-duration-hours');
+        var i = container.find('.numeric-duration-minutes');
+        var s = container.find('.numeric-duration-seconds');
+        y.add(m).add(d).add(h).add(i).add(s).on('input', function(e) {
+            NumericDataTypes.setDurationValue(v, y, m, d, h, i, s);
+        });
         // Match against ISO 8601, allowing for reduced precision.
         var matches = /^P(\d+Y)?(\d+M)?(\d+D)?(T(\d+H)?(\d+M)?(\d+S)?)?$/.exec(v.val());
         if (matches) {
@@ -216,15 +238,35 @@ $(document).on('o:prepare-value', function(e, type, value) {
             i.val(matches[6] ? parseInt(matches[6].slice(0, -1)) : null);
             s.val(matches[7] ? parseInt(matches[7].slice(0, -1)) : null);
         }
-        y.add(m).add(d).add(h).add(i).add(s).on('input', function(e) {
-            NumericDataTypes.setDurationValue(v, y, m, d, h, i, s);
-        });
+    }
+};
+
+// Enable numeric controls when preparing values on the resource form.
+$(document).on('o:prepare-value', function(e, type, value) {
+    if ('numeric:timestamp' === type) {
+        NumericDataTypes.enableTimestamp(value);
+    }
+    if ('numeric:interval' === type) {
+        NumericDataTypes.enableInterval(value);
+    }
+    if ('numeric:duration' === type) {
+        NumericDataTypes.enableDuration(value);
     }
 });
 
 $(function() {
+     // Automatically enable numeric controls that exist on the page.
+    $(document).find('.numeric-timestamp:visible').each(function() {
+        NumericDataTypes.enableTimestamp($(this));
+    });
+    $(document).find('.numeric-interval:visible').each(function() {
+        NumericDataTypes.enableInterval($(this));
+    });
+    $(document).find('.numeric-duration:visible').each(function() {
+        NumericDataTypes.enableDuration($(this));
+    });
+    // Toggle visibility of time inputs.
     $(document).find('.numeric-toggle-time').on('click', function(e) {
-        // Toggle visibility of time inputs.
         e.preventDefault();
         $(this).closest('.numeric-datetime-inputs').find('.numeric-time-inputs').toggle();
     });

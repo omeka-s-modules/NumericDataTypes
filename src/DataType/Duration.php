@@ -4,6 +4,7 @@ namespace NumericDataTypes\DataType;
 use DateInterval;
 use Doctrine\ORM\QueryBuilder;
 use NumericDataTypes\Entity\NumericDataTypesNumber;
+use NumericDataTypes\Form\Element\Duration as DurationElement;
 use Omeka\Entity\Value;
 use Omeka\Api\Adapter\AbstractEntityAdapter;
 use Omeka\Api\Adapter\AdapterInterface;
@@ -39,84 +40,9 @@ class Duration extends AbstractDataType
 
     public function form(PhpRenderer $view)
     {
-        $valueInput = new Element\Hidden('numeric-duration-value');
-        $valueInput->setAttributes([
-            'data-value-key' => '@value',
-        ]);
-
-        $yearsInput = new Element\Number('numeric-duration-years');
-        $yearsInput->setAttributes([
-            'step' => 1,
-            'min' => 0,
-        ]);
-
-        $monthsInput = new Element\Number('numeric-duration-months');
-        $monthsInput->setAttributes([
-            'step' => 1,
-            'min' => 0,
-        ]);
-
-        $daysInput = new Element\Number('numeric-duration-days');
-        $daysInput->setAttributes([
-            'step' => 1,
-            'min' => 0,
-        ]);
-
-        $hoursInput = new Element\Number('numeric-duration-hours');
-        $hoursInput->setAttributes([
-            'step' => 1,
-            'min' => 0,
-        ]);
-
-        $minutesInput = new Element\Number('numeric-duration-minutes');
-        $minutesInput->setAttributes([
-            'step' => 1,
-            'min' => 0,
-        ]);
-
-        $secondsInput = new Element\Number('numeric-duration-seconds');
-        $secondsInput->setAttributes([
-            'step' => 1,
-            'min' => 0,
-        ]);
-
-        $html = <<<HTML
-    %s
-    <div class="input">
-        <label class="value">%s%s</label>
-    </div>
-    <div class="input">
-        <label class="value">%s%s</label>
-    </div>
-    <div class="input">
-        <label class="value">%s%s</label>
-    </div>
-    <div class="input">
-        <label class="value">%s%s</label>
-    </div>
-    <div class="input">
-        <label class="value">%s%s</label>
-    </div>
-    <div class="input">
-        <label class="value">%s%s</label>
-    </div>
-HTML;
-        return sprintf(
-            $html,
-            $view->formHidden($valueInput),
-            $view->translate('Years'),
-            $view->formNumber($yearsInput),
-            $view->translate('Months'),
-            $view->formNumber($monthsInput),
-            $view->translate('Days'),
-            $view->formNumber($daysInput),
-            $view->translate('Hours'),
-            $view->formNumber($hoursInput),
-            $view->translate('Minutes'),
-            $view->formNumber($minutesInput),
-            $view->translate('Seconds'),
-            $view->formNumber($secondsInput)
-        );
+        $element = new DurationElement('numeric-duration-value');
+        $element->getValueElement()->setAttribute('data-value-key', '@value');
+        return $view->formElement($element);
     }
 
     public function isValid(array $valueObject)
