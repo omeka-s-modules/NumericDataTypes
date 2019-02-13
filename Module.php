@@ -214,35 +214,26 @@ ALTER TABLE numeric_data_types_interval ADD CONSTRAINT FK_7E2C936B549213EC FOREI
      */
     public function addSortings(Event $event)
     {
-        $em = $this->getServiceLocator()->get('Omeka\EntityManager');
-        $numericSortBy = [];
-        foreach ($this->getNumericDataTypes() as $dataTypeName => $dataType) {
-            $dql = 'SELECT p FROM Omeka\Entity\ResourceTemplateProperty p WHERE p.dataType = :dataType';
-            $query = $em->createQuery($dql);
-            $query->setParameter('dataType', $dataType->getName());
-            foreach ($query->getResult() as $templateProperty) {
-                $property = $templateProperty->getProperty();
-                $template = $templateProperty->getResourceTemplate();
-                $value = sprintf('%s:%s', $dataType->getName(), $property->getId());
-                if (!isset($numericSortBy[$value])) {
-                    $numericSortBy[$value] = [
-                        'label' => sprintf('%s (%s)', $property->getLabel(), $templateProperty->getDataType()),
-                        'value' => $property->getId(),
-                        'template_labels' => [],
-                    ];
-                }
-                // More than one template could use the same property.
-                $numericSortBy[$value]['template_labels'][] = sprintf(
-                    '• %s: %s',
-                    $template->getLabel(),
-                    $templateProperty->getAlternateLabel() ?: $property->getLabel()
-                );
-            }
+        $qb = $this->getServiceLocator()->get('Omeka\EntityManager')->createQueryBuilder();
+        $qb->select('p')->from('Omeka\Entity\ResourceTemplateProperty', 'p');
+        foreach (array_values($this->getNumericDataTypes()) as $index => $dataType) {
+            $qb->orWhere("p.dataType = ?$index");
+            $qb->setParameter($index, $dataType->getName());
         }
-        // Include template/property labels in the option title attribute.
-        foreach ($numericSortBy as $value => $option) {
-            $templateLabels = $numericSortBy[$value]['template_labels'];
-            $numericSortBy[$value]['attributes']['title'] = implode("\n", $templateLabels);
+        $query = $qb->getQuery();
+
+        $numericSortBy = [];
+        foreach ($query->getResult() as $templateProperty) {
+            $property = $templateProperty->getProperty();
+            $template = $templateProperty->getResourceTemplate();
+            $value = sprintf('%s:%s', $templateProperty->getDataType(), $property->getId());
+            if (!isset($numericSortBy[$value])) {
+                $numericSortBy[$value] = [
+                    'label' => sprintf('%s (%s)', $property->getLabel(), $templateProperty->getDataType()),
+                    'value' => $value,
+                    'template_labels' => [],
+                ];
+            }
         }
         // Sort options alphabetically.
         usort($numericSortBy, function ($a, $b) {
@@ -264,7 +255,7 @@ ALTER TABLE numeric_data_types_interval ADD CONSTRAINT FK_7E2C936B549213EC FOREI
         $numericDataTypes = [];
         foreach ($dataTypes->getRegisteredNames() as $dataType) {
             if (0 === strpos($dataType, 'numeric:')) {
-                $numericDataTypes[$dataType] = $dataTypes->get($dataType);
+                $numericDataTypes[] = $dataTypes->get($dataType);
             }
         }
         return $numericDataTypes;

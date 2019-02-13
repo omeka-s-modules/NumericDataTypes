@@ -56,16 +56,17 @@ class NumericPropertySelect extends Select
             $template = $templateProperty->getResourceTemplate();
             if (!isset($valueOptions[$property->getId()])) {
                 $valueOptions[$property->getId()] = [
-                    'label' => sprintf('%s (%s)', $property->getLabel(), $templateProperty->getDataType()),
+                    'label' => $property->getLabel(),
                     'value' => $property->getId(),
                     'template_labels' => [],
                 ];
             }
             // More than one template could use the same property.
             $valueOptions[$property->getId()]['template_labels'][] = sprintf(
-                '• %s: %s',
+                '• %s: %s (%s)',
                 $template->getLabel(),
-                $templateProperty->getAlternateLabel() ?: $property->getLabel()
+                $templateProperty->getAlternateLabel() ?: $property->getLabel(),
+                $templateProperty->getDataType()
             );
         }
         // Include template/property labels in the option title attribute.
