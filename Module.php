@@ -226,28 +226,23 @@ ALTER TABLE numeric_data_types_interval ADD CONSTRAINT FK_7E2C936B549213EC FOREI
                 $value = sprintf('%s:%s', $dataType->getName(), $property->getId());
                 if (!isset($numericSortBy[$value])) {
                     $numericSortBy[$value] = [
-                        'value' => $value,
-                        'label' => $property->getLabel(),
-                        'template_data' => [],
+                        'label' => sprintf('%s (%s)', $property->getLabel(), $templateProperty->getDataType()),
+                        'value' => $property->getId(),
+                        'template_labels' => [],
                     ];
                 }
-                $numericSortBy[$value]['template_data'][] = sprintf(
-                    '%s: %s',
+                // More than one template could use the same property.
+                $numericSortBy[$value]['template_labels'][] = sprintf(
+                    '• %s: %s',
                     $template->getLabel(),
                     $templateProperty->getAlternateLabel() ?: $property->getLabel()
                 );
             }
         }
-        // Include template labels and alternate labels.
+        // Include template/property labels in the option title attribute.
         foreach ($numericSortBy as $value => $option) {
-            $templateData = $numericSortBy[$value]['template_data'];
-            if ($templateData) {
-                $numericSortBy[$value]['label'] = sprintf(
-                    '%s (%s)',
-                    $numericSortBy[$value]['label'],
-                    implode(' | ', $templateData)
-                );
-            }
+            $templateLabels = $numericSortBy[$value]['template_labels'];
+            $numericSortBy[$value]['attributes']['title'] = implode("\n", $templateLabels);
         }
         // Sort options alphabetically.
         usort($numericSortBy, function ($a, $b) {

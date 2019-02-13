@@ -28,7 +28,7 @@ class NumericPropertySelect extends Select
     }
 
     /**
-     * Get value options for properties of numeric data types.
+     * Get value options for template properties of numeric data types.
      *
      * @return array
      */
@@ -56,27 +56,22 @@ class NumericPropertySelect extends Select
             $template = $templateProperty->getResourceTemplate();
             if (!isset($valueOptions[$property->getId()])) {
                 $valueOptions[$property->getId()] = [
-                    'label' => $property->getLabel(),
+                    'label' => sprintf('%s (%s)', $property->getLabel(), $templateProperty->getDataType()),
                     'value' => $property->getId(),
-                    'template_data' => [],
+                    'template_labels' => [],
                 ];
             }
-            $valueOptions[$property->getId()]['template_data'][] = sprintf(
-                '%s: %s',
+            // More than one template could use the same property.
+            $valueOptions[$property->getId()]['template_labels'][] = sprintf(
+                '• %s: %s',
                 $template->getLabel(),
                 $templateProperty->getAlternateLabel() ?: $property->getLabel()
             );
         }
-        // Include template labels and alternate labels.
+        // Include template/property labels in the option title attribute.
         foreach ($valueOptions as $propertyId => $option) {
-            $templateData = $valueOptions[$propertyId]['template_data'];
-            if ($templateData) {
-                $valueOptions[$propertyId]['label'] = sprintf(
-                    '%s (%s)',
-                    $valueOptions[$propertyId]['label'],
-                    implode(' | ', $templateData)
-                );
-            }
+            $templateLabels = $valueOptions[$propertyId]['template_labels'];
+            $valueOptions[$propertyId]['attributes']['title'] = implode("\n", $templateLabels);
         }
         // Sort options alphabetically.
         usort($valueOptions, function ($a, $b) {
