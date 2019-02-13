@@ -34,15 +34,21 @@ class NumericPropertySelect extends Select
      */
     public function getValueOptions()
     {
-        $dataType = $this->getOption('numeric_data_type');
-        if (!$dataType) {
+        $dataTypes = $this->getOption('numeric_data_type');
+        if (!is_array($dataTypes)) {
+            $dataTypes = [$dataTypes];
+        }
+        if (!$dataTypes) {
             return [];
         }
 
-        // Get only the properties of the numeric data types.
-        $dql = 'SELECT p FROM Omeka\Entity\ResourceTemplateProperty p WHERE p.dataType = :dataType';
-        $query = $this->entityManager->createQuery($dql);
-        $query->setParameter('dataType', sprintf('numeric:%s', $dataType));
+        $qb = $this->entityManager->createQueryBuilder();
+        $qb->select('p')->from('Omeka\Entity\ResourceTemplateProperty', 'p');
+        foreach (array_values($dataTypes) as $index => $dataType) {
+            $qb->orWhere("p.dataType = ?$index");
+            $qb->setParameter($index, sprintf('numeric:%s', $dataType));
+        }
+        $query = $qb->getQuery();
 
         $valueOptions = [];
         foreach ($query->getResult() as $templateProperty) {
@@ -50,21 +56,25 @@ class NumericPropertySelect extends Select
             $template = $templateProperty->getResourceTemplate();
             if (!isset($valueOptions[$property->getId()])) {
                 $valueOptions[$property->getId()] = [
-                    'label' => sprintf('%s (%s)', $property->getLabel(), $template->getLabel()),
+                    'label' => $property->getLabel(),
                     'value' => $property->getId(),
-                    'alternate_labels' => [],
+                    'template_data' => [],
                 ];
             }
-            $valueOptions[$property->getId()]['alternate_labels'][] = $templateProperty->getAlternateLabel();
+            $valueOptions[$property->getId()]['template_data'][] = sprintf(
+                '%s: %s',
+                $template->getLabel(),
+                $templateProperty->getAlternateLabel() ?: $property->getLabel()
+            );
         }
-        // Include alternate labels, if any.
+        // Include template labels and alternate labels.
         foreach ($valueOptions as $propertyId => $option) {
-            $altLabels = array_unique(array_filter($valueOptions[$propertyId]['alternate_labels']));
-            if ($altLabels) {
+            $templateData = $valueOptions[$propertyId]['template_data'];
+            if ($templateData) {
                 $valueOptions[$propertyId]['label'] = sprintf(
-                    '%s: %s',
+                    '%s (%s)',
                     $valueOptions[$propertyId]['label'],
-                    implode('; ', $altLabels)
+                    implode(' | ', $templateData)
                 );
             }
         }

@@ -227,21 +227,25 @@ ALTER TABLE numeric_data_types_interval ADD CONSTRAINT FK_7E2C936B549213EC FOREI
                 if (!isset($numericSortBy[$value])) {
                     $numericSortBy[$value] = [
                         'value' => $value,
-                        'label' => sprintf('%s (%s)', $property->getLabel(), $template->getLabel()),
-                        'alternate_labels' => [],
+                        'label' => $property->getLabel(),
+                        'template_data' => [],
                     ];
                 }
-                $numericSortBy[$value]['alternate_labels'][] = $templateProperty->getAlternateLabel();
+                $numericSortBy[$value]['template_data'][] = sprintf(
+                    '%s: %s',
+                    $template->getLabel(),
+                    $templateProperty->getAlternateLabel() ?: $property->getLabel()
+                );
             }
         }
-        // Include alternate labels, if any.
-        foreach ($numericSortBy as $key => $value) {
-            $altLabels = array_unique(array_filter($numericSortBy[$key]['alternate_labels']));
-            if ($altLabels) {
-                $numericSortBy[$key]['label'] = sprintf(
-                    '%s: %s',
-                    $numericSortBy[$key]['label'],
-                    implode('; ', $altLabels)
+        // Include template labels and alternate labels.
+        foreach ($numericSortBy as $value => $option) {
+            $templateData = $numericSortBy[$value]['template_data'];
+            if ($templateData) {
+                $numericSortBy[$value]['label'] = sprintf(
+                    '%s (%s)',
+                    $numericSortBy[$value]['label'],
+                    implode(' | ', $templateData)
                 );
             }
         }
