@@ -53,6 +53,15 @@ ALTER TABLE numeric_data_types_interval ADD CONSTRAINT FK_7E2C936B89329D25 FOREI
 ALTER TABLE numeric_data_types_interval ADD CONSTRAINT FK_7E2C936B549213EC FOREIGN KEY (property_id) REFERENCES property (id) ON DELETE CASCADE;
 ');
         }
+        if (Comparator::lessThan($oldVersion, '1.2.0')) {
+            // The numeric_data_types_duration table was mistakenly not created
+            // in the previous upgrade. Create it now.
+            $conn->exec('
+CREATE TABLE numeric_data_types_duration (id INT AUTO_INCREMENT NOT NULL, resource_id INT NOT NULL, property_id INT NOT NULL, value BIGINT NOT NULL, INDEX IDX_E1B5FC6089329D25 (resource_id), INDEX IDX_E1B5FC60549213EC (property_id), INDEX property_value (property_id, value), INDEX value (value), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB;
+ALTER TABLE numeric_data_types_duration ADD CONSTRAINT FK_E1B5FC6089329D25 FOREIGN KEY (resource_id) REFERENCES resource (id) ON DELETE CASCADE;
+ALTER TABLE numeric_data_types_duration ADD CONSTRAINT FK_E1B5FC60549213EC FOREIGN KEY (property_id) REFERENCES property (id) ON DELETE CASCADE;
+');
+        }
     }
 
     public function attachListeners(SharedEventManagerInterface $sharedEventManager)
