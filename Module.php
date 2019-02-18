@@ -264,7 +264,7 @@ ALTER TABLE numeric_data_types_duration ADD CONSTRAINT FK_E1B5FC60549213EC FOREI
         $numericDataTypes = [];
         foreach ($dataTypes->getRegisteredNames() as $dataType) {
             if (0 === strpos($dataType, 'numeric:')) {
-                $numericDataTypes[] = $dataTypes->get($dataType);
+                $numericDataTypes[$dataType] = $dataTypes->get($dataType);
             }
         }
         return $numericDataTypes;
