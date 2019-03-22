@@ -13,6 +13,7 @@ class DateTime extends Element
     protected $hourElement;
     protected $minuteElement;
     protected $secondElement;
+    protected $offsetElement;
 
     public function __construct($name = null, $options = [])
     {
@@ -48,6 +49,10 @@ class DateTime extends Element
             ->setAttribute('class', 'numeric-datetime-second')
             ->setEmptyOption('Second') // @translate
             ->setValueOptions($this->getMinuteSecondValueOptions());
+        $this->offsetElement = (new Element\Select('offset'))
+            ->setAttribute('class', 'numeric-datetime-offset')
+            ->setEmptyOption('Offset') // @translate
+            ->setValueOptions($this->getOffsetValueOptions());
     }
 
     public function getMonthValueOptions()
@@ -111,6 +116,51 @@ class DateTime extends Element
         return array_map(function($n) {return sprintf('%02d', $n);}, range(0, 59));
     }
 
+    public function getOffsetValueOptions()
+    {
+        $offsets = [
+            '-12:00',
+            '-11:00',
+            '-10:00',
+            '-09:30',
+            '-09:00',
+            '-08:00',
+            '-07:00',
+            '-06:00',
+            '-05:00',
+            '-04:00',
+            '-03:30',
+            '-03:00',
+            '-02:00',
+            '-01:00',
+            '+00:00',
+            '+01:00',
+            '+02:00',
+            '+03:00',
+            '+03:30',
+            '+04:00',
+            '+04:30',
+            '+05:00',
+            '+05:30',
+            '+05:45',
+            '+06:00',
+            '+06:30',
+            '+07:00',
+            '+08:00',
+            '+08:45',
+            '+09:00',
+            '+09:30',
+            '+10:00',
+            '+10:30',
+            '+11:00',
+            '+12:00',
+            '+12:45',
+            '+13:00',
+            '+14:00',
+        ];
+        return array_combine($offsets, $offsets);
+    }
+
     public function getValueElement()
     {
         $this->valueElement->setValue($this->getValue());
@@ -145,5 +195,10 @@ class DateTime extends Element
     public function getSecondElement()
     {
         return $this->secondElement;
+    }
+
+    public function getOffsetElement()
+    {
+        return $this->offsetElement;
     }
 }

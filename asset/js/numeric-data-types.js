@@ -8,8 +8,9 @@ var NumericDataTypes = {
      * @param h Hour input
      * @param mi Minute input
      * @param s Second input
+     * @param o Offset input
      */
-    getDateTime : function(y, m, d, h, mi, s) {
+    getDateTime : function(y, m, d, h, mi, s, o) {
         var yearMatches = /^(-?)(\d+)$/.exec(y.val());
         var yearSign = yearMatches ? yearMatches[1] : null;
         var year = yearMatches ? yearMatches[2] : null;
@@ -18,7 +19,10 @@ var NumericDataTypes = {
         var hour = h.val();
         var minute = mi.val();
         var second = s.val();
-        if (year && month && day && hour && minute && second) {
+        var offset = o.val();
+        if (year && month && day && hour && minute && second && offset) {
+            return `${yearSign}${year.padStart(4, '0')}-${month.padStart(2, '0')}-${day.padStart(2, '0')}T${hour.padStart(2, '0')}:${minute.padStart(2, '0')}:${second.padStart(2, '0')}${offset}`;
+        } else if (year && month && day && hour && minute && second) {
             return `${yearSign}${year.padStart(4, '0')}-${month.padStart(2, '0')}-${day.padStart(2, '0')}T${hour.padStart(2, '0')}:${minute.padStart(2, '0')}:${second.padStart(2, '0')}`;
         } else if (year && month && day && hour && minute) {
             return `${yearSign}${year.padStart(4, '0')}-${month.padStart(2, '0')}-${day.padStart(2, '0')}T${hour.padStart(2, '0')}:${minute.padStart(2, '0')}`;
@@ -35,6 +39,18 @@ var NumericDataTypes = {
         }
     },
     /**
+     * Get the client's timezone offset.
+     *
+     * @return string
+     */
+    getLocalOffset : function() {
+        var offset = new Date().getTimezoneOffset();
+        var offsetSign = (offset <= 0) ? '+' : '-';
+        var offsetHour = Math.abs(Math.floor(offset / 60));
+        var offsetMinute = offset % 60;
+        return `${offsetSign}${offsetHour.toString().padStart(2, '0')}:${offsetMinute.toString().padStart(2, '0')}`;
+    }
+    /**
      * Set a timestamp to a value.
      *
      * @param v Value input
@@ -45,8 +61,8 @@ var NumericDataTypes = {
      * @param mi Minute input
      * @param s Second input
      */
-    setTimestampValue : function(v, y, m, d, h, mi, s) {
-        v.val(this.getDateTime(y, m, d, h, mi, s));
+    setTimestampValue : function(v, y, m, d, h, mi, s, o) {
+        v.val(this.getDateTime(y, m, d, h, mi, s, o));
     },
     /**
      * Set an interval to a value.
@@ -137,11 +153,12 @@ var NumericDataTypes = {
         var h = container.find('.numeric-datetime-hour');
         var mi = container.find('.numeric-datetime-minute');
         var s = container.find('.numeric-datetime-second');
-        y.add(m).add(d).add(h).add(mi).add(s).on('input', function(e) {
-            NumericDataTypes.setTimestampValue(v, y, m, d, h, mi, s);
+        var o = container.find('.numeric-datetime-offset');
+        y.add(m).add(d).add(h).add(mi).add(s).add(o).on('input', function(e) {
+            NumericDataTypes.setTimestampValue(v, y, m, d, h, mi, s, o);
         });
         // Match against ISO 8601, allowing for reduced accuracy.
-        var matches = /^(-?\d{4,})(-(\d{2}))?(-(\d{2}))?(T(\d{2}))?(:(\d{2}))?(:(\d{2}))?$/.exec(v.val());
+        var matches = /^(-?\d{4,})(-(\d{2}))?(-(\d{2}))?(T(\d{2}))?(:(\d{2}))?(:(\d{2}))?([+-]\d{2}:\d{2})?$/.exec(v.val());
         if (matches) {
             // Set existing date/time during initial load.
             y.val(parseInt(matches[1]));
@@ -150,6 +167,7 @@ var NumericDataTypes = {
             h.val(matches[7] ? parseInt(matches[7]) : null);
             mi.val(matches[9] ? parseInt(matches[9]) : null);
             s.val(matches[11] ? parseInt(matches[11]) : null);
+            o.val(matches[12] ? matches[12] : null);
         }
         // By default, show time inputs only if there's an hour.
         var timeInputs = h.closest('.numeric-time-inputs');
