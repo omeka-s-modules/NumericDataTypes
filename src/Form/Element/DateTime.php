@@ -53,53 +53,56 @@ class DateTime extends Element
     public function getMonthValueOptions()
     {
         return [
-            1 => 'January', // @translate
-            2 => 'February', // @translate
-            3 => 'March', // @translate
-            4 => 'April', // @translate
-            5 => 'May', // @translate
-            6 => 'June', // @translate
-            7 => 'July', // @translate
-            8 => 'August', // @translate
-            9 => 'September', // @translate
-            10 => 'October', // @translate
-            11 => 'November', // @translate
-            12 => 'December', // @translate
+            1 => '01 — January', // @translate
+            2 => '02 — February', // @translate
+            3 => '03 — March', // @translate
+            4 => '04 — April', // @translate
+            5 => '05 — May', // @translate
+            6 => '06 — June', // @translate
+            7 => '07 — July', // @translate
+            8 => '08 — August', // @translate
+            9 => '09 — September', // @translate
+            10 => '10 — October', // @translate
+            11 => '11 — November', // @translate
+            12 => '12 — December', // @translate
         ];
     }
 
     public function getDayValueOptions()
     {
-        return array_combine(range(1, 31), range(1, 31));
+        return array_combine(
+            range(1, 31),
+            array_map(function($n) {return sprintf('%02d', $n);}, range(1, 31))
+        );
     }
 
     public function getHourValueOptions()
     {
         return [
-            0 => '00 (12 am)', // @translate
-            1 => '01 (1 am)', // @translate
-            2 => '02 (2 am)', // @translate
-            3 => '03 (3 am)', // @translate
-            4 => '04 (4 am)', // @translate
-            5 => '05 (5 am)', // @translate
-            6 => '06 (6 am)', // @translate
-            7 => '07 (7 am)', // @translate
-            8 => '08 (8 am)', // @translate
-            9 => '09 (9 am)', // @translate
-            10 => '10 (10 am)', // @translate
-            11 => '11 (11 am)', // @translate
-            12 => '12 (12 pm)', // @translate
-            13 => '13 (1 pm)', // @translate
-            14 => '14 (2 pm)', // @translate
-            15 => '15 (3 pm)', // @translate
-            16 => '16 (4 pm)', // @translate
-            17 => '17 (5 pm)', // @translate
-            18 => '18 (6 pm)', // @translate
-            19 => '19 (7 pm)', // @translate
-            20 => '20 (8 pm)', // @translate
-            21 => '21 (9 pm)', // @translate
-            22 => '22 (10 pm)', // @translate
-            23 => '23 (11 pm)', // @translate
+            0 => '00 — 12 am', // @translate
+            1 => '01 — 1 am', // @translate
+            2 => '02 — 2 am', // @translate
+            3 => '03 — 3 am', // @translate
+            4 => '04 — 4 am', // @translate
+            5 => '05 — 5 am', // @translate
+            6 => '06 — 6 am', // @translate
+            7 => '07 — 7 am', // @translate
+            8 => '08 — 8 am', // @translate
+            9 => '09 — 9 am', // @translate
+            10 => '10 — 10 am', // @translate
+            11 => '11 — 11 am', // @translate
+            12 => '12 — 12 pm', // @translate
+            13 => '13 — 1 pm', // @translate
+            14 => '14 — 2 pm', // @translate
+            15 => '15 — 3 pm', // @translate
+            16 => '16 — 4 pm', // @translate
+            17 => '17 — 5 pm', // @translate
+            18 => '18 — 6 pm', // @translate
+            19 => '19 — 7 pm', // @translate
+            20 => '20 — 8 pm', // @translate
+            21 => '21 — 9 pm', // @translate
+            22 => '22 — 10 pm', // @translate
+            23 => '23 — 11 pm', // @translate
         ];
     }
 
