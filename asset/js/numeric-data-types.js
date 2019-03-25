@@ -60,6 +60,7 @@ var NumericDataTypes = {
      * @param h Hour input
      * @param mi Minute input
      * @param s Second input
+     * @param o Offset input
      */
     setTimestampValue : function(v, y, m, d, h, mi, s, o) {
         v.val(this.getDateTime(y, m, d, h, mi, s, o));
@@ -74,16 +75,18 @@ var NumericDataTypes = {
      * @param hStart Hour start input
      * @param miStart Minute start input
      * @param sStart Second start input
+     * @param oStart Offset start input
      * @param yEnd Year end input
      * @param mEnd Month end select
      * @param dEnd Day end input
      * @param hEnd Hour end input
      * @param miEnd Minute end input
      * @param sEnd Second end input
+     * @param oEnd Offset end input
      */
-    setIntervalValue : function(v, yStart, mStart, dStart, hStart, miStart, sStart, yEnd, mEnd, dEnd, hEnd, miEnd, sEnd) {
-        var start = this.getDateTime(yStart, mStart, dStart, hStart, miStart, sStart);
-        var end = this.getDateTime(yEnd, mEnd, dEnd, hEnd, miEnd, sEnd);
+    setIntervalValue : function(v, yStart, mStart, dStart, hStart, miStart, sStart, oStart, yEnd, mEnd, dEnd, hEnd, miEnd, sEnd, oEnd) {
+        var start = this.getDateTime(yStart, mStart, dStart, hStart, miStart, sStart, oStart);
+        var end = this.getDateTime(yEnd, mEnd, dEnd, hEnd, miEnd, sEnd, oEnd);
         if (start && end) {
             v.val(`${start}/${end}`);
         } else {
@@ -191,32 +194,36 @@ var NumericDataTypes = {
         var hStart = container.find('.numeric-interval-start .numeric-datetime-hour');
         var miStart = container.find('.numeric-interval-start .numeric-datetime-minute');
         var sStart = container.find('.numeric-interval-start .numeric-datetime-second');
+        var oStart = container.find('.numeric-interval-start .numeric-datetime-offset');
         var yEnd = container.find('.numeric-interval-end .numeric-datetime-year');
         var mEnd = container.find('.numeric-interval-end .numeric-datetime-month');
         var dEnd = container.find('.numeric-interval-end .numeric-datetime-day');
         var hEnd = container.find('.numeric-interval-end .numeric-datetime-hour');
         var miEnd = container.find('.numeric-interval-end .numeric-datetime-minute');
         var sEnd = container.find('.numeric-interval-end .numeric-datetime-second');
-        yStart.add(mStart).add(dStart).add(hStart).add(miStart).add(sStart).add(yEnd).add(mEnd).add(dEnd).add(hEnd).add(miEnd).add(sEnd).on('input', function(e) {
-            NumericDataTypes.setIntervalValue(v, yStart, mStart, dStart, hStart, miStart, sStart, yEnd, mEnd, dEnd, hEnd, miEnd, sEnd);
+        var oEnd = container.find('.numeric-interval-end .numeric-datetime-offset');
+        yStart.add(mStart).add(dStart).add(hStart).add(miStart).add(sStart).add(oStart).add(yEnd).add(mEnd).add(dEnd).add(hEnd).add(miEnd).add(sEnd).add(oEnd).on('input', function(e) {
+            NumericDataTypes.setIntervalValue(v, yStart, mStart, dStart, hStart, miStart, sStart, oStart, yEnd, mEnd, dEnd, hEnd, miEnd, sEnd, oEnd);
         });
         // Match against ISO 8601, allowing for reduced accuracy.
-        var matches = /^(-?\d{4,})(-(\d{2}))?(-(\d{2}))?(T(\d{2}))?(:(\d{2}))?(:(\d{2}))?\/(-?\d{4,})(-(\d{2}))?(-(\d{2}))?(T(\d{2}))?(:(\d{2}))?(:(\d{2}))?$/.exec(v.val());
+        var matches = /^(-?\d{4,})(-(\d{2}))?(-(\d{2}))?(T(\d{2}))?(:(\d{2}))?(:(\d{2}))?([+-]\d{2}:\d{2})?\/(-?\d{4,})(-(\d{2}))?(-(\d{2}))?(T(\d{2}))?(:(\d{2}))?(:(\d{2}))?([+-]\d{2}:\d{2})?$/.exec(v.val());
+        console.log(matches);
         if (matches) {
-            // Set existing year, month, day, hour, minute, second during
-            // initial load.
+            // Set existing date/time during initial load.
             yStart.val(parseInt(matches[1]));
             mStart.val(matches[3] ? parseInt(matches[3]) : null);
             dStart.val(matches[5] ? parseInt(matches[5]) : null);
             hStart.val(matches[7] ? parseInt(matches[7]) : null);
             miStart.val(matches[9] ? parseInt(matches[9]) : null);
             sStart.val(matches[11] ? parseInt(matches[11]) : null);
+            oStart.val(matches[12] ? matches[12] : null);
             yEnd.val(parseInt(matches[12]));
-            mEnd.val(matches[14] ? parseInt(matches[14]) : null);
-            dEnd.val(matches[16] ? parseInt(matches[16]) : null);
-            hEnd.val(matches[18] ? parseInt(matches[18]) : null);
-            miEnd.val(matches[20] ? parseInt(matches[20]) : null);
-            sEnd.val(matches[22] ? parseInt(matches[22]) : null);
+            mEnd.val(matches[15] ? parseInt(matches[15]) : null);
+            dEnd.val(matches[17] ? parseInt(matches[17]) : null);
+            hEnd.val(matches[19] ? parseInt(matches[19]) : null);
+            miEnd.val(matches[21] ? parseInt(matches[21]) : null);
+            sEnd.val(matches[23] ? parseInt(matches[23]) : null);
+            oEnd.val(matches[24] ? matches[24] : null);
         }
         // By default, show time inputs only if there's an hour.
         var timeInputsStart = hStart.closest('.numeric-time-inputs');
