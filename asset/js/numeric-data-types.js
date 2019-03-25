@@ -49,7 +49,7 @@ var NumericDataTypes = {
         var offsetHour = Math.abs(Math.floor(offset / 60));
         var offsetMinute = offset % 60;
         return `${offsetSign}${offsetHour.toString().padStart(2, '0')}:${offsetMinute.toString().padStart(2, '0')}`;
-    }
+    },
     /**
      * Set a timestamp to a value.
      *
