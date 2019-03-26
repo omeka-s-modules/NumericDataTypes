@@ -207,7 +207,6 @@ var NumericDataTypes = {
         });
         // Match against ISO 8601, allowing for reduced accuracy.
         var matches = /^(-?\d{4,})(-(\d{2}))?(-(\d{2}))?(T(\d{2}))?(:(\d{2}))?(:(\d{2}))?([+-]\d{2}:\d{2})?\/(-?\d{4,})(-(\d{2}))?(-(\d{2}))?(T(\d{2}))?(:(\d{2}))?(:(\d{2}))?([+-]\d{2}:\d{2})?$/.exec(v.val());
-        console.log(matches);
         if (matches) {
             // Set existing date/time during initial load.
             yStart.val(parseInt(matches[1]));
@@ -217,7 +216,7 @@ var NumericDataTypes = {
             miStart.val(matches[9] ? parseInt(matches[9]) : null);
             sStart.val(matches[11] ? parseInt(matches[11]) : null);
             oStart.val(matches[12] ? matches[12] : null);
-            yEnd.val(parseInt(matches[12]));
+            yEnd.val(parseInt(matches[13]));
             mEnd.val(matches[15] ? parseInt(matches[15]) : null);
             dEnd.val(matches[17] ? parseInt(matches[17]) : null);
             hEnd.val(matches[19] ? parseInt(matches[19]) : null);
