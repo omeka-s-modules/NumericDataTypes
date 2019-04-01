@@ -118,6 +118,7 @@ class DateTime extends Element
 
     public function getOffsetValueOptions()
     {
+        // UTC offsets taken from https://en.wikipedia.org/wiki/List_of_UTC_time_offsets
         $offsets = [
             '-12:00',
             '-11:00',
