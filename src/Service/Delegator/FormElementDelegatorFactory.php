@@ -22,6 +22,10 @@ class FormElementDelegatorFactory implements DelegatorFactoryInterface
             \NumericDataTypes\Form\Element\Duration::class,
             'formNumericDuration'
         );
+        $formElement->addClass(
+            \NumericDataTypes\Form\Element\ConvertToNumeric::class,
+            'formNumericConvertToNumeric'
+        );
         return $formElement;
     }
 }

@@ -3,6 +3,7 @@ namespace NumericDataTypes;
 
 use Composer\Semver\Comparator;
 use Doctrine\Common\Collections\Criteria;
+use NumericDataTypes\Form\Element\ConvertToNumeric;
 use Omeka\Module\AbstractModule;
 use Zend\EventManager\Event;
 use Zend\EventManager\SharedEventManagerInterface;
@@ -104,6 +105,100 @@ ALTER TABLE numeric_data_types_duration ADD CONSTRAINT FK_E1B5FC60549213EC FOREI
                 $event->setParam('partials', $partials);
             }
         );
+        $sharedEventManager->attach(
+            'Omeka\Form\ResourceBatchUpdateForm',
+            'form.add_elements',
+            function (Event $event) {
+                $form = $event->getTarget();
+                $form->add([
+                    'type' => ConvertToNumeric::class,
+                    'name' => 'numeric_convert',
+                    'options' => [
+                        'label' => 'Convert to numeric',
+                    ],
+                ]);
+            }
+        );
+        $sharedEventManager->attach(
+            'Omeka\Api\Adapter\ItemAdapter',
+            'api.preprocess_batch_update',
+            function (Event $event) {
+                $adapter = $event->getTarget();
+                $data = $event->getParam('data');
+                $rawData = $event->getParam('request')->getContent();
+                if ($this->convertToNumericDataIsValid($rawData)) {
+                    $data['numeric_convert'] = $rawData['numeric_convert'];
+                }
+                $event->setParam('data', $data);
+            }
+        );
+    }
+
+    /**
+     * Is the passed data valid convert-to-numeric data?
+     *
+     * @param array $data
+     * return bool
+     */
+    public function convertToNumericDataIsValid(array $data)
+    {
+        $validTypes = [
+            'numeric:timestamp',
+            'numeric:interval',
+            'numeric:duration',
+            'numeric:integer',
+        ];
+        return (
+            isset($data['numeric_convert']['property'])
+            && is_numeric($data['numeric_convert']['property'])
+            && isset($data['numeric_convert']['type'])
+            && in_array($data['numeric_convert']['type'], $validTypes)
+        );
+    }
+
+    /**
+     * Convert property values to the specified numeric data type.
+     *
+     * @param Event $event
+     */
+    public function convertToNumeric(Event $event)
+    {
+        $item = $event->getParam('entity');
+        $data = $event->getParam('request')->getContent();
+
+        if (!$this->convertToNumericDataIsValid($data)) {
+            return;
+        }
+
+        $propertyId = (int) $data['numeric_convert']['property'];
+        $type = $data['numeric_convert']['type'];
+
+        $services = $this->getServiceLocator();
+        $entityManager = $services->get('Omeka\EntityManager');
+        $dataType = $services->get('Omeka\DataTypeManager')->get($type);
+        $adapter = $services->get('Omeka\ApiAdapterManager')->get('items');
+
+        // Get the property entity.
+        $dql = 'SELECT p FROM Omeka\Entity\Property p WHERE p.id = :id';
+        $property = $entityManager->createQuery($dql)
+            ->setParameter('id', $propertyId)
+            ->getOneOrNullResult();
+        if (null === $property) {
+            return; // The property doesn't exist. Do nothing.
+        }
+
+        // Only convert literal values of the specified property.
+        $criteria = Criteria::create()
+            ->where(Criteria::expr()->eq('property', $property))
+            ->andWhere(Criteria::expr()->eq('type', 'literal'));
+        $values = $item->getValues()->matching($criteria);
+        foreach ($values as $value) {
+            $valueObject = ['@value' => $value->getValue()];
+            if ($dataType->isValid($valueObject)) {
+                $value->setType($type);
+                $dataType->hydrate($valueObject, $value, $adapter);
+            }
+        }
     }
 
     /**
@@ -123,6 +218,13 @@ ALTER TABLE numeric_data_types_duration ADD CONSTRAINT FK_E1B5FC60549213EC FOREI
             // This is not a resource.
             return;
         }
+
+        // Must run the convert-to-numeric logic (if needed) immediately before
+        // saving numeric data. Cannot run this in api.hydrate.pre becuase the
+        // ValueHydrator would subsequently overwrite the values. Cannot run
+        // this in a separate api.hydrate.post becuase the conversions may
+        // happen after the numeric data is saved (sans priority).
+        $this->convertToNumeric($event);
 
         $allValues = $entity->getValues();
         foreach ($this->getNumericDataTypes() as $dataTypeName => $dataType) {
