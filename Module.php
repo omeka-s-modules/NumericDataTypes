@@ -172,6 +172,7 @@ ALTER TABLE numeric_data_types_duration ADD CONSTRAINT FK_E1B5FC60549213EC FOREI
         $entityManager = $services->get('Omeka\EntityManager');
         $dataType = $services->get('Omeka\DataTypeManager')->get($type);
         $adapter = $services->get('Omeka\ApiAdapterManager')->get($resource);
+        $logger = $services->get('Omeka\Logger');
 
         // Get the property entity.
         $dql = 'SELECT p FROM Omeka\Entity\Property p WHERE p.id = :id';
@@ -192,6 +193,12 @@ ALTER TABLE numeric_data_types_duration ADD CONSTRAINT FK_E1B5FC60549213EC FOREI
             if ($dataType->isValid($valueObject)) {
                 $value->setType($type);
                 $dataType->hydrate($valueObject, $value, $adapter);
+            } else {
+                $message = sprintf(
+                    'NumericDataTypes - invalid %s value for ID %s - %s', // @translate
+                    $type, $entity->getId(), $value->getValue()
+                );
+                $logger->notice($message);
             }
         }
     }
