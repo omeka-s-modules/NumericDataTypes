@@ -143,24 +143,26 @@ ALTER TABLE numeric_data_types_duration ADD CONSTRAINT FK_E1B5FC60549213EC FOREI
     /**
      * Convert property values to the specified numeric data type.
      *
+     * This will work for Item, ItemSet, and Media resources.
+     *
      * @param Event $event
      */
     public function convertToNumeric(Event $event)
     {
-        $data = $event->getParam('request')->getContent();
-        if (!$this->convertToNumericDataIsValid($data)) {
-            return; // This is not a convert-to-numeric request.
-        }
-
         $entity = $event->getParam('entity');
-        if ($entity instanceof \Omeka\Entity\ItemSet) {
-            $resource = 'item_sets';
-        } elseif ($entity instanceof \Omeka\Entity\Item) {
+        if ($entity instanceof \Omeka\Entity\Item) {
             $resource = 'items';
+        } elseif ($entity instanceof \Omeka\Entity\ItemSet) {
+            $resource = 'item_sets';
         } elseif ($entity instanceof \Omeka\Entity\Media) {
             $resource = 'media';
         } else {
             return; // This is not a resource entity.
+        }
+
+        $data = $event->getParam('request')->getContent();
+        if (!$this->convertToNumericDataIsValid($data)) {
+            return; // This is not a convert-to-numeric request.
         }
 
         $propertyId = (int) $data['numeric_convert']['property'];
@@ -201,6 +203,8 @@ ALTER TABLE numeric_data_types_duration ADD CONSTRAINT FK_E1B5FC60549213EC FOREI
      * update operations for a resource (item, item set, media). We do this as
      * an easy way to ensure that the numbers in the number tables are in sync
      * with the numbers in the value table.
+     *
+     * This will work for Item, ItemSet, and Media resources.
      *
      * @param Event $event
      */
