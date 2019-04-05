@@ -147,15 +147,20 @@ ALTER TABLE numeric_data_types_duration ADD CONSTRAINT FK_E1B5FC60549213EC FOREI
      */
     public function convertToNumeric(Event $event)
     {
-        $entity = $event->getParam('entity');
-        if (!$entity instanceof \Omeka\Entity\Resource) {
-            // This is not a resource.
-            return;
-        }
-
         $data = $event->getParam('request')->getContent();
         if (!$this->convertToNumericDataIsValid($data)) {
-            return;
+            return; // This is not a convert-to-numeric request.
+        }
+
+        $entity = $event->getParam('entity');
+        if ($entity instanceof \Omeka\Entity\ItemSet) {
+            $resource = 'item_sets';
+        } elseif ($entity instanceof \Omeka\Entity\Item) {
+            $resource = 'items';
+        } elseif ($entity instanceof \Omeka\Entity\Media) {
+            $resource = 'media';
+        } else {
+            return; // This is not a resource entity.
         }
 
         $propertyId = (int) $data['numeric_convert']['property'];
@@ -164,7 +169,7 @@ ALTER TABLE numeric_data_types_duration ADD CONSTRAINT FK_E1B5FC60549213EC FOREI
         $services = $this->getServiceLocator();
         $entityManager = $services->get('Omeka\EntityManager');
         $dataType = $services->get('Omeka\DataTypeManager')->get($type);
-        $adapter = $services->get('Omeka\ApiAdapterManager')->get('items');
+        $adapter = $services->get('Omeka\ApiAdapterManager')->get($resource);
 
         // Get the property entity.
         $dql = 'SELECT p FROM Omeka\Entity\Property p WHERE p.id = :id';
@@ -203,13 +208,14 @@ ALTER TABLE numeric_data_types_duration ADD CONSTRAINT FK_E1B5FC60549213EC FOREI
     {
         $entity = $event->getParam('entity');
         if (!$entity instanceof \Omeka\Entity\Resource) {
-            // This is not a resource.
-            return;
+            return; // This is not a resource entity.
         }
 
         $allValues = $entity->getValues();
         foreach ($this->getNumericDataTypes() as $dataTypeName => $dataType) {
-            $criteria = Criteria::create()->where(Criteria::expr()->eq('type', $dataTypeName));
+            $criteria = Criteria::create()
+                ->where(Criteria::expr()
+                ->eq('type', $dataTypeName));
             $matchingValues = $allValues->matching($criteria);
             if (!$matchingValues) {
                 // This resource has no number values of this type.
@@ -220,7 +226,10 @@ ALTER TABLE numeric_data_types_duration ADD CONSTRAINT FK_E1B5FC60549213EC FOREI
             $existingNumbers = [];
 
             if ($entity->getId()) {
-                $dql = sprintf('SELECT n FROM %s n WHERE n.resource = :resource', $dataType->getEntityClass());
+                $dql = sprintf(
+                    'SELECT n FROM %s n WHERE n.resource = :resource',
+                    $dataType->getEntityClass()
+                );
                 $query = $em->createQuery($dql);
                 $query->setParameter('resource', $entity);
                 $existingNumbers = $query->getResult();
@@ -354,7 +363,7 @@ ALTER TABLE numeric_data_types_duration ADD CONSTRAINT FK_E1B5FC60549213EC FOREI
     }
 
     /**
-     * Is the passed data valid convert-to-numeric data?
+     * Does the passed data contain valid convert-to-numeric data?
      *
      * @param array $data
      * return bool
