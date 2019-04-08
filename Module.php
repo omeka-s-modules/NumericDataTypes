@@ -119,9 +119,6 @@ ALTER TABLE numeric_data_types_duration ADD CONSTRAINT FK_E1B5FC60549213EC FOREI
                 $form->add([
                     'type' => ConvertToNumeric::class,
                     'name' => 'numeric_convert',
-                    'options' => [
-                        'label' => 'Convert to numeric',
-                    ],
                 ]);
             }
         );

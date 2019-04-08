@@ -18,6 +18,7 @@ class ConvertToNumeric extends Element
 
     public function init()
     {
+        $this->setLabel('Convert to numeric'); // @translate
         $this->propertyElement = $this->formElements->get(PropertySelect::class)
             ->setName('numeric_convert[property]')
             ->setEmptyOption('Select property') // @translate
