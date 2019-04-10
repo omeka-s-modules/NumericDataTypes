@@ -35,6 +35,7 @@ class Interval extends AbstractHelper
             %s
             %s
             %s
+            %s
         </div>
     </div>
     <div class="numeric-datetime-inputs numeric-interval-end">
@@ -46,6 +47,7 @@ class Interval extends AbstractHelper
             <a href="#" class="numeric-toggle-time">%s</a>
         </div>
         <div class="numeric-time-inputs">
+            %s
             %s
             %s
             %s
@@ -64,6 +66,7 @@ HTML;
             $view->formSelect($element->getHourElement()),
             $view->formSelect($element->getMinuteElement()),
             $view->formSelect($element->getSecondElement()),
+            $view->formSelect($element->getOffsetElement()),
             $view->translate('End:'),
             $view->formNumber($element->getYearElement()),
             $view->formSelect($element->getMonthElement()),
@@ -71,7 +74,8 @@ HTML;
             $view->translate('time'),
             $view->formSelect($element->getHourElement()),
             $view->formSelect($element->getMinuteElement()),
-            $view->formSelect($element->getSecondElement())
+            $view->formSelect($element->getSecondElement()),
+            $view->formSelect($element->getOffsetElement())
         );
     }
 }

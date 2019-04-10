@@ -34,6 +34,7 @@ class Timestamp extends AbstractHelper
             %s
             %s
             %s
+            %s
         </div>
     </div>
 </div>
@@ -47,7 +48,8 @@ HTML;
             $view->translate('time'),
             $view->formSelect($element->getHourElement()),
             $view->formSelect($element->getMinuteElement()),
-            $view->formSelect($element->getSecondElement())
+            $view->formSelect($element->getSecondElement()),
+            $view->formSelect($element->getOffsetElement())
         );
     }
 }
