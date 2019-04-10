@@ -39,6 +39,9 @@ class Integer extends AbstractDataType
 
     public function getJsonLd(ValueRepresentation $value)
     {
+        if (!$this->isValid(['@value' => $value->value()])) {
+            return ['@value' => $value->value()];
+        }
         return [
             '@value' => (int) $value->value(),
             '@type' => 'o-module-numeric-xsd:integer',
@@ -69,6 +72,9 @@ class Integer extends AbstractDataType
 
     public function render(PhpRenderer $view, ValueRepresentation $value)
     {
+        if (!$this->isValid(['@value' => $value->value()])) {
+            return $value->value();
+        }
         return number_format($value->value());
     }
 

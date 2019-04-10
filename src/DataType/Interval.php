@@ -88,6 +88,9 @@ class Interval extends AbstractDateTimeDataType
 
     public function render(PhpRenderer $view, ValueRepresentation $value)
     {
+        if (!$this->isValid(['@value' => $value->value()])) {
+            return $value->value();
+        }
         list($intervalStart, $intervalEnd) = explode('/', $value->value());
         $dateStart = $this->getDateTimeFromValue($intervalStart);
         $dateEnd = $this->getDateTimeFromValue($intervalEnd, false);

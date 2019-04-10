@@ -24,6 +24,9 @@ class Timestamp extends AbstractDateTimeDataType
 
     public function getJsonLd(ValueRepresentation $value)
     {
+        if (!$this->isValid(['@value' => $value->value()])) {
+            return ['@value' => $value->value()];
+        }
         $date = $this->getDateTimeFromValue($value->value());
         $type = null;
         if (isset($date['month']) && isset($date['day']) && isset($date['hour']) && isset($date['minute']) && isset($date['second']) && isset($date['offset'])) {
@@ -77,6 +80,9 @@ class Timestamp extends AbstractDateTimeDataType
 
     public function render(PhpRenderer $view, ValueRepresentation $value)
     {
+        if (!$this->isValid(['@value' => $value->value()])) {
+            return $value->value();
+        }
         // Render the datetime, allowing for reduced accuracy.
         $date = $this->getDateTimeFromValue($value->value());
         return $date['date']->format($date['format_render']);

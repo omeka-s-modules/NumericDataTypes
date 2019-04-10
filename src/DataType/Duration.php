@@ -66,6 +66,9 @@ class Duration extends AbstractDataType
 
     public function render(PhpRenderer $view, ValueRepresentation $value)
     {
+        if (!$this->isValid(['@value' => $value->value()])) {
+            return $value->value();
+        }
         $duration = $this->getDurationFromValue($value->value());
         $output = [];
         if (null !== $duration['years']) {
@@ -103,6 +106,9 @@ class Duration extends AbstractDataType
 
     public function getJsonLd(ValueRepresentation $value)
     {
+        if (!$this->isValid(['@value' => $value->value()])) {
+            return ['@value' => $value->value()];
+        }
         return [
             '@value' => $value->value(),
             '@type' => 'http://www.w3.org/2001/XMLSchema#duration',

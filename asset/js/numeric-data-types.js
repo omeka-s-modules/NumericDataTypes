@@ -171,6 +171,9 @@ var NumericDataTypes = {
             mi.val(matches[9] ? parseInt(matches[9]) : null);
             s.val(matches[11] ? parseInt(matches[11]) : null);
             o.val(matches[12] ? matches[12] : null);
+        } else if ('' !== v.val()) {
+            container.find('.numeric-timestamp')
+                .prepend(`<div style="color: red;">Invalid value: ${v.val()}</div>`);
         }
         // By default, show time inputs only if there's an hour.
         var timeInputs = h.closest('.numeric-time-inputs');
@@ -223,6 +226,9 @@ var NumericDataTypes = {
             miEnd.val(matches[21] ? parseInt(matches[21]) : null);
             sEnd.val(matches[23] ? parseInt(matches[23]) : null);
             oEnd.val(matches[24] ? matches[24] : null);
+        } else if ('' !== v.val()) {
+            container.find('.numeric-interval')
+                .prepend(`<div style="color: red;">Invalid value: ${v.val()}</div>`);
         }
         // By default, show time inputs only if there's an hour.
         var timeInputsStart = hStart.closest('.numeric-time-inputs');
@@ -261,6 +267,9 @@ var NumericDataTypes = {
             h.val(matches[5] ? parseInt(matches[5].slice(0, -1)) : null);
             i.val(matches[6] ? parseInt(matches[6].slice(0, -1)) : null);
             s.val(matches[7] ? parseInt(matches[7].slice(0, -1)) : null);
+        } else if ('' !== v.val()) {
+            container.find('.numeric-duration')
+                .prepend(`<div style="color: red;">Invalid value: ${v.val()}</div>`);
         }
         // By default, show time inputs only if there's an hour.
         var timeInputs = h.closest('.numeric-time-inputs');
