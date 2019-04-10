@@ -51,7 +51,7 @@ class Integer extends AbstractDataType
     public function form(PhpRenderer $view)
     {
         $element = new IntegerElement('numeric-integer-value');
-        $element->setAttribute('data-value-key', '@value');
+        $element->getValueElement()->setAttribute('data-value-key', '@value');
         return $view->formElement($element);
     }
 

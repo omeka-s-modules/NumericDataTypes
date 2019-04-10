@@ -274,6 +274,29 @@ var NumericDataTypes = {
         // By default, show time inputs only if there's an hour.
         var timeInputs = h.closest('.numeric-time-inputs');
         h.val() ? timeInputs.show() : timeInputs.hide();
+    },
+    /**
+     * Enable the integer control.
+     *
+     * @param container
+     */
+    enableInteger : function(container) {
+        var v = container.find('.numeric-integer-value');
+        var numericContainer = v.closest('.numeric-integer');
+        if (numericContainer.hasClass('numeric-enabled')) {
+            return; // Enable only once.
+        }
+        numericContainer.addClass('numeric-enabled');
+        var int = container.find('.numeric-integer-integer');
+        int.on('input', function(e) {
+            v.val(int.val());
+        });
+        if ($.isNumeric(v.val())) {
+            int.val(v.val());
+        } else if ('' !== v.val()) {
+            container.find('.numeric-integer')
+                .prepend(`<div style="color: red;">Invalid value: ${v.val()}</div>`);
+        }
     }
 };
 
@@ -288,6 +311,9 @@ $(document).on('o:prepare-value', function(e, type, value) {
     if ('numeric:duration' === type) {
         NumericDataTypes.enableDuration(value);
     }
+    if ('numeric:integer' === type) {
+        NumericDataTypes.enableInteger(value);
+    }
 });
 
 $(function() {
@@ -300,6 +326,9 @@ $(function() {
     });
     $(document).find('.numeric-duration:visible').each(function() {
         NumericDataTypes.enableDuration($(this));
+    });
+    $(document).find('.numeric-integer:visible').each(function() {
+        NumericDataTypes.enableInteger($(this));
     });
     // Toggle visibility of time inputs.
     $(document).find('.numeric-toggle-time').on('click', function(e) {
