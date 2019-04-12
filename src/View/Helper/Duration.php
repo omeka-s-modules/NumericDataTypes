@@ -22,6 +22,7 @@ class Duration extends AbstractHelper
         );
         $html = <<<HTML
 <div class="numeric-duration">
+    <div class="error invalid-value" data-invalid-message="%s" data-custom-validity="%s"></div>
     %s
     <div class="numeric-datetime-inputs">
         <div class="numeric-date-inputs">
@@ -40,6 +41,8 @@ class Duration extends AbstractHelper
 HTML;
         return sprintf(
             $html,
+            $view->escapeHtml($view->translate('Invalid value: %s')),
+            $view->escapeHtml($view->translate('Value must be a duration')),
             $view->formHidden($element->getValueElement()),
             $view->formNumber($element->getYearsElement()),
             $view->formNumber($element->getMonthsElement()),

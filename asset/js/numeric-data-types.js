@@ -173,9 +173,9 @@ var NumericDataTypes = {
             s.val(matches[11] ? parseInt(matches[11]) : null);
             o.val(matches[12] ? matches[12] : null);
         } else if ('' !== v.val()) {
-            y[0].setCustomValidity('Value must be a datetime');
-            container.find('.numeric-timestamp')
-                .prepend(`<div class="error">Invalid value: ${v.val()}</div>`);
+            var invalidValue = numericContainer.find('.invalid-value');
+            y[0].setCustomValidity(invalidValue.data('customValidity'));
+            invalidValue.text(invalidValue.data('invalidMessage').replace('%s', v.val()));
         }
         // By default, show time inputs only if there's an hour.
         var timeInputs = h.closest('.numeric-time-inputs');
@@ -230,9 +230,9 @@ var NumericDataTypes = {
             sEnd.val(matches[23] ? parseInt(matches[23]) : null);
             oEnd.val(matches[24] ? matches[24] : null);
         } else if ('' !== v.val()) {
-            yStart[0].setCustomValidity('Value must be an interval');
-            container.find('.numeric-interval')
-                .prepend(`<div class="error">Invalid value: ${v.val()}</div>`);
+            var invalidValue = numericContainer.find('.invalid-value');
+            yStart[0].setCustomValidity(invalidValue.data('customValidity'));
+            invalidValue.text(invalidValue.data('invalidMessage').replace('%s', v.val()));
         }
         // By default, show time inputs only if there's an hour.
         var timeInputsStart = hStart.closest('.numeric-time-inputs');
@@ -273,9 +273,9 @@ var NumericDataTypes = {
             i.val(matches[6] ? parseInt(matches[6].slice(0, -1)) : null);
             s.val(matches[7] ? parseInt(matches[7].slice(0, -1)) : null);
         } else if ('' !== v.val()) {
-            y[0].setCustomValidity('Value must be a duration');
-            container.find('.numeric-duration')
-                .prepend(`<div class="error">Invalid value: ${v.val()}</div>`);
+            var invalidValue = numericContainer.find('.invalid-value');
+            y[0].setCustomValidity(invalidValue.data('customValidity'));
+            invalidValue.text(invalidValue.data('invalidMessage').replace('%s', v.val()));
         }
         // By default, show time inputs only if there's an hour.
         var timeInputs = h.closest('.numeric-time-inputs');
@@ -301,9 +301,9 @@ var NumericDataTypes = {
         if ($.isNumeric(v.val())) {
             int.val(v.val());
         } else if ('' !== v.val()) {
-            int[0].setCustomValidity('Value must be an integer');
-            container.find('.numeric-integer')
-                .prepend(`<div class="error">Invalid value: ${v.val()}</div>`);
+            var invalidValue = numericContainer.find('.invalid-value');
+            int[0].setCustomValidity(invalidValue.data('customValidity'));
+            invalidValue.text(invalidValue.data('invalidMessage').replace('%s', v.val()));
         }
     }
 };

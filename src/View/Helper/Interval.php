@@ -22,6 +22,7 @@ class Interval extends AbstractHelper
         );
         $html = <<<HTML
 <div class="numeric-interval">
+    <div class="error invalid-value" data-invalid-message="%s" data-custom-validity="%s"></div>
     %s
     <div class="numeric-datetime-inputs numeric-interval-start">
         <span>%s</span>
@@ -57,6 +58,8 @@ class Interval extends AbstractHelper
 HTML;
         return sprintf(
             $html,
+            $view->escapeHtml($view->translate('Invalid value: %s')),
+            $view->escapeHtml($view->translate('Value must be a interval')),
             $view->formHidden($element->getValueElement()),
             $view->translate('Start:'),
             $view->formNumber($element->getYearElement()),
