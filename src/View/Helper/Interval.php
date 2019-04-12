@@ -13,73 +13,7 @@ class Interval extends AbstractHelper
 
     public function render(ElementInterface $element)
     {
-        $view = $this->getView();
-        $view->headLink()->appendStylesheet(
-            $view->assetUrl('css/numeric-data-types.css', 'NumericDataTypes')
-        );
-        $view->headScript()->appendFile(
-            $view->assetUrl('js/numeric-data-types.js', 'NumericDataTypes')
-        );
-        $html = <<<HTML
-<div class="numeric-interval">
-    <div class="error invalid-value" data-invalid-message="%s" data-custom-validity="%s"></div>
-    %s
-    <div class="numeric-datetime-inputs numeric-interval-start">
-        <span>%s</span>
-        <div class="numeric-date-inputs">
-            %s
-            %s
-            %s
-            <a href="#" class="numeric-toggle-time">%s</a>
-        </div>
-        <div class="numeric-time-inputs">
-            %s
-            %s
-            %s
-            %s
-        </div>
-    </div>
-    <div class="numeric-datetime-inputs numeric-interval-end">
-        <span>%s</span>
-        <div class="numeric-date-inputs">
-            %s
-            %s
-            %s
-            <a href="#" class="numeric-toggle-time">%s</a>
-        </div>
-        <div class="numeric-time-inputs">
-            %s
-            %s
-            %s
-            %s
-        </div>
-    </div>
-</div>
-HTML;
-        return sprintf(
-            $html,
-            $view->escapeHtml($view->translate('Invalid value: %s')),
-            $view->escapeHtml($view->translate('Value must be a interval')),
-            $view->formHidden($element->getValueElement()),
-            $view->translate('Start:'),
-            $view->formNumber($element->getYearElement()),
-            $view->formSelect($element->getMonthElement()),
-            $view->formSelect($element->getDayElement()),
-            $view->translate('time'),
-            $view->formSelect($element->getHourElement()),
-            $view->formSelect($element->getMinuteElement()),
-            $view->formSelect($element->getSecondElement()),
-            $view->formSelect($element->getOffsetElement()),
-            $view->translate('End:'),
-            $view->formNumber($element->getYearElement()),
-            $view->formSelect($element->getMonthElement()),
-            $view->formSelect($element->getDayElement()),
-            $view->translate('time'),
-            $view->formSelect($element->getHourElement()),
-            $view->formSelect($element->getMinuteElement()),
-            $view->formSelect($element->getSecondElement()),
-            $view->formSelect($element->getOffsetElement())
-        );
+        return $this->getView()->partial('common/numeric-interval', ['element' => $element]);
     }
 }
 

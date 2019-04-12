@@ -1,0 +1,41 @@
+<?php
+$this->headLink()->appendStylesheet($this->assetUrl('css/numeric-data-types.css','NumericDataTypes'));
+$this->headScript()->appendFile($this->assetUrl('js/numeric-data-types.js', 'NumericDataTypes'));
+?>
+<div class="numeric-interval">
+    <div class="error invalid-value"
+        data-invalid-message="<?php echo $this->escapeHtml($this->translate('Invalid value: %s')); ?>"
+        data-custom-validity="<?php echo $this->escapeHtml($this->translate('Value must be an interval')); ?>">
+    </div>
+    <?php echo $this->formHidden($element->getValueElement()); ?>
+    <div class="numeric-datetime-inputs numeric-interval-start">
+        <span><?php echo $this->translate('Start:'); ?></span>
+        <div class="numeric-date-inputs">
+            <?php echo $this->formNumber($element->getYearElement()); ?>
+            <?php echo $this->formSelect($element->getMonthElement()); ?>
+            <?php echo $this->formSelect($element->getDayElement()); ?>
+            <label class="numeric-toggle-time button" aria-title="<?php echo $this->translate('Time'); ?>" title="<?php echo $this->translate('Time'); ?>"><input type="checkbox" name="numeric-toggle-time-checkbox"/></label>
+        </div>
+        <div class="numeric-time-inputs">
+            <?php echo $this->formSelect($element->getHourElement()); ?>
+            <?php echo $this->formSelect($element->getMinuteElement()); ?>
+            <?php echo $this->formSelect($element->getSecondElement()); ?>
+            <?php echo $this->formSelect($element->getOffsetElement()); ?>
+        </div>
+    </div>
+    <div class="numeric-datetime-inputs numeric-interval-end">
+        <span><?php echo $this->translate('End:'); ?></span>
+        <div class="numeric-date-inputs">
+            <?php echo $this->formNumber($element->getYearElement()); ?>
+            <?php echo $this->formSelect($element->getMonthElement()); ?>
+            <?php echo $this->formSelect($element->getDayElement()); ?>
+            <label class="numeric-toggle-time button" aria-title="<?php echo $this->translate('Time'); ?>" title="<?php echo $this->translate('Time'); ?>"><input type="checkbox" name="numeric-toggle-time-checkbox"/></label>
+        </div>
+        <div class="numeric-time-inputs">
+            <?php echo $this->formSelect($element->getHourElement()); ?>
+            <?php echo $this->formSelect($element->getMinuteElement()); ?>
+            <?php echo $this->formSelect($element->getSecondElement()); ?>
+            <?php echo $this->formSelect($element->getOffsetElement()); ?>
+        </div>
+    </div>
+</div>
