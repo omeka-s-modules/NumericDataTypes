@@ -293,8 +293,7 @@ $(function() {
         NumericDataTypes.enableDuration($(this));
     });
     // Toggle visibility of time inputs.
-    $(document).find('.numeric-toggle-time').on('click', function(e) {
-        e.preventDefault();
+    $(document).find('.numeric-toggle-time input[type="checkbox"]').on('change', function(e) {
         $(this).closest('.numeric-datetime-inputs').find('.numeric-time-inputs').toggle();
     });
 });

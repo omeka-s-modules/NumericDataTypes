@@ -13,43 +13,6 @@ class Timestamp extends AbstractHelper
 
     public function render(ElementInterface $element)
     {
-        $view = $this->getView();
-        $view->headLink()->appendStylesheet(
-            $view->assetUrl('css/numeric-data-types.css', 'NumericDataTypes')
-        );
-        $view->headScript()->appendFile(
-            $view->assetUrl('js/numeric-data-types.js', 'NumericDataTypes')
-        );
-        $html = <<<HTML
-<div class="numeric-timestamp">
-    %s
-    <div class="numeric-datetime-inputs">
-        <div class="numeric-date-inputs">
-            %s
-            %s
-            %s
-            <a href="#" class="numeric-toggle-time">%s</a>
-        </div>
-        <div class="numeric-time-inputs">
-            %s
-            %s
-            %s
-            %s
-        </div>
-    </div>
-</div>
-HTML;
-        return sprintf(
-            $html,
-            $view->formHidden($element->getValueElement()),
-            $view->formNumber($element->getYearElement()),
-            $view->formSelect($element->getMonthElement()),
-            $view->formSelect($element->getDayElement()),
-            $view->translate('time'),
-            $view->formSelect($element->getHourElement()),
-            $view->formSelect($element->getMinuteElement()),
-            $view->formSelect($element->getSecondElement()),
-            $view->formSelect($element->getOffsetElement())
-        );
+        return $this->getView()->partial('common/timestamp', ['element' => $element]);
     }
 }
