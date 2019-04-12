@@ -13,6 +13,6 @@ class Timestamp extends AbstractHelper
 
     public function render(ElementInterface $element)
     {
-        return $this->getView()->partial('common/timestamp', ['element' => $element]);
+        return $this->getView()->partial('common/numeric-timestamp', ['element' => $element]);
     }
 }

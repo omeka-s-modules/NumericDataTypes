@@ -36,6 +36,7 @@ return [
             'formNumericTimestamp' =>  NumericDataTypes\View\Helper\Timestamp::class,
             'formNumericInterval' =>  NumericDataTypes\View\Helper\Interval::class,
             'formNumericDuration' =>  NumericDataTypes\View\Helper\Duration::class,
+            'formNumericInteger' =>  NumericDataTypes\View\Helper\Integer::class,
             'formNumericConvertToNumeric' =>  NumericDataTypes\View\Helper\ConvertToNumeric::class,
         ],
         'factories' => [

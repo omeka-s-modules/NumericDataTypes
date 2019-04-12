@@ -3,6 +3,10 @@ $this->headLink()->appendStylesheet($this->assetUrl('css/numeric-data-types.css'
 $this->headScript()->appendFile($this->assetUrl('js/numeric-data-types.js', 'NumericDataTypes'));
 ?>
 <div class="numeric-timestamp">
+    <div class="error invalid-value"
+        data-invalid-message="<?php echo $this->escapeHtml($this->translate('Invalid value: %s')); ?>"
+        data-custom-validity="<?php echo $this->escapeHtml($this->translate('Value must be a datetime')); ?>">
+    </div>
     <?php echo $this->formHidden($element->getValueElement()); ?>
     <div class="numeric-datetime-inputs">
         <div class="numeric-date-inputs">
@@ -15,6 +19,7 @@ $this->headScript()->appendFile($this->assetUrl('js/numeric-data-types.js', 'Num
             <?php echo $this->formSelect($element->getHourElement()); ?>
             <?php echo $this->formSelect($element->getMinuteElement()); ?>
             <?php echo $this->formSelect($element->getSecondElement()); ?>
+            <?php echo $this->formSelect($element->getOffsetElement()); ?>
         </div>
     </div>
 </div>
