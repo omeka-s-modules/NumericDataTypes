@@ -158,6 +158,7 @@ var NumericDataTypes = {
         var s = container.find('.numeric-datetime-second');
         var o = container.find('.numeric-datetime-offset');
         y.add(m).add(d).add(h).add(mi).add(s).add(o).on('input', function(e) {
+            y[0].setCustomValidity('');
             NumericDataTypes.setTimestampValue(v, y, m, d, h, mi, s, o);
         });
         // Match against ISO 8601, allowing for reduced accuracy.
@@ -172,8 +173,9 @@ var NumericDataTypes = {
             s.val(matches[11] ? parseInt(matches[11]) : null);
             o.val(matches[12] ? matches[12] : null);
         } else if ('' !== v.val()) {
+            y[0].setCustomValidity('Value must be a datetime');
             container.find('.numeric-timestamp')
-                .prepend(`<div style="color: red;">Invalid value: ${v.val()}</div>`);
+                .prepend(`<div class="error">Invalid value: ${v.val()}</div>`);
         }
         // By default, show time inputs only if there's an hour.
         var timeInputs = h.closest('.numeric-time-inputs');
@@ -206,6 +208,7 @@ var NumericDataTypes = {
         var sEnd = container.find('.numeric-interval-end .numeric-datetime-second');
         var oEnd = container.find('.numeric-interval-end .numeric-datetime-offset');
         yStart.add(mStart).add(dStart).add(hStart).add(miStart).add(sStart).add(oStart).add(yEnd).add(mEnd).add(dEnd).add(hEnd).add(miEnd).add(sEnd).add(oEnd).on('input', function(e) {
+            yStart[0].setCustomValidity('');
             NumericDataTypes.setIntervalValue(v, yStart, mStart, dStart, hStart, miStart, sStart, oStart, yEnd, mEnd, dEnd, hEnd, miEnd, sEnd, oEnd);
         });
         // Match against ISO 8601, allowing for reduced accuracy.
@@ -227,8 +230,9 @@ var NumericDataTypes = {
             sEnd.val(matches[23] ? parseInt(matches[23]) : null);
             oEnd.val(matches[24] ? matches[24] : null);
         } else if ('' !== v.val()) {
+            yStart[0].setCustomValidity('Value must be an interval');
             container.find('.numeric-interval')
-                .prepend(`<div style="color: red;">Invalid value: ${v.val()}</div>`);
+                .prepend(`<div class="error">Invalid value: ${v.val()}</div>`);
         }
         // By default, show time inputs only if there's an hour.
         var timeInputsStart = hStart.closest('.numeric-time-inputs');
@@ -255,6 +259,7 @@ var NumericDataTypes = {
         var i = container.find('.numeric-duration-minutes');
         var s = container.find('.numeric-duration-seconds');
         y.add(m).add(d).add(h).add(i).add(s).on('input', function(e) {
+            y[0].setCustomValidity('');
             NumericDataTypes.setDurationValue(v, y, m, d, h, i, s);
         });
         // Match against ISO 8601, allowing for reduced precision.
@@ -268,8 +273,9 @@ var NumericDataTypes = {
             i.val(matches[6] ? parseInt(matches[6].slice(0, -1)) : null);
             s.val(matches[7] ? parseInt(matches[7].slice(0, -1)) : null);
         } else if ('' !== v.val()) {
+            y[0].setCustomValidity('Value must be a duration');
             container.find('.numeric-duration')
-                .prepend(`<div style="color: red;">Invalid value: ${v.val()}</div>`);
+                .prepend(`<div class="error">Invalid value: ${v.val()}</div>`);
         }
         // By default, show time inputs only if there's an hour.
         var timeInputs = h.closest('.numeric-time-inputs');
@@ -289,13 +295,15 @@ var NumericDataTypes = {
         numericContainer.addClass('numeric-enabled');
         var int = container.find('.numeric-integer-integer');
         int.on('input', function(e) {
+            int[0].setCustomValidity('');
             v.val(int.val());
         });
         if ($.isNumeric(v.val())) {
             int.val(v.val());
         } else if ('' !== v.val()) {
+            int[0].setCustomValidity('Value must be an integer');
             container.find('.numeric-integer')
-                .prepend(`<div style="color: red;">Invalid value: ${v.val()}</div>`);
+                .prepend(`<div class="error">Invalid value: ${v.val()}</div>`);
         }
     }
 };
