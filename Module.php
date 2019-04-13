@@ -378,12 +378,7 @@ ALTER TABLE numeric_data_types_duration ADD CONSTRAINT FK_E1B5FC60549213EC FOREI
      */
     public function convertToNumericDataIsValid(array $data)
     {
-        $validTypes = [
-            'numeric:timestamp',
-            'numeric:interval',
-            'numeric:duration',
-            'numeric:integer',
-        ];
+        $validTypes = array_keys($this->getNumericDataTypes());
         return (
             isset($data['numeric_convert']['property'])
             && is_numeric($data['numeric_convert']['property'])
