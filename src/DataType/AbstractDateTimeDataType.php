@@ -42,7 +42,7 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
             return self::$dateTimes[$value][$defaultFirst ? 'first' : 'last'];
         }
         // Match against ISO 8601, allowing for reduced accuracy.
-        $isMatch = preg_match('/^(?<year>-?\d{4,})(?:-(?<month>\d{2}))?(?:-(?<day>\d{2}))?(?:T(?<hour>\d{2}))?(?::(?<minute>\d{2}))?(?::(?<second>\d{2}))?(?<offset>(?<ofset_sign>[+-])(?<offset_hour>\d{2}):(?<offset_minute>\d{2}))?$/', $value, $matches);
+        $isMatch = preg_match('/^(?<year>-?\d{4,})(?:-(?<month>\d{2}))?(?:-(?<day>\d{2}))?(?:T(?<hour>\d{2}))?(?::(?<minute>\d{2}))?(?::(?<second>\d{2}))?(?<offset>(?<offset_sign>[+-])(?<offset_hour>\d{2}):(?<offset_minute>\d{2}))?$/', $value, $matches);
         if (!$isMatch) {
             throw new \InvalidArgumentException('Invalid datetime string, must use ISO 8601');
         }
