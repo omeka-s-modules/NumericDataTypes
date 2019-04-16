@@ -41,7 +41,11 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
         if (isset(self::$dateTimes[$value][$defaultFirst ? 'first' : 'last'])) {
             return self::$dateTimes[$value][$defaultFirst ? 'first' : 'last'];
         }
-        // Match against ISO 8601, allowing for reduced accuracy.
+        // Match against ISO 8601, allowing for reduced accuracy, but first
+        // remove the trailing "Z" if it exists. The Z timezone designator is
+        // redundant because we already use Coordinated Universal Time (UTC) if
+        // no offset is provided.
+        $value = rtrim($value, 'Z');
         $isMatch = preg_match('/^(?<year>-?\d{4,})(?:-(?<month>\d{2}))?(?:-(?<day>\d{2}))?(?:T(?<hour>\d{2}))?(?::(?<minute>\d{2}))?(?::(?<second>\d{2}))?(?<offset>(?<offset_sign>[+-])(?<offset_hour>\d{2}):(?<offset_minute>\d{2}))?$/', $value, $matches);
         if (!$isMatch) {
             throw new \InvalidArgumentException('Invalid datetime string, must use ISO 8601');
