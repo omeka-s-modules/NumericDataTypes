@@ -69,11 +69,14 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
         // Coordinated Universal Time (UTC) if no offset is provided.
         $value = rtrim($value, 'Z');
 
-        // Match against ISO 8601, allowing for reduced accuracy.
+        // Match against ISO 8601, allowing for reduced accuracy. In lieu of a
+        // single regex, we parse the string into date, time, and offset
+        // segments and then into their respective components. Ideally we'd use
+        // a single regex for this purpose, but we haven't found one that is
+        // sufficiently comprehensive and foolproof.
         $dateMatches = [];
         $timeMatches = [];
         $offsetMatches = [];
-
         $dateTimeValues = preg_split('/(T)/', $value, null, PREG_SPLIT_DELIM_CAPTURE);
         if (3 < count($dateTimeValues)) {
             // More than one "T" found.
@@ -141,21 +144,21 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
         // Set the normalized datetime components. Each component not included
         // in the passed value is given a default value.
         $dateTime['month_normalized'] = isset($dateTime['month'])
-            ? $dateTime['month'] : ($defaultFirst ? 1 : 12); // default month
+            ? $dateTime['month'] : ($defaultFirst ? 1 : 12);
         // The last day takes special handling, as it depends on year/month.
         $dateTime['day_normalized'] = isset($dateTime['day'])
             ? $dateTime['day']
-            : ($defaultFirst ? 1 : self::getLastDay($dateTime['year'], $dateTime['month_normalized'])); // default day
+            : ($defaultFirst ? 1 : self::getLastDay($dateTime['year'], $dateTime['month_normalized']));
         $dateTime['hour_normalized'] = isset($dateTime['hour'])
-            ? $dateTime['hour'] : ($defaultFirst ? 0 : 23); // default hour
+            ? $dateTime['hour'] : ($defaultFirst ? 0 : 23);
         $dateTime['minute_normalized'] = isset($dateTime['minute'])
-            ? $dateTime['minute'] : ($defaultFirst ? 0 : 59); // default minute
+            ? $dateTime['minute'] : ($defaultFirst ? 0 : 59);
         $dateTime['second_normalized'] = isset($dateTime['second'])
-            ? $dateTime['second'] : ($defaultFirst ? 0 : 59); // default second
+            ? $dateTime['second'] : ($defaultFirst ? 0 : 59);
         $dateTime['offset_hour_normalized'] = isset($dateTime['offset_hour'])
-            ? $dateTime['offset_hour'] : 0; // default hour offset
+            ? $dateTime['offset_hour'] : 0;
         $dateTime['offset_minute_normalized'] = isset($dateTime['offset_minute'])
-            ? $dateTime['offset_minute'] : 0; // default hour offset
+            ? $dateTime['offset_minute'] : 0;
 
 
         if ((self::YEAR_MIN > $dateTime['year']) || (self::YEAR_MAX < $dateTime['year'])) {
