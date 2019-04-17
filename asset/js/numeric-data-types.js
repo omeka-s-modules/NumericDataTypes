@@ -22,6 +22,10 @@ var NumericDataTypes = {
         var offset = o.val();
         if (year && month && day && hour && minute && second && offset) {
             return `${yearSign}${year.padStart(4, '0')}-${month.padStart(2, '0')}-${day.padStart(2, '0')}T${hour.padStart(2, '0')}:${minute.padStart(2, '0')}:${second.padStart(2, '0')}${offset}`;
+        } else if (year && month && day && hour && minute && offset) {
+            return `${yearSign}${year.padStart(4, '0')}-${month.padStart(2, '0')}-${day.padStart(2, '0')}T${hour.padStart(2, '0')}:${minute.padStart(2, '0')}${offset}`;
+        } else if (year && month && day && hour && offset) {
+            return `${yearSign}${year.padStart(4, '0')}-${month.padStart(2, '0')}-${day.padStart(2, '0')}T${hour.padStart(2, '0')}${offset}`;
         } else if (year && month && day && hour && minute && second) {
             return `${yearSign}${year.padStart(4, '0')}-${month.padStart(2, '0')}-${day.padStart(2, '0')}T${hour.padStart(2, '0')}:${minute.padStart(2, '0')}:${second.padStart(2, '0')}`;
         } else if (year && month && day && hour && minute) {
