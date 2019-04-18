@@ -17,7 +17,7 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
     const YEAR_MAX =  292277026595;
 
     /**
-     * ISO 8601 datetime patterns
+     * ISO 8601 datetime pattern
      *
      * The standard permits the expansion of the year representation beyond
      * 0000–9999, but only by prior agreement between the sender and the
@@ -34,9 +34,7 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
      * include colons as separators. This follows the standard's best practices,
      * which notes that "The basic format should be avoided in plain text."
      */
-    const PATTERN_DATE = '^(?<year>-?\d{4,})(-(?<month>\d{2}))?(-(?<day>\d{2}))?$';
-    const PATTERN_TIME = '^T(?<hour>\d{2})(:(?<minute>\d{2}))?(:(?<second>\d{2}))?$';
-    const PATTERN_OFFSET = '^(?<offset_sign>[+-])(?<offset_hour>\d{2})(:(?<offset_minute>\d{2}))?$';
+    const PATTERN_ISO8601 = '^(?<date>(?<year>-?\d{4,})(-(?<month>\d{2}))?(-(?<day>\d{2}))?)(?<time>(T(?<hour>\d{2}))?(:(?<minute>\d{2}))?(:(?<second>\d{2}))?)(?<offset>((?<offset_hour>[+-]\d{2})?(:(?<offset_minute>\d{2}))?)|Z?)$';
 
     /**
      * @var array Cache of date/times
@@ -64,81 +62,35 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
             return self::$dateTimes[$value][$defaultFirst ? 'first' : 'last'];
         }
 
-        // Before matching against ISO 8601, remove the trailing "Z" if it
-        // exists. The Z timezone designator is redundant because we already use
-        // Coordinated Universal Time (UTC) if no offset is provided.
-        $value = rtrim($value, 'Z');
-
-        // Match against ISO 8601, allowing for reduced accuracy. In lieu of a
-        // single regex, we parse the string into date, time, and offset
-        // segments and then into their respective components. Ideally we'd use
-        // a single regex for this purpose, but we haven't found one that is
-        // sufficiently comprehensive and foolproof.
-        $dateMatches = [];
-        $timeMatches = [];
-        $offsetMatches = [];
-        $dateTimeValues = preg_split('/(T)/', $value, null, PREG_SPLIT_DELIM_CAPTURE);
-        if (3 < count($dateTimeValues)) {
-            // More than one "T" found.
+        // Match against ISO 8601, allowing for reduced accuracy.
+        $isMatch = preg_match(sprintf('/%s/', self::PATTERN_ISO8601), $value, $matches);
+        if (!$isMatch) {
             throw new \InvalidArgumentException(sprintf('Invalid ISO 8601 datetime: %s', $value));
         }
-        // Validate the ISO 8601 date segment.
-        $dateIsMatch = preg_match(sprintf('/%s/', self::PATTERN_DATE), $dateTimeValues[0], $dateMatches);
-        if (!$dateIsMatch) {
+        $matches = array_filter($matches); // remove empty values
+        // An hour requires a day.
+        if (isset($matches['hour']) && !isset($matches['day'])) {
             throw new \InvalidArgumentException(sprintf('Invalid ISO 8601 datetime: %s', $value));
         }
-        if (isset($dateTimeValues[2])) {
-            // Validate an ISO 8601 time segment.
-            if (!isset($dateMatches['year']) || !isset($dateMatches['month']) || !isset($dateMatches['day'])) {
-                // The time segment requires a year, month, and day.
-                throw new \InvalidArgumentException(sprintf('Invalid ISO 8601 datetime: %s', $value));
-            }
-            $timeOffsetValues = preg_split('/([+-])/', $dateTimeValues[2], null, PREG_SPLIT_DELIM_CAPTURE);
-            if (3 < count($timeOffsetValues)) {
-                // More than one "+" or "-" found.
-                throw new \InvalidArgumentException(sprintf('Invalid ISO 8601 datetime: %s', $value));
-            }
-            $timeIsMatch = preg_match(
-                sprintf('/%s/', self::PATTERN_TIME),
-                $dateTimeValues[1] . $timeOffsetValues[0],
-                $timeMatches
-            );
-            if (!$timeIsMatch) {
-                throw new \InvalidArgumentException(sprintf('Invalid ISO 8601 datetime: %s', $value));
-            }
-            if (isset($timeOffsetValues[2])) {
-                // Validate an ISO 8601 offset segment.
-                if (!isset($timeMatches['hour'])) {
-                    // The offset segment requires a year, month, day, and hour.
-                    // Note that it does not require a minute or second.
-                    throw new \InvalidArgumentException(sprintf('Invalid ISO 8601 datetime: %s', $value));
-                }
-                $offsetIsMatch = preg_match(
-                    sprintf('/%s/', self::PATTERN_OFFSET),
-                    $timeOffsetValues[1] . $timeOffsetValues[2],
-                    $offsetMatches
-                );
-                if (!$offsetIsMatch) {
-                    throw new \InvalidArgumentException(sprintf('Invalid ISO 8601 datetime: %s', $value));
-                }
-            }
+        // An offset requires a time.
+        if (isset($matches['offset']) && !isset($matches['time'])) {
+            throw new \InvalidArgumentException(sprintf('Invalid ISO 8601 datetime: %s', $value));
         }
 
         // Set the datetime components included in the passed value.
         $dateTime = [
             'value' => $value,
-            'dateValue' => $dateMatches[0],
-            'timeValue' => isset($timeMatches[0]) ? $timeMatches[0] : null,
-            'offsetValue' => isset($offsetMatches[0]) ? $offsetMatches[0] : null,
-            'year' => (int) $dateMatches['year'],
-            'month' => isset($dateMatches['month']) ? (int) $dateMatches['month'] : null,
-            'day' => isset($dateMatches['day']) ? (int) $dateMatches['day'] : null,
-            'hour' => isset($timeMatches['hour']) ? (int) $timeMatches['hour'] : null,
-            'minute' => isset($timeMatches['minute']) ? (int) $timeMatches['minute'] : null,
-            'second' => isset($timeMatches['second']) ? (int) $timeMatches['second'] : null,
-            'offset_sign' => isset($offsetMatches['offset_sign']) ? $offsetMatches['offset_sign'] : null,
-            'offset_hour' => isset($offsetMatches['offset_hour']) ? (int) $offsetMatches['offset_hour'] : null,
-            'offset_minute' => isset($offsetMatches['offset_minute']) ? (int) $offsetMatches['offset_minute'] : null,
+            'date_value' => $matches['date'],
+            'time_value' => isset($matches['time']) ? $matches['time'] : null,
+            'offset_value' => isset($matches['offset']) ? $matches['offset'] : null,
+            'year' => (int) $matches['year'],
+            'month' => isset($matches['month']) ? (int) $matches['month'] : null,
+            'day' => isset($matches['day']) ? (int) $matches['day'] : null,
+            'hour' => isset($matches['hour']) ? (int) $matches['hour'] : null,
+            'minute' => isset($matches['minute']) ? (int) $matches['minute'] : null,
+            'second' => isset($matches['second']) ? (int) $matches['second'] : null,
+            'offset_hour' => isset($matches['offset_hour']) ? (int) $matches['offset_hour'] : null,
+            'offset_minute' => isset($matches['offset_minute']) ? (int) $matches['offset_minute'] : null,
         ];
 
         // Set the normalized datetime components. Each component not included
@@ -159,8 +111,12 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
             ? $dateTime['offset_hour'] : 0;
         $dateTime['offset_minute_normalized'] = isset($dateTime['offset_minute'])
             ? $dateTime['offset_minute'] : 0;
+        // Set the UTC offset (+00:00) if no offset is provided.
+        $dateTime['offset_normalized'] = isset($dateTime['offset_value'])
+            ? ('Z' === $dateTime['offset_value'] ? '+00:00' : $dateTime['offset_value'])
+            : '+00:00';
 
-
+        // Validate ranges of the datetime component.
         if ((self::YEAR_MIN > $dateTime['year']) || (self::YEAR_MAX < $dateTime['year'])) {
             throw new \InvalidArgumentException(sprintf('Invalid year: %s', $dateTime['year']));
         }
@@ -179,7 +135,7 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
         if ((0 > $dateTime['second_normalized']) || (59 < $dateTime['second_normalized'])) {
             throw new \InvalidArgumentException(sprintf('Invalid second: %s', $dateTime['second_normalized']));
         }
-        if ((0 > $dateTime['offset_hour_normalized']) || (23 < $dateTime['offset_hour_normalized'])) {
+        if ((-23 > $dateTime['offset_hour_normalized']) || (23 < $dateTime['offset_hour_normalized'])) {
             throw new \InvalidArgumentException(sprintf('Invalid hour offset: %s', $dateTime['offset_hour_normalized']));
         }
         if ((0 > $dateTime['offset_minute_normalized']) || (59 < $dateTime['offset_minute_normalized'])) {
@@ -187,11 +143,11 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
         }
 
         // Set the ISO 8601 format.
-        if (isset($dateTime['month']) && isset($dateTime['day']) && isset($dateTime['hour']) && isset($dateTime['minute']) && isset($dateTime['second']) && isset($dateTime['offsetValue'])) {
+        if (isset($dateTime['month']) && isset($dateTime['day']) && isset($dateTime['hour']) && isset($dateTime['minute']) && isset($dateTime['second']) && isset($dateTime['offset_value'])) {
             $format = 'Y-m-d\TH:i:sP';
-        } elseif (isset($dateTime['month']) && isset($dateTime['day']) && isset($dateTime['hour']) && isset($dateTime['minute']) && isset($dateTime['offsetValue'])) {
+        } elseif (isset($dateTime['month']) && isset($dateTime['day']) && isset($dateTime['hour']) && isset($dateTime['minute']) && isset($dateTime['offset_value'])) {
             $format = 'Y-m-d\TH:iP';
-        } elseif (isset($dateTime['month']) && isset($dateTime['day']) && isset($dateTime['hour']) && isset($dateTime['offsetValue'])) {
+        } elseif (isset($dateTime['month']) && isset($dateTime['day']) && isset($dateTime['hour']) && isset($dateTime['offset_value'])) {
             $format = 'Y-m-d\THP';
         } elseif (isset($dateTime['month']) && isset($dateTime['day']) && isset($dateTime['hour']) && isset($dateTime['minute']) && isset($dateTime['second'])) {
             $format = 'Y-m-d\TH:i:s';
@@ -209,11 +165,11 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
         $dateTime['format_iso8601'] = $format;
 
         // Set the render format.
-        if (isset($dateTime['month']) && isset($dateTime['day']) && isset($dateTime['hour']) && isset($dateTime['minute']) && isset($dateTime['second']) && isset($dateTime['offsetValue'])) {
+        if (isset($dateTime['month']) && isset($dateTime['day']) && isset($dateTime['hour']) && isset($dateTime['minute']) && isset($dateTime['second']) && isset($dateTime['offset_value'])) {
             $format = 'F j, Y H:i:s P';
-        } elseif (isset($dateTime['month']) && isset($dateTime['day']) && isset($dateTime['hour']) && isset($dateTime['minute']) && isset($dateTime['offsetValue'])) {
+        } elseif (isset($dateTime['month']) && isset($dateTime['day']) && isset($dateTime['hour']) && isset($dateTime['minute']) && isset($dateTime['offset_value'])) {
             $format = 'F j, Y H:i P';
-        } elseif (isset($dateTime['month']) && isset($dateTime['day']) && isset($dateTime['hour']) && isset($dateTime['offsetValue'])) {
+        } elseif (isset($dateTime['month']) && isset($dateTime['day']) && isset($dateTime['hour']) && isset($dateTime['offset_value'])) {
             $format = 'F j, Y H P';
         } elseif (isset($dateTime['month']) && isset($dateTime['day']) && isset($dateTime['hour']) && isset($dateTime['minute']) && isset($dateTime['second'])) {
             $format = 'F j, Y H:i:s';
@@ -234,8 +190,7 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
         // consistency, use Coordinated Universal Time (UTC) if no offset is
         // provided. This avoids automatic adjustments based on the server's
         // default timezone.
-        $offset =  $dateTime['offsetValue'] ?: '+00:00';
-        $dateTime['date'] = new DateTime(null, new DateTimeZone($offset));
+        $dateTime['date'] = new DateTime(null, new DateTimeZone($dateTime['offset_normalized']));
         $dateTime['date']->setDate(
             $dateTime['year'],
             $dateTime['month_normalized'],
