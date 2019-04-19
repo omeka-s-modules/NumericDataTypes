@@ -29,7 +29,11 @@ class Timestamp extends AbstractDateTimeDataType
         }
         $date = $this->getDateTimeFromValue($value->value());
         $type = null;
-        if (isset($date['month']) && isset($date['day']) && isset($date['hour']) && isset($date['minute']) && isset($date['second']) && isset($date['offset'])) {
+        if (isset($date['month']) && isset($date['day']) && isset($date['hour']) && isset($date['minute']) && isset($date['second']) && isset($date['offset_value'])) {
+            $type = 'http://www.w3.org/2001/XMLSchema#dateTime';
+        } elseif (isset($date['month']) && isset($date['day']) && isset($date['hour']) && isset($date['minute']) && isset($date['offset_value'])) {
+            $type = 'http://www.w3.org/2001/XMLSchema#dateTime';
+        } elseif (isset($date['month']) && isset($date['day']) && isset($date['hour']) && isset($date['offset_value'])) {
             $type = 'http://www.w3.org/2001/XMLSchema#dateTime';
         } elseif (isset($date['month']) && isset($date['day']) && isset($date['hour']) && isset($date['minute']) && isset($date['second'])) {
             $type = 'http://www.w3.org/2001/XMLSchema#dateTime';
