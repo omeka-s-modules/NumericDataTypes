@@ -83,7 +83,12 @@ class Module extends AbstractModule
             [$this, 'saveNumericData']
         );
         $sharedEventManager->attach(
-            '*',
+            'Omeka\Controller\Admin\Item',
+            'view.sort-selector',
+            [$this, 'addSortings']
+        );
+        $sharedEventManager->attach(
+            'Omeka\Controller\Site\Item',
             'view.sort-selector',
             [$this, 'addSortings']
         );
