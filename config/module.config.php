@@ -54,4 +54,24 @@ return [
             'NumericDataTypes\Form\Element\ConvertToNumeric' => NumericDataTypes\Service\Form\Element\ConvertToNumericFactory::class,
         ],
     ],
+    'csv_import' =>[
+        'data_types' => [
+            'numeric:timestamp' => [
+                'label' => 'Date/Time (ISO 8601)', // @translate
+                'adapter' => 'literal',
+            ],
+            'numeric:interval' => [
+                'label' => 'Interval (ISO 8601)', // @translate
+                'adapter' => 'literal',
+            ],
+            'numeric:duration' => [
+                'label' => 'Duration (ISO 8601)', // @translate
+                'adapter' => 'literal',
+            ],
+            'numeric:integer' => [
+                'label' => 'Integer', // @translate
+                'adapter' => 'literal',
+            ],
+        ],
+    ],
 ];
