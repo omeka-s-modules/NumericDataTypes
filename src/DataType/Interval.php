@@ -133,7 +133,7 @@ class Interval extends AbstractDateTimeDataType
             $qb->leftJoin(
                 $this->getEntityClass(), $alias, 'WITH',
                 $qb->expr()->andX(
-                    $qb->expr()->eq("$alias.resource", $adapter->getEntityClass() . '.id'),
+                    $qb->expr()->eq("$alias.resource", 'omeka_root.id'),
                     $qb->expr()->eq("$alias.property", (int) $propertyId)
                 )
             );
