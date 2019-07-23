@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-15 20:07-0400\n"
+"POT-Creation-Date: 2019-07-23 16:16-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -320,23 +320,23 @@ msgstr ""
 msgid "23 — 11 pm"
 msgstr ""
 
-#: src/Form/Element/ConvertToNumeric.php:21
+#: src/Form/Element/ConvertToNumeric.php:22
 msgid "Convert to numeric"
 msgstr ""
 
-#: src/Form/Element/ConvertToNumeric.php:32
+#: src/Form/Element/ConvertToNumeric.php:33
 msgid "Convert to timestamp"
 msgstr ""
 
-#: src/Form/Element/ConvertToNumeric.php:33
+#: src/Form/Element/ConvertToNumeric.php:34
 msgid "Convert to interval"
 msgstr ""
 
-#: src/Form/Element/ConvertToNumeric.php:34
+#: src/Form/Element/ConvertToNumeric.php:35
 msgid "Convert to duration"
 msgstr ""
 
-#: src/Form/Element/ConvertToNumeric.php:35
+#: src/Form/Element/ConvertToNumeric.php:36
 msgid "Convert to integer"
 msgstr ""
 
@@ -364,7 +364,23 @@ msgstr ""
 msgid "Seconds"
 msgstr ""
 
-#: Module.php:195
+#: Module.php:194
 #, php-format
 msgid "NumericDataTypes - invalid %s value for ID %s - %s"
+msgstr ""
+
+#: config/module.config.php:60
+msgid "Date/Time (ISO 8601)"
+msgstr ""
+
+#: config/module.config.php:64
+msgid "Interval (ISO 8601)"
+msgstr ""
+
+#: config/module.config.php:68
+msgid "Duration (ISO 8601)"
+msgstr ""
+
+#: config/module.config.php:72
+msgid "Integer"
 msgstr ""
