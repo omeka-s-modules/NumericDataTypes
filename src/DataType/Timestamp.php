@@ -92,6 +92,11 @@ class Timestamp extends AbstractDateTimeDataType
         return $date['date']->format($date['format_render']);
     }
 
+    public function getFulltextText(PhpRenderer $view, ValueRepresentation $value)
+    {
+        return sprintf('%s %s', $value->value(), $this->render($view, $value));
+    }
+
     public function getEntityClass()
     {
         return 'NumericDataTypes\Entity\NumericDataTypesTimestamp';

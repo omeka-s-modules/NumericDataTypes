@@ -101,6 +101,11 @@ class Interval extends AbstractDateTimeDataType
         );
     }
 
+    public function getFulltextText(PhpRenderer $view, ValueRepresentation $value)
+    {
+        return sprintf('%s %s', $value->value(), $this->render($view, $value));
+    }
+
     public function getEntityClass()
     {
         return 'NumericDataTypes\Entity\NumericDataTypesInterval';

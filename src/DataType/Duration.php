@@ -104,6 +104,11 @@ class Duration extends AbstractDataType
         return implode(', ', $output);
     }
 
+    public function getFulltextText(PhpRenderer $view, ValueRepresentation $value)
+    {
+        return sprintf('%s %s', $value->value(), $this->render($view, $value));
+    }
+
     public function getJsonLd(ValueRepresentation $value)
     {
         if (!$this->isValid(['@value' => $value->value()])) {
