@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-23 16:16-0400\n"
+"POT-Creation-Date: 2019-11-13 20:55-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -140,12 +140,24 @@ msgstr ""
 msgid "Value must be a datetime"
 msgstr ""
 
+#: src/DataType/Timestamp.php:22
+msgid "Timestamp"
+msgstr ""
+
 #: src/DataType/Duration.php:38
 msgid "Duration"
 msgstr ""
 
 #: src/DataType/AbstractDataType.php:15
 msgid "Numeric"
+msgstr ""
+
+#: src/DataType/Interval.php:23
+msgid "Interval"
+msgstr ""
+
+#: src/DataType/Integer.php:37 config/module.config.php:72
+msgid "Integer"
 msgstr ""
 
 #: src/Form/Element/DateTime.php:30
@@ -379,8 +391,4 @@ msgstr ""
 
 #: config/module.config.php:68
 msgid "Duration (ISO 8601)"
-msgstr ""
-
-#: config/module.config.php:72
-msgid "Integer"
 msgstr ""

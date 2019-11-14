@@ -34,7 +34,7 @@ class Integer extends AbstractDataType
 
     public function getLabel()
     {
-        return 'Integer';
+        return 'Integer'; // @translate
     }
 
     public function getJsonLd(ValueRepresentation $value)

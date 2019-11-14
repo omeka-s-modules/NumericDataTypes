@@ -19,7 +19,7 @@ class Timestamp extends AbstractDateTimeDataType
 
     public function getLabel()
     {
-        return 'Timestamp';
+        return 'Timestamp'; // @translate
     }
 
     public function getJsonLd(ValueRepresentation $value)

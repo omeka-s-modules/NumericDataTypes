@@ -20,7 +20,7 @@ class Interval extends AbstractDateTimeDataType
 
     public function getLabel()
     {
-        return 'Interval';
+        return 'Interval'; // @translate
     }
 
     public function getJsonLd(ValueRepresentation $value)
