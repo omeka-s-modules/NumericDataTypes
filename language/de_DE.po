@@ -2,108 +2,112 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
+# Translators:
+# Joachim Räth <info@ihregeschichte.info>, 2019
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-01 16:22-0400\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2019-08-06 09:56-0400\n"
+"PO-Revision-Date: 2018-11-27 19:31+0000\n"
+"Last-Translator: Joachim Räth <info@ihregeschichte.info>, 2019\n"
+"Language-Team: German (Germany) (https://www.transifex.com/omeka/teams/14184/de_DE/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: de_DE\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/DataType/Duration.php:76
 #, php-format
 msgid "%s year"
-msgstr ""
+msgstr "%s Jahr"
 
 #: src/DataType/Duration.php:77
 #, php-format
 msgid "%s years"
-msgstr ""
+msgstr "%s Jahre"
 
 #: src/DataType/Duration.php:81
 #, php-format
 msgid "%s month"
-msgstr ""
+msgstr "%s Monat"
 
 #: src/DataType/Duration.php:82
 #, php-format
 msgid "%s months"
-msgstr ""
+msgstr "%s Monate"
 
 #: src/DataType/Duration.php:86
 #, php-format
 msgid "%s day"
-msgstr ""
+msgstr "%s Tag"
 
 #: src/DataType/Duration.php:87
 #, php-format
 msgid "%s days"
-msgstr ""
+msgstr "%s Tage"
 
 #: src/DataType/Duration.php:91
 #, php-format
 msgid "%s hour"
-msgstr ""
+msgstr "%s Stunde"
 
 #: src/DataType/Duration.php:92
 #, php-format
 msgid "%s hours"
-msgstr ""
+msgstr "%s Stunden"
 
 #: src/DataType/Duration.php:96
 #, php-format
 msgid "%s minute"
-msgstr ""
+msgstr "%s Minute"
 
 #: src/DataType/Duration.php:97
 #, php-format
 msgid "%s minutes"
-msgstr ""
+msgstr "%s Minuten"
 
 #: src/DataType/Duration.php:101
 #, php-format
 msgid "%s second"
-msgstr ""
+msgstr "%s Sekunde"
 
 #: src/DataType/Duration.php:102
 #, php-format
 msgid "%s seconds"
-msgstr ""
+msgstr "%s Sekunden"
 
 #: view/common/numeric-data-types-advanced-search.phtml:15
 msgid "Date comes after"
-msgstr ""
+msgstr "Datum liegt nach"
 
 #: view/common/numeric-data-types-advanced-search.phtml:39
 msgid "Date comes before"
-msgstr ""
+msgstr "Datum liegt vor"
 
 #: view/common/numeric-data-types-advanced-search.phtml:63
 msgid "Duration is greater than"
-msgstr ""
+msgstr "Dauer ist länger als"
 
 #: view/common/numeric-data-types-advanced-search.phtml:86
 msgid "Duration is less than"
-msgstr ""
+msgstr "Dauer ist kürzer als"
 
 #: view/common/numeric-data-types-advanced-search.phtml:109
 msgid "Date in interval"
-msgstr ""
+msgstr "Datum im Intervall"
 
 #: view/common/numeric-data-types-advanced-search.phtml:133
 msgid "Value is greater than"
-msgstr ""
+msgstr "Wert ist größer als"
 
 #: view/common/numeric-data-types-advanced-search.phtml:156
 msgid "Value is less than"
-msgstr ""
+msgstr "Wert ist kleiner als"
 
 #: view/common/numeric-duration.phtml:7 view/common/numeric-integer.phtml:7
 #: view/common/numeric-interval.phtml:7 view/common/numeric-timestamp.phtml:7
@@ -116,7 +120,8 @@ msgid "Value must be a duration"
 msgstr ""
 
 #: view/common/numeric-duration.phtml:16 view/common/numeric-interval.phtml:17
-#: view/common/numeric-interval.phtml:32 view/common/numeric-timestamp.phtml:16
+#: view/common/numeric-interval.phtml:32
+#: view/common/numeric-timestamp.phtml:16
 msgid "Time"
 msgstr ""
 
@@ -130,59 +135,47 @@ msgstr ""
 
 #: view/common/numeric-interval.phtml:12
 msgid "Start:"
-msgstr ""
+msgstr "Beginn:"
 
 #: view/common/numeric-interval.phtml:27
 msgid "End:"
-msgstr ""
+msgstr "Ende:"
 
 #: view/common/numeric-timestamp.phtml:8
 msgid "Value must be a datetime"
-msgstr ""
-
-#: src/DataType/Timestamp.php:22
-msgid "Timestamp"
-msgstr ""
+msgstr "Wert muss ein DateTime sein"
 
 #: src/DataType/Duration.php:38
 msgid "Duration"
-msgstr ""
+msgstr "Dauer"
 
 #: src/DataType/AbstractDataType.php:15
 msgid "Numeric"
-msgstr ""
-
-#: src/DataType/Interval.php:23
-msgid "Interval"
-msgstr ""
-
-#: src/DataType/Integer.php:37 config/module.config.php:72
-msgid "Integer"
-msgstr ""
+msgstr "Numerisch"
 
 #: src/Form/Element/DateTime.php:30
 msgid "Year"
-msgstr ""
+msgstr "Jahr"
 
 #: src/Form/Element/DateTime.php:34
 msgid "Month"
-msgstr ""
+msgstr "Monat"
 
 #: src/Form/Element/DateTime.php:38
 msgid "Day"
-msgstr ""
+msgstr "Tag"
 
 #: src/Form/Element/DateTime.php:42
 msgid "Hour"
-msgstr ""
+msgstr "Stunde"
 
 #: src/Form/Element/DateTime.php:46
 msgid "Minute"
-msgstr ""
+msgstr "Minute"
 
 #: src/Form/Element/DateTime.php:50
 msgid "Second"
-msgstr ""
+msgstr "Sekunde"
 
 #: src/Form/Element/DateTime.php:54
 msgid "Offset"
@@ -354,27 +347,27 @@ msgstr ""
 
 #: src/Form/Element/Duration.php:30
 msgid "Years"
-msgstr ""
+msgstr "Jahre"
 
 #: src/Form/Element/Duration.php:38
 msgid "Months"
-msgstr ""
+msgstr "Monate"
 
 #: src/Form/Element/Duration.php:46
 msgid "Days"
-msgstr ""
+msgstr "Tage"
 
 #: src/Form/Element/Duration.php:54
 msgid "Hours"
-msgstr ""
+msgstr "Stunden"
 
 #: src/Form/Element/Duration.php:62
 msgid "Minutes"
-msgstr ""
+msgstr "Minuten"
 
 #: src/Form/Element/Duration.php:70
 msgid "Seconds"
-msgstr ""
+msgstr "Sekunden"
 
 #: Module.php:194
 #, php-format
@@ -391,4 +384,8 @@ msgstr ""
 
 #: config/module.config.php:68
 msgid "Duration (ISO 8601)"
+msgstr ""
+
+#: config/module.config.php:72
+msgid "Integer"
 msgstr ""
