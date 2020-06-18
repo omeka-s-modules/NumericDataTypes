@@ -43,7 +43,7 @@ return [
             'numericPropertySelect' => NumericDataTypes\Service\ViewHelper\NumericPropertySelectFactory::class,
         ],
         'delegators' => [
-            'Zend\Form\View\Helper\FormElement' => [
+            'Laminas\Form\View\Helper\FormElement' => [
                 NumericDataTypes\Service\Delegator\FormElementDelegatorFactory::class,
             ],
         ],

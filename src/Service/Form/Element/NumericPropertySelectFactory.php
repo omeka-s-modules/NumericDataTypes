@@ -3,7 +3,7 @@ namespace NumericDataTypes\Service\Form\Element;
 
 use Interop\Container\ContainerInterface;
 use NumericDataTypes\Form\Element\NumericPropertySelect;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 class NumericPropertySelectFactory implements FactoryInterface
 {

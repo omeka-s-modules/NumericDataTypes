@@ -2,7 +2,7 @@
 namespace NumericDataTypes\Form\Element;
 
 use NumericDataTypes\DataType\Integer as IntegerDataType;
-use Zend\Form\Element;
+use Laminas\Form\Element;
 
 class Integer extends Element
 {

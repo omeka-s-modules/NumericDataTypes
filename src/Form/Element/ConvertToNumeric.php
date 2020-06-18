@@ -2,8 +2,8 @@
 namespace NumericDataTypes\Form\Element;
 
 use Omeka\Form\Element\PropertySelect;
-use Zend\Form\Element;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\Form\Element;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 class ConvertToNumeric extends Element
 {

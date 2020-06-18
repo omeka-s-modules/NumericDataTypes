@@ -3,7 +3,7 @@ namespace NumericDataTypes\DataType;
 
 use DateTime;
 use DateTimeZone;
-use Zend\Form\Element;
+use Laminas\Form\Element;
 
 abstract class AbstractDateTimeDataType extends AbstractDataType
 {

@@ -2,7 +2,7 @@
 namespace NumericDataTypes\Form\Element;
 
 use NumericDataTypes\DataType\Timestamp as TimestampDataType;
-use Zend\Form\Element;
+use Laminas\Form\Element;
 
 class DateTime extends Element
 {
