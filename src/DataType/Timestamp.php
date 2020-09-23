@@ -8,7 +8,7 @@ use Omeka\Api\Adapter\AbstractEntityAdapter;
 use Omeka\Api\Adapter\AdapterInterface;
 use Omeka\Api\Representation\ValueRepresentation;
 use Omeka\Entity\Value;
-use Zend\View\Renderer\PhpRenderer;
+use Laminas\View\Renderer\PhpRenderer;
 
 class Timestamp extends AbstractDateTimeDataType
 {

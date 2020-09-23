@@ -2,7 +2,7 @@
 namespace NumericDataTypes\Service\ViewHelper;
 
 use NumericDataTypes\View\Helper\NumericPropertySelect;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 use Interop\Container\ContainerInterface;
 
 class NumericPropertySelectFactory implements FactoryInterface

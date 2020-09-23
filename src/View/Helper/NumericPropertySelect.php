@@ -2,9 +2,9 @@
 namespace NumericDataTypes\View\Helper;
 
 use NumericDataTypes\Form\Element\NumericPropertySelect as Select;
-use Zend\Form\Factory;
-use Zend\View\Helper\AbstractHelper;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\Form\Factory;
+use Laminas\View\Helper\AbstractHelper;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 class NumericPropertySelect extends AbstractHelper
 {

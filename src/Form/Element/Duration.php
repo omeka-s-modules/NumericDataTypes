@@ -1,7 +1,7 @@
 <?php
 namespace NumericDataTypes\Form\Element;
 
-use Zend\Form\Element;
+use Laminas\Form\Element;
 
 class Duration extends Element
 {

@@ -2,7 +2,7 @@
 namespace NumericDataTypes\Form\Element;
 
 use Doctrine\ORM\EntityManager;
-use Zend\Form\Element\Select;
+use Laminas\Form\Element\Select;
 
 class NumericPropertySelect extends Select
 {

@@ -5,9 +5,9 @@ use Composer\Semver\Comparator;
 use Doctrine\Common\Collections\Criteria;
 use NumericDataTypes\Form\Element\ConvertToNumeric;
 use Omeka\Module\AbstractModule;
-use Zend\EventManager\Event;
-use Zend\EventManager\SharedEventManagerInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Laminas\EventManager\Event;
+use Laminas\EventManager\SharedEventManagerInterface;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 
 class Module extends AbstractModule
 {
