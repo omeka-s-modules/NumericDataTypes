@@ -3,7 +3,6 @@ namespace NumericDataTypes\DataType;
 
 use DateTime;
 use DateTimeZone;
-use Laminas\Form\Element;
 
 abstract class AbstractDateTimeDataType extends AbstractDataType
 {
@@ -14,7 +13,7 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
      * exceed the minimum or maximum range for a 64-bit integer.
      */
     const YEAR_MIN = -292277022656;
-    const YEAR_MAX =  292277026595;
+    const YEAR_MAX = 292277026595;
 
     /**
      * ISO 8601 datetime pattern

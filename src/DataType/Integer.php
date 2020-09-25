@@ -8,7 +8,6 @@ use Omeka\Api\Adapter\AbstractEntityAdapter;
 use Omeka\Api\Adapter\AdapterInterface;
 use Omeka\Api\Representation\ValueRepresentation;
 use Omeka\Entity\Value;
-use Laminas\Form\Element;
 use Laminas\View\Renderer\PhpRenderer;
 
 class Integer extends AbstractDataType
@@ -25,7 +24,7 @@ class Integer extends AbstractDataType
      * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MIN_SAFE_INTEGER
      */
     const MIN_SAFE_INT = -9007199254740991;
-    const MAX_SAFE_INT =  9007199254740991;
+    const MAX_SAFE_INT = 9007199254740991;
 
     public function getName()
     {

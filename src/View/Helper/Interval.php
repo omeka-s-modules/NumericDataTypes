@@ -16,4 +16,3 @@ class Interval extends AbstractHelper
         return $this->getView()->partial('common/numeric-interval', ['element' => $element]);
     }
 }
-

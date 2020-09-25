@@ -9,7 +9,6 @@ use Omeka\Entity\Value;
 use Omeka\Api\Adapter\AbstractEntityAdapter;
 use Omeka\Api\Adapter\AdapterInterface;
 use Omeka\Api\Representation\ValueRepresentation;
-use Laminas\Form\Element;
 use Laminas\View\Renderer\PhpRenderer;
 
 class Duration extends AbstractDataType

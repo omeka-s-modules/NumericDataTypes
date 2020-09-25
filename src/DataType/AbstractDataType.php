@@ -3,10 +3,7 @@ namespace NumericDataTypes\DataType;
 
 use Doctrine\ORM\QueryBuilder;
 use Omeka\Api\Adapter\AdapterInterface;
-use Omeka\Api\Representation\ValueRepresentation;
 use Omeka\DataType\AbstractDataType as BaseAbstractDataType;
-use Omeka\Entity\Property;
-use Omeka\Entity\Value;
 
 abstract class AbstractDataType extends BaseAbstractDataType implements DataTypeInterface
 {
@@ -75,4 +72,3 @@ abstract class AbstractDataType extends BaseAbstractDataType implements DataType
         ));
     }
 }
-

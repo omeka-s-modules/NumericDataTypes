@@ -77,7 +77,9 @@ class DateTime extends Element
     {
         return array_combine(
             range(1, 31),
-            array_map(function($n) {return sprintf('%02d', $n);}, range(1, 31))
+            array_map(function ($n) {
+                return sprintf('%02d', $n);
+            }, range(1, 31))
         );
     }
 
@@ -113,7 +115,9 @@ class DateTime extends Element
 
     public function getMinuteSecondValueOptions()
     {
-        return array_map(function($n) {return sprintf('%02d', $n);}, range(0, 59));
+        return array_map(function ($n) {
+            return sprintf('%02d', $n);
+        }, range(0, 59));
     }
 
     public function getOffsetValueOptions()
