@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-06 09:56-0400\n"
+"POT-Creation-Date: 2020-05-01 16:22-0400\n"
 "PO-Revision-Date: 2018-11-27 19:31+0000\n"
 "Last-Translator: iteau <songphan@gmail.com>, 2018\n"
 "Language-Team: Thai (https://www.transifex.com/omeka/teams/14184/th/)\n"
@@ -145,6 +145,10 @@ msgstr ""
 msgid "Value must be a datetime"
 msgstr ""
 
+#: src/DataType/Timestamp.php:22
+msgid "Timestamp"
+msgstr ""
+
 #: src/DataType/Duration.php:38
 msgid "Duration"
 msgstr ""
@@ -152,6 +156,14 @@ msgstr ""
 #: src/DataType/AbstractDataType.php:15
 msgid "Numeric"
 msgstr "ตัวเลข"
+
+#: src/DataType/Interval.php:23
+msgid "Interval"
+msgstr ""
+
+#: src/DataType/Integer.php:37 config/module.config.php:72
+msgid "Integer"
+msgstr ""
 
 #: src/Form/Element/DateTime.php:30
 msgid "Year"
@@ -384,8 +396,4 @@ msgstr ""
 
 #: config/module.config.php:68
 msgid "Duration (ISO 8601)"
-msgstr ""
-
-#: config/module.config.php:72
-msgid "Integer"
 msgstr ""
