@@ -4,16 +4,16 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Rivo Zängov <eraser@eraser.ee>, 2019
+# Rivo Zängov <eraser@eraser.ee>, 2020
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-01 16:22-0400\n"
+"POT-Creation-Date: 2020-11-17 16:00-0500\n"
 "PO-Revision-Date: 2018-11-27 19:31+0000\n"
-"Last-Translator: Rivo Zängov <eraser@eraser.ee>, 2019\n"
+"Last-Translator: Rivo Zängov <eraser@eraser.ee>, 2020\n"
 "Language-Team: Estonian (https://www.transifex.com/omeka/teams/14184/et/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,62 +21,62 @@ msgstr ""
 "Language: et\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/DataType/Duration.php:76
+#: src/DataType/Duration.php:75
 #, php-format
 msgid "%s year"
 msgstr "%s aasta"
 
-#: src/DataType/Duration.php:77
+#: src/DataType/Duration.php:76
 #, php-format
 msgid "%s years"
 msgstr "%s aastat"
 
-#: src/DataType/Duration.php:81
+#: src/DataType/Duration.php:80
 #, php-format
 msgid "%s month"
 msgstr "%s kuu"
 
-#: src/DataType/Duration.php:82
+#: src/DataType/Duration.php:81
 #, php-format
 msgid "%s months"
 msgstr "%s kuud"
 
-#: src/DataType/Duration.php:86
+#: src/DataType/Duration.php:85
 #, php-format
 msgid "%s day"
 msgstr "%s päev"
 
-#: src/DataType/Duration.php:87
+#: src/DataType/Duration.php:86
 #, php-format
 msgid "%s days"
 msgstr "%s päeva"
 
-#: src/DataType/Duration.php:91
+#: src/DataType/Duration.php:90
 #, php-format
 msgid "%s hour"
 msgstr "%s tund"
 
-#: src/DataType/Duration.php:92
+#: src/DataType/Duration.php:91
 #, php-format
 msgid "%s hours"
 msgstr "%s tundi"
 
-#: src/DataType/Duration.php:96
+#: src/DataType/Duration.php:95
 #, php-format
 msgid "%s minute"
 msgstr "%s minut"
 
-#: src/DataType/Duration.php:97
+#: src/DataType/Duration.php:96
 #, php-format
 msgid "%s minutes"
 msgstr "%s minutit"
 
-#: src/DataType/Duration.php:101
+#: src/DataType/Duration.php:100
 #, php-format
 msgid "%s second"
 msgstr "%s sekund"
 
-#: src/DataType/Duration.php:102
+#: src/DataType/Duration.php:101
 #, php-format
 msgid "%s seconds"
 msgstr "%s sekundit"
@@ -145,25 +145,42 @@ msgstr "Lõpp:"
 msgid "Value must be a datetime"
 msgstr "Väärtus peab olema kuupäev-kellaaeg"
 
-#: src/DataType/Timestamp.php:22
-msgid "Timestamp"
+#: Module.php:194
+#, php-format
+msgid "NumericDataTypes - invalid %s value for ID %s - %s"
+msgstr "NumericDataTypes - vigane %s ID %s - %sväärtused"
+
+#: config/module.config.php:60
+msgid "Date/Time (ISO 8601)"
 msgstr ""
 
-#: src/DataType/Duration.php:38
-msgid "Duration"
-msgstr "Kestus"
+#: config/module.config.php:64
+msgid "Interval (ISO 8601)"
+msgstr ""
 
-#: src/DataType/AbstractDataType.php:15
+#: config/module.config.php:68
+msgid "Duration (ISO 8601)"
+msgstr ""
+
+#: config/module.config.php:72 src/DataType/Integer.php:36
+msgid "Integer"
+msgstr ""
+
+#: src/DataType/Interval.php:22
+msgid "Interval"
+msgstr "Intervall"
+
+#: src/DataType/AbstractDataType.php:12
 msgid "Numeric"
 msgstr "Numbriline"
 
-#: src/DataType/Interval.php:23
-msgid "Interval"
-msgstr ""
+#: src/DataType/Timestamp.php:22
+msgid "Timestamp"
+msgstr "Ajatempel"
 
-#: src/DataType/Integer.php:37 config/module.config.php:72
-msgid "Integer"
-msgstr ""
+#: src/DataType/Duration.php:37
+msgid "Duration"
+msgstr "Kestus"
 
 #: src/Form/Element/DateTime.php:30
 msgid "Year"
@@ -241,99 +258,99 @@ msgstr "11 — november"
 msgid "12 — December"
 msgstr "12 — detsember"
 
-#: src/Form/Element/DateTime.php:87
+#: src/Form/Element/DateTime.php:89
 msgid "00 — 12 am"
 msgstr "00 — 12 el"
 
-#: src/Form/Element/DateTime.php:88
+#: src/Form/Element/DateTime.php:90
 msgid "01 — 1 am"
 msgstr "01 — 1 el"
 
-#: src/Form/Element/DateTime.php:89
+#: src/Form/Element/DateTime.php:91
 msgid "02 — 2 am"
 msgstr "02 — 2 el"
 
-#: src/Form/Element/DateTime.php:90
+#: src/Form/Element/DateTime.php:92
 msgid "03 — 3 am"
 msgstr "03 — 3 el"
 
-#: src/Form/Element/DateTime.php:91
+#: src/Form/Element/DateTime.php:93
 msgid "04 — 4 am"
 msgstr "04 — 4 el"
 
-#: src/Form/Element/DateTime.php:92
+#: src/Form/Element/DateTime.php:94
 msgid "05 — 5 am"
 msgstr "05 — 5 el"
 
-#: src/Form/Element/DateTime.php:93
+#: src/Form/Element/DateTime.php:95
 msgid "06 — 6 am"
 msgstr "06 — 6 el"
 
-#: src/Form/Element/DateTime.php:94
+#: src/Form/Element/DateTime.php:96
 msgid "07 — 7 am"
 msgstr "07 — 7 el"
 
-#: src/Form/Element/DateTime.php:95
+#: src/Form/Element/DateTime.php:97
 msgid "08 — 8 am"
 msgstr "08 — 8 el"
 
-#: src/Form/Element/DateTime.php:96
+#: src/Form/Element/DateTime.php:98
 msgid "09 — 9 am"
 msgstr "09 — 9 el"
 
-#: src/Form/Element/DateTime.php:97
+#: src/Form/Element/DateTime.php:99
 msgid "10 — 10 am"
 msgstr "10 — 10 el"
 
-#: src/Form/Element/DateTime.php:98
+#: src/Form/Element/DateTime.php:100
 msgid "11 — 11 am"
 msgstr "11 — 11 el"
 
-#: src/Form/Element/DateTime.php:99
+#: src/Form/Element/DateTime.php:101
 msgid "12 — 12 pm"
 msgstr "12 — 12 pl"
 
-#: src/Form/Element/DateTime.php:100
+#: src/Form/Element/DateTime.php:102
 msgid "13 — 1 pm"
 msgstr "13 — 1 pl"
 
-#: src/Form/Element/DateTime.php:101
+#: src/Form/Element/DateTime.php:103
 msgid "14 — 2 pm"
 msgstr "14 — 2 pl"
 
-#: src/Form/Element/DateTime.php:102
+#: src/Form/Element/DateTime.php:104
 msgid "15 — 3 pm"
 msgstr "15 — 3 pl"
 
-#: src/Form/Element/DateTime.php:103
+#: src/Form/Element/DateTime.php:105
 msgid "16 — 4 pm"
 msgstr "16 — 4 pl"
 
-#: src/Form/Element/DateTime.php:104
+#: src/Form/Element/DateTime.php:106
 msgid "17 — 5 pm"
 msgstr "17 — 5 pl"
 
-#: src/Form/Element/DateTime.php:105
+#: src/Form/Element/DateTime.php:107
 msgid "18 — 6 pm"
 msgstr "18 — 6 pl"
 
-#: src/Form/Element/DateTime.php:106
+#: src/Form/Element/DateTime.php:108
 msgid "19 — 7 pm"
 msgstr "19 — 7 pl"
 
-#: src/Form/Element/DateTime.php:107
+#: src/Form/Element/DateTime.php:109
 msgid "20 — 8 pm"
 msgstr "20 — 8 pl"
 
-#: src/Form/Element/DateTime.php:108
+#: src/Form/Element/DateTime.php:110
 msgid "21 — 9 pm"
 msgstr "21 — 9 pl"
 
-#: src/Form/Element/DateTime.php:109
+#: src/Form/Element/DateTime.php:111
 msgid "22 — 10 pm"
 msgstr "22 — 10 pl"
 
-#: src/Form/Element/DateTime.php:110
+#: src/Form/Element/DateTime.php:112
 msgid "23 — 11 pm"
 msgstr "23 — 11 pl"
 
@@ -380,20 +397,3 @@ msgstr "Minutit"
 #: src/Form/Element/Duration.php:70
 msgid "Seconds"
 msgstr "Sekundit"
-
-#: Module.php:194
-#, php-format
-msgid "NumericDataTypes - invalid %s value for ID %s - %s"
-msgstr "NumericDataTypes - vigane %s ID %s - %sväärtused"
-
-#: config/module.config.php:60
-msgid "Date/Time (ISO 8601)"
-msgstr ""
-
-#: config/module.config.php:64
-msgid "Interval (ISO 8601)"
-msgstr ""
-
-#: config/module.config.php:68
-msgid "Duration (ISO 8601)"
-msgstr ""
