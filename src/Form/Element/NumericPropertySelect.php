@@ -48,7 +48,7 @@ class NumericPropertySelect extends Select
         // numeric_data_type option, so set them here.
         $numericDataTypes = [];
         foreach ($dataTypes as $dataType) {
-            $numericDataTypes[] = sprintf('numeric:%s', $dataType);
+            $numericDataTypes[sprintf('numeric:%s', $dataType)] = true;
         }
 
         $qb = $this->entityManager->createQueryBuilder();
@@ -61,7 +61,7 @@ class NumericPropertySelect extends Select
             $property = $templateProperty->getProperty();
             $template = $templateProperty->getResourceTemplate();
             foreach ($templateProperty->getDataType() as $dataType) {
-                if (!in_array($dataType, $numericDataTypes)) {
+                if (!isset($numericDataTypes[$dataType])) {
                     // This is not a requested numeric data type.
                     continue;
                 }
