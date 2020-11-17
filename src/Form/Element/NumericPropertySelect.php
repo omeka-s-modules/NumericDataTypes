@@ -44,6 +44,13 @@ class NumericPropertySelect extends Select
             return [];
         }
 
+        // Users don't pass the full numeric data type names using the
+        // numeric_data_type option, so set them here.
+        $numericDataTypes = [];
+        foreach ($dataTypes as $dataType) {
+            $numericDataTypes[] = sprintf('numeric:%s', $dataType);
+        }
+
         $qb = $this->entityManager->createQueryBuilder();
         $qb->select('rtp')
             ->from('Omeka\Entity\ResourceTemplateProperty', 'rtp')
@@ -54,6 +61,10 @@ class NumericPropertySelect extends Select
             $property = $templateProperty->getProperty();
             $template = $templateProperty->getResourceTemplate();
             foreach ($templateProperty->getDataType() as $dataType) {
+                if (!in_array($dataType, $numericDataTypes)) {
+                    // This is not a requested numeric data type.
+                    continue;
+                }
                 $value = $disambiguate
                     ? sprintf('%s:%s', $dataType, $property->getId())
                     : $property->getId();
