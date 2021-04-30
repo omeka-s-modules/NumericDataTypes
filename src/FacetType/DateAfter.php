@@ -23,6 +23,11 @@ class DateAfter implements FacetTypeInterface
         return 'Date after'; // @translate
     }
 
+    public function getMaxFacets() : ?int
+    {
+        return 1;
+    }
+
     public function prepareDataForm(PhpRenderer $view) : void
     {
         $view->headScript()->appendFile($view->assetUrl('js/faceted-browse/facet-data-form/date-after.js', 'NumericDataTypes'));
