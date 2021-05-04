@@ -79,7 +79,7 @@ class DateAfter implements FacetTypeInterface
         $values = array_unique($values);
         $iso8601KeyValues = [];
         foreach ($values as $value) {
-            if (preg_match('/^(.+) (.+)/', $value, $matches)) {
+            if (preg_match('/^([^\s]+) (.+)/', $value, $matches)) {
                 $iso8601 = $matches[1];
                 $value = $matches[2];
             } else {
