@@ -2,3 +2,5 @@
 <?php echo $this->formRow($min); ?>
 <?php echo $this->formRow($max); ?>
 <?php echo $this->formRow($step); ?>
+<p><input type="checkbox" id="greater-than-show-integer-values"> <?php echo $this->translate('Show all available values of the selected property.'); ?></p>
+<table id="greater-than-integer-values" data-integer-values-url="<?php echo $this->escapeHtml($this->url('admin/site/slug/numeric-data-types-faceted-browse', ['controller' => 'index', 'action' => 'integer-values'], true)) ?>"></table>
