@@ -53,7 +53,7 @@ class DateAfter implements FacetTypeInterface
         $values->setName('values');
         $values->setOptions([
             'label' => 'Values', // @translate
-            'info' => 'Enter the date/time values in ISO 8601 format, separated by new lines.', // @translate
+            'info' => 'Enter the date/time values, separated by a new line. For each line, enter the date/time in ISO 8601 format, followed by a space, followed by the human-readable date/time.', // @translate
         ]);
         $values->setAttributes([
             'id' => 'date-after-values',
@@ -77,11 +77,24 @@ class DateAfter implements FacetTypeInterface
         $values = explode("\n", $values);
         $values = array_map('trim', $values);
         $values = array_unique($values);
-        $values = array_combine($values, $values);
-        $values = array_map(function ($value) {
-            $date = Timestamp::getDateTimeFromValue($value);
-            return $date['date']->format($date['format_render']);
-        }, $values);
+        $iso8601KeyValues = [];
+        foreach ($values as $value) {
+            if (preg_match('/^(.+) (.+)/', $value, $matches)) {
+                $iso8601 = $matches[1];
+                $value = $matches[2];
+            } else {
+                $iso8601 = $value;
+                $value = $value;
+            }
+            try {
+                Timestamp::getDateTimeFromValue($iso8601);
+            } catch (\InvalidArgumentException $e) {
+                // This is invalid ISO 8601.
+                continue;
+            }
+            $iso8601KeyValues[$iso8601] = $value;
+        }
+        $values = $iso8601KeyValues;
 
         $elementValues = $this->formElements->get(LaminasElement\Select::class);
         $elementValues->setName('date_after');
