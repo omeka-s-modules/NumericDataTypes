@@ -1,4 +1,9 @@
 <?php echo $this->formRow($elementPropertyId); ?>
 <?php echo $this->formRow($elementValues); ?>
-<p><input type="checkbox" id="date-after-show-timestamp-values"> <?php echo $this->translate('Show all available values of the selected property.'); ?></p>
-<table id="date-after-timestamp-values" data-timestamp-values-url="<?php echo $this->escapeHtml($this->url('admin/site/slug/numeric-data-types-faceted-browse', ['controller' => 'index', 'action' => 'timestamp-values'], true)) ?>"></table>
+<?php echo $this->partial('show-all', [
+    'label' => $this->translate('Show all available values.'),
+    'url' => $this->url('admin/site/slug/numeric-data-types-faceted-browse', ['controller' => 'index', 'action' => 'timestamp-values'], true),
+    'queryParams' => [
+        'property_id' => '#date-after-property-id',
+    ],
+]); ?>

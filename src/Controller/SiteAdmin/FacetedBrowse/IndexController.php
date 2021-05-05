@@ -16,7 +16,7 @@ class IndexController extends AbstractActionController
     public function timestampValuesAction()
     {
         $propertyId = $this->params()->fromQuery('property_id');
-        $query = $this->params()->fromQuery('query');
+        $query = $this->params()->fromQuery('category_query');
         parse_str($query, $query);
         $query['site_id'] = $this->currentSite()->id();
 
@@ -27,30 +27,30 @@ class IndexController extends AbstractActionController
         $ids = $api->search('items', $query, ['returnScalar' => 'id'])->getContent();
 
         $dql = '
-        SELECT v.value value, COUNT(v.value) value_count
+        SELECT v.value label, COUNT(v.value) has_count
         FROM Omeka\Entity\Value v
         WHERE v.type = :type
         AND v.property = :propertyId
         AND v.resource IN (:ids)
-        GROUP BY value
-        ORDER BY value ASC';
+        GROUP BY label
+        ORDER BY label ASC';
         $query = $em->createQuery($dql)
             ->setParameter('type', 'numeric:timestamp')
             ->setParameter('propertyId', $propertyId)
             ->setParameter('ids', $ids);
         $values = $query->getResult();
 
-        $response = $this->getResponse();
-        $responseHeaders = $response->getHeaders();
-        $responseHeaders->addHeaderLine('Content-Type: application/json');
-        $response->setContent(json_encode($values));
-        return $response;
+        $view = new ViewModel;
+        $view->setTerminal(true);
+        $view->setTemplate('faceted-browse/site-admin/category/show-all-table');
+        $view->setVariable('rows', $values);
+        return $view;
     }
 
     public function integerValuesAction()
     {
         $propertyId = $this->params()->fromQuery('property_id');
-        $query = $this->params()->fromQuery('query');
+        $query = $this->params()->fromQuery('category_query');
         parse_str($query, $query);
         $query['site_id'] = $this->currentSite()->id();
 
@@ -63,23 +63,23 @@ class IndexController extends AbstractActionController
         // For ordering to work, we must cast string values to int by forcing a
         // cast using + 0.
         $dql = '
-        SELECT v.value + 0 value, COUNT(v.value) value_count
+        SELECT v.value + 0 label, COUNT(v.value) has_count
         FROM Omeka\Entity\Value v
         WHERE v.type = :type
         AND v.property = :propertyId
         AND v.resource IN (:ids)
-        GROUP BY value
-        ORDER BY value ASC';
+        GROUP BY label
+        ORDER BY label ASC';
         $query = $em->createQuery($dql)
             ->setParameter('type', 'numeric:integer')
             ->setParameter('propertyId', $propertyId)
             ->setParameter('ids', $ids);
         $values = $query->getResult();
 
-        $response = $this->getResponse();
-        $responseHeaders = $response->getHeaders();
-        $responseHeaders->addHeaderLine('Content-Type: application/json');
-        $response->setContent(json_encode($values));
-        return $response;
+        $view = new ViewModel;
+        $view->setTerminal(true);
+        $view->setTemplate('faceted-browse/site-admin/category/show-all-table');
+        $view->setVariable('rows', $values);
+        return $view;
     }
 }
