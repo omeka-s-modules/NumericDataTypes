@@ -1,3 +1,11 @@
+FacetedBrowse.registerFacetApplyStateHandler('greater_than', function(facet, facetState) {
+    const thisFacet = $(facet);
+    const thisRange = thisFacet.find(`input.greater-than`);
+    thisRange.val(facetState);
+    thisFacet.find('.greater-than-reset').show();
+    thisFacet.find('.greater-than-value').text(thisRange.val());
+});
+
 $(document).ready(function() {
 
 const container = $('#container');
@@ -10,6 +18,7 @@ container.on('input', '.greater-than', function(e) {
     facet.find('.greater-than-value').text(thisRange.val());
     FacetedBrowse.setFacetState(
         facet.data('facetId'),
+        thisRange.val(),
         `numeric[int][gt][pid]=${facetData.property_id}&numeric[int][gt][val]=${encodeURIComponent(thisRange.val())}`
     );
     FacetedBrowse.triggerFacetStateChange();
