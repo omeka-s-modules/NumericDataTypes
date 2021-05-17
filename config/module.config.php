@@ -82,6 +82,7 @@ return [
     'faceted_browse_facet_types' => [
         'factories' => [
             'date_after' => NumericDataTypes\Service\FacetType\DateAfterFactory::class,
+            'date_before' => NumericDataTypes\Service\FacetType\DateBeforeFactory::class,
             'greater_than' => NumericDataTypes\Service\FacetType\GreaterThanFactory::class,
         ],
     ],
