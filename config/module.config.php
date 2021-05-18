@@ -85,6 +85,7 @@ return [
             'date_before' => NumericDataTypes\Service\FacetType\DateBeforeFactory::class,
             'value_greater_than' => NumericDataTypes\Service\FacetType\ValueGreaterThanFactory::class,
             'value_less_than' => NumericDataTypes\Service\FacetType\ValueLessThanFactory::class,
+            'duration_greater_than' => NumericDataTypes\Service\FacetType\DurationGreaterThanFactory::class,
         ],
     ],
     'router' => [
