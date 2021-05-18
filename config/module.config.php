@@ -86,6 +86,7 @@ return [
             'value_greater_than' => NumericDataTypes\Service\FacetType\ValueGreaterThanFactory::class,
             'value_less_than' => NumericDataTypes\Service\FacetType\ValueLessThanFactory::class,
             'duration_greater_than' => NumericDataTypes\Service\FacetType\DurationGreaterThanFactory::class,
+            'duration_less_than' => NumericDataTypes\Service\FacetType\DurationLessThanFactory::class,
         ],
     ],
     'router' => [
