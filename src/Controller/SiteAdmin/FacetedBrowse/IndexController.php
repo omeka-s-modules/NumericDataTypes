@@ -16,17 +16,6 @@ class IndexController extends AbstractActionController
 
     public function timestampValuesAction()
     {
-        $propertyId = $this->params()->fromQuery('property_id');
-        $query = $this->params()->fromQuery('category_query');
-        parse_str($query, $query);
-        $query['site_id'] = $this->currentSite()->id();
-
-        $api = $this->services->get('Omeka\ApiManager');
-        $em = $this->services->get('Omeka\EntityManager');
-
-        // Get the IDs of all items that satisfy the category query.
-        $ids = $api->search('items', $query, ['returnScalar' => 'id'])->getContent();
-
         $dql = '
         SELECT v.value label, COUNT(v.value) has_count
         FROM Omeka\Entity\Value v
@@ -35,32 +24,11 @@ class IndexController extends AbstractActionController
         AND v.resource IN (:ids)
         GROUP BY label
         ORDER BY label ASC';
-        $query = $em->createQuery($dql)
-            ->setParameter('type', 'numeric:timestamp')
-            ->setParameter('propertyId', $propertyId)
-            ->setParameter('ids', $ids);
-        $values = $query->getResult();
-
-        $view = new ViewModel;
-        $view->setTerminal(true);
-        $view->setTemplate('faceted-browse/site-admin/category/show-all-table');
-        $view->setVariable('rows', $values);
-        return $view;
+        return $this->getShowAllTable('numeric:timestamp', $dql);
     }
 
     public function durationValuesAction()
     {
-        $propertyId = $this->params()->fromQuery('property_id');
-        $query = $this->params()->fromQuery('category_query');
-        parse_str($query, $query);
-        $query['site_id'] = $this->currentSite()->id();
-
-        $api = $this->services->get('Omeka\ApiManager');
-        $em = $this->services->get('Omeka\EntityManager');
-
-        // Get the IDs of all items that satisfy the category query.
-        $ids = $api->search('items', $query, ['returnScalar' => 'id'])->getContent();
-
         $dql = '
         SELECT v.value label, COUNT(v.value) has_count
         FROM Omeka\Entity\Value v
@@ -69,32 +37,11 @@ class IndexController extends AbstractActionController
         AND v.resource IN (:ids)
         GROUP BY label
         ORDER BY label ASC';
-        $query = $em->createQuery($dql)
-            ->setParameter('type', 'numeric:duration')
-            ->setParameter('propertyId', $propertyId)
-            ->setParameter('ids', $ids);
-        $values = $query->getResult();
-
-        $view = new ViewModel;
-        $view->setTerminal(true);
-        $view->setTemplate('faceted-browse/site-admin/category/show-all-table');
-        $view->setVariable('rows', $values);
-        return $view;
+        return $this->getShowAllTable('numeric:duration', $dql);
     }
 
     public function intervalValuesAction()
     {
-        $propertyId = $this->params()->fromQuery('property_id');
-        $query = $this->params()->fromQuery('category_query');
-        parse_str($query, $query);
-        $query['site_id'] = $this->currentSite()->id();
-
-        $api = $this->services->get('Omeka\ApiManager');
-        $em = $this->services->get('Omeka\EntityManager');
-
-        // Get the IDs of all items that satisfy the category query.
-        $ids = $api->search('items', $query, ['returnScalar' => 'id'])->getContent();
-
         $dql = '
         SELECT v.value label, COUNT(v.value) has_count
         FROM Omeka\Entity\Value v
@@ -103,32 +50,11 @@ class IndexController extends AbstractActionController
         AND v.resource IN (:ids)
         GROUP BY label
         ORDER BY label ASC';
-        $query = $em->createQuery($dql)
-            ->setParameter('type', 'numeric:interval')
-            ->setParameter('propertyId', $propertyId)
-            ->setParameter('ids', $ids);
-        $values = $query->getResult();
-
-        $view = new ViewModel;
-        $view->setTerminal(true);
-        $view->setTemplate('faceted-browse/site-admin/category/show-all-table');
-        $view->setVariable('rows', $values);
-        return $view;
+        return $this->getShowAllTable('numeric:interval', $dql);
     }
 
     public function integerValuesAction()
     {
-        $propertyId = $this->params()->fromQuery('property_id');
-        $query = $this->params()->fromQuery('category_query');
-        parse_str($query, $query);
-        $query['site_id'] = $this->currentSite()->id();
-
-        $api = $this->services->get('Omeka\ApiManager');
-        $em = $this->services->get('Omeka\EntityManager');
-
-        // Get the IDs of all items that satisfy the category query.
-        $ids = $api->search('items', $query, ['returnScalar' => 'id'])->getContent();
-
         // For ordering to work, we must cast string values to int by forcing a
         // cast using + 0.
         $dql = '
@@ -139,8 +65,24 @@ class IndexController extends AbstractActionController
         AND v.resource IN (:ids)
         GROUP BY label
         ORDER BY label ASC';
+        return $this->getShowAllTable('numeric:integer', $dql);
+    }
+
+    protected function getShowAllTable($dataType, $dql)
+    {
+        $propertyId = $this->params()->fromQuery('property_id');
+        $query = $this->params()->fromQuery('category_query');
+        parse_str($query, $query);
+        $query['site_id'] = $this->currentSite()->id();
+
+        $api = $this->services->get('Omeka\ApiManager');
+        $em = $this->services->get('Omeka\EntityManager');
+
+        // Get the IDs of all items that satisfy the category query.
+        $ids = $api->search('items', $query, ['returnScalar' => 'id'])->getContent();
+
         $query = $em->createQuery($dql)
-            ->setParameter('type', 'numeric:integer')
+            ->setParameter('type', $dataType)
             ->setParameter('propertyId', $propertyId)
             ->setParameter('ids', $ids);
         $values = $query->getResult();
