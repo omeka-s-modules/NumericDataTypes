@@ -11,11 +11,10 @@ container.on('change', '.duration-less-than-value', function(e) {
     const thisSelect = $(this);
     const facet = thisSelect.closest('.facet');
     const facetData = facet.data('facetData');
-    FacetedBrowse.setFacetState(
-        facet.data('facetId'),
-        thisSelect.val(),
-        `numeric[dur][lt][pid]=${facetData.property_id}&numeric[dur][lt][val]=${encodeURIComponent(thisSelect.val())}`
-    );
+    const query = thisSelect.val()
+    ? `numeric[dur][lt][pid]=${facetData.property_id}&numeric[dur][lt][val]=${encodeURIComponent(thisSelect.val())}`
+    : '';
+    FacetedBrowse.setFacetState(facet.data('facetId'), thisSelect.val(), query);
     FacetedBrowse.triggerFacetStateChange();
 });
 
