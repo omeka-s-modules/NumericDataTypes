@@ -1,21 +1,21 @@
-FacetedBrowse.registerFacetApplyStateHandler('greater_than', function(facet, facetState) {
+FacetedBrowse.registerFacetApplyStateHandler('value_greater_than', function(facet, facetState) {
     const thisFacet = $(facet);
-    const thisRange = thisFacet.find(`input.greater-than`);
+    const thisRange = thisFacet.find(`input.value-greater-than`);
     thisRange.val(facetState);
-    thisFacet.find('.greater-than-reset').show();
-    thisFacet.find('.greater-than-value').text(thisRange.val());
+    thisFacet.find('.value-greater-than-reset').show();
+    thisFacet.find('.value-greater-than-value').text(thisRange.val());
 });
 
 $(document).ready(function() {
 
 const container = $('#container');
 
-container.on('input', '.greater-than', function(e) {
+container.on('input', '.value-greater-than', function(e) {
     const thisRange = $(this);
     const facet = thisRange.closest('.facet');
     const facetData = facet.data('facetData');
-    facet.find('.greater-than-reset').show();
-    facet.find('.greater-than-value').text(thisRange.val());
+    facet.find('.value-greater-than-reset').show();
+    facet.find('.value-greater-than-value').text(thisRange.val());
     FacetedBrowse.setFacetState(
         facet.data('facetId'),
         thisRange.val(),
@@ -23,13 +23,13 @@ container.on('input', '.greater-than', function(e) {
     );
     FacetedBrowse.triggerFacetStateChange();
 });
-container.on('click', '.greater-than-reset', function(e) {
+container.on('click', '.value-greater-than-reset', function(e) {
     const thisButton = $(this);
     const facet = thisButton.closest('.facet');
     const facetData = facet.data('facetData');
-    const range = facet.find('.greater-than');
-    facet.find('.greater-than-reset').hide();
-    facet.find('.greater-than-value').text('');
+    const range = facet.find('.value-greater-than');
+    facet.find('.value-greater-than-reset').hide();
+    facet.find('.value-greater-than-value').text('');
     range.val('');
     FacetedBrowse.setFacetState(facet.data('facetId'), '');
     FacetedBrowse.triggerFacetStateChange();

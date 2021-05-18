@@ -9,7 +9,7 @@ use Laminas\View\Renderer\PhpRenderer;
 use NumericDataTypes\DataType\Timestamp;
 use NumericDataTypes\Form\Element\NumericPropertySelect;
 
-class GreaterThan implements FacetTypeInterface
+class ValueLessThan implements FacetTypeInterface
 {
     protected $formElements;
 
@@ -20,7 +20,7 @@ class GreaterThan implements FacetTypeInterface
 
     public function getLabel() : string
     {
-        return 'Greater than'; // @translate
+        return 'Value less than'; // @translate
     }
 
     public function getMaxFacets() : ?int
@@ -30,7 +30,7 @@ class GreaterThan implements FacetTypeInterface
 
     public function prepareDataForm(PhpRenderer $view) : void
     {
-        $view->headScript()->appendFile($view->assetUrl('js/faceted-browse/facet-data-form/greater-than.js', 'NumericDataTypes'));
+        $view->headScript()->appendFile($view->assetUrl('js/faceted-browse/facet-data-form/value-less-than.js', 'NumericDataTypes'));
     }
 
     public function renderDataForm(PhpRenderer $view, array $data) : string
@@ -44,7 +44,7 @@ class GreaterThan implements FacetTypeInterface
             'numeric_data_type' => 'integer',
         ]);
         $propertyId->setAttributes([
-            'id' => 'greater-than-property-id',
+            'id' => 'value-less-than-property-id',
             'value' => $data['property_id'] ?? null,
             'data-placeholder' => 'Select one…', // @translate
         ]);
@@ -56,7 +56,7 @@ class GreaterThan implements FacetTypeInterface
             'label' => 'Minimum value',
         ]);
         $min->setAttributes([
-            'id' => 'greater-than-min',
+            'id' => 'value-less-than-min',
         ]);
         // Maximum
         $max = $this->formElements->get(LaminasElement\Number::class);
@@ -66,7 +66,7 @@ class GreaterThan implements FacetTypeInterface
             'label' => 'Maximum value',
         ]);
         $max->setAttributes([
-            'id' => 'greater-than-max',
+            'id' => 'value-less-than-max',
         ]);
         // Step
         $step = $this->formElements->get(LaminasElement\Number::class);
@@ -76,10 +76,10 @@ class GreaterThan implements FacetTypeInterface
             'label' => 'Step',
         ]);
         $step->setAttributes([
-            'id' => 'greater-than-step',
+            'id' => 'value-less-than-step',
         ]);
 
-        return $view->partial('common/faceted-browse/facet-data-form/greater-than', [
+        return $view->partial('common/faceted-browse/facet-data-form/value-less-than', [
             'propertyId' => $propertyId,
             'min' => $min,
             'max' => $max,
@@ -89,24 +89,24 @@ class GreaterThan implements FacetTypeInterface
 
     public function prepareFacet(PhpRenderer $view) : void
     {
-        $view->headScript()->appendFile($view->assetUrl('js/faceted-browse/facet-render/greater-than.js', 'NumericDataTypes'));
+        $view->headScript()->appendFile($view->assetUrl('js/faceted-browse/facet-render/value-less-than.js', 'NumericDataTypes'));
     }
 
     public function renderFacet(PhpRenderer $view, FacetedBrowseFacetRepresentation $facet) : string
     {
-        $greaterThan = $this->formElements->get(LaminasElement\Range::class);
-        $greaterThan->setName('greater_than');
-        $greaterThan->setAttributes([
-            'class' => 'greater-than',
+        $lessThan = $this->formElements->get(LaminasElement\Range::class);
+        $lessThan->setName('value_less_than');
+        $lessThan->setAttributes([
+            'class' => 'value-less-than',
             'min' => $facet->data('min'),
             'max' => $facet->data('max'),
             'step' => $facet->data('step'),
             'style' => 'width: 90%;',
         ]);
 
-        return $view->partial('common/faceted-browse/facet-render/greater-than', [
+        return $view->partial('common/faceted-browse/facet-render/value-less-than', [
             'facet' => $facet,
-            'greaterThan' => $greaterThan,
+            'lessThan' => $lessThan,
         ]);
     }
 }

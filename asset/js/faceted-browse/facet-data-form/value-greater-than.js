@@ -1,13 +1,13 @@
-FacetedBrowse.registerFacetAddEditHandler('greater_than', function() {
-    $('#greater-than-property-id').chosen({
+FacetedBrowse.registerFacetAddEditHandler('value_greater_than', function() {
+    $('#value-greater-than-property-id').chosen({
         allow_single_deselect: true,
     });
 });
-FacetedBrowse.registerFacetSetHandler('greater_than', function() {
-    const propertyId = $('#greater-than-property-id');
-    const min = $('#greater-than-min');
-    const max = $('#greater-than-max');
-    const step = $('#greater-than-step');
+FacetedBrowse.registerFacetSetHandler('value_greater_than', function() {
+    const propertyId = $('#value-greater-than-property-id');
+    const min = $('#value-greater-than-min');
+    const max = $('#value-greater-than-max');
+    const step = $('#value-greater-than-step');
     if (!propertyId.val()) {
         alert(Omeka.jsTranslate('A facet must have a property.'));
     } else {
@@ -24,7 +24,7 @@ FacetedBrowse.registerFacetSetHandler('greater_than', function() {
 $(document).ready(function() {
 
 // Clear show all during certain interactions.
-$(document).on('change', '#greater-than-property-id', function(e) {
+$(document).on('change', '#value-greater-than-property-id', function(e) {
     $('#show-all').prop('checked', false);
     $('#show-all-table-container').empty();
 });

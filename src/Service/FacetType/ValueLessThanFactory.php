@@ -1,14 +1,14 @@
 <?php
 namespace NumericDataTypes\Service\FacetType;
 
-use NumericDataTypes\FacetType\LessThan;
+use NumericDataTypes\FacetType\ValueLessThan;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Interop\Container\ContainerInterface;
 
-class LessThanFactory implements FactoryInterface
+class ValueLessThanFactory implements FactoryInterface
 {
     public function __invoke(ContainerInterface $services, $requestedName, array $options = null)
     {
-        return new LessThan($services->get('FormElementManager'));
+        return new ValueLessThan($services->get('FormElementManager'));
     }
 }

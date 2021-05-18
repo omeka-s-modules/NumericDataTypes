@@ -1,21 +1,21 @@
-FacetedBrowse.registerFacetApplyStateHandler('less_than', function(facet, facetState) {
+FacetedBrowse.registerFacetApplyStateHandler('value_less_than', function(facet, facetState) {
     const thisFacet = $(facet);
-    const thisRange = thisFacet.find(`input.less-than`);
+    const thisRange = thisFacet.find(`input.value-less-than`);
     thisRange.val(facetState);
-    thisFacet.find('.less-than-reset').show();
-    thisFacet.find('.less-than-value').text(thisRange.val());
+    thisFacet.find('.value-less-than-reset').show();
+    thisFacet.find('.value-less-than-value').text(thisRange.val());
 });
 
 $(document).ready(function() {
 
 const container = $('#container');
 
-container.on('input', '.less-than', function(e) {
+container.on('input', '.value-less-than', function(e) {
     const thisRange = $(this);
     const facet = thisRange.closest('.facet');
     const facetData = facet.data('facetData');
-    facet.find('.less-than-reset').show();
-    facet.find('.less-than-value').text(thisRange.val());
+    facet.find('.value-less-than-reset').show();
+    facet.find('.value-less-than-value').text(thisRange.val());
     FacetedBrowse.setFacetState(
         facet.data('facetId'),
         thisRange.val(),
@@ -23,13 +23,13 @@ container.on('input', '.less-than', function(e) {
     );
     FacetedBrowse.triggerFacetStateChange();
 });
-container.on('click', '.less-than-reset', function(e) {
+container.on('click', '.value-less-than-reset', function(e) {
     const thisButton = $(this);
     const facet = thisButton.closest('.facet');
     const facetData = facet.data('facetData');
-    const range = facet.find('.less-than');
-    facet.find('.less-than-reset').hide();
-    facet.find('.less-than-value').text('');
+    const range = facet.find('.value-less-than');
+    facet.find('.value-less-than-reset').hide();
+    facet.find('.value-less-than-value').text('');
     range.val('');
     FacetedBrowse.setFacetState(facet.data('facetId'), '');
     FacetedBrowse.triggerFacetStateChange();

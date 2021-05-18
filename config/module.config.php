@@ -83,8 +83,8 @@ return [
         'factories' => [
             'date_after' => NumericDataTypes\Service\FacetType\DateAfterFactory::class,
             'date_before' => NumericDataTypes\Service\FacetType\DateBeforeFactory::class,
-            'greater_than' => NumericDataTypes\Service\FacetType\GreaterThanFactory::class,
-            'less_than' => NumericDataTypes\Service\FacetType\LessThanFactory::class,
+            'value_greater_than' => NumericDataTypes\Service\FacetType\ValueGreaterThanFactory::class,
+            'value_less_than' => NumericDataTypes\Service\FacetType\ValueLessThanFactory::class,
         ],
     ],
     'router' => [
