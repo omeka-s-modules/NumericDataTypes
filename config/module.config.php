@@ -87,6 +87,7 @@ return [
             'value_less_than' => NumericDataTypes\Service\FacetType\ValueLessThanFactory::class,
             'duration_greater_than' => NumericDataTypes\Service\FacetType\DurationGreaterThanFactory::class,
             'duration_less_than' => NumericDataTypes\Service\FacetType\DurationLessThanFactory::class,
+            'date_in_interval' => NumericDataTypes\Service\FacetType\DateInIntervalFactory::class,
         ],
     ],
     'router' => [
