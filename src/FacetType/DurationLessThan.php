@@ -99,6 +99,7 @@ class DurationLessThan implements FacetTypeInterface
         $elementValues = $this->formElements->get(LaminasElement\Select::class);
         $elementValues->setName('duration_less_than');
         $elementValues->setAttribute('class', 'duration-less-than-value');
+        $elementValues->setAttribute('style', 'width: 90%;');
         $elementValues->setEmptyOption('Select a date…'); // @translate
         $elementValues->setValueOptions($values);
 

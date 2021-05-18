@@ -99,6 +99,7 @@ class DateAfter implements FacetTypeInterface
         $elementValues = $this->formElements->get(LaminasElement\Select::class);
         $elementValues->setName('date_after');
         $elementValues->setAttribute('class', 'date-after-value');
+        $elementValues->setAttribute('style', 'width: 90%;');
         $elementValues->setEmptyOption('Select a date…'); // @translate
         $elementValues->setValueOptions($values);
 

@@ -99,6 +99,7 @@ class DateBefore implements FacetTypeInterface
         $elementValues = $this->formElements->get(LaminasElement\Select::class);
         $elementValues->setName('date_before');
         $elementValues->setAttribute('class', 'date-before-value');
+        $elementValues->setAttribute('style', 'width: 90%;');
         $elementValues->setEmptyOption('Select a date…'); // @translate
         $elementValues->setValueOptions($values);
 
