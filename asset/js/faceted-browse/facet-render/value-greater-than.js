@@ -21,7 +21,7 @@ container.on('input', '.value-greater-than', function(e) {
         thisRange.val(),
         `numeric[int][gt][pid]=${facetData.property_id}&numeric[int][gt][val]=${encodeURIComponent(thisRange.val())}`
     );
-    FacetedBrowse.triggerFacetStateChange();
+    FacetedBrowse.triggerStateChange();
 });
 container.on('click', '.value-greater-than-reset', function(e) {
     const thisButton = $(this);
@@ -32,7 +32,7 @@ container.on('click', '.value-greater-than-reset', function(e) {
     facet.find('.value-greater-than-value').text('');
     range.val('');
     FacetedBrowse.setFacetState(facet.data('facetId'), '');
-    FacetedBrowse.triggerFacetStateChange();
+    FacetedBrowse.triggerStateChange();
 });
 
 });

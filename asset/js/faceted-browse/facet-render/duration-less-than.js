@@ -15,7 +15,7 @@ container.on('change', '.duration-less-than-value', function(e) {
     ? `numeric[dur][lt][pid]=${facetData.property_id}&numeric[dur][lt][val]=${encodeURIComponent(thisSelect.val())}`
     : '';
     FacetedBrowse.setFacetState(facet.data('facetId'), thisSelect.val(), query);
-    FacetedBrowse.triggerFacetStateChange();
+    FacetedBrowse.triggerStateChange();
 });
 
 });

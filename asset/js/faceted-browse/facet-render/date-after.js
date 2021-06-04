@@ -15,7 +15,7 @@ container.on('change', '.date-after-value', function(e) {
         ? `numeric[ts][gt][pid]=${facetData.property_id}&numeric[ts][gt][val]=${encodeURIComponent(thisSelect.val())}`
         : '';
     FacetedBrowse.setFacetState(facet.data('facetId'), thisSelect.val(), query);
-    FacetedBrowse.triggerFacetStateChange();
+    FacetedBrowse.triggerStateChange();
 });
 
 });
