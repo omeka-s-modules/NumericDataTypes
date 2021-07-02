@@ -1,5 +1,5 @@
 <?php
-namespace NumericDataTypes\FacetType;
+namespace NumericDataTypes\FacetedBrowse\FacetType;
 
 use FacetedBrowse\Api\Representation\FacetedBrowseFacetRepresentation;
 use FacetedBrowse\FacetType\FacetTypeInterface;
@@ -21,6 +21,11 @@ class ValueGreaterThan implements FacetTypeInterface
     public function getLabel() : string
     {
         return 'Value greater than'; // @translate
+    }
+
+    public function getResourceTypes() : array
+    {
+        return ['items'];
     }
 
     public function getMaxFacets() : ?int

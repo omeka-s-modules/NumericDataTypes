@@ -1,7 +1,7 @@
 <?php
-namespace NumericDataTypes\Service\FacetType;
+namespace NumericDataTypes\Service\FacetedBrowse\FacetType;
 
-use NumericDataTypes\FacetType\ValueGreaterThan;
+use NumericDataTypes\FacetedBrowse\FacetType\ValueGreaterThan;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Interop\Container\ContainerInterface;
 

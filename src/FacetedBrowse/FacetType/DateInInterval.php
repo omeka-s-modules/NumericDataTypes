@@ -1,5 +1,5 @@
 <?php
-namespace NumericDataTypes\FacetType;
+namespace NumericDataTypes\FacetedBrowse\FacetType;
 
 use FacetedBrowse\Api\Representation\FacetedBrowseFacetRepresentation;
 use FacetedBrowse\FacetType\FacetTypeInterface;
@@ -9,7 +9,7 @@ use Laminas\View\Renderer\PhpRenderer;
 use NumericDataTypes\DataType\Timestamp;
 use NumericDataTypes\Form\Element\NumericPropertySelect;
 
-class DateBefore implements FacetTypeInterface
+class DateInInterval implements FacetTypeInterface
 {
     protected $formElements;
 
@@ -20,7 +20,12 @@ class DateBefore implements FacetTypeInterface
 
     public function getLabel() : string
     {
-        return 'Date before'; // @translate
+        return 'Date in interval'; // @translate
+    }
+
+    public function getResourceTypes() : array
+    {
+        return ['items'];
     }
 
     public function getMaxFacets() : ?int
@@ -30,7 +35,7 @@ class DateBefore implements FacetTypeInterface
 
     public function prepareDataForm(PhpRenderer $view) : void
     {
-        $view->headScript()->appendFile($view->assetUrl('js/faceted-browse/facet-data-form/date-before.js', 'NumericDataTypes'));
+        $view->headScript()->appendFile($view->assetUrl('js/faceted-browse/facet-data-form/date-in-interval.js', 'NumericDataTypes'));
     }
 
     public function renderDataForm(PhpRenderer $view, array $data) : string
@@ -41,10 +46,10 @@ class DateBefore implements FacetTypeInterface
         $propertyId->setOptions([
             'label' => 'Property', // @translate
             'empty_option' => '',
-            'numeric_data_type' => 'timestamp',
+            'numeric_data_type' => 'interval',
         ]);
         $propertyId->setAttributes([
-            'id' => 'date-before-property-id',
+            'id' => 'date-in-interval-property-id',
             'value' => $data['property_id'] ?? null,
             'data-placeholder' => 'Select one…', // @translate
         ]);
@@ -56,11 +61,11 @@ class DateBefore implements FacetTypeInterface
             'info' => 'Enter the date/time values, separated by a new line. For each line, enter the date/time in ISO 8601 format, followed by a space, followed by the human-readable date/time.', // @translate
         ]);
         $values->setAttributes([
-            'id' => 'date-before-values',
+            'id' => 'date-in-interval-values',
             'style' => 'height: 300px;',
             'value' => $data['values'] ?? null,
         ]);
-        return $view->partial('common/faceted-browse/facet-data-form/date-before', [
+        return $view->partial('common/faceted-browse/facet-data-form/date-in-interval', [
             'elementPropertyId' => $propertyId,
             'elementValues' => $values,
         ]);
@@ -68,7 +73,7 @@ class DateBefore implements FacetTypeInterface
 
     public function prepareFacet(PhpRenderer $view) : void
     {
-        $view->headScript()->appendFile($view->assetUrl('js/faceted-browse/facet-render/date-before.js', 'NumericDataTypes'));
+        $view->headScript()->appendFile($view->assetUrl('js/faceted-browse/facet-render/date-in-interval.js', 'NumericDataTypes'));
     }
 
     public function renderFacet(PhpRenderer $view, FacetedBrowseFacetRepresentation $facet) : string
@@ -97,13 +102,13 @@ class DateBefore implements FacetTypeInterface
         $values = $iso8601KeyValues;
 
         $elementValues = $this->formElements->get(LaminasElement\Select::class);
-        $elementValues->setName('date_before');
-        $elementValues->setAttribute('class', 'date-before-value');
+        $elementValues->setName('date_in_interval');
+        $elementValues->setAttribute('class', 'date-in-interval-value');
         $elementValues->setAttribute('style', 'width: 90%;');
         $elementValues->setEmptyOption('Select a date…'); // @translate
         $elementValues->setValueOptions($values);
 
-        return $view->partial('common/faceted-browse/facet-render/date-before', [
+        return $view->partial('common/faceted-browse/facet-render/date-in-interval', [
             'facet' => $facet,
             'elementValues' => $elementValues,
         ]);

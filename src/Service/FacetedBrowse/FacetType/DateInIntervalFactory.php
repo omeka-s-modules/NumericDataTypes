@@ -1,7 +1,7 @@
 <?php
-namespace NumericDataTypes\Service\FacetType;
+namespace NumericDataTypes\Service\FacetedBrowse\FacetType;
 
-use NumericDataTypes\FacetType\DateInInterval;
+use NumericDataTypes\FacetedBrowse\FacetType\DateInInterval;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Interop\Container\ContainerInterface;
 

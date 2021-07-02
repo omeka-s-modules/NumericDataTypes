@@ -81,13 +81,13 @@ return [
     ],
     'faceted_browse_facet_types' => [
         'factories' => [
-            'date_after' => NumericDataTypes\Service\FacetType\DateAfterFactory::class,
-            'date_before' => NumericDataTypes\Service\FacetType\DateBeforeFactory::class,
-            'value_greater_than' => NumericDataTypes\Service\FacetType\ValueGreaterThanFactory::class,
-            'value_less_than' => NumericDataTypes\Service\FacetType\ValueLessThanFactory::class,
-            'duration_greater_than' => NumericDataTypes\Service\FacetType\DurationGreaterThanFactory::class,
-            'duration_less_than' => NumericDataTypes\Service\FacetType\DurationLessThanFactory::class,
-            'date_in_interval' => NumericDataTypes\Service\FacetType\DateInIntervalFactory::class,
+            'date_after' => NumericDataTypes\Service\FacetedBrowse\FacetType\DateAfterFactory::class,
+            'date_before' => NumericDataTypes\Service\FacetedBrowse\FacetType\DateBeforeFactory::class,
+            'value_greater_than' => NumericDataTypes\Service\FacetedBrowse\FacetType\ValueGreaterThanFactory::class,
+            'value_less_than' => NumericDataTypes\Service\FacetedBrowse\FacetType\ValueLessThanFactory::class,
+            'duration_greater_than' => NumericDataTypes\Service\FacetedBrowse\FacetType\DurationGreaterThanFactory::class,
+            'duration_less_than' => NumericDataTypes\Service\FacetedBrowse\FacetType\DurationLessThanFactory::class,
+            'date_in_interval' => NumericDataTypes\Service\FacetedBrowse\FacetType\DateInIntervalFactory::class,
         ],
     ],
     'router' => [

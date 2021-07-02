@@ -1,15 +1,15 @@
 <?php
-namespace NumericDataTypes\FacetType;
+namespace NumericDataTypes\FacetedBrowse\FacetType;
 
 use FacetedBrowse\Api\Representation\FacetedBrowseFacetRepresentation;
 use FacetedBrowse\FacetType\FacetTypeInterface;
 use Laminas\Form\Element as LaminasElement;
 use Laminas\ServiceManager\ServiceLocatorInterface;
 use Laminas\View\Renderer\PhpRenderer;
-use NumericDataTypes\DataType\Duration;
+use NumericDataTypes\DataType\Timestamp;
 use NumericDataTypes\Form\Element\NumericPropertySelect;
 
-class DurationGreaterThan implements FacetTypeInterface
+class DateAfter implements FacetTypeInterface
 {
     protected $formElements;
 
@@ -20,7 +20,12 @@ class DurationGreaterThan implements FacetTypeInterface
 
     public function getLabel() : string
     {
-        return 'Duration greater than'; // @translate
+        return 'Date after'; // @translate
+    }
+
+    public function getResourceTypes() : array
+    {
+        return ['items'];
     }
 
     public function getMaxFacets() : ?int
@@ -30,7 +35,7 @@ class DurationGreaterThan implements FacetTypeInterface
 
     public function prepareDataForm(PhpRenderer $view) : void
     {
-        $view->headScript()->appendFile($view->assetUrl('js/faceted-browse/facet-data-form/duration-greater-than.js', 'NumericDataTypes'));
+        $view->headScript()->appendFile($view->assetUrl('js/faceted-browse/facet-data-form/date-after.js', 'NumericDataTypes'));
     }
 
     public function renderDataForm(PhpRenderer $view, array $data) : string
@@ -41,10 +46,10 @@ class DurationGreaterThan implements FacetTypeInterface
         $propertyId->setOptions([
             'label' => 'Property', // @translate
             'empty_option' => '',
-            'numeric_data_type' => 'duration',
+            'numeric_data_type' => 'timestamp',
         ]);
         $propertyId->setAttributes([
-            'id' => 'duration-greater-than-property-id',
+            'id' => 'date-after-property-id',
             'value' => $data['property_id'] ?? null,
             'data-placeholder' => 'Select one…', // @translate
         ]);
@@ -53,14 +58,14 @@ class DurationGreaterThan implements FacetTypeInterface
         $values->setName('values');
         $values->setOptions([
             'label' => 'Values', // @translate
-            'info' => 'Enter the duration values, separated by a new line. For each line, enter the duration in ISO 8601 format, followed by a space, followed by the human-readable duration.', // @translate
+            'info' => 'Enter the date/time values, separated by a new line. For each line, enter the date/time in ISO 8601 format, followed by a space, followed by the human-readable date/time.', // @translate
         ]);
         $values->setAttributes([
-            'id' => 'duration-greater-than-values',
+            'id' => 'date-after-values',
             'style' => 'height: 300px;',
             'value' => $data['values'] ?? null,
         ]);
-        return $view->partial('common/faceted-browse/facet-data-form/duration-greater-than', [
+        return $view->partial('common/faceted-browse/facet-data-form/date-after', [
             'elementPropertyId' => $propertyId,
             'elementValues' => $values,
         ]);
@@ -68,7 +73,7 @@ class DurationGreaterThan implements FacetTypeInterface
 
     public function prepareFacet(PhpRenderer $view) : void
     {
-        $view->headScript()->appendFile($view->assetUrl('js/faceted-browse/facet-render/duration-greater-than.js', 'NumericDataTypes'));
+        $view->headScript()->appendFile($view->assetUrl('js/faceted-browse/facet-render/date-after.js', 'NumericDataTypes'));
     }
 
     public function renderFacet(PhpRenderer $view, FacetedBrowseFacetRepresentation $facet) : string
@@ -87,7 +92,7 @@ class DurationGreaterThan implements FacetTypeInterface
                 $value = $value;
             }
             try {
-                Duration::getDurationFromValue($iso8601);
+                Timestamp::getDateTimeFromValue($iso8601);
             } catch (\InvalidArgumentException $e) {
                 // This is invalid ISO 8601.
                 continue;
@@ -97,13 +102,13 @@ class DurationGreaterThan implements FacetTypeInterface
         $values = $iso8601KeyValues;
 
         $elementValues = $this->formElements->get(LaminasElement\Select::class);
-        $elementValues->setName('duration_greater_than');
-        $elementValues->setAttribute('class', 'duration-greater-than-value');
+        $elementValues->setName('date_after');
+        $elementValues->setAttribute('class', 'date-after-value');
         $elementValues->setAttribute('style', 'width: 90%;');
         $elementValues->setEmptyOption('Select a date…'); // @translate
         $elementValues->setValueOptions($values);
 
-        return $view->partial('common/faceted-browse/facet-render/duration-greater-than', [
+        return $view->partial('common/faceted-browse/facet-render/date-after', [
             'facet' => $facet,
             'elementValues' => $elementValues,
         ]);
