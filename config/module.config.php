@@ -74,4 +74,17 @@ return [
             ],
         ],
     ],
+    'datavis_dataset_types' => [
+        'invokables' => [
+            'count_items_time_series' => NumericDataTypes\Datavis\DatasetType\CountItemsTimeSeries::class,
+            'count_items_property_values_time_series' => NumericDataTypes\Datavis\DatasetType\CountItemsPropertyValuesTimeSeries::class,
+        ],
+    ],
+    'datavis_diagram_types' => [
+        'invokables' => [
+            'line_chart_time_series' => NumericDataTypes\Datavis\DiagramType\LineChartTimeSeries::class,
+            'histogram_time_series' => NumericDataTypes\Datavis\DiagramType\HistogramTimeSeries::class,
+            'line_chart_time_series_grouped' => NumericDataTypes\Datavis\DiagramType\LineChartTimeSeriesGrouped::class,
+        ],
+    ],
 ];
