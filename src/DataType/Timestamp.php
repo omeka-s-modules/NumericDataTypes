@@ -7,10 +7,11 @@ use NumericDataTypes\Form\Element\Timestamp as TimestampElement;
 use Omeka\Api\Adapter\AbstractEntityAdapter;
 use Omeka\Api\Adapter\AdapterInterface;
 use Omeka\Api\Representation\ValueRepresentation;
+use Omeka\DataType\ValueAnnotatableInterface;
 use Omeka\Entity\Value;
 use Laminas\View\Renderer\PhpRenderer;
 
-class Timestamp extends AbstractDateTimeDataType
+class Timestamp extends AbstractDateTimeDataType implements ValueAnnotatableInterface
 {
     public function getName()
     {
@@ -158,5 +159,14 @@ class Timestamp extends AbstractDateTimeDataType
             );
             $qb->addOrderBy('numeric_value', $query['sort_order']);
         }
+    }
+
+    public function valueAnnotationPrepareForm(PhpRenderer $view)
+    {
+    }
+
+    public function valueAnnotationForm(PhpRenderer $view)
+    {
+        return $this->form($view);
     }
 }

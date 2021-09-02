@@ -313,7 +313,7 @@ var NumericDataTypes = {
 };
 
 // Enable numeric controls when preparing values on the resource form.
-$(document).on('o:prepare-value', function(e, type, value) {
+$(document).on('o:prepare-value o:prepare-value-annotation', function(e, type, value) {
     if ('numeric:timestamp' === type) {
         NumericDataTypes.enableTimestamp(value);
     }
@@ -343,7 +343,7 @@ $(function() {
         NumericDataTypes.enableInteger($(this));
     });
     // Toggle visibility of time inputs.
-    $(document).find('.numeric-toggle-time input[type="checkbox"]').on('change', function(e) {
+    $(document).on('change', '.numeric-toggle-time input[type="checkbox"]', function() {
         $(this).closest('.numeric-datetime-inputs').find('.numeric-time-inputs').toggle();
     });
 });
