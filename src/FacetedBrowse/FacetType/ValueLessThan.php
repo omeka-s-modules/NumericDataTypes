@@ -99,14 +99,14 @@ class ValueLessThan implements FacetTypeInterface
 
     public function renderFacet(PhpRenderer $view, FacetedBrowseFacetRepresentation $facet) : string
     {
-        $lessThan = $this->formElements->get(LaminasElement\Range::class);
+        $lessThan = $this->formElements->get(LaminasElement\Number::class);
         $lessThan->setName('value_less_than');
         $lessThan->setAttributes([
             'class' => 'value-less-than',
             'min' => $facet->data('min'),
             'max' => $facet->data('max'),
             'step' => $facet->data('step'),
-            'style' => 'width: 90%;',
+            'style' => 'width: 50%;',
         ]);
 
         return $view->partial('common/faceted-browse/facet-render/value-less-than', [

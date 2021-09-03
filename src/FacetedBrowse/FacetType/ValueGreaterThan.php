@@ -99,14 +99,14 @@ class ValueGreaterThan implements FacetTypeInterface
 
     public function renderFacet(PhpRenderer $view, FacetedBrowseFacetRepresentation $facet) : string
     {
-        $greaterThan = $this->formElements->get(LaminasElement\Range::class);
+        $greaterThan = $this->formElements->get(LaminasElement\Number::class);
         $greaterThan->setName('value_greater_than');
         $greaterThan->setAttributes([
             'class' => 'value-greater-than',
             'min' => $facet->data('min'),
             'max' => $facet->data('max'),
             'step' => $facet->data('step'),
-            'style' => 'width: 90%;',
+            'style' => 'width: 50%;',
         ]);
 
         return $view->partial('common/faceted-browse/facet-render/value-greater-than', [
