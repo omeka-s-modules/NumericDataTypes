@@ -99,16 +99,34 @@ class ValueLessThan implements FacetTypeInterface
 
     public function renderFacet(PhpRenderer $view, FacetedBrowseFacetRepresentation $facet) : string
     {
-        $lessThan = $this->formElements->get(LaminasElement\Number::class);
-        $lessThan->setName('value_less_than');
-        $lessThan->setAttributes([
-            'class' => 'value-less-than',
-            'min' => $facet->data('min'),
-            'max' => $facet->data('max'),
-            'step' => $facet->data('step'),
-            'style' => 'width: 50%;',
-        ]);
+        $min = $facet->data('min');
+        $max = $facet->data('max');
+        $step = $facet->data('step') ?: 1;
 
+        // To use a dropdown menu, we must require a min and max so we can
+        // calculate a valid range. Also, to avoid the risk of reaching the
+        // memory limit, we must set a resonable maximum number of options.
+        if (is_numeric($min) && is_numeric($max) && (5000 >= (($max - $min) / $step))) {
+            $range = range($min, $max, $step);
+            $lessThan = $this->formElements->get(LaminasElement\Select::class);
+            $lessThan->setName('value_less_than');
+            $lessThan->setEmptyOption('');
+            $lessThan->setValueOptions(array_combine($range, $range));
+            $lessThan->setAttributes([
+                'class' => 'value-less-than',
+                'style' => 'width: 50%;',
+            ]);
+        } else {
+            $lessThan = $this->formElements->get(LaminasElement\Number::class);
+            $lessThan->setName('value_less_than');
+            $lessThan->setAttributes([
+                'class' => 'value-less-than',
+                'min' => $min,
+                'max' => $max,
+                'step' => $step,
+                'style' => 'width: 50%;',
+            ]);
+        }
         return $view->partial('common/faceted-browse/facet-render/value-less-than', [
             'facet' => $facet,
             'lessThan' => $lessThan,

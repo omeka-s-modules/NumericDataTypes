@@ -99,15 +99,34 @@ class ValueGreaterThan implements FacetTypeInterface
 
     public function renderFacet(PhpRenderer $view, FacetedBrowseFacetRepresentation $facet) : string
     {
-        $greaterThan = $this->formElements->get(LaminasElement\Number::class);
-        $greaterThan->setName('value_greater_than');
-        $greaterThan->setAttributes([
-            'class' => 'value-greater-than',
-            'min' => $facet->data('min'),
-            'max' => $facet->data('max'),
-            'step' => $facet->data('step'),
-            'style' => 'width: 50%;',
-        ]);
+        $min = $facet->data('min');
+        $max = $facet->data('max');
+        $step = $facet->data('step') ?: 1;
+
+        // To use a dropdown menu, we must require a min and max so we can
+        // calculate a valid range. Also, to avoid the risk of reaching the
+        // memory limit, we must set a resonable maximum number of options.
+        if (is_numeric($min) && is_numeric($max) && (5000 >= (($max - $min) / $step))) {
+            $range = range($min, $max, $step);
+            $greaterThan = $this->formElements->get(LaminasElement\Select::class);
+            $greaterThan->setName('value_greater_than');
+            $greaterThan->setEmptyOption('');
+            $greaterThan->setValueOptions(array_combine($range, $range));
+            $greaterThan->setAttributes([
+                'class' => 'value-greater-than',
+                'style' => 'width: 50%;',
+            ]);
+        } else {
+            $greaterThan = $this->formElements->get(LaminasElement\Number::class);
+            $greaterThan->setName('value_greater_than');
+            $greaterThan->setAttributes([
+                'class' => 'value-greater-than',
+                'min' => $min,
+                'max' => $max,
+                'step' => $step,
+                'style' => 'width: 50%;',
+            ]);
+        }
 
         return $view->partial('common/faceted-browse/facet-render/value-greater-than', [
             'facet' => $facet,

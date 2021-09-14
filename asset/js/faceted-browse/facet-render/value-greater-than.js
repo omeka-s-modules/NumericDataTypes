@@ -1,6 +1,6 @@
 FacetedBrowse.registerFacetApplyStateHandler('value_greater_than', function(facet, facetState) {
     const thisFacet = $(facet);
-    const thisInput = thisFacet.find(`input.value-greater-than`);
+    const thisInput = thisFacet.find(`.value-greater-than`);
     thisInput.val(facetState);
 });
 
