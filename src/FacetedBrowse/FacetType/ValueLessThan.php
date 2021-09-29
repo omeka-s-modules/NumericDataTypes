@@ -6,7 +6,6 @@ use FacetedBrowse\FacetType\FacetTypeInterface;
 use Laminas\Form\Element as LaminasElement;
 use Laminas\ServiceManager\ServiceLocatorInterface;
 use Laminas\View\Renderer\PhpRenderer;
-use NumericDataTypes\DataType\Timestamp;
 use NumericDataTypes\Form\Element\NumericPropertySelect;
 
 class ValueLessThan implements FacetTypeInterface

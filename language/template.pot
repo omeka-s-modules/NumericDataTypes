@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-17 16:00-0500\n"
+"POT-Creation-Date: 2021-09-29 16:59-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -75,6 +75,16 @@ msgstr ""
 #: src/DataType/Duration.php:101
 #, php-format
 msgid "%s seconds"
+msgstr ""
+
+#: view/common/faceted-browse/facet-data-form/date-after.phtml:4
+#: view/common/faceted-browse/facet-data-form/date-before.phtml:4
+#: view/common/faceted-browse/facet-data-form/date-in-interval.phtml:4
+#: view/common/faceted-browse/facet-data-form/duration-greater-than.phtml:4
+#: view/common/faceted-browse/facet-data-form/duration-less-than.phtml:4
+#: view/common/faceted-browse/facet-data-form/value-greater-than.phtml:6
+#: view/common/faceted-browse/facet-data-form/value-less-than.phtml:6
+msgid "Show all available values."
 msgstr ""
 
 #: view/common/numeric-data-types-advanced-search.phtml:15
@@ -161,20 +171,103 @@ msgstr ""
 msgid "Integer"
 msgstr ""
 
-#: src/DataType/Interval.php:22
-msgid "Interval"
-msgstr ""
-
 #: src/DataType/AbstractDataType.php:12
 msgid "Numeric"
+msgstr ""
+
+#: src/DataType/Duration.php:37
+msgid "Duration"
 msgstr ""
 
 #: src/DataType/Timestamp.php:22
 msgid "Timestamp"
 msgstr ""
 
-#: src/DataType/Duration.php:37
-msgid "Duration"
+#: src/DataType/Interval.php:22
+msgid "Interval"
+msgstr ""
+
+#: src/FacetedBrowse/FacetType/DateAfter.php:23
+msgid "Date after"
+msgstr ""
+
+#: src/FacetedBrowse/FacetType/DateAfter.php:54
+#: src/FacetedBrowse/FacetType/ValueGreaterThan.php:54
+#: src/FacetedBrowse/FacetType/DurationGreaterThan.php:54
+#: src/FacetedBrowse/FacetType/DurationLessThan.php:54
+#: src/FacetedBrowse/FacetType/DateInInterval.php:54
+#: src/FacetedBrowse/FacetType/ValueLessThan.php:54
+#: src/FacetedBrowse/FacetType/DateBefore.php:54
+msgid "Select one…"
+msgstr ""
+
+#: src/FacetedBrowse/FacetType/DateAfter.php:61
+#: src/FacetedBrowse/FacetType/DateInInterval.php:61
+#: src/FacetedBrowse/FacetType/DateBefore.php:61
+msgid ""
+"Enter the date/time values, separated by a new line. For each line, enter "
+"the date/time in ISO 8601 format, followed by a space, followed by the human-"
+"readable date/time."
+msgstr ""
+
+#: src/FacetedBrowse/FacetType/DateAfter.php:108
+#: src/FacetedBrowse/FacetType/DurationGreaterThan.php:108
+#: src/FacetedBrowse/FacetType/DurationLessThan.php:108
+#: src/FacetedBrowse/FacetType/DateInInterval.php:108
+#: src/FacetedBrowse/FacetType/DateBefore.php:108
+msgid "Select a date…"
+msgstr ""
+
+#: src/FacetedBrowse/FacetType/ValueGreaterThan.php:23
+msgid "Value greater than"
+msgstr ""
+
+#: src/FacetedBrowse/FacetType/DurationGreaterThan.php:23
+msgid "Duration greater than"
+msgstr ""
+
+#: src/FacetedBrowse/FacetType/DurationGreaterThan.php:61
+#: src/FacetedBrowse/FacetType/DurationLessThan.php:61
+msgid ""
+"Enter the duration values, separated by a new line. For each line, enter the "
+"duration in ISO 8601 format, followed by a space, followed by the human-"
+"readable duration."
+msgstr ""
+
+#: src/FacetedBrowse/FacetType/DurationLessThan.php:23
+msgid "Duration less than"
+msgstr ""
+
+#: src/FacetedBrowse/FacetType/ValueLessThan.php:23
+msgid "Value less than"
+msgstr ""
+
+#: src/FacetedBrowse/FacetType/DateBefore.php:23
+msgid "Date before"
+msgstr ""
+
+#: src/Form/Element/Duration.php:30
+msgid "Years"
+msgstr ""
+
+#: src/Form/Element/Duration.php:38
+msgid "Months"
+msgstr ""
+
+#: src/Form/Element/Duration.php:46
+msgid "Days"
+msgstr ""
+
+#: src/Form/Element/Duration.php:54
+msgid "Hours"
+msgstr ""
+
+#: src/Form/Element/Duration.php:62
+msgid "Minutes"
+msgstr ""
+
+#: src/Form/Element/Duration.php:70
+msgid "Seconds"
 msgstr ""
 
 #: src/Form/Element/DateTime.php:30
@@ -367,28 +460,4 @@ msgstr ""
 
 #: src/Form/Element/ConvertToNumeric.php:36
 msgid "Convert to integer"
-msgstr ""
-
-#: src/Form/Element/Duration.php:30
-msgid "Years"
-msgstr ""
-
-#: src/Form/Element/Duration.php:38
-msgid "Months"
-msgstr ""
-
-#: src/Form/Element/Duration.php:46
-msgid "Days"
-msgstr ""
-
-#: src/Form/Element/Duration.php:54
-msgid "Hours"
-msgstr ""
-
-#: src/Form/Element/Duration.php:62
-msgid "Minutes"
-msgstr ""
-
-#: src/Form/Element/Duration.php:70
-msgid "Seconds"
 msgstr ""
