@@ -43,7 +43,7 @@ class Integer extends AbstractDataType
         }
         return [
             '@value' => (int) $value->value(),
-            '@type' => 'o-module-numeric-xsd:integer',
+            '@type' => 'http://www.w3.org/2001/XMLSchema#integer',
         ];
     }
 
