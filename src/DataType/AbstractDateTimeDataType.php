@@ -80,8 +80,8 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
         $dateTime = [
             'value' => $value,
             'date_value' => $matches['date'],
-            'time_value' => isset($matches['time']) ? $matches['time'] : null,
-            'offset_value' => isset($matches['offset']) ? $matches['offset'] : null,
+            'time_value' => $matches['time'] ?? null,
+            'offset_value' => $matches['offset'] ?? null,
             'year' => (int) $matches['year'],
             'month' => isset($matches['month']) ? (int) $matches['month'] : null,
             'day' => isset($matches['day']) ? (int) $matches['day'] : null,
@@ -94,22 +94,15 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
 
         // Set the normalized datetime components. Each component not included
         // in the passed value is given a default value.
-        $dateTime['month_normalized'] = isset($dateTime['month'])
-            ? $dateTime['month'] : ($defaultFirst ? 1 : 12);
+        $dateTime['month_normalized'] = $dateTime['month'] ?? ($defaultFirst ? 1 : 12);
         // The last day takes special handling, as it depends on year/month.
-        $dateTime['day_normalized'] = isset($dateTime['day'])
-            ? $dateTime['day']
-            : ($defaultFirst ? 1 : self::getLastDay($dateTime['year'], $dateTime['month_normalized']));
-        $dateTime['hour_normalized'] = isset($dateTime['hour'])
-            ? $dateTime['hour'] : ($defaultFirst ? 0 : 23);
-        $dateTime['minute_normalized'] = isset($dateTime['minute'])
-            ? $dateTime['minute'] : ($defaultFirst ? 0 : 59);
-        $dateTime['second_normalized'] = isset($dateTime['second'])
-            ? $dateTime['second'] : ($defaultFirst ? 0 : 59);
-        $dateTime['offset_hour_normalized'] = isset($dateTime['offset_hour'])
-            ? $dateTime['offset_hour'] : 0;
-        $dateTime['offset_minute_normalized'] = isset($dateTime['offset_minute'])
-            ? $dateTime['offset_minute'] : 0;
+        $dateTime['day_normalized'] = $dateTime['day']
+            ?? ($defaultFirst ? 1 : self::getLastDay($dateTime['year'], $dateTime['month_normalized']));
+        $dateTime['hour_normalized'] = $dateTime['hour'] ?? ($defaultFirst ? 0 : 23);
+        $dateTime['minute_normalized'] = $dateTime['minute'] ?? ($defaultFirst ? 0 : 59);
+        $dateTime['second_normalized'] = $dateTime['second'] ?? ($defaultFirst ? 0 : 59);
+        $dateTime['offset_hour_normalized'] = $dateTime['offset_hour'] ?? 0;
+        $dateTime['offset_minute_normalized'] = $dateTime['offset_minute'] ?? 0;
         // Set the UTC offset (+00:00) if no offset is provided.
         $dateTime['offset_normalized'] = isset($dateTime['offset_value'])
             ? ('Z' === $dateTime['offset_value'] ? '+00:00' : $dateTime['offset_value'])
@@ -189,7 +182,8 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
         // consistency, use Coordinated Universal Time (UTC) if no offset is
         // provided. This avoids automatic adjustments based on the server's
         // default timezone.
-        $dateTime['date'] = new DateTime(null, new DateTimeZone($dateTime['offset_normalized']));
+        // With strict type, "now" is required.
+        $dateTime['date'] = new DateTime('now', new DateTimeZone($dateTime['offset_normalized']));
         $dateTime['date']->setDate(
             $dateTime['year'],
             $dateTime['month_normalized'],

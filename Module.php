@@ -125,7 +125,6 @@ class Module extends AbstractModule
             'Omeka\Api\Adapter\ItemAdapter',
             'api.preprocess_batch_update',
             function (Event $event) {
-                $adapter = $event->getTarget();
                 $data = $event->getParam('data');
                 $rawData = $event->getParam('request')->getContent();
                 if ($this->convertToNumericDataIsValid($rawData)) {
@@ -281,7 +280,7 @@ class Module extends AbstractModule
         }
         $adapter = $event->getTarget();
         $qb = $event->getParam('queryBuilder');
-        foreach ($this->getNumericDataTypes() as $dataTypeName => $dataType) {
+        foreach ($this->getNumericDataTypes() as $dataType) {
             $dataType->buildQuery($adapter, $qb, $query);
         }
     }
@@ -310,7 +309,7 @@ class Module extends AbstractModule
         if ('numeric' !== $namespace || !is_string($type) || !is_numeric($propertyId)) {
             return;
         }
-        foreach ($this->getNumericDataTypes() as $dataTypeName => $dataType) {
+        foreach ($this->getNumericDataTypes() as $dataType) {
             $dataType->sortQuery($adapter, $qb, $query, $type, $propertyId);
         }
     }
