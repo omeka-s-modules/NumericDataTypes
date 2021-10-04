@@ -82,13 +82,18 @@ class Timestamp extends AbstractDateTimeDataType
         $value->setValueResource(null);
     }
 
-    public function render(PhpRenderer $view, ValueRepresentation $value)
+    public function render(PhpRenderer $view, ValueRepresentation $value, $lang = null)
     {
         if (!$this->isValid(['@value' => $value->value()])) {
             return $value->value();
         }
         // Render the datetime, allowing for reduced accuracy.
         $date = $this->getDateTimeFromValue($value->value());
+        if (extension_loaded('intl') && $lang && substr($lang, 0, 2) !== 'en') {
+            $intlDateFormatter = new \IntlDateFormatter($lang, \IntlDateFormatter::NONE, \IntlDateFormatter::NONE);
+            $intlDateFormatter->setPattern($this->dateTimeToUnicode[$date['format_render']]);
+            return $intlDateFormatter->format($date['date']);
+        }
         return $date['date']->format($date['format_render']);
     }
 

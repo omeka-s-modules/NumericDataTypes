@@ -36,6 +36,36 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
     const PATTERN_ISO8601 = '^(?<date>(?<year>-?\d{4,})(-(?<month>\d{2}))?(-(?<day>\d{2}))?)(?<time>(T(?<hour>\d{2}))?(:(?<minute>\d{2}))?(:(?<second>\d{2}))?)(?<offset>((?<offset_hour>[+-]\d{2})?(:(?<offset_minute>\d{2}))?)|Z?)$';
 
     /**
+     * Map from \DateTime format to standard Unicode format (ICU).
+     *
+     * @see https://www.php.net/manual/en/datetime.format.php
+     * @see https://unicode-org.github.io/icu/userguide/format_parse/datetime/#datetime-format-syntax
+     */
+    protected $dateTimeToUnicode = [
+        // ISO 8601.
+        'Y-m-d\TH:i:sP' => "yyyy-LL-dd'T'HH:mm:ss xxx",
+        'Y-m-d\TH:iP' => "yyyy-LL-dd'T'HH:mm xxx",
+        'Y-m-d\THP' => "yyyy-LL-dd'T'HHss xxx",
+        'Y-m-d\TH:i:s' => "yyyy-LL-dd'T'HH:mm:ss",
+        'Y-m-d\TH:i' => "yyyy-LL-dd'T'HH:mm",
+        'Y-m-d\TH' => "yyyy-LL-dd'T'HH",
+        'Y-m-d' => 'yyyy-LL-dd',
+        'Y-m' => 'yyyy-LL',
+        'Y' => 'yyyy',
+        // Rendering. Use day before months, because English is an exception
+        // among all languages that use natural order, from day to year.
+        'F j, Y H:i:s P' => 'd LLLL yyyy, HH:mm:ss xxx',
+        'F j, Y H:i P' => 'd LLLL yyyy, HH:mm xxx',
+        'F j, Y H P' => 'd LLLL yyyy, HH xxx',
+        'F j, Y H:i:s' => 'd LLLL yyyy, HH:mm:ss',
+        'F j, Y H:i' => 'd LLLL yyyy, HH:mm',
+        'F j, Y H' => 'd LLLL yyyy, HH:mm',
+        'F j, Y' => 'd LLLL yyyy',
+        'F Y' => 'LLLL yyyy',
+        'Y' => 'yyyy',
+    ];
+
+    /**
      * @var array Cache of date/times
      */
     protected static $dateTimes = [];
