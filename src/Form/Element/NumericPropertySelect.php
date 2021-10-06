@@ -60,7 +60,7 @@ class NumericPropertySelect extends Select
         foreach ($query->getResult() as $templateProperty) {
             $property = $templateProperty->getProperty();
             $template = $templateProperty->getResourceTemplate();
-            foreach ($templateProperty->getDataType() as $dataType) {
+            foreach ($templateProperty->getDataType() ?? [] as $dataType) {
                 if (!isset($numericDataTypes[$dataType])) {
                     // This is not a requested numeric data type.
                     continue;

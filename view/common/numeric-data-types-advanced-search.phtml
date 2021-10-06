@@ -1,8 +1,5 @@
 <?php
-use NumericDataTypes\DataType\Duration;
-use NumericDataTypes\DataType\Timestamp;
 use NumericDataTypes\Form\Element\Timestamp as TimestampElement;
-use NumericDataTypes\Form\Element\Interval as IntervalElement;
 use NumericDataTypes\Form\Element\Duration as DurationElement;
 use NumericDataTypes\Form\Element\Integer as IntegerElement;
 
@@ -21,14 +18,14 @@ $this->headLink()->appendStylesheet($this->assetUrl('css/numeric-data-types.css'
             'attributes' => [
                 'id' => 'timestamp-after-pid',
                 'class' => 'chosen-select',
-                'value' => isset($query['numeric']['ts']['gt']['pid']) ? $query['numeric']['ts']['gt']['pid'] : null,
+                'value' => $query['numeric']['ts']['gt']['pid'] ?? null,
             ],
             'options' => [
                 'numeric_data_type' => 'timestamp',
             ],
         ]);
         $element = new TimestampElement('numeric[ts][gt][val]');
-        $element->setValue(isset($query['numeric']['ts']['gt']['val']) ? $query['numeric']['ts']['gt']['val'] : null);
+        $element->setValue($query['numeric']['ts']['gt']['val'] ?? null);
         echo $this->formElement($element);
         ?>
     </div>
@@ -45,14 +42,14 @@ $this->headLink()->appendStylesheet($this->assetUrl('css/numeric-data-types.css'
             'attributes' => [
                 'id' => 'timestamp-before-pid',
                 'class' => 'chosen-select',
-                'value' => isset($query['numeric']['ts']['lt']['pid']) ? $query['numeric']['ts']['lt']['pid'] : null,
+                'value' => $query['numeric']['ts']['lt']['pid'] ?? null,
             ],
             'options' => [
                 'numeric_data_type' => 'timestamp',
             ],
         ]);
         $element = new TimestampElement('numeric[ts][lt][val]');
-        $element->setValue(isset($query['numeric']['ts']['lt']['val']) ? $query['numeric']['ts']['lt']['val'] : null);
+        $element->setValue($query['numeric']['ts']['lt']['val'] ?? null);
         echo $this->formElement($element);
         ?>
     </div>
@@ -68,14 +65,14 @@ $this->headLink()->appendStylesheet($this->assetUrl('css/numeric-data-types.css'
             'name' => 'numeric[dur][gt][pid]',
             'attributes' => [
                 'class' => 'chosen-select',
-                'value' => isset($query['numeric']['dur']['gt']['pid']) ? $query['numeric']['dur']['gt']['pid'] : null,
+                'value' => $query['numeric']['dur']['gt']['pid'] ?? null,
             ],
             'options' => [
                 'numeric_data_type' => 'duration',
             ],
         ]);
         $element = new DurationElement('numeric[dur][gt][val]');
-        $element->setValue(isset($query['numeric']['dur']['gt']['val']) ? $query['numeric']['dur']['gt']['val'] : null);
+        $element->setValue($query['numeric']['dur']['gt']['val'] ?? null);
         echo $this->formElement($element);
         ?>
     </div>
@@ -91,14 +88,14 @@ $this->headLink()->appendStylesheet($this->assetUrl('css/numeric-data-types.css'
             'name' => 'numeric[dur][lt][pid]',
             'attributes' => [
                 'class' => 'chosen-select',
-                'value' => isset($query['numeric']['dur']['lt']['pid']) ? $query['numeric']['dur']['lt']['pid'] : null,
+                'value' => $query['numeric']['dur']['lt']['pid'] ?? null,
             ],
             'options' => [
                 'numeric_data_type' => 'duration',
             ],
         ]);
         $element = new DurationElement('numeric[dur][lt][val]');
-        $element->setValue(isset($query['numeric']['dur']['lt']['val']) ? $query['numeric']['dur']['lt']['val'] : null);
+        $element->setValue($query['numeric']['dur']['lt']['val'] ?? null);
         echo $this->formElement($element);
         ?>
     </div>
@@ -115,14 +112,14 @@ $this->headLink()->appendStylesheet($this->assetUrl('css/numeric-data-types.css'
             'attributes' => [
                 'id' => 'interval-pid',
                 'class' => 'chosen-select',
-                'value' => isset($query['numeric']['ivl']['pid']) ? $query['numeric']['ivl']['pid'] : null,
+                'value' => $query['numeric']['ivl']['pid'] ?? null,
             ],
             'options' => [
                 'numeric_data_type' => 'interval',
             ],
         ]);
         $element = new TimestampElement('numeric[ivl][val]');
-        $element->setValue(isset($query['numeric']['ivl']['val']) ? $query['numeric']['ivl']['val'] : null);
+        $element->setValue($query['numeric']['ivl']['val'] ?? null);
         echo $this->formElement($element);
         ?>
     </div>
@@ -138,14 +135,14 @@ $this->headLink()->appendStylesheet($this->assetUrl('css/numeric-data-types.css'
             'name' => 'numeric[int][gt][pid]',
             'attributes' => [
                 'class' => 'chosen-select',
-                'value' => isset($query['numeric']['int']['gt']['pid']) ? $query['numeric']['int']['gt']['pid'] : null,
+                'value' => $query['numeric']['int']['gt']['pid'] ?? null,
             ],
             'options' => [
                 'numeric_data_type' => 'integer',
             ],
         ]);
         $element = new IntegerElement('numeric[int][gt][val]');
-        $element->setValue(isset($query['numeric']['int']['gt']['val']) ? $query['numeric']['int']['gt']['val'] : null);
+        $element->setValue($query['numeric']['int']['gt']['val'] ?? null);
         echo $this->formElement($element);
         ?>
     </div>
@@ -161,14 +158,14 @@ $this->headLink()->appendStylesheet($this->assetUrl('css/numeric-data-types.css'
             'name' => 'numeric[int][lt][pid]',
             'attributes' => [
                 'class' => 'chosen-select',
-                'value' => isset($query['numeric']['int']['lt']['pid']) ? $query['numeric']['int']['lt']['pid'] : null,
+                'value' => $query['numeric']['int']['lt']['pid'] ?? null,
             ],
             'options' => [
                 'numeric_data_type' => 'integer',
             ],
         ]);
         $element = new IntegerElement('numeric[int][lt][val]');
-        $element->setValue(isset($query['numeric']['int']['lt']['val']) ? $query['numeric']['int']['lt']['val'] : null);
+        $element->setValue($query['numeric']['int']['lt']['val'] ?? null);
         echo $this->formElement($element);
         ?>
     </div>
