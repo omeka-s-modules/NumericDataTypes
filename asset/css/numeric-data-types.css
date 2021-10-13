@@ -3,7 +3,6 @@ label.numeric-toggle-time.button {
     align-items: center;
     width: auto;
     padding: 6px;
-    margin: 0 !important;
 }
 
 label.numeric-toggle-time:before {
@@ -35,13 +34,13 @@ label.numeric-toggle-time:before {
 .field .inputs select[class*="numeric"],
 .field .inputs select[name*="numeric"] {
     margin-right: .25rem;
-    max-width: 40%;
     display: inline-block;
     height: auto;
 }
 
-.field .inputs input[class*="numeric"] {
-    margin-bottom: 0;
+.field .inputs [class*="numeric"]:not(div),
+.field .inputs [name*="numeric"]:not(div) {
+    margin: .25rem .25rem .25rem 0;
     height: auto;
 }
 
