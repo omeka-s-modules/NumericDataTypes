@@ -23,7 +23,7 @@ abstract class AbstractDataType extends BaseAbstractDataType implements DataType
     /**
      * Add a less-than query.
      *
-     * Use in self::buildQuery() to perform simple less-than comparisons.
+     * Use in self::buildQuery() to perform simple < comparisons.
      *
      * @param AdapterInterface $adapter
      * @param QueryBuilder $qb
@@ -49,7 +49,7 @@ abstract class AbstractDataType extends BaseAbstractDataType implements DataType
     /**
      * Add a greater-than query.
      *
-     * Use in self::buildQuery() to perform simple greater than comparisons.
+     * Use in self::buildQuery() to perform simple > comparisons.
      *
      * @param AdapterInterface $adapter
      * @param QueryBuilder $qb
@@ -67,6 +67,58 @@ abstract class AbstractDataType extends BaseAbstractDataType implements DataType
             )
         );
         $qb->andWhere($qb->expr()->gt(
+            "$alias.value",
+            $adapter->createNamedParameter($qb, $number)
+        ));
+    }
+
+    /**
+     * Add a less-than-or-equal-to query.
+     *
+     * Use in self::buildQuery() to perform simple <= comparisons.
+     *
+     * @param AdapterInterface $adapter
+     * @param QueryBuilder $qb
+     * @param int propertyId
+     * @param int $number
+     */
+    public function addLessThanOrEqualToQuery(AdapterInterface $adapter, QueryBuilder $qb, $propertyId, $number)
+    {
+        $alias = $adapter->createAlias();
+        $qb->leftJoin(
+            $this->getEntityClass(), $alias, 'WITH',
+            $qb->expr()->andX(
+                $qb->expr()->eq("$alias.resource", 'omeka_root.id'),
+                $qb->expr()->eq("$alias.property", (int) $propertyId)
+            )
+        );
+        $qb->andWhere($qb->expr()->lte(
+            "$alias.value",
+            $adapter->createNamedParameter($qb, $number)
+        ));
+    }
+
+    /**
+     * Add a greater-than-or-equal-to query.
+     *
+     * Use in self::buildQuery() to perform simple >= comparisons.
+     *
+     * @param AdapterInterface $adapter
+     * @param QueryBuilder $qb
+     * @param int propertyId
+     * @param int $number
+     */
+    public function addGreaterThanOrEqualToQuery(AdapterInterface $adapter, QueryBuilder $qb, $propertyId, $number)
+    {
+        $alias = $adapter->createAlias();
+        $qb->leftJoin(
+            $this->getEntityClass(), $alias, 'WITH',
+            $qb->expr()->andX(
+                $qb->expr()->eq("$alias.resource", 'omeka_root.id'),
+                $qb->expr()->eq("$alias.property", (int) $propertyId)
+            )
+        );
+        $qb->andWhere($qb->expr()->gte(
             "$alias.value",
             $adapter->createNamedParameter($qb, $number)
         ));

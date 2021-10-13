@@ -111,8 +111,8 @@ class Timestamp extends AbstractDateTimeDataType
     /**
      * numeric => [
      *   ts => [
-     *     lt => [val => <date>, pid => <propertyID>],
-     *     gt => [val => <date>, pid => <propertyID>],
+     *     lt/lte => [val => <date>, pid => <propertyID>],
+     *     gt/gte => [val => <date>, pid => <propertyID>],
      *   ],
      * ]
      */
@@ -140,6 +140,30 @@ class Timestamp extends AbstractDateTimeDataType
                 $date = $this->getDateTimeFromValue($value);
                 $number = $date['date']->getTimestamp();
                 $this->addGreaterThanQuery($adapter, $qb, $propertyId, $number);
+            }
+        }
+        if (isset($query['numeric']['ts']['lte']['val'])
+            && isset($query['numeric']['ts']['lte']['pid'])
+            && is_numeric($query['numeric']['ts']['lte']['pid'])
+        ) {
+            $value = $query['numeric']['ts']['lte']['val'];
+            $propertyId = $query['numeric']['ts']['lte']['pid'];
+            if ($this->isValid(['@value' => $value])) {
+                $date = $this->getDateTimeFromValue($value);
+                $number = $date['date']->getTimestamp();
+                $this->addLessThanOrEqualToQuery($adapter, $qb, $propertyId, $number);
+            }
+        }
+        if (isset($query['numeric']['ts']['gte']['val'])
+            && isset($query['numeric']['ts']['gte']['pid'])
+            && is_numeric($query['numeric']['ts']['gte']['pid'])
+        ) {
+            $value = $query['numeric']['ts']['gte']['val'];
+            $propertyId = $query['numeric']['ts']['gte']['pid'];
+            if ($this->isValid(['@value' => $value])) {
+                $date = $this->getDateTimeFromValue($value);
+                $number = $date['date']->getTimestamp();
+                $this->addGreaterThanOrEqualToQuery($adapter, $qb, $propertyId, $number);
             }
         }
     }

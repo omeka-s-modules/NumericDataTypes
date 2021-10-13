@@ -7,49 +7,49 @@ $this->headScript()->appendFile($this->assetUrl('js/numeric-data-types.js', 'Num
 $this->headLink()->appendStylesheet($this->assetUrl('css/numeric-data-types.css', 'NumericDataTypes'));
 ?>
 
-<div class="field" id="numeric-timestamp-after">
+<div class="field" id="numeric-timestamp-on-after">
     <div class="field-meta">
-        <label for=""><?php echo $this->translate('Date comes after'); ?></label>
+        <label for=""><?php echo $this->translate('Date comes on or after'); ?></label>
     </div>
     <div class="inputs">
         <?php
         echo $this->numericPropertySelect([
-            'name' => 'numeric[ts][gt][pid]',
+            'name' => 'numeric[ts][gte][pid]',
             'attributes' => [
-                'id' => 'timestamp-after-pid',
+                'id' => 'timestamp-on-after-pid',
                 'class' => 'chosen-select',
-                'value' => $query['numeric']['ts']['gt']['pid'] ?? null,
+                'value' => $query['numeric']['ts']['gte']['pid'] ?? null,
             ],
             'options' => [
                 'numeric_data_type' => 'timestamp',
             ],
         ]);
-        $element = new TimestampElement('numeric[ts][gt][val]');
-        $element->setValue($query['numeric']['ts']['gt']['val'] ?? null);
+        $element = new TimestampElement('numeric[ts][gte][val]');
+        $element->setValue($query['numeric']['ts']['gte']['val'] ?? null);
         echo $this->formElement($element);
         ?>
     </div>
 </div>
 
-<div class="field" id="numeric-timestamp-before">
+<div class="field" id="numeric-timestamp-on-before">
     <div class="field-meta">
-        <label for=""><?php echo $this->translate('Date comes before'); ?></label>
+        <label for=""><?php echo $this->translate('Date comes on or before'); ?></label>
     </div>
     <div class="inputs">
         <?php
         echo $this->numericPropertySelect([
-            'name' => 'numeric[ts][lt][pid]',
+            'name' => 'numeric[ts][lte][pid]',
             'attributes' => [
-                'id' => 'timestamp-before-pid',
+                'id' => 'timestamp-on-before-pid',
                 'class' => 'chosen-select',
-                'value' => $query['numeric']['ts']['lt']['pid'] ?? null,
+                'value' => $query['numeric']['ts']['lte']['pid'] ?? null,
             ],
             'options' => [
                 'numeric_data_type' => 'timestamp',
             ],
         ]);
-        $element = new TimestampElement('numeric[ts][lt][val]');
-        $element->setValue($query['numeric']['ts']['lt']['val'] ?? null);
+        $element = new TimestampElement('numeric[ts][lte][val]');
+        $element->setValue($query['numeric']['ts']['lte']['val'] ?? null);
         echo $this->formElement($element);
         ?>
     </div>
