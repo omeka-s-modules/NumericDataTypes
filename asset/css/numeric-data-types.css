@@ -1,8 +1,9 @@
 label.numeric-toggle-time.button {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     width: auto;
     padding: 6px;
-    margin: 0;
+    margin: 0 !important;
 }
 
 label.numeric-toggle-time:before {
@@ -13,9 +14,35 @@ label.numeric-toggle-time:before {
     text-indent: 0;
 }
 
-.numeric-time-inputs {
+[id*="numeric-"] .inputs {
     display: flex;
-    margin-top: 6px;
+    flex-wrap: wrap;
+}
+
+.inputs div[class*="numeric"] {
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.numeric-datetime-inputs div {
+    margin-top: .25rem !important;
+}
+
+.field .inputs select[class*="numeric"],
+.field .inputs select[name*="numeric"] {
+    margin-right: .25rem;
+    max-width: 40%;
+    display: inline-block;
+    height: auto;
+}
+
+.field .inputs input[class*="numeric"] {
+    margin-bottom: 0;
+    height: auto;
 }
 
 .numeric-datetime-inputs select {
@@ -26,10 +53,13 @@ label.numeric-toggle-time:before {
 .numeric-datetime-inputs input {
     min-width: 4em;
     width: 8em;
+    margin: 0;
+    height: 100%;
 }
 
 .numeric-datetime-inputs input[type="checkbox"] {
     min-width: 0;
+    width: auto;
     margin-right: 0;
     cursor: pointer;
 }
@@ -48,4 +78,9 @@ label.numeric-toggle-time:before {
 .value[data-data-type="numeric:duration"] .input-body,
 .value[data-data-type="numeric:integer"] .input-body {
     background-color: transparent;
+}
+
+.numeric-integer-integer[type="number"] {
+    margin-top: .25rem;
+    width: auto;
 }
