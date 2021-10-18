@@ -7,11 +7,11 @@ use NumericDataTypes\Form\Element\Interval as IntervalElement;
 use Omeka\Api\Adapter\AbstractEntityAdapter;
 use Omeka\Api\Adapter\AdapterInterface;
 use Omeka\Api\Representation\ValueRepresentation;
-use Omeka\DataType\ValueAnnotatableInterface;
+use Omeka\DataType\ValueAnnotatingInterface;
 use Omeka\Entity\Value;
 use Laminas\View\Renderer\PhpRenderer;
 
-class Interval extends AbstractDateTimeDataType implements ValueAnnotatableInterface
+class Interval extends AbstractDateTimeDataType implements ValueAnnotatingInterface
 {
     public function getName()
     {

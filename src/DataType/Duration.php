@@ -9,10 +9,10 @@ use Omeka\Entity\Value;
 use Omeka\Api\Adapter\AbstractEntityAdapter;
 use Omeka\Api\Adapter\AdapterInterface;
 use Omeka\Api\Representation\ValueRepresentation;
-use Omeka\DataType\ValueAnnotatableInterface;
+use Omeka\DataType\ValueAnnotatingInterface;
 use Laminas\View\Renderer\PhpRenderer;
 
-class Duration extends AbstractDataType implements ValueAnnotatableInterface
+class Duration extends AbstractDataType implements ValueAnnotatingInterface
 {
     /**
      * Seconds in a timespan

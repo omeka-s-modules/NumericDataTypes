@@ -8,10 +8,10 @@ use Omeka\Api\Adapter\AbstractEntityAdapter;
 use Omeka\Api\Adapter\AdapterInterface;
 use Omeka\Api\Representation\ValueRepresentation;
 use Omeka\Entity\Value;
-use Omeka\DataType\ValueAnnotatableInterface;
+use Omeka\DataType\ValueAnnotatingInterface;
 use Laminas\View\Renderer\PhpRenderer;
 
-class Integer extends AbstractDataType implements ValueAnnotatableInterface
+class Integer extends AbstractDataType implements ValueAnnotatingInterface
 {
     /**
      * Minimum and maximum integers.
