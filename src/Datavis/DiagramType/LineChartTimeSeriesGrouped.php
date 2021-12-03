@@ -150,4 +150,3 @@ class LineChartTimeSeriesGrouped implements DiagramTypeInterface
         $view->headLink()->appendStylesheet($view->assetUrl('css/diagram-render/line_chart_time_series_grouped.css', 'Datavis'));
     }
 }
-

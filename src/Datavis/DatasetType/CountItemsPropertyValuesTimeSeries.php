@@ -3,7 +3,6 @@ namespace NumericDataTypes\Datavis\DatasetType;
 
 use Datavis\Api\Representation\DatavisVisRepresentation;
 use Datavis\DatasetType\AbstractDatasetType;
-use Datavis\Form\Element as DatavisElement;
 use DateInterval;
 use DatePeriod;
 use DateTime;
