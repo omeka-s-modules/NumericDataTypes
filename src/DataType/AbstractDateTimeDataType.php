@@ -3,6 +3,7 @@ namespace NumericDataTypes\DataType;
 
 use DateTime;
 use DateTimeZone;
+use Laminas\View\Renderer\PhpRenderer;
 
 abstract class AbstractDateTimeDataType extends AbstractDataType
 {
@@ -257,5 +258,13 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
                 // January, March, May, July, August, October, December
                 return 31;
         }
+    }
+
+    protected function selectedLang(PhpRenderer $view, array $options = [])
+    {
+        if (isset($options['lang'])) {
+            $lang = is_array($options['lang']) ? reset($options['lang']) : $options['lang'];
+        }
+        return empty($lang) ? $view->lang() : $lang;
     }
 }

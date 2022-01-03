@@ -85,7 +85,7 @@ class Interval extends AbstractDateTimeDataType
         $value->setValueResource(null);
     }
 
-    public function render(PhpRenderer $view, ValueRepresentation $value, $lang = null)
+    public function render(PhpRenderer $view, ValueRepresentation $value, $options = [])
     {
         if (!$this->isValid(['@value' => $value->value()])) {
             return $value->value();
@@ -93,16 +93,20 @@ class Interval extends AbstractDateTimeDataType
         list($intervalStart, $intervalEnd) = explode('/', $value->value());
         $dateStart = $this->getDateTimeFromValue($intervalStart);
         $dateEnd = $this->getDateTimeFromValue($intervalEnd, false);
-        if (extension_loaded('intl') && $lang && substr($lang, 0, 2) !== 'en') {
-            $intlDateFormatterStart = new \IntlDateFormatter($lang, \IntlDateFormatter::NONE, \IntlDateFormatter::NONE);
-            $intlDateFormatterStart->setPattern($this->dateTimeToUnicode[$dateStart['format_render']]);
-            $intlDateFormatterEnd = new \IntlDateFormatter($lang, \IntlDateFormatter::NONE, \IntlDateFormatter::NONE);
-            $intlDateFormatterEnd->setPattern($this->dateTimeToUnicode[$dateEnd['format_render']]);
-            return sprintf(
-                '%s – %s',
-                $intlDateFormatterStart->format($dateStart['date']),
-                $intlDateFormatterEnd->format($dateEnd['date'])
-            );
+        if (extension_loaded('intl')) {
+            // Lang is the default option for compatibility with some datatypes.
+            $lang = $this->selectedLang($view, is_array($options) ? $options : ['lang' => $options]);
+            if (substr($lang, 0, 2) !== 'en') {
+                $intlDateFormatterStart = new \IntlDateFormatter($lang, \IntlDateFormatter::NONE, \IntlDateFormatter::NONE);
+                $intlDateFormatterStart->setPattern($this->dateTimeToUnicode[$dateStart['format_render']]);
+                $intlDateFormatterEnd = new \IntlDateFormatter($lang, \IntlDateFormatter::NONE, \IntlDateFormatter::NONE);
+                $intlDateFormatterEnd->setPattern($this->dateTimeToUnicode[$dateEnd['format_render']]);
+                return sprintf(
+                    '%s – %s',
+                    $intlDateFormatterStart->format($dateStart['date']),
+                    $intlDateFormatterEnd->format($dateEnd['date'])
+                );
+            }
         }
         return sprintf(
             '%s – %s',
