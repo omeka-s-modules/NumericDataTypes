@@ -20,7 +20,7 @@ class NumericPropertySelect extends Select
     }
 
     /**
-     * @return ApiManager
+     * @return EntityManager
      */
     public function getEntityManager()
     {

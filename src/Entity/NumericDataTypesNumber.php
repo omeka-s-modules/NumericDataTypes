@@ -25,7 +25,8 @@ class NumericDataTypesNumber extends AbstractEntity
 
     /**
      * @ManyToOne(
-     *     targetEntity="Omeka\Entity\Resource"
+     *     targetEntity="Omeka\Entity\Resource",
+     *     cascade={"persist"}
      * )
      * @JoinColumn(
      *     nullable=false,
