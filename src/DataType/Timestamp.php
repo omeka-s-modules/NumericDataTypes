@@ -90,13 +90,7 @@ class Timestamp extends AbstractDateTimeDataType
         // Render the datetime, allowing for reduced accuracy.
         $date = $this->getDateTimeFromValue($value->value());
         if (extension_loaded('intl')) {
-            // Lang is the default option for compatibility with some datatypes.
-            $lang = $this->selectedLang($view, is_array($options) ? $options : ['lang' => $options]);
-            if (substr($lang, 0, 2) !== 'en') {
-                $intlDateFormatter = new \IntlDateFormatter($lang, \IntlDateFormatter::NONE, \IntlDateFormatter::NONE);
-                $intlDateFormatter->setPattern($this->dateTimeToUnicode[$date['format_render']]);
-                return $intlDateFormatter->format($date['date']);
-            }
+            return $this->renderIntlDate($date, $options, $view);
         }
         return $date['date']->format($date['format_render']);
     }

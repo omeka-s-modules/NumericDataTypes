@@ -94,19 +94,9 @@ class Interval extends AbstractDateTimeDataType
         $dateStart = $this->getDateTimeFromValue($intervalStart);
         $dateEnd = $this->getDateTimeFromValue($intervalEnd, false);
         if (extension_loaded('intl')) {
-            // Lang is the default option for compatibility with some datatypes.
-            $lang = $this->selectedLang($view, is_array($options) ? $options : ['lang' => $options]);
-            if (substr($lang, 0, 2) !== 'en') {
-                $intlDateFormatterStart = new \IntlDateFormatter($lang, \IntlDateFormatter::NONE, \IntlDateFormatter::NONE);
-                $intlDateFormatterStart->setPattern($this->dateTimeToUnicode[$dateStart['format_render']]);
-                $intlDateFormatterEnd = new \IntlDateFormatter($lang, \IntlDateFormatter::NONE, \IntlDateFormatter::NONE);
-                $intlDateFormatterEnd->setPattern($this->dateTimeToUnicode[$dateEnd['format_render']]);
-                return sprintf(
-                    '%s – %s',
-                    $intlDateFormatterStart->format($dateStart['date']),
-                    $intlDateFormatterEnd->format($dateEnd['date'])
-                );
-            }
+            $start = $this->renderIntlDate($dateStart, $options, $view);
+            $end = $this->renderIntlDate($dateEnd, $options, $view);
+            return sprintf('%s – %s', $start, $end);
         }
         return sprintf(
             '%s – %s',

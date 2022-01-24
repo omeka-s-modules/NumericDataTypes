@@ -44,26 +44,26 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
      */
     protected $dateTimeToUnicode = [
         // ISO 8601.
-        'Y-m-d\TH:i:sP' => "yyyy-LL-dd'T'HH:mm:ss xxx",
-        'Y-m-d\TH:iP' => "yyyy-LL-dd'T'HH:mm xxx",
-        'Y-m-d\THP' => "yyyy-LL-dd'T'HHss xxx",
-        'Y-m-d\TH:i:s' => "yyyy-LL-dd'T'HH:mm:ss",
-        'Y-m-d\TH:i' => "yyyy-LL-dd'T'HH:mm",
-        'Y-m-d\TH' => "yyyy-LL-dd'T'HH",
-        'Y-m-d' => 'yyyy-LL-dd',
-        'Y-m' => 'yyyy-LL',
-        'Y' => 'yyyy',
+        'Y-m-d\TH:i:sP' => "G yyyy-LL-dd'T'HH:mm:ss xxx",
+        'Y-m-d\TH:iP' => "G yyyy-LL-dd'T'HH:mm xxx",
+        'Y-m-d\THP' => "G yyyy-LL-dd'T'HHss xxx",
+        'Y-m-d\TH:i:s' => "G yyyy-LL-dd'T'HH:mm:ss",
+        'Y-m-d\TH:i' => "G yyyy-LL-dd'T'HH:mm",
+        'Y-m-d\TH' => "G yyyy-LL-dd'T'HH",
+        'Y-m-d' => 'G yyyy-LL-dd',
+        'Y-m' => 'G yyyy-LL',
+        'Y' => 'G yyyy',
         // Rendering. Use day before months, because English is an exception
         // among all languages that use natural order, from day to year.
-        'F j, Y H:i:s P' => 'd LLLL yyyy, HH:mm:ss xxx',
-        'F j, Y H:i P' => 'd LLLL yyyy, HH:mm xxx',
-        'F j, Y H P' => 'd LLLL yyyy, HH xxx',
-        'F j, Y H:i:s' => 'd LLLL yyyy, HH:mm:ss',
-        'F j, Y H:i' => 'd LLLL yyyy, HH:mm',
-        'F j, Y H' => 'd LLLL yyyy, HH:mm',
-        'F j, Y' => 'd LLLL yyyy',
-        'F Y' => 'LLLL yyyy',
-        'Y' => 'yyyy',
+        'F j, Y H:i:s P' => 'd LLLL yyyy G, HH:mm:ss xxx',
+        'F j, Y H:i P' => 'd LLLL yyyy G, HH:mm xxx',
+        'F j, Y H P' => 'd LLLL yyyy G, HH xxx',
+        'F j, Y H:i:s' => 'd LLLL yyyy G, HH:mm:ss',
+        'F j, Y H:i' => 'd LLLL yyyy G, HH:mm',
+        'F j, Y H' => 'd LLLL yyyy G, HH:mm',
+        'F j, Y' => 'd LLLL yyyy G',
+        'F Y' => 'LLLL yyyy G',
+        'Y' => 'yyyy G',
     ];
 
     /**
@@ -260,11 +260,42 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
         }
     }
 
-    protected function selectedLang(PhpRenderer $view, array $options = [])
+    protected function selectedLang(PhpRenderer $view, array $options = []): string
     {
         if (isset($options['lang'])) {
             $lang = is_array($options['lang']) ? reset($options['lang']) : $options['lang'];
         }
-        return empty($lang) ? $view->lang() : $lang;
+        return empty($lang) ? (string) $view->lang() : (string) $lang;
+    }
+
+    protected function renderIntlDate(array $date, array $options, PhpRenderer $view): string
+    {
+        // Lang is the default option for compatibility with some datatypes.
+        $lang = $this->selectedLang($view, is_array($options) ? $options : ['lang' => $options]);
+        if (!$lang || substr($lang, 0, 2) === 'en') {
+            return $date['date']->format($date['format_render']);
+        }
+
+        $intlDateFormatter = new \IntlDateFormatter($lang, \IntlDateFormatter::NONE, \IntlDateFormatter::NONE);
+
+        // Manage Gregorian negative dates: because year 0 does not exist, the
+        // representation of negative dates is complex.
+        // For example, 15 March -44 is converted into 17 March -45.
+        // For now, keep the standard render for them, but not well translated.
+        // Setlocale() is not used with DateTime, that is always in English.
+        if ($date['date']->format('Y') <= 0) {
+            return $date['date']->format($date['format_render']);
+            // A clone is required to avoid to modify stored date.
+            // $dateNeg = clone $date['date'];
+            // To add one year does not work, because there will be a growing
+            // offset due to the leap year.
+            // // $dateNeg->add(new \DateInterval('P1Y'));
+            // $intlDateFormatter->setPattern($this->dateTimeToUnicode[$date['format_render']]);
+            // return $intlDateFormatter->format($dateNeg);
+        }
+
+        // Most of the time, the era is useless.
+        $intlDateFormatter->setPattern(str_replace(' G', '', $this->dateTimeToUnicode[$date['format_render']]));
+        return $intlDateFormatter->format($date['date']);
     }
 }
