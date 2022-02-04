@@ -87,9 +87,8 @@ class Timestamp extends AbstractDateTimeDataType
         if (!$this->isValid(['@value' => $value->value()])) {
             return $value->value();
         }
-        // Render the datetime, allowing for reduced accuracy.
-        $date = $this->getDateTimeFromValue($value->value());
-        return $date['date']->format($date['format_render']);
+        $dateTime = $this->getDateTimeFromValue($value->value(), true, $view->lang());
+        return $dateTime['formatted_render_intl'] ?: $dateTime['formatted_render'];
     }
 
     public function getFulltextText(PhpRenderer $view, ValueRepresentation $value)

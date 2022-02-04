@@ -91,12 +91,12 @@ class Interval extends AbstractDateTimeDataType
             return $value->value();
         }
         list($intervalStart, $intervalEnd) = explode('/', $value->value());
-        $dateStart = $this->getDateTimeFromValue($intervalStart);
-        $dateEnd = $this->getDateTimeFromValue($intervalEnd, false);
+        $dateStart = $this->getDateTimeFromValue($intervalStart, true, $view->lang());
+        $dateEnd = $this->getDateTimeFromValue($intervalEnd, false, $view->lang());
         return sprintf(
             '%s – %s',
-            $dateStart['date']->format($dateStart['format_render']),
-            $dateEnd['date']->format($dateEnd['format_render'])
+            $dateStart['formatted_render_intl'] ?: $dateStart['formatted_render'],
+            $dateEnd['formatted_render_intl'] ?: $dateEnd['formatted_render']
         );
     }
 
