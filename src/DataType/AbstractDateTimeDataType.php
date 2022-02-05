@@ -3,6 +3,9 @@ namespace NumericDataTypes\DataType;
 
 use DateTime;
 use DateTimeZone;
+use IntlCalendar;
+use IntlDateFormatter;
+use InvalidArgumentException;
 
 abstract class AbstractDateTimeDataType extends AbstractDataType
 {
@@ -41,7 +44,10 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
     protected static $dateTimes = [];
 
     /**
-     * Get the decomposed date/time and DateTime object from an ISO 8601 value.
+     * Get relevant date/time information from an ISO 8601 value.
+     *
+     * Sets the decomposed date/time, format patterns, and the DateTime and
+     * IntlCalendar objects to an array and returns the array.
      *
      * Use $defaultFirst to set the default of each datetime component to its
      * first (true) or last (false) possible integer, if the specific component
@@ -50,13 +56,12 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
      * Also used to validate the datetime since validation is a side effect of
      * parsing the value into its component datetime pieces.
      *
-     * @throws \InvalidArgumentException
-     * @param string $value
+     * @throws InvalidArgumentException
+     * @param string $value An ISO 8601 string
      * @param bool $defaultFirst
-     * @param ?string $locale
      * @return array
      */
-    public static function getDateTimeFromValue($value, $defaultFirst = true, $locale = null)
+    public static function getDateTimeFromValue($value, $defaultFirst = true)
     {
         if (isset(self::$dateTimes[$value][$defaultFirst ? 'first' : 'last'])) {
             return self::$dateTimes[$value][$defaultFirst ? 'first' : 'last'];
@@ -65,16 +70,16 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
         // Match against ISO 8601, allowing for reduced accuracy.
         $isMatch = preg_match(sprintf('/%s/', self::PATTERN_ISO8601), $value, $matches);
         if (!$isMatch) {
-            throw new \InvalidArgumentException(sprintf('Invalid ISO 8601 datetime: %s', $value));
+            throw new InvalidArgumentException(sprintf('Invalid ISO 8601 datetime: %s', $value));
         }
         $matches = array_filter($matches); // remove empty values
         // An hour requires a day.
         if (isset($matches['hour']) && !isset($matches['day'])) {
-            throw new \InvalidArgumentException(sprintf('Invalid ISO 8601 datetime: %s', $value));
+            throw new InvalidArgumentException(sprintf('Invalid ISO 8601 datetime: %s', $value));
         }
         // An offset requires a time.
         if (isset($matches['offset']) && !isset($matches['time'])) {
-            throw new \InvalidArgumentException(sprintf('Invalid ISO 8601 datetime: %s', $value));
+            throw new InvalidArgumentException(sprintf('Invalid ISO 8601 datetime: %s', $value));
         }
 
         // Set the datetime components included in the passed value.
@@ -111,28 +116,28 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
 
         // Validate ranges of the datetime component.
         if ((self::YEAR_MIN > $dateTime['year']) || (self::YEAR_MAX < $dateTime['year'])) {
-            throw new \InvalidArgumentException(sprintf('Invalid year: %s', $dateTime['year']));
+            throw new InvalidArgumentException(sprintf('Invalid year: %s', $dateTime['year']));
         }
         if ((1 > $dateTime['month_normalized']) || (12 < $dateTime['month_normalized'])) {
-            throw new \InvalidArgumentException(sprintf('Invalid month: %s', $dateTime['month_normalized']));
+            throw new InvalidArgumentException(sprintf('Invalid month: %s', $dateTime['month_normalized']));
         }
         if ((1 > $dateTime['day_normalized']) || (31 < $dateTime['day_normalized'])) {
-            throw new \InvalidArgumentException(sprintf('Invalid day: %s', $dateTime['day_normalized']));
+            throw new InvalidArgumentException(sprintf('Invalid day: %s', $dateTime['day_normalized']));
         }
         if ((0 > $dateTime['hour_normalized']) || (23 < $dateTime['hour_normalized'])) {
-            throw new \InvalidArgumentException(sprintf('Invalid hour: %s', $dateTime['hour_normalized']));
+            throw new InvalidArgumentException(sprintf('Invalid hour: %s', $dateTime['hour_normalized']));
         }
         if ((0 > $dateTime['minute_normalized']) || (59 < $dateTime['minute_normalized'])) {
-            throw new \InvalidArgumentException(sprintf('Invalid minute: %s', $dateTime['minute_normalized']));
+            throw new InvalidArgumentException(sprintf('Invalid minute: %s', $dateTime['minute_normalized']));
         }
         if ((0 > $dateTime['second_normalized']) || (59 < $dateTime['second_normalized'])) {
-            throw new \InvalidArgumentException(sprintf('Invalid second: %s', $dateTime['second_normalized']));
+            throw new InvalidArgumentException(sprintf('Invalid second: %s', $dateTime['second_normalized']));
         }
         if ((-23 > $dateTime['offset_hour_normalized']) || (23 < $dateTime['offset_hour_normalized'])) {
-            throw new \InvalidArgumentException(sprintf('Invalid hour offset: %s', $dateTime['offset_hour_normalized']));
+            throw new InvalidArgumentException(sprintf('Invalid hour offset: %s', $dateTime['offset_hour_normalized']));
         }
         if ((0 > $dateTime['offset_minute_normalized']) || (59 < $dateTime['offset_minute_normalized'])) {
-            throw new \InvalidArgumentException(sprintf('Invalid minute offset: %s', $dateTime['offset_minute_normalized']));
+            throw new InvalidArgumentException(sprintf('Invalid minute offset: %s', $dateTime['offset_minute_normalized']));
         }
 
         // Set the ISO 8601 format and render format.
@@ -177,11 +182,7 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
         $dateTime['format_render'] = $formatRender;
         $dateTime['format_render_intl'] = $formatRenderIntl;
 
-        // Adding the DateTime object here to reduce code duplication. To ensure
-        // consistency, use Coordinated Universal Time (UTC) if no offset is
-        // provided. This avoids automatic adjustments based on the server's
-        // default timezone.
-        // With strict type, "now" is required.
+        // Set the DateTime object.
         $dateTime['date'] = new DateTime('now', new DateTimeZone($dateTime['offset_normalized']));
         $dateTime['date']->setDate(
             $dateTime['year'],
@@ -193,9 +194,9 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
             $dateTime['second_normalized']
         );
 
-        // Add a IntlCalendar object here to reduce code duplication. Used for
-        // implementations that use IntlDateFormatter to format dates.
-        $dateTime['intl_calendar'] = \IntlCalendar::createInstance(
+        // Set the IntlCalendar object. Used for implementations that use
+        // IntlDateFormatter to format dates.
+        $dateTime['intl_calendar'] = IntlCalendar::createInstance(
             $dateTime['offset_value'] ? sprintf('GMT%s', $dateTime['offset_normalized']) : null
         );
         $dateTime['intl_calendar']->set(
@@ -207,30 +208,46 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
             $dateTime['second_normalized']
         );
 
-        $dateTime['formatted_render'] = $dateTime['date']->format($dateTime['format_render']);
-        $dateTime['formatted_render_intl'] = null;
-
-        // IntlCalendar only supports range ~5,800,000 BCE to ~5,800,000 CE.
-        // @see https://unicode-org.github.io/icu-docs/apidoc/dev/icu4j/com/ibm/icu/util/Calendar.html under "Supported range"
-        if ((-5800000 <= $dateTime['year']) && (5800000 >= $dateTime['year'])) {
-            $intlDateFormatter = new \IntlDateFormatter(
-                $locale,
-                \IntlDateFormatter::NONE,
-                \IntlDateFormatter::NONE,
-                $dateTime['offset_value'] ? sprintf('GMT%s', $dateTime['offset_normalized']) : null
-            );
-            $format = $dateTime['format_render_intl'];
-            if (0 <= $dateTime['year']) {
-                // No need to include the era for positive years. It is implied.
-                $format = str_replace(' G', '', $format);
-            }
-            $intlDateFormatter->setPattern($format);
-            $dateTime['formatted_render_intl'] = $intlDateFormatter->format($dateTime['intl_calendar']);
-        }
-
         self::$dateTimes[$value][$defaultFirst ? 'first' : 'last'] = $dateTime; // Cache the date/time
         return $dateTime;
     }
+
+    /**
+     * Get a formatted (human-readable) date/time from an ISO 8601 value.
+     *
+     * @param string $value An ISO 8601 string
+     * @param bool $defaultFirst See self::getDateTimeFromValue for info
+     * @return string
+     */
+    public static function getFormattedDateTimeFromValue($value, $defaultFirst = true, $locale = null)
+    {
+        $dateTime = self::getDateTimeFromValue($value, $defaultFirst);
+
+        $intlDateFormatter = new IntlDateFormatter(
+            $locale,
+            IntlDateFormatter::NONE,
+            IntlDateFormatter::NONE,
+            $dateTime['offset_value'] ? sprintf('GMT%s', $dateTime['offset_normalized']) : null,
+        );
+        $format = $dateTime['format_render_intl'];
+        if (0 <= $dateTime['year']) {
+            // No need to include the era for positive years. It is implied.
+            $format = str_replace(' G', '', $format);
+        }
+        $intlDateFormatter->setPattern($format);
+
+        // Set the formatted date/time string. Note that IntlCalendar only
+        // supports range ~5,800,000 BCE to ~5,800,000 CE. Any date outside
+        // those boundaries will be formatted using the default DateTime format.
+        // @see https://unicode-org.github.io/icu-docs/apidoc/dev/icu4j/com/ibm/icu/util/Calendar.html
+        if ((-5800000 <= $dateTime['year']) && (5800000 >= $dateTime['year'])) {
+            $formattedDateTime = $intlDateFormatter->format($dateTime['intl_calendar']);
+        } else {
+            $formattedDateTime = $dateTime['date']->format($dateTime['format_render']);
+        }
+        return $formattedDateTime;
+    }
+
 
     /**
      * Get the last day of a given year/month.
