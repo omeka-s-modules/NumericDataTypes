@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-29 16:59-0400\n"
+"POT-Creation-Date: 2022-02-07 00:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -153,121 +153,6 @@ msgstr ""
 #: Module.php:194
 #, php-format
 msgid "NumericDataTypes - invalid %s value for ID %s - %s"
-msgstr ""
-
-#: config/module.config.php:60
-msgid "Date/Time (ISO 8601)"
-msgstr ""
-
-#: config/module.config.php:64
-msgid "Interval (ISO 8601)"
-msgstr ""
-
-#: config/module.config.php:68
-msgid "Duration (ISO 8601)"
-msgstr ""
-
-#: config/module.config.php:72 src/DataType/Integer.php:36
-msgid "Integer"
-msgstr ""
-
-#: src/DataType/AbstractDataType.php:12
-msgid "Numeric"
-msgstr ""
-
-#: src/DataType/Duration.php:37
-msgid "Duration"
-msgstr ""
-
-#: src/DataType/Timestamp.php:22
-msgid "Timestamp"
-msgstr ""
-
-#: src/DataType/Interval.php:22
-msgid "Interval"
-msgstr ""
-
-#: src/FacetedBrowse/FacetType/DateAfter.php:23
-msgid "Date after"
-msgstr ""
-
-#: src/FacetedBrowse/FacetType/DateAfter.php:54
-#: src/FacetedBrowse/FacetType/ValueGreaterThan.php:54
-#: src/FacetedBrowse/FacetType/DurationGreaterThan.php:54
-#: src/FacetedBrowse/FacetType/DurationLessThan.php:54
-#: src/FacetedBrowse/FacetType/DateInInterval.php:54
-#: src/FacetedBrowse/FacetType/ValueLessThan.php:54
-#: src/FacetedBrowse/FacetType/DateBefore.php:54
-msgid "Select one…"
-msgstr ""
-
-#: src/FacetedBrowse/FacetType/DateAfter.php:61
-#: src/FacetedBrowse/FacetType/DateInInterval.php:61
-#: src/FacetedBrowse/FacetType/DateBefore.php:61
-msgid ""
-"Enter the date/time values, separated by a new line. For each line, enter "
-"the date/time in ISO 8601 format, followed by a space, followed by the human-"
-"readable date/time."
-msgstr ""
-
-#: src/FacetedBrowse/FacetType/DateAfter.php:108
-#: src/FacetedBrowse/FacetType/DurationGreaterThan.php:108
-#: src/FacetedBrowse/FacetType/DurationLessThan.php:108
-#: src/FacetedBrowse/FacetType/DateInInterval.php:108
-#: src/FacetedBrowse/FacetType/DateBefore.php:108
-msgid "Select a date…"
-msgstr ""
-
-#: src/FacetedBrowse/FacetType/ValueGreaterThan.php:23
-msgid "Value greater than"
-msgstr ""
-
-#: src/FacetedBrowse/FacetType/DurationGreaterThan.php:23
-msgid "Duration greater than"
-msgstr ""
-
-#: src/FacetedBrowse/FacetType/DurationGreaterThan.php:61
-#: src/FacetedBrowse/FacetType/DurationLessThan.php:61
-msgid ""
-"Enter the duration values, separated by a new line. For each line, enter the "
-"duration in ISO 8601 format, followed by a space, followed by the human-"
-"readable duration."
-msgstr ""
-
-#: src/FacetedBrowse/FacetType/DurationLessThan.php:23
-msgid "Duration less than"
-msgstr ""
-
-#: src/FacetedBrowse/FacetType/ValueLessThan.php:23
-msgid "Value less than"
-msgstr ""
-
-#: src/FacetedBrowse/FacetType/DateBefore.php:23
-msgid "Date before"
-msgstr ""
-
-#: src/Form/Element/Duration.php:30
-msgid "Years"
-msgstr ""
-
-#: src/Form/Element/Duration.php:38
-msgid "Months"
-msgstr ""
-
-#: src/Form/Element/Duration.php:46
-msgid "Days"
-msgstr ""
-
-#: src/Form/Element/Duration.php:54
-msgid "Hours"
-msgstr ""
-
-#: src/Form/Element/Duration.php:62
-msgid "Minutes"
-msgstr ""
-
-#: src/Form/Element/Duration.php:70
-msgid "Seconds"
 msgstr ""
 
 #: src/Form/Element/DateTime.php:30
@@ -460,4 +345,274 @@ msgstr ""
 
 #: src/Form/Element/ConvertToNumeric.php:36
 msgid "Convert to integer"
+msgstr ""
+
+#: src/Form/Element/Duration.php:30
+msgid "Years"
+msgstr ""
+
+#: src/Form/Element/Duration.php:38
+msgid "Months"
+msgstr ""
+
+#: src/Form/Element/Duration.php:46
+msgid "Days"
+msgstr ""
+
+#: src/Form/Element/Duration.php:54
+msgid "Hours"
+msgstr ""
+
+#: src/Form/Element/Duration.php:62
+msgid "Minutes"
+msgstr ""
+
+#: src/Form/Element/Duration.php:70
+msgid "Seconds"
+msgstr ""
+
+#: src/DataType/Integer.php:36 config/module.config.php:72
+msgid "Integer"
+msgstr ""
+
+#: src/DataType/Timestamp.php:22
+msgid "Timestamp"
+msgstr ""
+
+#: src/DataType/Interval.php:22
+msgid "Interval"
+msgstr ""
+
+#: src/DataType/Duration.php:37
+msgid "Duration"
+msgstr ""
+
+#: src/DataType/AbstractDataType.php:12
+msgid "Numeric"
+msgstr ""
+
+#: src/DataType/AbstractDateTimeDataType.php:170
+msgid "F j, Y H:i:s P"
+msgstr ""
+
+#: src/DataType/AbstractDateTimeDataType.php:172
+msgid "F j, Y H:i P"
+msgstr ""
+
+#: src/DataType/AbstractDateTimeDataType.php:174
+msgid "F j, Y H P"
+msgstr ""
+
+#: src/DataType/AbstractDateTimeDataType.php:176
+msgid "F j, Y H:i:s"
+msgstr ""
+
+#: src/DataType/AbstractDateTimeDataType.php:178
+msgid "F j, Y H:i"
+msgstr ""
+
+#: src/DataType/AbstractDateTimeDataType.php:180
+msgid "F j, Y H"
+msgstr ""
+
+#: src/DataType/AbstractDateTimeDataType.php:182
+msgid "F j, Y"
+msgstr ""
+
+#: src/DataType/AbstractDateTimeDataType.php:184
+msgid "F Y"
+msgstr ""
+
+#: src/DataType/AbstractDateTimeDataType.php:186
+msgid "Y"
+msgstr ""
+
+#: src/FacetedBrowse/FacetType/ValueGreaterThan.php:22
+msgid "Value greater than"
+msgstr ""
+
+#: src/FacetedBrowse/FacetType/ValueGreaterThan.php:53
+#: src/FacetedBrowse/FacetType/DateAfter.php:54
+#: src/FacetedBrowse/FacetType/DurationLessThan.php:54
+#: src/FacetedBrowse/FacetType/DateBefore.php:54
+#: src/FacetedBrowse/FacetType/DurationGreaterThan.php:54
+#: src/FacetedBrowse/FacetType/ValueLessThan.php:53
+#: src/FacetedBrowse/FacetType/DateInInterval.php:54
+msgid "Select one…"
+msgstr ""
+
+#: src/FacetedBrowse/FacetType/DateAfter.php:23
+msgid "Date after"
+msgstr ""
+
+#: src/FacetedBrowse/FacetType/DateAfter.php:61
+#: src/FacetedBrowse/FacetType/DateBefore.php:61
+#: src/FacetedBrowse/FacetType/DateInInterval.php:61
+msgid ""
+"Enter the date/time values, separated by a new line. For each line, enter "
+"the date/time in ISO 8601 format, followed by a space, followed by the human-"
+"readable date/time."
+msgstr ""
+
+#: src/FacetedBrowse/FacetType/DateAfter.php:108
+#: src/FacetedBrowse/FacetType/DurationLessThan.php:108
+#: src/FacetedBrowse/FacetType/DateBefore.php:108
+#: src/FacetedBrowse/FacetType/DurationGreaterThan.php:108
+#: src/FacetedBrowse/FacetType/DateInInterval.php:108
+msgid "Select a date…"
+msgstr ""
+
+#: src/FacetedBrowse/FacetType/DurationLessThan.php:23
+msgid "Duration less than"
+msgstr ""
+
+#: src/FacetedBrowse/FacetType/DurationLessThan.php:61
+#: src/FacetedBrowse/FacetType/DurationGreaterThan.php:61
+msgid ""
+"Enter the duration values, separated by a new line. For each line, enter the "
+"duration in ISO 8601 format, followed by a space, followed by the human-"
+"readable duration."
+msgstr ""
+
+#: src/FacetedBrowse/FacetType/DateBefore.php:23
+msgid "Date before"
+msgstr ""
+
+#: src/FacetedBrowse/FacetType/DurationGreaterThan.php:23
+msgid "Duration greater than"
+msgstr ""
+
+#: src/FacetedBrowse/FacetType/ValueLessThan.php:22
+msgid "Value less than"
+msgstr ""
+
+#: config/module.config.php:60
+msgid "Date/Time (ISO 8601)"
+msgstr ""
+
+#: config/module.config.php:64
+msgid "Interval (ISO 8601)"
+msgstr ""
+
+#: config/module.config.php:68
+msgid "Duration (ISO 8601)"
+msgstr ""
+
+msgid "Monday"
+msgstr ""
+
+msgid "Tuesday"
+msgstr ""
+
+msgid "Wednesday"
+msgstr ""
+
+msgid "Thursday"
+msgstr ""
+
+msgid "Friday"
+msgstr ""
+
+msgid "Saturday"
+msgstr ""
+
+msgid "Sunday"
+msgstr ""
+
+msgid "Mon"
+msgstr ""
+
+msgid "Tue"
+msgstr ""
+
+msgid "Wed"
+msgstr ""
+
+msgid "Thu"
+msgstr ""
+
+msgid "Fri"
+msgstr ""
+
+msgid "Sat"
+msgstr ""
+
+msgid "Sun"
+msgstr ""
+
+msgid "January"
+msgstr ""
+
+msgid "February"
+msgstr ""
+
+msgid "March"
+msgstr ""
+
+msgid "April"
+msgstr ""
+
+msgid "May"
+msgstr ""
+
+msgid "June"
+msgstr ""
+
+msgid "July"
+msgstr ""
+
+msgid "August"
+msgstr ""
+
+msgid "September"
+msgstr ""
+
+msgid "October"
+msgstr ""
+
+msgid "November"
+msgstr ""
+
+msgid "December"
+msgstr ""
+
+msgid "Jan"
+msgstr ""
+
+msgid "Feb"
+msgstr ""
+
+msgid "Mar"
+msgstr ""
+
+msgid "Apr"
+msgstr ""
+
+# msgid "May"
+# msgstr ""
+msgid "Jun"
+msgstr ""
+
+msgid "Jul"
+msgstr ""
+
+msgid "Aug"
+msgstr ""
+
+msgid "Sep"
+msgstr ""
+
+msgid "Oct"
+msgstr ""
+
+msgid "Nov"
+msgstr ""
+
+msgid "Dec"
+msgstr ""
+
+msgid "AM"
+msgstr ""
+
+msgid "PM"
 msgstr ""
