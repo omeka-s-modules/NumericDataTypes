@@ -194,20 +194,6 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
             $dateTime['second_normalized']
         );
 
-        // Set the IntlCalendar object. Used for implementations that use
-        // IntlDateFormatter to format dates.
-        $dateTime['intl_calendar'] = IntlCalendar::createInstance(
-            $dateTime['offset_value'] ? sprintf('GMT%s', $dateTime['offset_normalized']) : null
-        );
-        $dateTime['intl_calendar']->set(
-            $dateTime['year'],
-            $dateTime['month_normalized'] - 1, // IntlCalendar months are zero indexed
-            $dateTime['day_normalized'],
-            $dateTime['hour_normalized'],
-            $dateTime['minute_normalized'],
-            $dateTime['second_normalized']
-        );
-
         self::$dateTimes[$value][$defaultFirst ? 'first' : 'last'] = $dateTime; // Cache the date/time
         return $dateTime;
     }
@@ -215,14 +201,31 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
     /**
      * Get a formatted (human-readable) date/time from an ISO 8601 value.
      *
+     * Uses the standard DateTime format if the intl extension is not loaded or
+     * the date is outside bounds. (Note that IntlCalendar only supports range
+     * ~5.8M BCE to ~5.8M CE.) Otherwise this uses IntlDateFormatter and
+     * IntlCalendar to localize the date/time.
+     *
+     * Use $defaultFirst to set the default of each datetime component to its
+     * first (true) or last (false) possible integer, if the specific component
+     * is not passed with the value.
+     *
+     * @see https://unicode-org.github.io/icu-docs/apidoc/dev/icu4j/com/ibm/icu/util/Calendar.html
      * @param string $value An ISO 8601 string
-     * @param bool $defaultFirst See self::getDateTimeFromValue for info
+     * @param bool $defaultFirst
+     * @param ?string $locale
      * @return string
      */
     public static function getFormattedDateTimeFromValue($value, $defaultFirst = true, $locale = null)
     {
         $dateTime = self::getDateTimeFromValue($value, $defaultFirst);
 
+        $isOutsideBounds = ((5800000 < $dateTime['year']) || (-5800000 > $dateTime['year']));
+        if (!extension_loaded('intl') || $isOutsideBounds) {
+            return $dateTime['date']->format($dateTime['format_render']);
+        }
+
+        // Configure IntlDateFormatter.
         $intlDateFormatter = new IntlDateFormatter(
             $locale,
             IntlDateFormatter::NONE,
@@ -236,16 +239,20 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
         }
         $intlDateFormatter->setPattern($format);
 
-        // Set the formatted date/time string. Note that IntlCalendar only
-        // supports range ~5,800,000 BCE to ~5,800,000 CE. Any date outside
-        // those boundaries will be formatted using the default DateTime format.
-        // @see https://unicode-org.github.io/icu-docs/apidoc/dev/icu4j/com/ibm/icu/util/Calendar.html
-        if ((-5800000 <= $dateTime['year']) && (5800000 >= $dateTime['year'])) {
-            $formattedDateTime = $intlDateFormatter->format($dateTime['intl_calendar']);
-        } else {
-            $formattedDateTime = $dateTime['date']->format($dateTime['format_render']);
-        }
-        return $formattedDateTime;
+        // Configure IntlCalendar.
+        $intlCalendar = IntlCalendar::createInstance(
+            $dateTime['offset_value'] ? sprintf('GMT%s', $dateTime['offset_normalized']) : null
+        );
+        $intlCalendar->set(
+            $dateTime['year'],
+            $dateTime['month_normalized'] - 1, // IntlCalendar months are zero indexed
+            $dateTime['day_normalized'],
+            $dateTime['hour_normalized'],
+            $dateTime['minute_normalized'],
+            $dateTime['second_normalized']
+        );
+
+        return $intlDateFormatter->format($intlCalendar);
     }
 
 
