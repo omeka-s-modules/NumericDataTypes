@@ -5,7 +5,7 @@ use DateTime;
 use DateTimeZone;
 use Laminas\View\Renderer\PhpRenderer;
 
-abstract class AbstractDateTimeDataType extends AbstractDataType
+abstract class AbstractDateTimeDataType extends AbstractDataType // implements DataTypeWithOptionsInterface
 {
     /**
      * Minimum and maximum years.
@@ -35,36 +35,6 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
      * which notes that "The basic format should be avoided in plain text."
      */
     const PATTERN_ISO8601 = '^(?<date>(?<year>-?\d{4,})(-(?<month>\d{2}))?(-(?<day>\d{2}))?)(?<time>(T(?<hour>\d{2}))?(:(?<minute>\d{2}))?(:(?<second>\d{2}))?)(?<offset>((?<offset_hour>[+-]\d{2})?(:(?<offset_minute>\d{2}))?)|Z?)$';
-
-    /**
-     * Map from \DateTime format to standard Unicode format (ICU).
-     *
-     * @see https://www.php.net/manual/en/datetime.format.php
-     * @see https://unicode-org.github.io/icu/userguide/format_parse/datetime/#datetime-format-syntax
-     */
-    protected $dateTimeToUnicode = [
-        // ISO 8601.
-        'Y-m-d\TH:i:sP' => "G yyyy-LL-dd'T'HH:mm:ss xxx",
-        'Y-m-d\TH:iP' => "G yyyy-LL-dd'T'HH:mm xxx",
-        'Y-m-d\THP' => "G yyyy-LL-dd'T'HHss xxx",
-        'Y-m-d\TH:i:s' => "G yyyy-LL-dd'T'HH:mm:ss",
-        'Y-m-d\TH:i' => "G yyyy-LL-dd'T'HH:mm",
-        'Y-m-d\TH' => "G yyyy-LL-dd'T'HH",
-        'Y-m-d' => 'G yyyy-LL-dd',
-        'Y-m' => 'G yyyy-LL',
-        'Y' => 'G yyyy',
-        // Rendering. Use day before months, because English is an exception
-        // among all languages that use natural order, from day to year.
-        'F j, Y H:i:s P' => 'd LLLL yyyy G, HH:mm:ss xxx',
-        'F j, Y H:i P' => 'd LLLL yyyy G, HH:mm xxx',
-        'F j, Y H P' => 'd LLLL yyyy G, HH xxx',
-        'F j, Y H:i:s' => 'd LLLL yyyy G, HH:mm:ss',
-        'F j, Y H:i' => 'd LLLL yyyy G, HH:mm',
-        'F j, Y H' => 'd LLLL yyyy G, HH:mm',
-        'F j, Y' => 'd LLLL yyyy G',
-        'F Y' => 'LLLL yyyy G',
-        'Y' => 'yyyy G',
-    ];
 
     /**
      * @var array Cache of date/times
@@ -196,23 +166,23 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
 
         // Set the render format.
         if (isset($dateTime['month']) && isset($dateTime['day']) && isset($dateTime['hour']) && isset($dateTime['minute']) && isset($dateTime['second']) && isset($dateTime['offset_value'])) {
-            $format = 'F j, Y H:i:s P';
+            $format = 'F j, Y H:i:s P'; // @translate
         } elseif (isset($dateTime['month']) && isset($dateTime['day']) && isset($dateTime['hour']) && isset($dateTime['minute']) && isset($dateTime['offset_value'])) {
-            $format = 'F j, Y H:i P';
+            $format = 'F j, Y H:i P'; // @translate
         } elseif (isset($dateTime['month']) && isset($dateTime['day']) && isset($dateTime['hour']) && isset($dateTime['offset_value'])) {
-            $format = 'F j, Y H P';
+            $format = 'F j, Y H P'; // @translate
         } elseif (isset($dateTime['month']) && isset($dateTime['day']) && isset($dateTime['hour']) && isset($dateTime['minute']) && isset($dateTime['second'])) {
-            $format = 'F j, Y H:i:s';
+            $format = 'F j, Y H:i:s'; // @translate
         } elseif (isset($dateTime['month']) && isset($dateTime['day']) && isset($dateTime['hour']) && isset($dateTime['minute'])) {
-            $format = 'F j, Y H:i';
+            $format = 'F j, Y H:i'; // @translate
         } elseif (isset($dateTime['month']) && isset($dateTime['day']) && isset($dateTime['hour'])) {
-            $format = 'F j, Y H';
+            $format = 'F j, Y H'; // @translate
         } elseif (isset($dateTime['month']) && isset($dateTime['day'])) {
-            $format = 'F j, Y';
+            $format = 'F j, Y'; // @translate
         } elseif (isset($dateTime['month'])) {
-            $format = 'F Y';
+            $format = 'F Y'; // @translate
         } else {
-            $format = 'Y';
+            $format = 'Y'; // @translate
         }
         $dateTime['format_render'] = $format;
 
@@ -260,42 +230,20 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
         }
     }
 
-    protected function selectedLang(PhpRenderer $view, array $options = []): string
+    public static function translateDate(PhpRenderer $view, $date)
     {
-        if (isset($options['lang'])) {
-            $lang = is_array($options['lang']) ? reset($options['lang']) : $options['lang'];
+        // Either translate all days and monthes statically with a str_replace,
+        // either translate each part one by one.
+        // The translation should take care of ",", etc., if any.
+        $result = '';
+        $translate = $view->plugin('translate');
+        foreach (explode(' ', $date) as $part) {
+            if (is_numeric($part)) {
+                $result .= $part . ' ';
+            } else {
+                $result .= $translate($part) . ' ';
+            }
         }
-        return empty($lang) ? (string) $view->lang() : (string) $lang;
-    }
-
-    protected function renderIntlDate(array $date, array $options, PhpRenderer $view): string
-    {
-        // Lang is the default option for compatibility with some datatypes.
-        $lang = $this->selectedLang($view, is_array($options) ? $options : ['lang' => $options]);
-        if (!$lang || substr($lang, 0, 2) === 'en') {
-            return $date['date']->format($date['format_render']);
-        }
-
-        $intlDateFormatter = new \IntlDateFormatter($lang, \IntlDateFormatter::NONE, \IntlDateFormatter::NONE);
-
-        // Manage Gregorian negative dates: because year 0 does not exist, the
-        // representation of negative dates is complex.
-        // For example, 15 March -44 is converted into 17 March -45.
-        // For now, keep the standard render for them, but not well translated.
-        // Setlocale() is not used with DateTime, that is always in English.
-        if ($date['date']->format('Y') <= 0) {
-            return $date['date']->format($date['format_render']);
-            // A clone is required to avoid to modify stored date.
-            // $dateNeg = clone $date['date'];
-            // To add one year does not work, because there will be a growing
-            // offset due to the leap year.
-            // // $dateNeg->add(new \DateInterval('P1Y'));
-            // $intlDateFormatter->setPattern($this->dateTimeToUnicode[$date['format_render']]);
-            // return $intlDateFormatter->format($dateNeg);
-        }
-
-        // Most of the time, the era is useless.
-        $intlDateFormatter->setPattern(str_replace(' G', '', $this->dateTimeToUnicode[$date['format_render']]));
-        return $intlDateFormatter->format($date['date']);
+        return rtrim($result);
     }
 }

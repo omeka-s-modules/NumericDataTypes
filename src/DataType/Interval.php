@@ -93,15 +93,25 @@ class Interval extends AbstractDateTimeDataType
         list($intervalStart, $intervalEnd) = explode('/', $value->value());
         $dateStart = $this->getDateTimeFromValue($intervalStart);
         $dateEnd = $this->getDateTimeFromValue($intervalEnd, false);
-        if (extension_loaded('intl')) {
-            $start = $this->renderIntlDate($dateStart, $options, $view);
-            $end = $this->renderIntlDate($dateEnd, $options, $view);
-            return sprintf('%s – %s', $start, $end);
+        // By default, render the lang according to the current language.
+        // Check if the format is different for start and end dates.
+        if (empty($options['format_start'])) {
+            $formatStart = empty($options['format'])
+                ? $view->translate($dateStart['format_render'])
+                : $options['format'];
+            $formatEnd = $formatStart;
+        } else {
+            $formatStart = empty($options['format_start'])
+                ? $view->translate($dateStart['format_render'])
+                : $options['format'];
+            $formatEnd = empty($options['format_end'])
+                ? $view->translate($dateEnd['format_render'])
+                : $options['format'];
         }
         return sprintf(
             '%s – %s',
-            $dateStart['date']->format($dateStart['format_render']),
-            $dateEnd['date']->format($dateEnd['format_render'])
+            $this->translateDate($dateStart['date']->format($formatStart)),
+            $this->translateDate($dateEnd['date']->format($formatEnd))
         );
     }
 

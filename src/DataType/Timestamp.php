@@ -89,10 +89,11 @@ class Timestamp extends AbstractDateTimeDataType
         }
         // Render the datetime, allowing for reduced accuracy.
         $date = $this->getDateTimeFromValue($value->value());
-        if (extension_loaded('intl')) {
-            return $this->renderIntlDate($date, $options, $view);
-        }
-        return $date['date']->format($date['format_render']);
+        // By default, render the lang according to the current language.
+        $format = empty($options['format'])
+            ? $view->translate($date['format_render'])
+            : $options['format'];
+        return $this->translateDate($view, $date['date']->format($format));
     }
 
     public function getFulltextText(PhpRenderer $view, ValueRepresentation $value)

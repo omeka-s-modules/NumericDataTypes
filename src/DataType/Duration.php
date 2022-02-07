@@ -63,7 +63,7 @@ class Duration extends AbstractDataType
         $value->setValueResource(null);
     }
 
-    public function render(PhpRenderer $view, ValueRepresentation $value, $options = [])
+    public function render(PhpRenderer $view, ValueRepresentation $value)
     {
         if (!$this->isValid(['@value' => $value->value()])) {
             return $value->value();

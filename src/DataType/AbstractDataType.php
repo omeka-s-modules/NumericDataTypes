@@ -5,7 +5,7 @@ use Doctrine\ORM\QueryBuilder;
 use Omeka\Api\Adapter\AdapterInterface;
 use Omeka\DataType\AbstractDataType as BaseAbstractDataType;
 
-abstract class AbstractDataType extends BaseAbstractDataType implements DataTypeInterface
+abstract class AbstractDataType extends BaseAbstractDataType
 {
     public function getOptgroupLabel()
     {
