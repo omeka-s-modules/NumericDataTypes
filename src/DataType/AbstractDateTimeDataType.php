@@ -236,6 +236,10 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
         if (0 <= $dateTime['year']) {
             // No need to include the era for positive years. It is implied.
             $format = str_replace(' G', '', $format);
+        } else {
+            // IntlDateFormatter substracts one year for negative years because
+            // year 0 doesn't exist, so it is added for display.
+            ++$dateTime['year'];
         }
         $intlDateFormatter->setPattern($format);
 
