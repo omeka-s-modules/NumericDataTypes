@@ -216,7 +216,7 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
      * @param ?string $locale
      * @return string
      */
-    public static function getFormattedDateTimeFromValue($value, $defaultFirst = true, $locale = null)
+    public static function getFormattedDateTimeFromValue($value, $defaultFirst = true, $options = [])
     {
         $dateTime = self::getDateTimeFromValue($value, $defaultFirst);
 
@@ -227,7 +227,7 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
 
         // Configure IntlDateFormatter.
         $intlDateFormatter = new IntlDateFormatter(
-            $locale,
+            $options['lang'] ?? null,
             IntlDateFormatter::NONE,
             IntlDateFormatter::NONE,
             $dateTime['offset_value'] ? sprintf('GMT%s', $dateTime['offset_normalized']) : null,

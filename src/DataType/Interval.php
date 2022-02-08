@@ -90,9 +90,10 @@ class Interval extends AbstractDateTimeDataType
         if (!$this->isValid(['@value' => $value->value()])) {
             return $value->value();
         }
+        $options['lang'] = $options['lang'] ?? $view->lang();
         list($intervalStart, $intervalEnd) = explode('/', $value->value());
-        $dateStart = $this->getFormattedDateTimeFromValue($intervalStart, true, $view->lang());
-        $dateEnd = $this->getFormattedDateTimeFromValue($intervalEnd, false, $view->lang());
+        $dateStart = $this->getFormattedDateTimeFromValue($intervalStart, true, $options);
+        $dateEnd = $this->getFormattedDateTimeFromValue($intervalEnd, false, $options);
         return sprintf('%s – %s', $dateStart, $dateEnd);
     }
 
