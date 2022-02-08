@@ -144,39 +144,39 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
         if (isset($dateTime['month']) && isset($dateTime['day']) && isset($dateTime['hour']) && isset($dateTime['minute']) && isset($dateTime['second']) && isset($dateTime['offset_value'])) {
             $formatIso8601 = 'Y-m-d\TH:i:sP';
             $formatRender = 'j F Y H:i:s P';
-            $formatRenderIntl = 'd LLLL yyyy G, HH:mm:ss xxx';
+            $formatRenderIntl = 'd LLLL y G, HH:mm:ss xxx';
         } elseif (isset($dateTime['month']) && isset($dateTime['day']) && isset($dateTime['hour']) && isset($dateTime['minute']) && isset($dateTime['offset_value'])) {
             $formatIso8601 = 'Y-m-d\TH:iP';
             $formatRender = 'j F Y H:i P';
-            $formatRenderIntl = 'd LLLL yyyy G, HH:mm xxx';
+            $formatRenderIntl = 'd LLLL y G, HH:mm xxx';
         } elseif (isset($dateTime['month']) && isset($dateTime['day']) && isset($dateTime['hour']) && isset($dateTime['offset_value'])) {
             $formatIso8601 = 'Y-m-d\THP';
             $formatRender = 'j F Y H P';
-            $formatRenderIntl = 'd LLLL yyyy G, HH xxx';
+            $formatRenderIntl = 'd LLLL y G, HH xxx';
         } elseif (isset($dateTime['month']) && isset($dateTime['day']) && isset($dateTime['hour']) && isset($dateTime['minute']) && isset($dateTime['second'])) {
             $formatIso8601 = 'Y-m-d\TH:i:s';
             $formatRender = 'j F Y H:i:s';
-            $formatRenderIntl = 'd LLLL yyyy G, HH:mm:ss';
+            $formatRenderIntl = 'd LLLL y G, HH:mm:ss';
         } elseif (isset($dateTime['month']) && isset($dateTime['day']) && isset($dateTime['hour']) && isset($dateTime['minute'])) {
             $formatIso8601 = 'Y-m-d\TH:i';
             $formatRender = 'j F Y H:i';
-            $formatRenderIntl = 'd LLLL yyyy G, HH:mm';
+            $formatRenderIntl = 'd LLLL y G, HH:mm';
         } elseif (isset($dateTime['month']) && isset($dateTime['day']) && isset($dateTime['hour'])) {
             $formatIso8601 = 'Y-m-d\TH';
             $formatRender = 'j F Y H';
-            $formatRenderIntl = 'd LLLL yyyy G, HH:mm';
+            $formatRenderIntl = 'd LLLL y G, HH:mm';
         } elseif (isset($dateTime['month']) && isset($dateTime['day'])) {
             $formatIso8601 = 'Y-m-d';
             $formatRender = 'j F Y';
-            $formatRenderIntl = 'd LLLL yyyy G';
+            $formatRenderIntl = 'd LLLL y G';
         } elseif (isset($dateTime['month'])) {
             $formatIso8601 = 'Y-m';
             $formatRender = 'F Y';
-            $formatRenderIntl = 'LLLL yyyy G';
+            $formatRenderIntl = 'LLLL y G';
         } else {
             $formatIso8601 = 'Y';
             $formatRender = 'Y';
-            $formatRenderIntl = 'yyyy G';
+            $formatRenderIntl = 'y G';
         }
         $dateTime['format_iso8601'] = $formatIso8601;
         $dateTime['format_render'] = $formatRender;
