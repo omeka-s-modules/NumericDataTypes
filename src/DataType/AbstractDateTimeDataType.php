@@ -230,7 +230,7 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
             $options['lang'] ?? null,
             IntlDateFormatter::NONE,
             IntlDateFormatter::NONE,
-            $dateTime['offset_value'] ? sprintf('GMT%s', $dateTime['offset_normalized']) : null,
+            $dateTime['offset_value'] ? sprintf('GMT%s', $dateTime['offset_normalized']) : null
         );
         $format = $dateTime['format_render_intl'];
         if (0 <= $dateTime['year']) {
