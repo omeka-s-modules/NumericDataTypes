@@ -69,7 +69,7 @@ class Integer extends AbstractDataType
             && ((int) $valueObject['@value'] >= self::MIN_SAFE_INT);
     }
 
-    public function render(PhpRenderer $view, ValueRepresentation $value)
+    public function render(PhpRenderer $view, ValueRepresentation $value, $options = [])
     {
         if (!$this->isValid(['@value' => $value->value()])) {
             return $value->value();

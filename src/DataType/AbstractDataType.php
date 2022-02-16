@@ -2,14 +2,30 @@
 namespace NumericDataTypes\DataType;
 
 use Doctrine\ORM\QueryBuilder;
+use Laminas\View\Renderer\PhpRenderer;
 use Omeka\Api\Adapter\AdapterInterface;
-use Omeka\DataType\AbstractDataType as BaseAbstractDataType;
+use Omeka\DataType\DataTypeWithOptionsInterface;
+use Omeka\Api\Representation\ValueRepresentation;
 
-abstract class AbstractDataType extends BaseAbstractDataType implements DataTypeInterface
+abstract class AbstractDataType implements DataTypeWithOptionsInterface, DataTypeInterface
 {
     public function getOptgroupLabel()
     {
         return 'Numeric'; // @translate
+    }
+
+    public function prepareForm(PhpRenderer $view)
+    {
+    }
+
+    public function toString(ValueRepresentation $value)
+    {
+        return (string) $value->value();
+    }
+
+    public function getFulltextText(PhpRenderer $view, ValueRepresentation $value)
+    {
+        return $value->value();
     }
 
     public function buildQuery(AdapterInterface $adapter, QueryBuilder $qb, array $query)

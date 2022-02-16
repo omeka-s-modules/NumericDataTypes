@@ -85,19 +85,16 @@ class Interval extends AbstractDateTimeDataType
         $value->setValueResource(null);
     }
 
-    public function render(PhpRenderer $view, ValueRepresentation $value)
+    public function render(PhpRenderer $view, ValueRepresentation $value, $options = [])
     {
         if (!$this->isValid(['@value' => $value->value()])) {
             return $value->value();
         }
+        $options['lang'] = $options['lang'] ?? $view->lang();
         list($intervalStart, $intervalEnd) = explode('/', $value->value());
-        $dateStart = $this->getDateTimeFromValue($intervalStart);
-        $dateEnd = $this->getDateTimeFromValue($intervalEnd, false);
-        return sprintf(
-            '%s – %s',
-            $dateStart['date']->format($dateStart['format_render']),
-            $dateEnd['date']->format($dateEnd['format_render'])
-        );
+        $dateStart = $this->getFormattedDateTimeFromValue($intervalStart, true, $options);
+        $dateEnd = $this->getFormattedDateTimeFromValue($intervalEnd, false, $options);
+        return sprintf('%s – %s', $dateStart, $dateEnd);
     }
 
     public function getFulltextText(PhpRenderer $view, ValueRepresentation $value)
