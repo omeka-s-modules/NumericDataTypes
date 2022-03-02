@@ -86,13 +86,10 @@ label.numeric-toggle-time:before {
     background-color: transparent;
 }
 
-<<<<<<< HEAD
 .numeric-integer-integer[type="number"] {
     margin-top: .25rem;
     width: auto;
 }
-=======
 .sidebar [data-data-type="numeric:integer"] .input-footer .actions {
     flex-direction: row;
 }
->>>>>>> value-annotation
