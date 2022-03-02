@@ -42,6 +42,8 @@ label.numeric-toggle-time:before {
 .field .inputs [name*="numeric"]:not(div) {
     margin: .25rem .25rem .25rem 0;
     height: auto;
+    margin-top: 6px;
+    flex-wrap: wrap;
 }
 
 .numeric-datetime-inputs select {
@@ -68,6 +70,11 @@ label.numeric-toggle-time:before {
     margin-right: 4px;
 }
 
+.sidebar .numeric-datetime-inputs input:not(:last-child),
+.sidebar .numeric-datetime-inputs select:not(:last-child) {
+    margin-bottom: .5rem;
+}
+
 #resource-values .numeric-date-inputs {
     margin-top: 0;
 }
@@ -79,7 +86,13 @@ label.numeric-toggle-time:before {
     background-color: transparent;
 }
 
+<<<<<<< HEAD
 .numeric-integer-integer[type="number"] {
     margin-top: .25rem;
     width: auto;
 }
+=======
+.sidebar [data-data-type="numeric:integer"] .input-footer .actions {
+    flex-direction: row;
+}
+>>>>>>> value-annotation

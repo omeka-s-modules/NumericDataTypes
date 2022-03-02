@@ -30,6 +30,12 @@ return [
             'numeric:duration' => NumericDataTypes\DataType\Duration::class,
             'numeric:interval' => NumericDataTypes\DataType\Interval::class,
         ],
+        'value_annotating' => [
+            'numeric:timestamp',
+            'numeric:integer',
+            'numeric:duration',
+            'numeric:interval',
+        ],
     ],
     'view_helpers' => [
         'invokables' => [
