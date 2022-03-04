@@ -63,6 +63,7 @@ label.numeric-toggle-time:before {
     width: auto;
     margin-right: 0;
     cursor: pointer;
+    height: 1em;
 }
 
 .numeric-datetime-inputs input:not(:last-child),
