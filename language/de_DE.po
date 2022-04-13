@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-03 15:57-0500\n"
+"POT-Creation-Date: 2022-04-13 12:03-0400\n"
 "PO-Revision-Date: 2018-11-27 19:31+0000\n"
 "Last-Translator: Joachim Räth <info@ihregeschichte.info>, 2019\n"
 "Language-Team: German (Germany) (https://www.transifex.com/omeka/teams/14184/de_DE/)\n"
@@ -21,62 +21,62 @@ msgstr ""
 "Language: de_DE\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/DataType/Duration.php:75
+#: src/DataType/Duration.php:76
 #, php-format
 msgid "%s year"
 msgstr "%s Jahr"
 
-#: src/DataType/Duration.php:76
+#: src/DataType/Duration.php:77
 #, php-format
 msgid "%s years"
 msgstr "%s Jahre"
 
-#: src/DataType/Duration.php:80
+#: src/DataType/Duration.php:81
 #, php-format
 msgid "%s month"
 msgstr "%s Monat"
 
-#: src/DataType/Duration.php:81
+#: src/DataType/Duration.php:82
 #, php-format
 msgid "%s months"
 msgstr "%s Monate"
 
-#: src/DataType/Duration.php:85
+#: src/DataType/Duration.php:86
 #, php-format
 msgid "%s day"
 msgstr "%s Tag"
 
-#: src/DataType/Duration.php:86
+#: src/DataType/Duration.php:87
 #, php-format
 msgid "%s days"
 msgstr "%s Tage"
 
-#: src/DataType/Duration.php:90
+#: src/DataType/Duration.php:91
 #, php-format
 msgid "%s hour"
 msgstr "%s Stunde"
 
-#: src/DataType/Duration.php:91
+#: src/DataType/Duration.php:92
 #, php-format
 msgid "%s hours"
 msgstr "%s Stunden"
 
-#: src/DataType/Duration.php:95
+#: src/DataType/Duration.php:96
 #, php-format
 msgid "%s minute"
 msgstr "%s Minute"
 
-#: src/DataType/Duration.php:96
+#: src/DataType/Duration.php:97
 #, php-format
 msgid "%s minutes"
 msgstr "%s Minuten"
 
-#: src/DataType/Duration.php:100
+#: src/DataType/Duration.php:101
 #, php-format
 msgid "%s second"
 msgstr "%s Sekunde"
 
-#: src/DataType/Duration.php:101
+#: src/DataType/Duration.php:102
 #, php-format
 msgid "%s seconds"
 msgstr "%s Sekunden"
@@ -160,38 +160,38 @@ msgstr "Wert muss ein DateTime sein"
 msgid "NumericDataTypes - invalid %s value for ID %s - %s"
 msgstr ""
 
-#: config/module.config.php:60
+#: config/module.config.php:66
 msgid "Date/Time (ISO 8601)"
 msgstr ""
 
-#: config/module.config.php:64
+#: config/module.config.php:70
 msgid "Interval (ISO 8601)"
 msgstr ""
 
-#: config/module.config.php:68
+#: config/module.config.php:74
 msgid "Duration (ISO 8601)"
 msgstr ""
 
-#: config/module.config.php:72 src/DataType/Integer.php:36
+#: config/module.config.php:78 src/DataType/Integer.php:37
 msgid "Integer"
 msgstr ""
 
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:20
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:19
 msgid "Count of items with property values in a time series"
 msgstr ""
 
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:25
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:24
 msgid ""
 "Visualize the count of items that have selected values of a selected "
 "property over a selected period of time."
 msgstr ""
 
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:39
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:38
 msgid "Value property"
 msgstr ""
 
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:46
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:74
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:45
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:73
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:46
 #: src/FacetedBrowse/FacetType/DateAfter.php:54
 #: src/FacetedBrowse/FacetType/ValueGreaterThan.php:53
@@ -203,77 +203,77 @@ msgstr ""
 msgid "Select one…"
 msgstr ""
 
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:55
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:54
 msgid "Enter values, separated by new lines."
 msgstr ""
 
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:67
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:66
 msgid "Timestamp property"
 msgstr ""
 
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:83
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:82
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:55
 msgid ""
 "Enter the start of the time series in ISO 8601 format: YYYY-MM-DDTHH:MM:SS"
 msgstr ""
 
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:97
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:96
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:69
 msgid ""
 "Enter the end of the time series in ISO 8601 format: YYYY-MM-DDTHH:MM:SS"
 msgstr ""
 
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:110
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:109
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:82
 msgid "Sample rate"
 msgstr ""
 
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:112
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:111
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:84
 msgid "1 second"
 msgstr ""
 
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:113
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:112
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:85
 msgid "1 minute"
 msgstr ""
 
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:114
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:113
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:86
 msgid "1 hour"
 msgstr ""
 
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:115
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:114
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:87
 msgid "1 day"
 msgstr ""
 
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:116
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:115
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:88
 msgid "7 days"
 msgstr ""
 
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:117
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:116
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:89
 msgid "1 month"
 msgstr ""
 
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:118
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:117
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:90
 msgid "6 months"
 msgstr ""
 
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:119
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:118
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:91
 msgid "1 year"
 msgstr ""
 
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:120
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:119
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:92
 msgid "5 years"
 msgstr ""
 
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:121
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:120
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:93
 msgid "10 years"
 msgstr ""
@@ -388,19 +388,19 @@ msgstr ""
 msgid "Histogram (time series)"
 msgstr ""
 
-#: src/DataType/AbstractDataType.php:12
+#: src/DataType/AbstractDataType.php:14
 msgid "Numeric"
 msgstr "Numerisch"
 
-#: src/DataType/Duration.php:37
+#: src/DataType/Duration.php:38
 msgid "Duration"
 msgstr "Dauer"
 
-#: src/DataType/Timestamp.php:22
+#: src/DataType/Timestamp.php:23
 msgid "Timestamp"
 msgstr ""
 
-#: src/DataType/Interval.php:22
+#: src/DataType/Interval.php:23
 msgid "Interval"
 msgstr ""
 

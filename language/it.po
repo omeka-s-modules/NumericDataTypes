@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-03 15:57-0500\n"
+"POT-Creation-Date: 2022-04-13 12:03-0400\n"
 "PO-Revision-Date: 2018-11-27 19:31+0000\n"
 "Last-Translator: Giorgio Comai <g@giorgiocomai.eu>, 2021\n"
 "Language-Team: Italian (https://www.transifex.com/omeka/teams/14184/it/)\n"
@@ -23,62 +23,62 @@ msgstr ""
 "Language: it\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/DataType/Duration.php:75
+#: src/DataType/Duration.php:76
 #, php-format
 msgid "%s year"
 msgstr "%s anno"
 
-#: src/DataType/Duration.php:76
+#: src/DataType/Duration.php:77
 #, php-format
 msgid "%s years"
 msgstr "%s anni"
 
-#: src/DataType/Duration.php:80
+#: src/DataType/Duration.php:81
 #, php-format
 msgid "%s month"
 msgstr "%s mese"
 
-#: src/DataType/Duration.php:81
+#: src/DataType/Duration.php:82
 #, php-format
 msgid "%s months"
 msgstr "%s mesi"
 
-#: src/DataType/Duration.php:85
+#: src/DataType/Duration.php:86
 #, php-format
 msgid "%s day"
 msgstr "%s giorno"
 
-#: src/DataType/Duration.php:86
+#: src/DataType/Duration.php:87
 #, php-format
 msgid "%s days"
 msgstr "%s giorni"
 
-#: src/DataType/Duration.php:90
+#: src/DataType/Duration.php:91
 #, php-format
 msgid "%s hour"
 msgstr "%s ora"
 
-#: src/DataType/Duration.php:91
+#: src/DataType/Duration.php:92
 #, php-format
 msgid "%s hours"
 msgstr "%s ore"
 
-#: src/DataType/Duration.php:95
+#: src/DataType/Duration.php:96
 #, php-format
 msgid "%s minute"
 msgstr "%s minuto"
 
-#: src/DataType/Duration.php:96
+#: src/DataType/Duration.php:97
 #, php-format
 msgid "%s minutes"
 msgstr "%s minuti"
 
-#: src/DataType/Duration.php:100
+#: src/DataType/Duration.php:101
 #, php-format
 msgid "%s second"
 msgstr "%s secondo"
 
-#: src/DataType/Duration.php:101
+#: src/DataType/Duration.php:102
 #, php-format
 msgid "%s seconds"
 msgstr "%s secondi"
@@ -95,11 +95,11 @@ msgstr "Mostra tutti i valori disponibili."
 
 #: view/common/numeric-data-types-advanced-search.phtml:12
 msgid "Date comes on or after"
-msgstr ""
+msgstr "La data corrisponde o è successiva"
 
 #: view/common/numeric-data-types-advanced-search.phtml:36
 msgid "Date comes on or before"
-msgstr ""
+msgstr "La data corrisponde o precede"
 
 #: view/common/numeric-data-types-advanced-search.phtml:60
 msgid "Duration is greater than"
@@ -162,38 +162,40 @@ msgstr "Il valore deve essere di tipo datetime"
 msgid "NumericDataTypes - invalid %s value for ID %s - %s"
 msgstr "NumericDataTypes - valore %s non valido per ID %s - %s"
 
-#: config/module.config.php:60
+#: config/module.config.php:66
 msgid "Date/Time (ISO 8601)"
 msgstr "Data/Ora (ISO 8601)"
 
-#: config/module.config.php:64
+#: config/module.config.php:70
 msgid "Interval (ISO 8601)"
 msgstr "Intervallo (ISO 8601)"
 
-#: config/module.config.php:68
+#: config/module.config.php:74
 msgid "Duration (ISO 8601)"
 msgstr "Durata (ISO 8601)"
 
-#: config/module.config.php:72 src/DataType/Integer.php:36
+#: config/module.config.php:78 src/DataType/Integer.php:37
 msgid "Integer"
 msgstr "Numero intero"
 
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:20
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:19
 msgid "Count of items with property values in a time series"
-msgstr ""
+msgstr "Numero di contenuti con valori della proprietà in una serie temporale"
 
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:25
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:24
 msgid ""
 "Visualize the count of items that have selected values of a selected "
 "property over a selected period of time."
 msgstr ""
+"Visualizza il numero di contenuti che hanno i valori selezionati della "
+"proprietà selezionata nel periodo di tempo selezionato."
 
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:39
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:38
 msgid "Value property"
-msgstr ""
+msgstr "Valore della proprietà"
 
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:46
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:74
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:45
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:73
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:46
 #: src/FacetedBrowse/FacetType/DateAfter.php:54
 #: src/FacetedBrowse/FacetType/ValueGreaterThan.php:53
@@ -205,204 +207,208 @@ msgstr ""
 msgid "Select one…"
 msgstr "Seleziona un'opzione..."
 
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:55
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:54
 msgid "Enter values, separated by new lines."
-msgstr ""
+msgstr "Inserisci i valori, separati da un a capo."
 
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:67
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:66
 msgid "Timestamp property"
-msgstr ""
+msgstr "Proprietà con data e ora"
 
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:83
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:82
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:55
 msgid ""
 "Enter the start of the time series in ISO 8601 format: YYYY-MM-DDTHH:MM:SS"
 msgstr ""
+"Inserisci l'inizio della serie temporale nel formato ISO 8601: YYYY-MM-"
+"DDTHH:MM:SS"
 
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:97
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:96
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:69
 msgid ""
 "Enter the end of the time series in ISO 8601 format: YYYY-MM-DDTHH:MM:SS"
 msgstr ""
+"Inserisci la fine della serie temporale nel formato ISO 8601: YYYY-MM-"
+"DDTHH:MM:SS"
 
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:110
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:109
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:82
 msgid "Sample rate"
-msgstr ""
+msgstr "Frequenza di campionamento"
 
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:112
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:111
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:84
 msgid "1 second"
-msgstr ""
+msgstr "1 secondo"
 
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:113
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:112
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:85
 msgid "1 minute"
-msgstr ""
+msgstr "1 minuto"
 
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:114
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:113
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:86
 msgid "1 hour"
-msgstr ""
+msgstr "1 ora"
 
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:115
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:114
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:87
 msgid "1 day"
-msgstr ""
+msgstr "1 giorno"
 
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:116
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:115
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:88
 msgid "7 days"
-msgstr ""
+msgstr "7 giorni"
 
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:117
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:116
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:89
 msgid "1 month"
-msgstr ""
+msgstr "1 mese"
 
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:118
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:117
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:90
 msgid "6 months"
-msgstr ""
+msgstr "6 mesi"
 
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:119
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:118
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:91
 msgid "1 year"
-msgstr ""
+msgstr "1 anno"
 
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:120
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:119
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:92
 msgid "5 years"
-msgstr ""
+msgstr "5 anni"
 
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:121
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:120
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:93
 msgid "10 years"
-msgstr ""
+msgstr "10 anni"
 
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:20
 msgid "Count of items in a time series"
-msgstr ""
+msgstr "Numero di contenuti in una serie temporale"
 
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:25
 msgid "Visualize the count of items over a selected period of time."
-msgstr ""
+msgstr "Visualizza il numero di contenuti nel periodo di tempo selezionato"
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:14
 msgid "Line chart (time series)"
-msgstr ""
+msgstr "Grafico a linea (serie temporale)"
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:36
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:36
 msgid "Line (no points)"
-msgstr ""
+msgstr "Linea (senza punti)"
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:37
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:37
 msgid "Points (no line)"
-msgstr ""
+msgstr "Punti (senza linea)"
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:38
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:38
 msgid "Line and points"
-msgstr ""
+msgstr "Linea e punti"
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:50
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:50
 msgid "Line type"
-msgstr ""
+msgstr "Tipo di linea"
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:52
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:52
 msgid "Linear"
-msgstr ""
+msgstr "Lineare"
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:53
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:53
 msgid "MonotoneX"
-msgstr ""
+msgstr "MonotoneX"
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:54
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:54
 msgid "Natural"
-msgstr ""
+msgstr "Naturale"
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:55
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:55
 msgid "Step"
-msgstr ""
+msgstr "Passo"
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:56
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:56
 msgid "StepAfter"
-msgstr ""
+msgstr "PassoDopo"
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:57
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:57
 msgid "StepBefore"
-msgstr ""
+msgstr "PassoPrima"
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:69
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:69
 #: src/Datavis/DiagramType/HistogramTimeSeries.php:32
 msgid "Width"
-msgstr ""
+msgstr "Larghezza"
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:82
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:82
 #: src/Datavis/DiagramType/HistogramTimeSeries.php:45
 msgid "Height"
-msgstr ""
+msgstr "Altezza"
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:95
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:95
 #: src/Datavis/DiagramType/HistogramTimeSeries.php:58
 msgid "Margin top"
-msgstr ""
+msgstr "Margine in alto"
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:108
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:108
 #: src/Datavis/DiagramType/HistogramTimeSeries.php:71
 msgid "Margin right"
-msgstr ""
+msgstr "Margine a destra"
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:121
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:121
 #: src/Datavis/DiagramType/HistogramTimeSeries.php:84
 msgid "Margin bottom"
-msgstr ""
+msgstr "Margine in basso"
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:134
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:134
 #: src/Datavis/DiagramType/HistogramTimeSeries.php:97
 msgid "Margin left"
-msgstr ""
+msgstr "Margine a sinistra"
 
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:14
 msgid "Grouped line chart (time series)"
-msgstr ""
+msgstr "Grafico a linea raggruppato (linee temporali)"
 
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:34
 msgid "Plot type"
-msgstr ""
+msgstr "Tipo di grafico"
 
 #: src/Datavis/DiagramType/HistogramTimeSeries.php:14
 msgid "Histogram (time series)"
-msgstr ""
+msgstr "Istogramma (serie temporale)"
 
-#: src/DataType/AbstractDataType.php:12
+#: src/DataType/AbstractDataType.php:14
 msgid "Numeric"
 msgstr "Numerico"
 
-#: src/DataType/Duration.php:37
+#: src/DataType/Duration.php:38
 msgid "Duration"
 msgstr "Durata"
 
-#: src/DataType/Timestamp.php:22
+#: src/DataType/Timestamp.php:23
 msgid "Timestamp"
 msgstr "Data/ora"
 
-#: src/DataType/Interval.php:22
+#: src/DataType/Interval.php:23
 msgid "Interval"
 msgstr "Intervallo"
 
