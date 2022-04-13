@@ -259,7 +259,6 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
         return $intlDateFormatter->format($intlCalendar);
     }
 
-
     /**
      * Get the last day of a given year/month.
      *
