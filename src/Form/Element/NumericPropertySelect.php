@@ -32,7 +32,7 @@ class NumericPropertySelect extends Select
      *
      * @return array
      */
-    public function getValueOptions()
+    public function getValueOptions() : array
     {
         $dataTypes = $this->getOption('numeric_data_type');
         $disambiguate = $this->getOption('numeric_data_type_disambiguate');
