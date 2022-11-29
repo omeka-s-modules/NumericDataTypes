@@ -4,25 +4,25 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Daniel Berthereau <daniel.transifex@berthereau.net>, 2019
 # Laurent Thomas, 2019
 # Judith Hannoun <judith.hannoun@gmail.com>, 2020
 # Pols12 <poltron54@gmail.com>, 2022
+# Daniel Berthereau <daniel.transifex@berthereau.net>, 2022
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-13 12:03-0400\n"
+"POT-Creation-Date: 2022-11-29 12:26-0500\n"
 "PO-Revision-Date: 2018-11-27 19:31+0000\n"
-"Last-Translator: Pols12 <poltron54@gmail.com>, 2022\n"
+"Last-Translator: Daniel Berthereau <daniel.transifex@berthereau.net>, 2022\n"
 "Language-Team: French (https://www.transifex.com/omeka/teams/14184/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #: src/DataType/Duration.php:76
 #, php-format
@@ -441,11 +441,11 @@ msgstr "Choisissez une date…"
 
 #: src/FacetedBrowse/FacetType/ValueGreaterThan.php:22
 msgid "Value greater than"
-msgstr ""
+msgstr "Valeur plus grande que"
 
 #: src/FacetedBrowse/FacetType/DurationGreaterThan.php:23
 msgid "Duration greater than"
-msgstr ""
+msgstr "Durée plus longue que"
 
 #: src/FacetedBrowse/FacetType/DurationGreaterThan.php:61
 #: src/FacetedBrowse/FacetType/DurationLessThan.php:61
@@ -454,18 +454,21 @@ msgid ""
 " duration in ISO 8601 format, followed by a space, followed by the human-"
 "readable duration."
 msgstr ""
+"Saisir les valeurs de durée, séparées par un saut de ligne. Pour chaque "
+"ligne, indiquer la durée au format ISO 8601 suivi d’une espace et de la "
+"durée dans un format lisible."
 
 #: src/FacetedBrowse/FacetType/DurationLessThan.php:23
 msgid "Duration less than"
-msgstr ""
+msgstr "Durée plus courte que"
 
 #: src/FacetedBrowse/FacetType/ValueLessThan.php:22
 msgid "Value less than"
-msgstr ""
+msgstr "Valeur plus grande que"
 
 #: src/FacetedBrowse/FacetType/DateBefore.php:23
 msgid "Date before"
-msgstr ""
+msgstr "Date avant"
 
 #: src/Form/Element/Duration.php:30
 msgid "Years"
