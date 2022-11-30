@@ -72,7 +72,7 @@ class Interval extends AbstractDateTimeDataType implements ValueAnnotatingInterf
 
     public function hydrate(array $valueObject, Value $value, AbstractEntityAdapter $adapter)
     {
-        list($intervalStart, $intervalEnd) = explode('/', $valueObject['@value']);
+        [$intervalStart, $intervalEnd] = explode('/', $valueObject['@value']);
         $dateStart = $this->getDateTimeFromValue($intervalStart);
         $dateEnd = $this->getDateTimeFromValue($intervalEnd, false);
         $interval = sprintf(
@@ -91,8 +91,8 @@ class Interval extends AbstractDateTimeDataType implements ValueAnnotatingInterf
         if (!$this->isValid(['@value' => $value->value()])) {
             return $value->value();
         }
-        $options['lang'] = $options['lang'] ?? $view->lang();
-        list($intervalStart, $intervalEnd) = explode('/', $value->value());
+        $options['lang'] ??= $view->lang();
+        [$intervalStart, $intervalEnd] = explode('/', $value->value());
         $dateStart = $this->getFormattedDateTimeFromValue($intervalStart, true, $options);
         $dateEnd = $this->getFormattedDateTimeFromValue($intervalEnd, false, $options);
         return sprintf('%s – %s', $dateStart, $dateEnd);
@@ -110,7 +110,7 @@ class Interval extends AbstractDateTimeDataType implements ValueAnnotatingInterf
 
     public function setEntityValues(NumericDataTypesNumber $entity, Value $value)
     {
-        list($intervalStart, $intervalEnd) = explode('/', $value->getValue());
+        [$intervalStart, $intervalEnd] = explode('/', $value->getValue());
         $dateStart = $this->getDateTimeFromValue($intervalStart);
         $dateEnd = $this->getDateTimeFromValue($intervalEnd, false);
         $entity->setValue($dateStart['date']->getTimestamp());

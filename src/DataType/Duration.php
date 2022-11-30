@@ -165,12 +165,12 @@ class Duration extends AbstractDataType implements ValueAnnotatingInterface
             'minutes' => (isset($matches['minutes']) && '' !== $matches['minutes']) ? (int) $matches['minutes'] : null,
             'seconds' => (isset($matches['seconds']) && '' !== $matches['seconds']) ? (int) $matches['seconds'] : null,
         ];
-        $duration['years_normalized'] = isset($duration['years']) ? $duration['years'] : 0;
-        $duration['months_normalized'] = isset($duration['months']) ? $duration['months'] : 0;
-        $duration['days_normalized'] = isset($duration['days']) ? $duration['days'] : 0;
-        $duration['hours_normalized'] = isset($duration['hours']) ? $duration['hours'] : 0;
-        $duration['minutes_normalized'] = isset($duration['minutes']) ? $duration['minutes'] : 0;
-        $duration['seconds_normalized'] = isset($duration['seconds']) ? $duration['seconds'] : 0;
+        $duration['years_normalized'] = $duration['years'] ?? 0;
+        $duration['months_normalized'] = $duration['months'] ?? 0;
+        $duration['days_normalized'] = $duration['days'] ?? 0;
+        $duration['hours_normalized'] = $duration['hours'] ?? 0;
+        $duration['minutes_normalized'] = $duration['minutes'] ?? 0;
+        $duration['seconds_normalized'] = $duration['seconds'] ?? 0;
         // Calculate the total seconds of the duration.
         $totalSeconds =
               ($duration['years_normalized'] * self::SECONDS_YEAR)

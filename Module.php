@@ -305,7 +305,7 @@ class Module extends AbstractModule
         if (3 !== count($sortBy)) {
             return;
         }
-        list($namespace, $type, $propertyId) = $sortBy;
+        [$namespace, $type, $propertyId] = $sortBy;
         if ('numeric' !== $namespace || !is_string($type) || !is_numeric($propertyId)) {
             return;
         }

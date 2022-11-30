@@ -88,7 +88,7 @@ class Timestamp extends AbstractDateTimeDataType implements ValueAnnotatingInter
         if (!$this->isValid(['@value' => $value->value()])) {
             return $value->value();
         }
-        $options['lang'] = $options['lang'] ?? $view->lang();
+        $options['lang'] ??= $view->lang();
         return $this->getFormattedDateTimeFromValue($value->value(), $options);
     }
 
