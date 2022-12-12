@@ -127,13 +127,14 @@ abstract class AbstractDataType implements DataTypeWithOptionsInterface, DataTyp
     public function addGreaterThanOrEqualToQuery(AdapterInterface $adapter, QueryBuilder $qb, $propertyId, $number)
     {
         $alias = $adapter->createAlias();
-        $qb->leftJoin(
-            $this->getEntityClass(), $alias, 'WITH',
-            $qb->expr()->andX(
-                $qb->expr()->eq("$alias.resource", 'omeka_root.id'),
+        $with = $qb->expr()->eq("$alias.resource", 'omeka_root.id');
+        if (is_numeric($propertyId)) {
+            $with = $qb->expr()->andX(
+                $with,
                 $qb->expr()->eq("$alias.property", (int) $propertyId)
-            )
-        );
+            );
+        }
+        $qb->leftJoin($this->getEntityClass(), $alias, 'WITH', $with);
         $qb->andWhere($qb->expr()->gte(
             "$alias.value",
             $adapter->createNamedParameter($qb, $number)

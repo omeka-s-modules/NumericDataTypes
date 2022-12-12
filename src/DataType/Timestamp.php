@@ -154,12 +154,9 @@ class Timestamp extends AbstractDateTimeDataType implements ValueAnnotatingInter
                 $this->addLessThanOrEqualToQuery($adapter, $qb, $propertyId, $number);
             }
         }
-        if (isset($query['numeric']['ts']['gte']['val'])
-            && isset($query['numeric']['ts']['gte']['pid'])
-            && is_numeric($query['numeric']['ts']['gte']['pid'])
-        ) {
+        if (isset($query['numeric']['ts']['gte']['val'])) {
             $value = $query['numeric']['ts']['gte']['val'];
-            $propertyId = $query['numeric']['ts']['gte']['pid'];
+            $propertyId = $query['numeric']['ts']['gte']['pid'] ?? null;
             if ($this->isValid(['@value' => $value])) {
                 $date = $this->getDateTimeFromValue($value);
                 $number = $date['date']->getTimestamp();
