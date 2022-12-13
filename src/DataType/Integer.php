@@ -98,23 +98,17 @@ class Integer extends AbstractDataType implements ValueAnnotatingInterface
      */
     public function buildQuery(AdapterInterface $adapter, QueryBuilder $qb, array $query)
     {
-        if (isset($query['numeric']['int']['lt']['val'])
-            && isset($query['numeric']['int']['lt']['pid'])
-            && is_numeric($query['numeric']['int']['lt']['pid'])
-        ) {
+        if (isset($query['numeric']['int']['lt']['val'])) {
             $value = $query['numeric']['int']['lt']['val'];
-            $propertyId = $query['numeric']['int']['lt']['pid'];
+            $propertyId = $query['numeric']['int']['lt']['pid'] ?? null;
             if ($this->isValid(['@value' => $value])) {
                 $number = (int) $value;
                 $this->addLessThanQuery($adapter, $qb, $propertyId, $number);
             }
         }
-        if (isset($query['numeric']['int']['gt']['val'])
-            && isset($query['numeric']['int']['gt']['pid'])
-            && is_numeric($query['numeric']['int']['gt']['pid'])
-        ) {
+        if (isset($query['numeric']['int']['gt']['val'])) {
             $value = $query['numeric']['int']['gt']['val'];
-            $propertyId = $query['numeric']['int']['gt']['pid'];
+            $propertyId = $query['numeric']['int']['gt']['pid'] ?? null;
             if ($this->isValid(['@value' => $value])) {
                 $number = (int) $value;
                 $this->addGreaterThanQuery($adapter, $qb, $propertyId, $number);

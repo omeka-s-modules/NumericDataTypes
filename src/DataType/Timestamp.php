@@ -118,36 +118,27 @@ class Timestamp extends AbstractDateTimeDataType implements ValueAnnotatingInter
      */
     public function buildQuery(AdapterInterface $adapter, QueryBuilder $qb, array $query)
     {
-        if (isset($query['numeric']['ts']['lt']['val'])
-            && isset($query['numeric']['ts']['lt']['pid'])
-            && is_numeric($query['numeric']['ts']['lt']['pid'])
-        ) {
+        if (isset($query['numeric']['ts']['lt']['val'])) {
             $value = $query['numeric']['ts']['lt']['val'];
-            $propertyId = $query['numeric']['ts']['lt']['pid'];
+            $propertyId = $query['numeric']['ts']['lt']['pid'] ?? null;
             if ($this->isValid(['@value' => $value])) {
                 $date = $this->getDateTimeFromValue($value);
                 $number = $date['date']->getTimestamp();
                 $this->addLessThanQuery($adapter, $qb, $propertyId, $number);
             }
         }
-        if (isset($query['numeric']['ts']['gt']['val'])
-            && isset($query['numeric']['ts']['gt']['pid'])
-            && is_numeric($query['numeric']['ts']['gt']['pid'])
-        ) {
+        if (isset($query['numeric']['ts']['gt']['val'])) {
             $value = $query['numeric']['ts']['gt']['val'];
-            $propertyId = $query['numeric']['ts']['gt']['pid'];
+            $propertyId = $query['numeric']['ts']['gt']['pid'] ?? null;
             if ($this->isValid(['@value' => $value])) {
                 $date = $this->getDateTimeFromValue($value);
                 $number = $date['date']->getTimestamp();
                 $this->addGreaterThanQuery($adapter, $qb, $propertyId, $number);
             }
         }
-        if (isset($query['numeric']['ts']['lte']['val'])
-            && isset($query['numeric']['ts']['lte']['pid'])
-            && is_numeric($query['numeric']['ts']['lte']['pid'])
-        ) {
+        if (isset($query['numeric']['ts']['lte']['val'])) {
             $value = $query['numeric']['ts']['lte']['val'];
-            $propertyId = $query['numeric']['ts']['lte']['pid'];
+            $propertyId = $query['numeric']['ts']['lte']['pid'] ?? null;
             if ($this->isValid(['@value' => $value])) {
                 $date = $this->getDateTimeFromValue($value);
                 $number = $date['date']->getTimestamp();
