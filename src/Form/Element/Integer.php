@@ -26,6 +26,7 @@ class Integer extends Element
 
     public function getValueElement()
     {
+        $this->valueElement->setValue($this->getValue());
         return $this->valueElement;
     }
 
