@@ -43,19 +43,20 @@ abstract class AbstractDataType implements DataTypeWithOptionsInterface, DataTyp
      *
      * @param AdapterInterface $adapter
      * @param QueryBuilder $qb
-     * @param int propertyId
+     * @param int|null propertyId
      * @param int $number
      */
     public function addLessThanQuery(AdapterInterface $adapter, QueryBuilder $qb, $propertyId, $number)
     {
         $alias = $adapter->createAlias();
-        $qb->leftJoin(
-            $this->getEntityClass(), $alias, 'WITH',
-            $qb->expr()->andX(
+        $with = $qb->expr()->eq("$alias.resource", 'omeka_root.id');
+        if (is_numeric($propertyId)) {
+            $with = $qb->expr()->andX(
                 $qb->expr()->eq("$alias.resource", 'omeka_root.id'),
                 $qb->expr()->eq("$alias.property", (int) $propertyId)
-            )
-        );
+            );
+        }
+        $qb->leftJoin($this->getEntityClass(), $alias, 'WITH', $with);
         $qb->andWhere($qb->expr()->lt(
             "$alias.value",
             $adapter->createNamedParameter($qb, $number)
@@ -69,19 +70,20 @@ abstract class AbstractDataType implements DataTypeWithOptionsInterface, DataTyp
      *
      * @param AdapterInterface $adapter
      * @param QueryBuilder $qb
-     * @param int propertyId
+     * @param int|null propertyId
      * @param int $number
      */
     public function addGreaterThanQuery(AdapterInterface $adapter, QueryBuilder $qb, $propertyId, $number)
     {
         $alias = $adapter->createAlias();
-        $qb->leftJoin(
-            $this->getEntityClass(), $alias, 'WITH',
-            $qb->expr()->andX(
-                $qb->expr()->eq("$alias.resource", 'omeka_root.id'),
+        $with = $qb->expr()->eq("$alias.resource", 'omeka_root.id');
+        if (is_numeric($propertyId)) {
+            $with = $qb->expr()->andX(
+                $with,
                 $qb->expr()->eq("$alias.property", (int) $propertyId)
-            )
-        );
+            );
+        }
+        $qb->leftJoin($this->getEntityClass(), $alias, 'WITH', $with);
         $qb->andWhere($qb->expr()->gt(
             "$alias.value",
             $adapter->createNamedParameter($qb, $number)
@@ -95,19 +97,20 @@ abstract class AbstractDataType implements DataTypeWithOptionsInterface, DataTyp
      *
      * @param AdapterInterface $adapter
      * @param QueryBuilder $qb
-     * @param int propertyId
+     * @param int|null propertyId
      * @param int $number
      */
     public function addLessThanOrEqualToQuery(AdapterInterface $adapter, QueryBuilder $qb, $propertyId, $number)
     {
         $alias = $adapter->createAlias();
-        $qb->leftJoin(
-            $this->getEntityClass(), $alias, 'WITH',
-            $qb->expr()->andX(
-                $qb->expr()->eq("$alias.resource", 'omeka_root.id'),
+        $with = $qb->expr()->eq("$alias.resource", 'omeka_root.id');
+        if (is_numeric($propertyId)) {
+            $with = $qb->expr()->andX(
+                $with,
                 $qb->expr()->eq("$alias.property", (int) $propertyId)
-            )
-        );
+            );
+        }
+        $qb->leftJoin($this->getEntityClass(), $alias, 'WITH', $with);
         $qb->andWhere($qb->expr()->lte(
             "$alias.value",
             $adapter->createNamedParameter($qb, $number)
@@ -121,19 +124,20 @@ abstract class AbstractDataType implements DataTypeWithOptionsInterface, DataTyp
      *
      * @param AdapterInterface $adapter
      * @param QueryBuilder $qb
-     * @param int propertyId
+     * @param int|null propertyId
      * @param int $number
      */
     public function addGreaterThanOrEqualToQuery(AdapterInterface $adapter, QueryBuilder $qb, $propertyId, $number)
     {
         $alias = $adapter->createAlias();
-        $qb->leftJoin(
-            $this->getEntityClass(), $alias, 'WITH',
-            $qb->expr()->andX(
-                $qb->expr()->eq("$alias.resource", 'omeka_root.id'),
+        $with = $qb->expr()->eq("$alias.resource", 'omeka_root.id');
+        if (is_numeric($propertyId)) {
+            $with = $qb->expr()->andX(
+                $with,
                 $qb->expr()->eq("$alias.property", (int) $propertyId)
-            )
-        );
+            );
+        }
+        $qb->leftJoin($this->getEntityClass(), $alias, 'WITH', $with);
         $qb->andWhere($qb->expr()->gte(
             "$alias.value",
             $adapter->createNamedParameter($qb, $number)

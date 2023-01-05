@@ -189,24 +189,18 @@ class Duration extends AbstractDataType implements ValueAnnotatingInterface
 
     public function buildQuery(AdapterInterface $adapter, QueryBuilder $qb, array $query)
     {
-        if (isset($query['numeric']['dur']['lt']['val'])
-            && isset($query['numeric']['dur']['lt']['pid'])
-            && is_numeric($query['numeric']['dur']['lt']['pid'])
-        ) {
+        if (isset($query['numeric']['dur']['lt']['val'])) {
             $value = $query['numeric']['dur']['lt']['val'];
-            $propertyId = $query['numeric']['dur']['lt']['pid'];
+            $propertyId = $query['numeric']['dur']['lt']['pid'] ?? null;
             if ($this->isValid(['@value' => $value])) {
                 $duration = $this->getDurationFromValue($value);
                 $number = $duration['total_seconds'];
                 $this->addLessThanQuery($adapter, $qb, $propertyId, $number);
             }
         }
-        if (isset($query['numeric']['dur']['gt']['val'])
-            && isset($query['numeric']['dur']['gt']['pid'])
-            && is_numeric($query['numeric']['dur']['gt']['pid'])
-        ) {
+        if (isset($query['numeric']['dur']['gt']['val'])) {
             $value = $query['numeric']['dur']['gt']['val'];
-            $propertyId = $query['numeric']['dur']['gt']['pid'];
+            $propertyId = $query['numeric']['dur']['gt']['pid'] ?? null;
             if ($this->isValid(['@value' => $value])) {
                 $duration = $this->getDurationFromValue($value);
                 $number = $duration['total_seconds'];

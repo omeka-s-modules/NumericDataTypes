@@ -119,12 +119,9 @@ class Interval extends AbstractDateTimeDataType implements ValueAnnotatingInterf
 
     public function buildQuery(AdapterInterface $adapter, QueryBuilder $qb, array $query)
     {
-        if (isset($query['numeric']['ivl']['val'])
-            && isset($query['numeric']['ivl']['pid'])
-            && is_numeric($query['numeric']['ivl']['pid'])
-        ) {
+        if (isset($query['numeric']['ivl']['val'])) {
             $value = $query['numeric']['ivl']['val'];
-            $propertyId = $query['numeric']['ivl']['pid'];
+            $propertyId = $query['numeric']['ivl']['pid'] ?? null;
             try {
                 $date = $this->getDateTimeFromValue($value);
                 $number = $date['date']->getTimestamp();
@@ -132,13 +129,14 @@ class Interval extends AbstractDateTimeDataType implements ValueAnnotatingInterf
                 return; // invalid value
             }
             $alias = $adapter->createAlias();
-            $qb->leftJoin(
-                $this->getEntityClass(), $alias, 'WITH',
-                $qb->expr()->andX(
+            $with = $qb->expr()->eq("$alias.resource", 'omeka_root.id');
+            if (is_numeric($propertyId)) {
+                $with = $qb->expr()->andX(
                     $qb->expr()->eq("$alias.resource", 'omeka_root.id'),
                     $qb->expr()->eq("$alias.property", (int) $propertyId)
-                )
-            );
+                );
+            }
+            $qb->leftJoin($this->getEntityClass(), $alias, 'WITH', $with);
             $qb->andWhere($qb->expr()->lte(
                 "$alias.value",
                 $adapter->createNamedParameter($qb, $number)
