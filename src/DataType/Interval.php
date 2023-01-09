@@ -148,6 +148,22 @@ class Interval extends AbstractDateTimeDataType implements ValueAnnotatingInterf
         }
     }
 
+    public function sortQuery(AdapterInterface $adapter, QueryBuilder $qb, array $query, $type, $propertyId)
+    {
+        if ('interval' === $type) {
+            $alias = $adapter->createAlias();
+            $qb->addSelect("MIN($alias.value) as HIDDEN numeric_value");
+            $qb->leftJoin(
+                $this->getEntityClass(), $alias, 'WITH',
+                $qb->expr()->andX(
+                    $qb->expr()->eq("$alias.resource", 'omeka_root.id'),
+                    $qb->expr()->eq("$alias.property", $propertyId)
+                )
+            );
+            $qb->addOrderBy('numeric_value', $query['sort_order']);
+        }
+    }
+
     public function valueAnnotationPrepareForm(PhpRenderer $view)
     {
     }
