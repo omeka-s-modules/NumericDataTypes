@@ -336,21 +336,16 @@ class Module extends AbstractModule
                 if (isset($numericDataTypes[$dataType])) {
                     $value = sprintf('%s:%s', $dataType, $templatePropertyData['id']);
                     if (!isset($numericSortBy[$value])) {
-                        $numericSortBy[$value] = [
-                            'label' => sprintf('%s (%s)', $templatePropertyData['label'], $dataType),
-                            'value' => $value,
-                        ];
+                        $numericSortBy[$value] = sprintf('%s (%s)', $templatePropertyData['label'], $dataType);
                     }
                 }
             }
         }
         // Sort options alphabetically.
-        usort($numericSortBy, function ($a, $b) {
-            return strcasecmp($a['label'], $b['label']);
-        });
-        $sortBy = $event->getParam('sortBy');
-        $sortBy = array_merge($sortBy, $numericSortBy);
-        $event->setParam('sortBy', $sortBy);
+        asort($numericSortBy);
+        $sortConfig = $event->getParam('sortConfig');
+        $sortConfig = array_merge($sortConfig, $numericSortBy);
+        $event->setParam('sortConfig', $sortConfig);
     }
 
     /**
