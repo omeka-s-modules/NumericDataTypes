@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Joachim Räth <info@ihregeschichte.info>, 2019
+# Iametza Interaktiboa, 2022
 # 
 #, fuzzy
 msgid ""
@@ -13,73 +13,73 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-01-19 10:29-0500\n"
 "PO-Revision-Date: 2018-11-27 19:31+0000\n"
-"Last-Translator: Joachim Räth <info@ihregeschichte.info>, 2019\n"
-"Language-Team: German (Germany) (https://www.transifex.com/omeka/teams/14184/de_DE/)\n"
+"Last-Translator: Iametza Interaktiboa, 2022\n"
+"Language-Team: Basque (https://www.transifex.com/omeka/teams/14184/eu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: de_DE\n"
+"Language: eu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/DataType/Duration.php:76
 #, php-format
 msgid "%s year"
-msgstr "%s Jahr"
+msgstr "%s urtea"
 
 #: src/DataType/Duration.php:77
 #, php-format
 msgid "%s years"
-msgstr "%s Jahre"
+msgstr "%s urte"
 
 #: src/DataType/Duration.php:81
 #, php-format
 msgid "%s month"
-msgstr "%s Monat"
+msgstr "%s hilabetea"
 
 #: src/DataType/Duration.php:82
 #, php-format
 msgid "%s months"
-msgstr "%s Monate"
+msgstr "%s hilabete"
 
 #: src/DataType/Duration.php:86
 #, php-format
 msgid "%s day"
-msgstr "%s Tag"
+msgstr "%s eguna"
 
 #: src/DataType/Duration.php:87
 #, php-format
 msgid "%s days"
-msgstr "%s Tage"
+msgstr "%s egun"
 
 #: src/DataType/Duration.php:91
 #, php-format
 msgid "%s hour"
-msgstr "%s Stunde"
+msgstr "%s ordua"
 
 #: src/DataType/Duration.php:92
 #, php-format
 msgid "%s hours"
-msgstr "%s Stunden"
+msgstr "%s ordu"
 
 #: src/DataType/Duration.php:96
 #, php-format
 msgid "%s minute"
-msgstr "%s Minute"
+msgstr "%s minutua"
 
 #: src/DataType/Duration.php:97
 #, php-format
 msgid "%s minutes"
-msgstr "%s Minuten"
+msgstr "%s minutuak"
 
 #: src/DataType/Duration.php:101
 #, php-format
 msgid "%s second"
-msgstr "%s Sekunde"
+msgstr "%s segundu"
 
 #: src/DataType/Duration.php:102
 #, php-format
 msgid "%s seconds"
-msgstr "%s Sekunden"
+msgstr "%s segunduak"
 
 #: view/common/faceted-browse/facet-data-form/date-after.phtml:4
 #: view/common/faceted-browse/facet-data-form/date-before.phtml:4
@@ -89,7 +89,7 @@ msgstr "%s Sekunden"
 #: view/common/faceted-browse/facet-data-form/value-greater-than.phtml:6
 #: view/common/faceted-browse/facet-data-form/value-less-than.phtml:6
 msgid "Show all available values."
-msgstr ""
+msgstr "Erakutsi eskuragarri dauden balio guztiak."
 
 #: view/common/numeric-data-types-advanced-search.phtml:12
 msgid "Date comes on or after"
@@ -101,84 +101,84 @@ msgstr ""
 
 #: view/common/numeric-data-types-advanced-search.phtml:60
 msgid "Duration is greater than"
-msgstr "Dauer ist länger als"
+msgstr "Iraupena luzeagoa da hau baino:"
 
 #: view/common/numeric-data-types-advanced-search.phtml:83
 msgid "Duration is less than"
-msgstr "Dauer ist kürzer als"
+msgstr "Iraupena laburragoa da hau baino:"
 
 #: view/common/numeric-data-types-advanced-search.phtml:106
 msgid "Date in interval"
-msgstr "Datum im Intervall"
+msgstr "Data tartea"
 
 #: view/common/numeric-data-types-advanced-search.phtml:130
 msgid "Value is greater than"
-msgstr "Wert ist größer als"
+msgstr "Balioa handiagoa da hau baino:"
 
 #: view/common/numeric-data-types-advanced-search.phtml:153
 msgid "Value is less than"
-msgstr "Wert ist kleiner als"
+msgstr "Balioa txikiagoa da hau baino:"
 
 #: view/common/numeric-duration.phtml:7 view/common/numeric-integer.phtml:7
 #: view/common/numeric-interval.phtml:7 view/common/numeric-timestamp.phtml:7
 #, php-format
 msgid "Invalid value: %s"
-msgstr ""
+msgstr "Balio desegokia: %s"
 
 #: view/common/numeric-duration.phtml:8
 msgid "Value must be a duration"
-msgstr ""
+msgstr "Balioak iraupena izan behar du"
 
 #: view/common/numeric-duration.phtml:16 view/common/numeric-interval.phtml:17
 #: view/common/numeric-interval.phtml:32
 #: view/common/numeric-timestamp.phtml:16
 msgid "Time"
-msgstr ""
+msgstr "Denbora"
 
 #: view/common/numeric-integer.phtml:8
 msgid "Value must be an integer"
-msgstr ""
+msgstr "Balioak zenbakia izan behar du"
 
 #: view/common/numeric-interval.phtml:8
 msgid "Value must be an interval"
-msgstr ""
+msgstr "Balioak tartea izan behar du"
 
 #: view/common/numeric-interval.phtml:12
 msgid "Start:"
-msgstr "Beginn:"
+msgstr "Hasi:"
 
 #: view/common/numeric-interval.phtml:27
 msgid "End:"
-msgstr "Ende:"
+msgstr "Bukatu:"
 
 #: view/common/numeric-timestamp.phtml:8
 msgid "Value must be a datetime"
-msgstr "Wert muss ein DateTime sein"
+msgstr "Balioak data-denbora izan behar du"
 
 #: Module.php:193
 #, php-format
 msgid "NumericDataTypes - invalid %s value for ID %s - %s"
-msgstr ""
+msgstr "Datu zenbaki motak - %s balio desegokia %s - %s IDarentzat"
 
 #: config/module.config.php:66
 msgid "Date/Time (ISO 8601)"
-msgstr ""
+msgstr "Data/Ordua (ISO 8601)"
 
 #: config/module.config.php:70
 msgid "Interval (ISO 8601)"
-msgstr ""
+msgstr "Tartea (ISO 8601)"
 
 #: config/module.config.php:74
 msgid "Duration (ISO 8601)"
-msgstr ""
+msgstr "Iraupena (ISO 8601)"
 
 #: config/module.config.php:78 src/DataType/Integer.php:37
 msgid "Integer"
-msgstr ""
+msgstr "Zenbakia"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:19
 msgid "Count of items with property values in a time series"
-msgstr ""
+msgstr "Denbora seriean balioa duten elementu kopurua"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:24
 msgid ""
@@ -188,7 +188,7 @@ msgstr ""
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:38
 msgid "Value property"
-msgstr ""
+msgstr "Balio propietatea"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:45
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:73
@@ -201,27 +201,29 @@ msgstr ""
 #: src/FacetedBrowse/FacetType/ValueLessThan.php:53
 #: src/FacetedBrowse/FacetType/DateBefore.php:54
 msgid "Select one…"
-msgstr ""
+msgstr "Hautatu bat..."
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:54
 msgid "Enter values, separated by new lines."
-msgstr ""
+msgstr "Sartu balioak, lerro saltoz bereizita."
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:66
 msgid "Timestamp property"
-msgstr ""
+msgstr "Denbora-zigilu propietatea"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:82
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:55
 msgid ""
 "Enter the start of the time series in ISO 8601 format: YYYY-MM-DDTHH:MM:SS"
 msgstr ""
+"Sartu denbora seriearen hasiera ISO 8601 formatuan: YYYY-MM-DDTHH:MM:SS"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:96
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:69
 msgid ""
 "Enter the end of the time series in ISO 8601 format: YYYY-MM-DDTHH:MM:SS"
 msgstr ""
+"Sartu denbora seriearen amaiera ISO 8601 formatuan: YYYY-MM-DDTHH:MM:SS"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:109
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:82
@@ -231,89 +233,89 @@ msgstr ""
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:111
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:84
 msgid "1 second"
-msgstr ""
+msgstr "1 segundu"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:112
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:85
 msgid "1 minute"
-msgstr ""
+msgstr "1 minutu"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:113
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:86
 msgid "1 hour"
-msgstr ""
+msgstr "1 ordu"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:114
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:87
 msgid "1 day"
-msgstr ""
+msgstr "1 egun"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:115
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:88
 msgid "7 days"
-msgstr ""
+msgstr "7 egun"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:116
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:89
 msgid "1 month"
-msgstr ""
+msgstr "1 hilabete"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:117
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:90
 msgid "6 months"
-msgstr ""
+msgstr "6 hilabete"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:118
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:91
 msgid "1 year"
-msgstr ""
+msgstr "1 urte"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:119
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:92
 msgid "5 years"
-msgstr ""
+msgstr "5 urte"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:120
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:93
 msgid "10 years"
-msgstr ""
+msgstr "10 urte"
 
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:20
 msgid "Count of items in a time series"
-msgstr ""
+msgstr "Denbora serieko elementu kopurua"
 
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:25
 msgid "Visualize the count of items over a selected period of time."
-msgstr ""
+msgstr "Ikusi hautatutako denbora tarte bateko elementu kopurua."
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:14
 msgid "Line chart (time series)"
-msgstr ""
+msgstr "Lerro-diagrama (denbora serieak)"
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:36
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:36
 msgid "Line (no points)"
-msgstr ""
+msgstr "Lerroa (punturik ez)"
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:37
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:37
 msgid "Points (no line)"
-msgstr ""
+msgstr "Puntuak (lerrorik ez)"
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:38
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:38
 msgid "Line and points"
-msgstr ""
+msgstr "Lerro eta puntuak"
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:50
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:50
 msgid "Line type"
-msgstr ""
+msgstr "Lerro mota"
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:52
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:52
 msgid "Linear"
-msgstr ""
+msgstr "Lineala"
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:53
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:53
@@ -323,58 +325,58 @@ msgstr ""
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:54
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:54
 msgid "Natural"
-msgstr ""
+msgstr "Naturala"
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:55
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:55
 msgid "Step"
-msgstr ""
+msgstr "Saltoa"
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:56
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:56
 msgid "StepAfter"
-msgstr ""
+msgstr "SaltoAurrera"
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:57
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:57
 msgid "StepBefore"
-msgstr ""
+msgstr "SaltoAtzera"
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:69
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:69
 #: src/Datavis/DiagramType/HistogramTimeSeries.php:32
 msgid "Width"
-msgstr ""
+msgstr "Zabalera"
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:82
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:82
 #: src/Datavis/DiagramType/HistogramTimeSeries.php:45
 msgid "Height"
-msgstr ""
+msgstr "Altuera"
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:95
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:95
 #: src/Datavis/DiagramType/HistogramTimeSeries.php:58
 msgid "Margin top"
-msgstr ""
+msgstr "Goiko marjina"
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:108
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:108
 #: src/Datavis/DiagramType/HistogramTimeSeries.php:71
 msgid "Margin right"
-msgstr ""
+msgstr "Eskuineko marjina"
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:121
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:121
 #: src/Datavis/DiagramType/HistogramTimeSeries.php:84
 msgid "Margin bottom"
-msgstr ""
+msgstr "Beheko marjina"
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:134
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:134
 #: src/Datavis/DiagramType/HistogramTimeSeries.php:97
 msgid "Margin left"
-msgstr ""
+msgstr "Ezkerreko marjina"
 
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:14
 msgid "Grouped line chart (time series)"
@@ -390,23 +392,23 @@ msgstr ""
 
 #: src/DataType/AbstractDataType.php:14
 msgid "Numeric"
-msgstr "Numerisch"
+msgstr "Zenbakizkoa"
 
 #: src/DataType/Duration.php:38
 msgid "Duration"
-msgstr "Dauer"
+msgstr "Iraupena"
 
 #: src/DataType/Timestamp.php:23
 msgid "Timestamp"
-msgstr ""
+msgstr "Denbora-zigilua"
 
 #: src/DataType/Interval.php:23
 msgid "Interval"
-msgstr ""
+msgstr "Tartea"
 
 #: src/FacetedBrowse/FacetType/DateAfter.php:23
 msgid "Date after"
-msgstr ""
+msgstr "Data ondoren"
 
 #: src/FacetedBrowse/FacetType/DateAfter.php:61
 #: src/FacetedBrowse/FacetType/DateInInterval.php:61
@@ -423,15 +425,15 @@ msgstr ""
 #: src/FacetedBrowse/FacetType/DateInInterval.php:108
 #: src/FacetedBrowse/FacetType/DateBefore.php:108
 msgid "Select a date…"
-msgstr ""
+msgstr "Hautatu data..."
 
 #: src/FacetedBrowse/FacetType/ValueGreaterThan.php:22
 msgid "Value greater than"
-msgstr ""
+msgstr "Balioa handiagoa hau baino:"
 
 #: src/FacetedBrowse/FacetType/DurationGreaterThan.php:23
 msgid "Duration greater than"
-msgstr ""
+msgstr "Iraupena handiagoa hau baino:"
 
 #: src/FacetedBrowse/FacetType/DurationGreaterThan.php:61
 #: src/FacetedBrowse/FacetType/DurationLessThan.php:61
@@ -443,228 +445,228 @@ msgstr ""
 
 #: src/FacetedBrowse/FacetType/DurationLessThan.php:23
 msgid "Duration less than"
-msgstr ""
+msgstr "Iraupena txikiagoa hau baino:"
 
 #: src/FacetedBrowse/FacetType/ValueLessThan.php:22
 msgid "Value less than"
-msgstr ""
+msgstr "Balioa txikiagoa hau baino:"
 
 #: src/FacetedBrowse/FacetType/DateBefore.php:23
 msgid "Date before"
-msgstr ""
+msgstr "Data aurretik"
 
 #: src/Form/Element/Duration.php:30
 msgid "Years"
-msgstr "Jahre"
+msgstr "Urteak"
 
 #: src/Form/Element/Duration.php:38
 msgid "Months"
-msgstr "Monate"
+msgstr "Hilabeteak"
 
 #: src/Form/Element/Duration.php:46
 msgid "Days"
-msgstr "Tage"
+msgstr "Egunak"
 
 #: src/Form/Element/Duration.php:54
 msgid "Hours"
-msgstr "Stunden"
+msgstr "Orduak"
 
 #: src/Form/Element/Duration.php:62
 msgid "Minutes"
-msgstr "Minuten"
+msgstr "Minutuak"
 
 #: src/Form/Element/Duration.php:70
 msgid "Seconds"
-msgstr "Sekunden"
+msgstr "Segunduak"
 
 #: src/Form/Element/DateTime.php:30
 msgid "Year"
-msgstr "Jahr"
+msgstr "Urtea"
 
 #: src/Form/Element/DateTime.php:34
 msgid "Month"
-msgstr "Monat"
+msgstr "Hilabetea"
 
 #: src/Form/Element/DateTime.php:38
 msgid "Day"
-msgstr "Tag"
+msgstr "Eguna"
 
 #: src/Form/Element/DateTime.php:42
 msgid "Hour"
-msgstr "Stunde"
+msgstr "Ordua"
 
 #: src/Form/Element/DateTime.php:46
 msgid "Minute"
-msgstr "Minute"
+msgstr "Minutua"
 
 #: src/Form/Element/DateTime.php:50
 msgid "Second"
-msgstr "Sekunde"
+msgstr "Segundua"
 
 #: src/Form/Element/DateTime.php:54
 msgid "Offset"
-msgstr ""
+msgstr "Desplazamendua"
 
 #: src/Form/Element/DateTime.php:61
 msgid "01 — January"
-msgstr ""
+msgstr "01 — Urtarrila"
 
 #: src/Form/Element/DateTime.php:62
 msgid "02 — February"
-msgstr ""
+msgstr "02 — Otsaila"
 
 #: src/Form/Element/DateTime.php:63
 msgid "03 — March"
-msgstr ""
+msgstr "03 — Martxoa"
 
 #: src/Form/Element/DateTime.php:64
 msgid "04 — April"
-msgstr ""
+msgstr "04 — Apirila"
 
 #: src/Form/Element/DateTime.php:65
 msgid "05 — May"
-msgstr ""
+msgstr "05 — Maiatza"
 
 #: src/Form/Element/DateTime.php:66
 msgid "06 — June"
-msgstr ""
+msgstr "06 — Ekaina"
 
 #: src/Form/Element/DateTime.php:67
 msgid "07 — July"
-msgstr ""
+msgstr "07 — Uztaila"
 
 #: src/Form/Element/DateTime.php:68
 msgid "08 — August"
-msgstr ""
+msgstr "08 — Abuztua"
 
 #: src/Form/Element/DateTime.php:69
 msgid "09 — September"
-msgstr ""
+msgstr "09 — Iraila"
 
 #: src/Form/Element/DateTime.php:70
 msgid "10 — October"
-msgstr ""
+msgstr "10 — Urria"
 
 #: src/Form/Element/DateTime.php:71
 msgid "11 — November"
-msgstr ""
+msgstr "11 — Azaroa"
 
 #: src/Form/Element/DateTime.php:72
 msgid "12 — December"
-msgstr ""
+msgstr "12 — Abendua"
 
 #: src/Form/Element/DateTime.php:89
 msgid "00 — 12 am"
-msgstr ""
+msgstr "00 — 12 am"
 
 #: src/Form/Element/DateTime.php:90
 msgid "01 — 1 am"
-msgstr ""
+msgstr "01 — 1 am"
 
 #: src/Form/Element/DateTime.php:91
 msgid "02 — 2 am"
-msgstr ""
+msgstr "02 — 2 am"
 
 #: src/Form/Element/DateTime.php:92
 msgid "03 — 3 am"
-msgstr ""
+msgstr "03 — 3 am"
 
 #: src/Form/Element/DateTime.php:93
 msgid "04 — 4 am"
-msgstr ""
+msgstr "04 — 4 am"
 
 #: src/Form/Element/DateTime.php:94
 msgid "05 — 5 am"
-msgstr ""
+msgstr "05 — 5 am"
 
 #: src/Form/Element/DateTime.php:95
 msgid "06 — 6 am"
-msgstr ""
+msgstr "06 — 6 am"
 
 #: src/Form/Element/DateTime.php:96
 msgid "07 — 7 am"
-msgstr ""
+msgstr "07 — 7 am"
 
 #: src/Form/Element/DateTime.php:97
 msgid "08 — 8 am"
-msgstr ""
+msgstr "08 — 8 am"
 
 #: src/Form/Element/DateTime.php:98
 msgid "09 — 9 am"
-msgstr ""
+msgstr "09 — 9 am"
 
 #: src/Form/Element/DateTime.php:99
 msgid "10 — 10 am"
-msgstr ""
+msgstr "10 — 10 am"
 
 #: src/Form/Element/DateTime.php:100
 msgid "11 — 11 am"
-msgstr ""
+msgstr "11 — 11 am"
 
 #: src/Form/Element/DateTime.php:101
 msgid "12 — 12 pm"
-msgstr ""
+msgstr "12 — 12 pm"
 
 #: src/Form/Element/DateTime.php:102
 msgid "13 — 1 pm"
-msgstr ""
+msgstr "13 — 1 pm"
 
 #: src/Form/Element/DateTime.php:103
 msgid "14 — 2 pm"
-msgstr ""
+msgstr "14 — 2 pm"
 
 #: src/Form/Element/DateTime.php:104
 msgid "15 — 3 pm"
-msgstr ""
+msgstr "15 — 3 pm"
 
 #: src/Form/Element/DateTime.php:105
 msgid "16 — 4 pm"
-msgstr ""
+msgstr "16 — 4 pm"
 
 #: src/Form/Element/DateTime.php:106
 msgid "17 — 5 pm"
-msgstr ""
+msgstr "17 — 5 pm"
 
 #: src/Form/Element/DateTime.php:107
 msgid "18 — 6 pm"
-msgstr ""
+msgstr "18 — 6 pm"
 
 #: src/Form/Element/DateTime.php:108
 msgid "19 — 7 pm"
-msgstr ""
+msgstr "19 — 7 pm"
 
 #: src/Form/Element/DateTime.php:109
 msgid "20 — 8 pm"
-msgstr ""
+msgstr "20 — 8 pm"
 
 #: src/Form/Element/DateTime.php:110
 msgid "21 — 9 pm"
-msgstr ""
+msgstr "21 — 9 pm"
 
 #: src/Form/Element/DateTime.php:111
 msgid "22 — 10 pm"
-msgstr ""
+msgstr "22 — 10 pm"
 
 #: src/Form/Element/DateTime.php:112
 msgid "23 — 11 pm"
-msgstr ""
+msgstr "23 — 11 pm"
 
 #: src/Form/Element/ConvertToNumeric.php:22
 msgid "Convert to numeric"
-msgstr ""
+msgstr "Zenbaki bihurtu"
 
 #: src/Form/Element/ConvertToNumeric.php:33
 msgid "Convert to timestamp"
-msgstr ""
+msgstr "Denbora-zigilu bihurtu"
 
 #: src/Form/Element/ConvertToNumeric.php:34
 msgid "Convert to interval"
-msgstr ""
+msgstr "Tarte bihurtu"
 
 #: src/Form/Element/ConvertToNumeric.php:35
 msgid "Convert to duration"
-msgstr ""
+msgstr "Iraupen bihurtu"
 
 #: src/Form/Element/ConvertToNumeric.php:36
 msgid "Convert to integer"
-msgstr ""
+msgstr "Zenbaki bihurtu"

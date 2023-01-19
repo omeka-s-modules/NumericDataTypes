@@ -7,16 +7,16 @@
 # Laurent Thomas, 2019
 # Judith Hannoun <judith.hannoun@gmail.com>, 2020
 # Pols12 <poltron54@gmail.com>, 2022
-# Daniel Berthereau <daniel.transifex@berthereau.net>, 2022
+# Daniel Berthereau <daniel.transifex@berthereau.net>, 2023
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-12 14:10-0500\n"
+"POT-Creation-Date: 2023-01-19 10:29-0500\n"
 "PO-Revision-Date: 2018-11-27 19:31+0000\n"
-"Last-Translator: Daniel Berthereau <daniel.transifex@berthereau.net>, 2022\n"
+"Last-Translator: Daniel Berthereau <daniel.transifex@berthereau.net>, 2023\n"
 "Language-Team: French (https://www.transifex.com/omeka/teams/14184/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -156,7 +156,7 @@ msgstr "Fin :"
 
 #: view/common/numeric-timestamp.phtml:8
 msgid "Value must be a datetime"
-msgstr "La valeur doit être une estampille temporelle."
+msgstr "La valeur doit être de type date/heure."
 
 #: Module.php:193
 #, php-format
@@ -191,7 +191,7 @@ msgid ""
 "property over a selected period of time."
 msgstr ""
 "Voir le nombre de contenus qui ont les valeurs sélectionnés pour une "
-"propriété sélectionnée, dans une période temporelle définie."
+"propriété sélectionnée, dans une période définie."
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:38
 msgid "Value property"
@@ -295,7 +295,7 @@ msgstr "Nombre de contenus dans un intervalle de temps"
 
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:25
 msgid "Visualize the count of items over a selected period of time."
-msgstr "Voir le nombre de contenus dans une période temporelle définie."
+msgstr "Voir le nombre de contenus dans une période définie."
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:14
 msgid "Line chart (time series)"
@@ -672,7 +672,7 @@ msgstr "Convertir en nombre"
 
 #: src/Form/Element/ConvertToNumeric.php:33
 msgid "Convert to timestamp"
-msgstr "Convertir en estampille"
+msgstr "Convertir en horodatage"
 
 #: src/Form/Element/ConvertToNumeric.php:34
 msgid "Convert to interval"
