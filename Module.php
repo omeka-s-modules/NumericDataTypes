@@ -343,7 +343,7 @@ class Module extends AbstractModule
         }
         // Sort options alphabetically.
         asort($numericSortBy);
-        $sortConfig = $event->getParam('sortConfig');
+        $sortConfig = $event->getParam('sortConfig') ?: [];
         $sortConfig = array_merge($sortConfig, $numericSortBy);
         $event->setParam('sortConfig', $sortConfig);
     }
