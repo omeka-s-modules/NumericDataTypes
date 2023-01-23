@@ -331,7 +331,7 @@ class Module extends AbstractModule
 
         $numericSortBy = [];
         foreach ($query->getResult() as $templatePropertyData) {
-            $dataTypes = $templatePropertyData['dataType'];
+            $dataTypes = $templatePropertyData['dataType'] ?? [];
             foreach ($dataTypes as $dataType) {
                 if (isset($numericDataTypes[$dataType])) {
                     $value = sprintf('%s:%s', $dataType, $templatePropertyData['id']);
