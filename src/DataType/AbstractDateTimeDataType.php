@@ -5,6 +5,7 @@ use DateTime;
 use DateTimeZone;
 use IntlCalendar;
 use IntlDateFormatter;
+use IntlDatePatternGenerator;
 use InvalidArgumentException;
 
 abstract class AbstractDateTimeDataType extends AbstractDataType
@@ -232,10 +233,17 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
             IntlDateFormatter::NONE,
             $dateTime['offset_value'] ? sprintf('GMT%s', $dateTime['offset_normalized']) : null
         );
-        $format = $dateTime['format_render_intl'];
+        // PHP 8.1 is required to use IntlDatePatternGenerator to get the best
+        // date pattern for the given locale. Otherwise, use the default pattern.
+        if (version_compare(phpversion(), '8.1', '>=')) {
+            $intlDatePatternGenerator = new IntlDatePatternGenerator($options['lang'] ?? null);
+            $format = $intlDatePatternGenerator->getBestPattern($dateTime['format_render_intl']);
+        } else {
+            $format = $dateTime['format_render_intl'];
+        }
         if (0 <= $dateTime['year']) {
             // No need to include the era for positive years. It is implied.
-            $format = str_replace(' G', '', $format);
+            $format = str_replace([' G', 'G '], '', $format);
         } else {
             // IntlDateFormatter substracts one year for negative years because
             // year 0 doesn't exist, so it is added for display.
