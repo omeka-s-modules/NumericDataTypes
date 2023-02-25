@@ -321,14 +321,18 @@ class Module extends AbstractModule
      */
     public function addSortings(Event $event)
     {
-        $numericDataTypes = $this->getNumericDataTypes();
-        $qb = $this->getServiceLocator()->get('Omeka\EntityManager')->createQueryBuilder();
+        $services = $this->getServiceLocator();
+        $translator = $services->get('MvcTranslator');
+        $entityManager = $services->get('Omeka\EntityManager');
+
+        $qb = $entityManager->createQueryBuilder();
         $qb->select(['p.id', 'p.label', 'rtp.dataType'])
             ->from('Omeka\Entity\ResourceTemplateProperty', 'rtp')
             ->innerJoin('rtp.property', 'p');
         $qb->andWhere($qb->expr()->isNotNull('rtp.dataType'));
         $query = $qb->getQuery();
 
+        $numericDataTypes = $this->getNumericDataTypes();
         $numericSortBy = [];
         foreach ($query->getResult() as $templatePropertyData) {
             $dataTypes = $templatePropertyData['dataType'] ?? [];
@@ -336,7 +340,7 @@ class Module extends AbstractModule
                 if (isset($numericDataTypes[$dataType])) {
                     $value = sprintf('%s:%s', $dataType, $templatePropertyData['id']);
                     if (!isset($numericSortBy[$value])) {
-                        $numericSortBy[$value] = sprintf('%s (%s)', $templatePropertyData['label'], $dataType);
+                        $numericSortBy[$value] = sprintf('%s (%s)', $translator->translate($templatePropertyData['label']), $dataType);
                     }
                 }
             }
