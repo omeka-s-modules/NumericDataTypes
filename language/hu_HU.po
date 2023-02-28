@@ -4,8 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Angela-Marina Batarelo <angela-marina.batarelo@ericsson.com>, 2021
-# Josip Ilic <josip.ilic@ericsson.com>, 2021
+# Tamás Dombos, 2023
 # 
 #, fuzzy
 msgid ""
@@ -14,73 +13,73 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-02-28 13:27-0500\n"
 "PO-Revision-Date: 2018-11-27 19:31+0000\n"
-"Last-Translator: Josip Ilic <josip.ilic@ericsson.com>, 2021\n"
-"Language-Team: Croatian (https://www.transifex.com/omeka/teams/14184/hr/)\n"
+"Last-Translator: Tamás Dombos, 2023\n"
+"Language-Team: Hungarian (Hungary) (https://www.transifex.com/omeka/teams/14184/hu_HU/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: hr\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Language: hu_HU\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/DataType/Duration.php:76
 #, php-format
 msgid "%s year"
-msgstr "%s godina"
+msgstr "%s év"
 
 #: src/DataType/Duration.php:77
 #, php-format
 msgid "%s years"
-msgstr "%s godine"
+msgstr "%s év"
 
 #: src/DataType/Duration.php:81
 #, php-format
 msgid "%s month"
-msgstr "%s mjesec"
+msgstr "%s hónap"
 
 #: src/DataType/Duration.php:82
 #, php-format
 msgid "%s months"
-msgstr "%s mjeseci"
+msgstr "%s hónap"
 
 #: src/DataType/Duration.php:86
 #, php-format
 msgid "%s day"
-msgstr "%s dan"
+msgstr "%s nap"
 
 #: src/DataType/Duration.php:87
 #, php-format
 msgid "%s days"
-msgstr "%s dana"
+msgstr "%s nap"
 
 #: src/DataType/Duration.php:91
 #, php-format
 msgid "%s hour"
-msgstr "%s sat"
+msgstr "%s óra"
 
 #: src/DataType/Duration.php:92
 #, php-format
 msgid "%s hours"
-msgstr "%s sati"
+msgstr "%s óra"
 
 #: src/DataType/Duration.php:96
 #, php-format
 msgid "%s minute"
-msgstr "%s minuta"
+msgstr "%s perc"
 
 #: src/DataType/Duration.php:97
 #, php-format
 msgid "%s minutes"
-msgstr "%s minuta"
+msgstr "%s perc"
 
 #: src/DataType/Duration.php:101
 #, php-format
 msgid "%s second"
-msgstr "%s sekunda"
+msgstr "%s másodperc"
 
 #: src/DataType/Duration.php:102
 #, php-format
 msgid "%s seconds"
-msgstr "%s sekundi"
+msgstr "%s másodperc"
 
 #: view/common/faceted-browse/facet-data-form/date-after.phtml:4
 #: view/common/faceted-browse/facet-data-form/date-before.phtml:4
@@ -90,92 +89,92 @@ msgstr "%s sekundi"
 #: view/common/faceted-browse/facet-data-form/value-greater-than.phtml:6
 #: view/common/faceted-browse/facet-data-form/value-less-than.phtml:6
 msgid "Show all available values."
-msgstr ""
+msgstr "Összes elérhető érték mutatása."
 
 #: view/common/numeric-data-types-advanced-search.phtml:12
 msgid "Date comes on or after"
-msgstr ""
+msgstr "Dátum ez a nap vagy később"
 
 #: view/common/numeric-data-types-advanced-search.phtml:36
 msgid "Date comes on or before"
-msgstr ""
+msgstr "Dátum ez a nap vagy korábban"
 
 #: view/common/numeric-data-types-advanced-search.phtml:60
 msgid "Duration is greater than"
-msgstr "Trajanje je dulje od"
+msgstr "Hosszabb, mint"
 
 #: view/common/numeric-data-types-advanced-search.phtml:83
 msgid "Duration is less than"
-msgstr "Trajanje je kraće od"
+msgstr "Rövidebb, mint"
 
 #: view/common/numeric-data-types-advanced-search.phtml:106
 msgid "Date in interval"
-msgstr "Datum u intervalu"
+msgstr "Ez a dátum az intervallumba esik"
 
 #: view/common/numeric-data-types-advanced-search.phtml:130
 msgid "Value is greater than"
-msgstr "Vrijednost je veća od"
+msgstr "Érték nagyobb, mint"
 
 #: view/common/numeric-data-types-advanced-search.phtml:153
 msgid "Value is less than"
-msgstr "Vrijednost je manja od"
+msgstr "Érték kisebb, mint"
 
 #: view/common/numeric-duration.phtml:7 view/common/numeric-integer.phtml:7
 #: view/common/numeric-interval.phtml:7 view/common/numeric-timestamp.phtml:7
 #, php-format
 msgid "Invalid value: %s"
-msgstr "Neispravna vrijednost: %s"
+msgstr "Érvénytelen érték: %s"
 
 #: view/common/numeric-duration.phtml:8
 msgid "Value must be a duration"
-msgstr "Vrijednost mora imati trajanje"
+msgstr "Az értéknek időtartamnak kell lennie"
 
 #: view/common/numeric-duration.phtml:16 view/common/numeric-interval.phtml:17
 #: view/common/numeric-interval.phtml:32
 #: view/common/numeric-timestamp.phtml:16
 msgid "Time"
-msgstr "Vrijeme"
+msgstr "Idő"
 
 #: view/common/numeric-integer.phtml:8
 msgid "Value must be an integer"
-msgstr "Vrijednost mora biti broj"
+msgstr "Az értéknek egész számnak kell lennie"
 
 #: view/common/numeric-interval.phtml:8
 msgid "Value must be an interval"
-msgstr "Vrijednost mora biti interval"
+msgstr "Az értéknek egész intervallumnak kell lennie"
 
 #: view/common/numeric-interval.phtml:12
 msgid "Start:"
-msgstr "Početak:"
+msgstr "Kezdete:"
 
 #: view/common/numeric-interval.phtml:27
 msgid "End:"
-msgstr "Kraj:"
+msgstr "Vége:"
 
 #: view/common/numeric-timestamp.phtml:8
 msgid "Value must be a datetime"
-msgstr "Vrijednost mora biti datum i vrijeme"
+msgstr "Az értéknek egész dátum és időnek kell lennie"
 
 #: Module.php:193
 #, php-format
 msgid "NumericDataTypes - invalid %s value for ID %s - %s"
-msgstr "NumericDataTypes - neispravna %s vrijednost za ID %s - %s"
+msgstr "NumericDataTypes - érvénytelen %s érték ehhez az ID-hez: %s - %s"
 
 #: config/module.config.php:66
 msgid "Date/Time (ISO 8601)"
-msgstr "Datum/Vrijeme (ISO 8601)"
+msgstr "Dátum/idő (ISO 8601)"
 
 #: config/module.config.php:70
 msgid "Interval (ISO 8601)"
-msgstr "Interval (ISO 8601)"
+msgstr "Intervallum (ISO 8601)"
 
 #: config/module.config.php:74
 msgid "Duration (ISO 8601)"
-msgstr "Trajanje (ISO 8601)"
+msgstr "Időtartam (ISO 8601)"
 
 #: config/module.config.php:78 src/DataType/Integer.php:37
 msgid "Integer"
-msgstr "Broj"
+msgstr "Egész szám"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:19
 msgid "Count of items with property values in a time series"
@@ -189,7 +188,7 @@ msgstr ""
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:38
 msgid "Value property"
-msgstr ""
+msgstr "Érték tulajdonsága"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:45
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:73
@@ -202,15 +201,15 @@ msgstr ""
 #: src/FacetedBrowse/FacetType/ValueLessThan.php:53
 #: src/FacetedBrowse/FacetType/DateBefore.php:54
 msgid "Select one…"
-msgstr ""
+msgstr "Válasszon egyet…"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:54
 msgid "Enter values, separated by new lines."
-msgstr ""
+msgstr "Adja meg az értékek, minden érték új sorban."
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:66
 msgid "Timestamp property"
-msgstr ""
+msgstr "Időpont tulajdonság"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:82
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:55
@@ -232,52 +231,52 @@ msgstr ""
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:111
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:84
 msgid "1 second"
-msgstr ""
+msgstr "1 másodperc"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:112
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:85
 msgid "1 minute"
-msgstr ""
+msgstr "1 perc"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:113
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:86
 msgid "1 hour"
-msgstr ""
+msgstr "1 óra"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:114
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:87
 msgid "1 day"
-msgstr ""
+msgstr "1 nap"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:115
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:88
 msgid "7 days"
-msgstr ""
+msgstr "7 nap"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:116
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:89
 msgid "1 month"
-msgstr ""
+msgstr "1 hónap"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:117
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:90
 msgid "6 months"
-msgstr ""
+msgstr "6 hónap"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:118
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:91
 msgid "1 year"
-msgstr ""
+msgstr "1 év"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:119
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:92
 msgid "5 years"
-msgstr ""
+msgstr "5 év"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:120
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:93
 msgid "10 years"
-msgstr ""
+msgstr "10 év"
 
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:20
 msgid "Count of items in a time series"
@@ -345,37 +344,37 @@ msgstr ""
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:69
 #: src/Datavis/DiagramType/HistogramTimeSeries.php:32
 msgid "Width"
-msgstr ""
+msgstr "Szélesség"
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:82
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:82
 #: src/Datavis/DiagramType/HistogramTimeSeries.php:45
 msgid "Height"
-msgstr ""
+msgstr "Magasság"
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:95
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:95
 #: src/Datavis/DiagramType/HistogramTimeSeries.php:58
 msgid "Margin top"
-msgstr ""
+msgstr "Felső margó"
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:108
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:108
 #: src/Datavis/DiagramType/HistogramTimeSeries.php:71
 msgid "Margin right"
-msgstr ""
+msgstr "Jobb margó"
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:121
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:121
 #: src/Datavis/DiagramType/HistogramTimeSeries.php:84
 msgid "Margin bottom"
-msgstr ""
+msgstr "Alsó margó"
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:134
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:134
 #: src/Datavis/DiagramType/HistogramTimeSeries.php:97
 msgid "Margin left"
-msgstr ""
+msgstr "Bal margó"
 
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:14
 msgid "Grouped line chart (time series)"
@@ -391,23 +390,23 @@ msgstr ""
 
 #: src/DataType/AbstractDataType.php:14
 msgid "Numeric"
-msgstr "Brojčano"
+msgstr "Szám"
 
 #: src/DataType/Duration.php:38
 msgid "Duration"
-msgstr "Trajanje"
+msgstr "Időtartam"
 
 #: src/DataType/Timestamp.php:23
 msgid "Timestamp"
-msgstr "Vremenska oznaka"
+msgstr "Dátum/idő"
 
 #: src/DataType/Interval.php:23
 msgid "Interval"
-msgstr "Interval"
+msgstr "Intervallum"
 
 #: src/FacetedBrowse/FacetType/DateAfter.php:23
 msgid "Date after"
-msgstr ""
+msgstr "Dátum később, mint"
 
 #: src/FacetedBrowse/FacetType/DateAfter.php:61
 #: src/FacetedBrowse/FacetType/DateInInterval.php:61
@@ -424,15 +423,15 @@ msgstr ""
 #: src/FacetedBrowse/FacetType/DateInInterval.php:108
 #: src/FacetedBrowse/FacetType/DateBefore.php:108
 msgid "Select a date…"
-msgstr ""
+msgstr "Dátum kiválasztása…"
 
 #: src/FacetedBrowse/FacetType/ValueGreaterThan.php:22
 msgid "Value greater than"
-msgstr ""
+msgstr "Érték nagyobb, mint"
 
 #: src/FacetedBrowse/FacetType/DurationGreaterThan.php:23
 msgid "Duration greater than"
-msgstr ""
+msgstr "Időtartam hosszabb, mint"
 
 #: src/FacetedBrowse/FacetType/DurationGreaterThan.php:61
 #: src/FacetedBrowse/FacetType/DurationLessThan.php:61
@@ -444,236 +443,228 @@ msgstr ""
 
 #: src/FacetedBrowse/FacetType/DurationLessThan.php:23
 msgid "Duration less than"
-msgstr ""
+msgstr "Időtartam rövidebb, mint"
 
 #: src/FacetedBrowse/FacetType/ValueLessThan.php:22
 msgid "Value less than"
-msgstr ""
+msgstr "Érték kisebb, mint"
 
 #: src/FacetedBrowse/FacetType/DateBefore.php:23
 msgid "Date before"
-msgstr ""
+msgstr "Dátum korábbi, mint"
 
 #: src/Form/Element/Duration.php:30
 msgid "Years"
-msgstr "Godine"
+msgstr "Év"
 
 #: src/Form/Element/Duration.php:38
 msgid "Months"
-msgstr "Mjeseci"
+msgstr "Hónap"
 
 #: src/Form/Element/Duration.php:46
 msgid "Days"
-msgstr "Dani"
+msgstr "Nap"
 
 #: src/Form/Element/Duration.php:54
 msgid "Hours"
-msgstr "Sati"
+msgstr "Óra"
 
 #: src/Form/Element/Duration.php:62
 msgid "Minutes"
-msgstr "Minute"
+msgstr "Perc"
 
 #: src/Form/Element/Duration.php:70
 msgid "Seconds"
-msgstr "Sekunde"
+msgstr "Másodperc"
 
 #: src/Form/Element/DateTime.php:30
 msgid "Year"
-msgstr "Godina"
+msgstr "Év"
 
 #: src/Form/Element/DateTime.php:34
 msgid "Month"
-msgstr "Mjesec"
+msgstr "Hónap"
 
 #: src/Form/Element/DateTime.php:38
 msgid "Day"
-msgstr "Dan"
+msgstr "Nap"
 
 #: src/Form/Element/DateTime.php:42
 msgid "Hour"
-msgstr "Sat"
+msgstr "Óra"
 
 #: src/Form/Element/DateTime.php:46
 msgid "Minute"
-msgstr "Minuta"
+msgstr "Perc"
 
 #: src/Form/Element/DateTime.php:50
 msgid "Second"
-msgstr "Sekunda"
+msgstr "Másodperc"
 
 #: src/Form/Element/DateTime.php:54
 msgid "Offset"
-msgstr "Ofset"
+msgstr "Időeltolódás"
 
 #: src/Form/Element/DateTime.php:61
 msgid "01 — January"
-msgstr "01 - Siječanj"
+msgstr "01 — január"
 
 #: src/Form/Element/DateTime.php:62
 msgid "02 — February"
-msgstr "02 - Veljača"
+msgstr "02 — február"
 
 #: src/Form/Element/DateTime.php:63
 msgid "03 — March"
-msgstr "03 - Ožujak"
+msgstr "03 — március"
 
 #: src/Form/Element/DateTime.php:64
 msgid "04 — April"
-msgstr "04 - Travanj"
+msgstr "04 — április"
 
 #: src/Form/Element/DateTime.php:65
 msgid "05 — May"
-msgstr "05 - Svibanj"
+msgstr "05 — május"
 
 #: src/Form/Element/DateTime.php:66
 msgid "06 — June"
-msgstr "06 - Lipanj"
+msgstr "06 — június"
 
 #: src/Form/Element/DateTime.php:67
 msgid "07 — July"
-msgstr "07 - Srpanj"
+msgstr "07 — július"
 
 #: src/Form/Element/DateTime.php:68
 msgid "08 — August"
-msgstr "08 - Kolovoz"
+msgstr "08 — augusztus"
 
 #: src/Form/Element/DateTime.php:69
 msgid "09 — September"
-msgstr "09 - Rujan"
+msgstr "09 — szeptember"
 
 #: src/Form/Element/DateTime.php:70
 msgid "10 — October"
-msgstr "10 - Listopad"
+msgstr "10 — október"
 
 #: src/Form/Element/DateTime.php:71
 msgid "11 — November"
-msgstr "11 - Studeni"
+msgstr "11 — november"
 
 #: src/Form/Element/DateTime.php:72
 msgid "12 — December"
-msgstr "12 - Prosinac"
+msgstr "12 — december"
 
 #: src/Form/Element/DateTime.php:89
 msgid "00 — 12 am"
-msgstr "00 - 00:00"
+msgstr "00 — 0 óra"
 
 #: src/Form/Element/DateTime.php:90
 msgid "01 — 1 am"
-msgstr "01 - 01:00"
+msgstr "01 — 1 óra"
 
 #: src/Form/Element/DateTime.php:91
 msgid "02 — 2 am"
-msgstr "02 - 02:00"
+msgstr "02 — 2 óra"
 
 #: src/Form/Element/DateTime.php:92
 msgid "03 — 3 am"
-msgstr "03 - 03:00"
+msgstr "03 — 3 óra"
 
 #: src/Form/Element/DateTime.php:93
 msgid "04 — 4 am"
-msgstr "04 - 04:00"
+msgstr "04 — 4 óra"
 
 #: src/Form/Element/DateTime.php:94
 msgid "05 — 5 am"
-msgstr "05 - 05:00"
+msgstr "05 — 5 óra"
 
 #: src/Form/Element/DateTime.php:95
 msgid "06 — 6 am"
-msgstr "06 - 06:00"
+msgstr "06 — 6 óra"
 
 #: src/Form/Element/DateTime.php:96
 msgid "07 — 7 am"
-msgstr "07 - 07:00"
+msgstr "07 — 7 óra"
 
 #: src/Form/Element/DateTime.php:97
 msgid "08 — 8 am"
-msgstr "08 - 08:00"
+msgstr "08 — 8 óra"
 
 #: src/Form/Element/DateTime.php:98
 msgid "09 — 9 am"
-msgstr "09 - 09:00"
+msgstr "09 — 9 óra"
 
 #: src/Form/Element/DateTime.php:99
 msgid "10 — 10 am"
-msgstr "10 - 10:00"
+msgstr "10 — 10 óra"
 
 #: src/Form/Element/DateTime.php:100
 msgid "11 — 11 am"
-msgstr "11 - 11:00"
+msgstr "11 — 11 óra"
 
 #: src/Form/Element/DateTime.php:101
 msgid "12 — 12 pm"
-msgstr "12 - 12:00"
+msgstr "12 — 12 óra"
 
 #: src/Form/Element/DateTime.php:102
 msgid "13 — 1 pm"
-msgstr "13 - 13:00"
+msgstr "13 — 13 óra"
 
 #: src/Form/Element/DateTime.php:103
 msgid "14 — 2 pm"
-msgstr "14 - 14:00"
+msgstr "14 — 14 óra"
 
 #: src/Form/Element/DateTime.php:104
 msgid "15 — 3 pm"
-msgstr "15 - 15:00"
+msgstr "15 — 15 óra"
 
 #: src/Form/Element/DateTime.php:105
 msgid "16 — 4 pm"
-msgstr "16 - 16:00"
+msgstr "16 — 16 óra"
 
 #: src/Form/Element/DateTime.php:106
 msgid "17 — 5 pm"
-msgstr "17 - 17:00"
+msgstr "17 — 17 óra"
 
 #: src/Form/Element/DateTime.php:107
 msgid "18 — 6 pm"
-msgstr "18 - 18:00"
+msgstr "18 — 18 óra"
 
 #: src/Form/Element/DateTime.php:108
 msgid "19 — 7 pm"
-msgstr "19 - 19:00"
+msgstr "19 — 19 óra"
 
 #: src/Form/Element/DateTime.php:109
 msgid "20 — 8 pm"
-msgstr "20 - 20:00"
+msgstr "20 — 20 óra"
 
 #: src/Form/Element/DateTime.php:110
 msgid "21 — 9 pm"
-msgstr "21 - 21:00"
+msgstr "21 — 21 óra"
 
 #: src/Form/Element/DateTime.php:111
 msgid "22 — 10 pm"
-msgstr "22 - 22:00"
+msgstr "22 — 22 óra"
 
 #: src/Form/Element/DateTime.php:112
 msgid "23 — 11 pm"
-msgstr "23 - 23:00"
+msgstr "23 — 23 óra"
 
 #: src/Form/Element/ConvertToNumeric.php:22
 msgid "Convert to numeric"
-msgstr "Pretvorite u brojčano"
+msgstr "Alakítás számmá"
 
 #: src/Form/Element/ConvertToNumeric.php:33
 msgid "Convert to timestamp"
-msgstr ""
-"Pretvori u vremensku oznaku\n"
-" \n"
-"\n"
-" \n"
-" \n"
-" \n"
-" \n"
-" "
+msgstr "Alakítás dátum/idővé"
 
 #: src/Form/Element/ConvertToNumeric.php:34
 msgid "Convert to interval"
-msgstr "Pretvorite u interval"
+msgstr "Alakítás intervallummá"
 
 #: src/Form/Element/ConvertToNumeric.php:35
 msgid "Convert to duration"
-msgstr "Pretvorite u trajanje"
+msgstr "Alakítás időtartammás"
 
 #: src/Form/Element/ConvertToNumeric.php:36
 msgid "Convert to integer"
-msgstr "Pretvorite u broj"
+msgstr "Alakítás egész számmá"
