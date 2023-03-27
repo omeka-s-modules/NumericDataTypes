@@ -20,7 +20,7 @@ class DateTime extends Element
         parent::__construct($name, $options);
 
         $this->valueElement = (new Element\Hidden($name))
-            ->setAttribute('class', 'numeric-datetime-value');
+            ->setAttribute('class', 'numeric-datetime-value to-require');
         $this->yearElement = (new Element\Number('year'))
             ->setAttributes([
                 'class' => 'numeric-datetime-year',

@@ -19,7 +19,7 @@ class Duration extends Element
 
         $this->valueElement = new Element\Hidden($name);
         $this->valueElement->setAttributes([
-            'class' => 'numeric-duration-value',
+            'class' => 'numeric-duration-value to-require',
         ]);
 
         $this->yearsElement = new Element\Number('years');

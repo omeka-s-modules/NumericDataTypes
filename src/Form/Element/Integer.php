@@ -14,7 +14,7 @@ class Integer extends Element
         parent::__construct($name, $options);
 
         $this->valueElement = (new Element\Hidden($name))
-            ->setAttribute('class', 'numeric-integer-value');
+            ->setAttribute('class', 'numeric-integer-value to-require');
         $this->integerElement = (new Element\Number('integer'))
             ->setAttributes([
                 'class' => 'numeric-integer-integer',
