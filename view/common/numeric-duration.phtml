@@ -15,7 +15,7 @@ $formNumber->addTranslatableAttribute('aria-label');
             <?php echo $formNumber($element->getYearsElement()); ?>
             <?php echo $formNumber($element->getMonthsElement()); ?>
             <?php echo $formNumber($element->getDaysElement()); ?>
-            <label class="numeric-toggle-time button" aria-title="<?php echo $this->translate('Time'); ?>" title="<?php echo $this->translate('Time'); ?>"><input type="checkbox" name="numeric-toggle-time-checkbox"/></label>
+            <label class="numeric-toggle-time button" title="<?php echo $this->translate('Time'); ?>"><input type="checkbox" name="numeric-toggle-time-checkbox" aria-label="<?php echo $this->translate('Time'); ?>"></label>
         </div>
         <div class="numeric-time-inputs">
             <?php echo $formNumber($element->getHoursElement()); ?>
