@@ -16,6 +16,7 @@ $this->headLink()->appendStylesheet($this->assetUrl('css/numeric-data-types.css'
         echo $this->numericPropertySelect([
             'name' => 'numeric[ts][gte][pid]',
             'attributes' => [
+                'aria-label' => $this->translate('Property'),
                 'id' => 'timestamp-on-after-pid',
                 'class' => 'chosen-select',
                 'value' => $query['numeric']['ts']['gte']['pid'] ?? null,
@@ -40,6 +41,7 @@ $this->headLink()->appendStylesheet($this->assetUrl('css/numeric-data-types.css'
         echo $this->numericPropertySelect([
             'name' => 'numeric[ts][lte][pid]',
             'attributes' => [
+                'aria-label' => $this->translate('Property'),
                 'id' => 'timestamp-on-before-pid',
                 'class' => 'chosen-select',
                 'value' => $query['numeric']['ts']['lte']['pid'] ?? null,
@@ -62,6 +64,7 @@ $this->headLink()->appendStylesheet($this->assetUrl('css/numeric-data-types.css'
     <div class="inputs">
         <?php
         echo $this->numericPropertySelect([
+            'aria-label' => $this->translate('Property'),
             'name' => 'numeric[dur][gt][pid]',
             'attributes' => [
                 'class' => 'chosen-select',
@@ -85,6 +88,7 @@ $this->headLink()->appendStylesheet($this->assetUrl('css/numeric-data-types.css'
     <div class="inputs">
         <?php
         echo $this->numericPropertySelect([
+            'aria-label' => $this->translate('Property'),
             'name' => 'numeric[dur][lt][pid]',
             'attributes' => [
                 'class' => 'chosen-select',
@@ -108,6 +112,7 @@ $this->headLink()->appendStylesheet($this->assetUrl('css/numeric-data-types.css'
     <div class="inputs">
         <?php
         echo $this->numericPropertySelect([
+            'aria-label' => $this->translate('Property'),
             'name' => 'numeric[ivl][pid]',
             'attributes' => [
                 'id' => 'interval-pid',
@@ -132,6 +137,7 @@ $this->headLink()->appendStylesheet($this->assetUrl('css/numeric-data-types.css'
     <div class="inputs">
         <?php
         echo $this->numericPropertySelect([
+            'aria-label' => $this->translate('Property'),
             'name' => 'numeric[int][gt][pid]',
             'attributes' => [
                 'class' => 'chosen-select',
@@ -155,6 +161,7 @@ $this->headLink()->appendStylesheet($this->assetUrl('css/numeric-data-types.css'
     <div class="inputs">
         <?php
         echo $this->numericPropertySelect([
+            'aria-label' => $this->translate('Property'),
             'name' => 'numeric[int][lt][pid]',
             'attributes' => [
                 'class' => 'chosen-select',

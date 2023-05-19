@@ -28,30 +28,37 @@ class DateTime extends Element
                 'min' => TimestampDataType::YEAR_MIN,
                 'max' => TimestampDataType::YEAR_MAX,
                 'placeholder' => 'Year', // @translate
+                'aria-label' => 'Year', // @translate
             ]);
         $this->monthElement = (new Element\Select('month'))
             ->setAttribute('class', 'numeric-datetime-month')
             ->setEmptyOption('Month') // @translate
+            ->setAttribute('aria-label', 'Month') // @translate
             ->setValueOptions($this->getMonthValueOptions());
         $this->dayElement = (new Element\Select('day'))
             ->setAttribute('class', 'numeric-datetime-day')
             ->setEmptyOption('Day') // @translate
+            ->setAttribute('aria-label', 'Day') // @translate
             ->setValueOptions($this->getDayValueOptions());
         $this->hourElement = (new Element\Select('hour'))
             ->setAttribute('class', 'numeric-datetime-hour')
             ->setEmptyOption('Hour') // @translate
+            ->setAttribute('aria-label', 'Hour') // @translate
             ->setValueOptions($this->getHourValueOptions());
         $this->minuteElement = (new Element\Select('minute'))
             ->setAttribute('class', 'numeric-datetime-minute')
             ->setEmptyOption('Minute') // @translate
+            ->setAttribute('aria-label', 'Minute') // @translate
             ->setValueOptions($this->getMinuteSecondValueOptions());
         $this->secondElement = (new Element\Select('second'))
             ->setAttribute('class', 'numeric-datetime-second')
             ->setEmptyOption('Second') // @translate
+            ->setAttribute('aria-label', 'Second') // @translate
             ->setValueOptions($this->getMinuteSecondValueOptions());
         $this->offsetElement = (new Element\Select('offset'))
             ->setAttribute('class', 'numeric-datetime-offset')
             ->setEmptyOption('Offset') // @translate
+            ->setAttribute('aria-label', 'Offset') // @translate
             ->setValueOptions($this->getOffsetValueOptions());
     }
 

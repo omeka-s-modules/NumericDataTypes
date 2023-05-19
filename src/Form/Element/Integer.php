@@ -21,6 +21,7 @@ class Integer extends Element
                 'step' => 1,
                 'min' => IntegerDataType::MIN_SAFE_INT,
                 'max' => IntegerDataType::MAX_SAFE_INT,
+                'aria-label' => 'Value', // @translate
             ]);
     }
 
