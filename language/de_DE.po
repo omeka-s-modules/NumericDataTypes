@@ -11,10 +11,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-28 13:27-0500\n"
+"POT-Creation-Date: 2023-05-19 16:16-0400\n"
 "PO-Revision-Date: 2018-11-27 19:31+0000\n"
 "Last-Translator: Joachim Räth <info@ihregeschichte.info>, 2019\n"
-"Language-Team: German (Germany) (https://www.transifex.com/omeka/teams/14184/de_DE/)\n"
+"Language-Team: German (Germany) (https://app.transifex.com/omeka/teams/14184/de_DE/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -95,63 +95,64 @@ msgstr ""
 msgid "Date comes on or after"
 msgstr ""
 
-#: view/common/numeric-data-types-advanced-search.phtml:36
+#: view/common/numeric-data-types-advanced-search.phtml:37
 msgid "Date comes on or before"
 msgstr ""
 
-#: view/common/numeric-data-types-advanced-search.phtml:60
+#: view/common/numeric-data-types-advanced-search.phtml:62
 msgid "Duration is greater than"
 msgstr "Dauer ist länger als"
 
-#: view/common/numeric-data-types-advanced-search.phtml:83
+#: view/common/numeric-data-types-advanced-search.phtml:86
 msgid "Duration is less than"
 msgstr "Dauer ist kürzer als"
 
-#: view/common/numeric-data-types-advanced-search.phtml:106
+#: view/common/numeric-data-types-advanced-search.phtml:110
 msgid "Date in interval"
 msgstr "Datum im Intervall"
 
-#: view/common/numeric-data-types-advanced-search.phtml:130
+#: view/common/numeric-data-types-advanced-search.phtml:135
 msgid "Value is greater than"
 msgstr "Wert ist größer als"
 
-#: view/common/numeric-data-types-advanced-search.phtml:153
+#: view/common/numeric-data-types-advanced-search.phtml:159
 msgid "Value is less than"
 msgstr "Wert ist kleiner als"
 
-#: view/common/numeric-duration.phtml:7 view/common/numeric-integer.phtml:7
-#: view/common/numeric-interval.phtml:7 view/common/numeric-timestamp.phtml:7
+#: view/common/numeric-duration.phtml:9 view/common/numeric-integer.phtml:9
+#: view/common/numeric-interval.phtml:11
+#: view/common/numeric-timestamp.phtml:11
 #, php-format
 msgid "Invalid value: %s"
 msgstr ""
 
-#: view/common/numeric-duration.phtml:8
+#: view/common/numeric-duration.phtml:10
 msgid "Value must be a duration"
 msgstr ""
 
-#: view/common/numeric-duration.phtml:16 view/common/numeric-interval.phtml:17
-#: view/common/numeric-interval.phtml:32
-#: view/common/numeric-timestamp.phtml:16
+#: view/common/numeric-duration.phtml:18 view/common/numeric-interval.phtml:21
+#: view/common/numeric-interval.phtml:36
+#: view/common/numeric-timestamp.phtml:20
 msgid "Time"
 msgstr ""
 
-#: view/common/numeric-integer.phtml:8
+#: view/common/numeric-integer.phtml:10
 msgid "Value must be an integer"
 msgstr ""
 
-#: view/common/numeric-interval.phtml:8
+#: view/common/numeric-interval.phtml:12
 msgid "Value must be an interval"
 msgstr ""
 
-#: view/common/numeric-interval.phtml:12
+#: view/common/numeric-interval.phtml:16
 msgid "Start:"
 msgstr "Beginn:"
 
-#: view/common/numeric-interval.phtml:27
+#: view/common/numeric-interval.phtml:31
 msgid "End:"
 msgstr "Ende:"
 
-#: view/common/numeric-timestamp.phtml:8
+#: view/common/numeric-timestamp.phtml:12
 msgid "Value must be a datetime"
 msgstr "Wert muss ein DateTime sein"
 
@@ -453,199 +454,199 @@ msgstr ""
 msgid "Date before"
 msgstr ""
 
-#: src/Form/Element/Duration.php:30
+#: src/Form/Element/Duration.php:30 src/Form/Element/Duration.php:31
 msgid "Years"
 msgstr "Jahre"
 
-#: src/Form/Element/Duration.php:38
+#: src/Form/Element/Duration.php:39 src/Form/Element/Duration.php:40
 msgid "Months"
 msgstr "Monate"
 
-#: src/Form/Element/Duration.php:46
+#: src/Form/Element/Duration.php:48 src/Form/Element/Duration.php:49
 msgid "Days"
 msgstr "Tage"
 
-#: src/Form/Element/Duration.php:54
+#: src/Form/Element/Duration.php:57 src/Form/Element/Duration.php:58
 msgid "Hours"
 msgstr "Stunden"
 
-#: src/Form/Element/Duration.php:62
+#: src/Form/Element/Duration.php:66 src/Form/Element/Duration.php:67
 msgid "Minutes"
 msgstr "Minuten"
 
-#: src/Form/Element/Duration.php:70
+#: src/Form/Element/Duration.php:75 src/Form/Element/Duration.php:76
 msgid "Seconds"
 msgstr "Sekunden"
 
-#: src/Form/Element/DateTime.php:30
+#: src/Form/Element/DateTime.php:30 src/Form/Element/DateTime.php:31
 msgid "Year"
 msgstr "Jahr"
 
-#: src/Form/Element/DateTime.php:34
+#: src/Form/Element/DateTime.php:35 src/Form/Element/DateTime.php:36
 msgid "Month"
 msgstr "Monat"
 
-#: src/Form/Element/DateTime.php:38
+#: src/Form/Element/DateTime.php:40 src/Form/Element/DateTime.php:41
 msgid "Day"
 msgstr "Tag"
 
-#: src/Form/Element/DateTime.php:42
+#: src/Form/Element/DateTime.php:45 src/Form/Element/DateTime.php:46
 msgid "Hour"
 msgstr "Stunde"
 
-#: src/Form/Element/DateTime.php:46
+#: src/Form/Element/DateTime.php:50 src/Form/Element/DateTime.php:51
 msgid "Minute"
 msgstr "Minute"
 
-#: src/Form/Element/DateTime.php:50
+#: src/Form/Element/DateTime.php:55 src/Form/Element/DateTime.php:56
 msgid "Second"
 msgstr "Sekunde"
 
-#: src/Form/Element/DateTime.php:54
+#: src/Form/Element/DateTime.php:60 src/Form/Element/DateTime.php:61
 msgid "Offset"
 msgstr ""
 
-#: src/Form/Element/DateTime.php:61
+#: src/Form/Element/DateTime.php:68
 msgid "01 — January"
 msgstr ""
 
-#: src/Form/Element/DateTime.php:62
+#: src/Form/Element/DateTime.php:69
 msgid "02 — February"
 msgstr ""
 
-#: src/Form/Element/DateTime.php:63
+#: src/Form/Element/DateTime.php:70
 msgid "03 — March"
 msgstr ""
 
-#: src/Form/Element/DateTime.php:64
+#: src/Form/Element/DateTime.php:71
 msgid "04 — April"
 msgstr ""
 
-#: src/Form/Element/DateTime.php:65
+#: src/Form/Element/DateTime.php:72
 msgid "05 — May"
 msgstr ""
 
-#: src/Form/Element/DateTime.php:66
+#: src/Form/Element/DateTime.php:73
 msgid "06 — June"
 msgstr ""
 
-#: src/Form/Element/DateTime.php:67
+#: src/Form/Element/DateTime.php:74
 msgid "07 — July"
 msgstr ""
 
-#: src/Form/Element/DateTime.php:68
+#: src/Form/Element/DateTime.php:75
 msgid "08 — August"
 msgstr ""
 
-#: src/Form/Element/DateTime.php:69
+#: src/Form/Element/DateTime.php:76
 msgid "09 — September"
 msgstr ""
 
-#: src/Form/Element/DateTime.php:70
+#: src/Form/Element/DateTime.php:77
 msgid "10 — October"
 msgstr ""
 
-#: src/Form/Element/DateTime.php:71
+#: src/Form/Element/DateTime.php:78
 msgid "11 — November"
 msgstr ""
 
-#: src/Form/Element/DateTime.php:72
+#: src/Form/Element/DateTime.php:79
 msgid "12 — December"
 msgstr ""
 
-#: src/Form/Element/DateTime.php:89
+#: src/Form/Element/DateTime.php:96
 msgid "00 — 12 am"
 msgstr ""
 
-#: src/Form/Element/DateTime.php:90
+#: src/Form/Element/DateTime.php:97
 msgid "01 — 1 am"
 msgstr ""
 
-#: src/Form/Element/DateTime.php:91
+#: src/Form/Element/DateTime.php:98
 msgid "02 — 2 am"
 msgstr ""
 
-#: src/Form/Element/DateTime.php:92
+#: src/Form/Element/DateTime.php:99
 msgid "03 — 3 am"
 msgstr ""
 
-#: src/Form/Element/DateTime.php:93
+#: src/Form/Element/DateTime.php:100
 msgid "04 — 4 am"
 msgstr ""
 
-#: src/Form/Element/DateTime.php:94
+#: src/Form/Element/DateTime.php:101
 msgid "05 — 5 am"
 msgstr ""
 
-#: src/Form/Element/DateTime.php:95
+#: src/Form/Element/DateTime.php:102
 msgid "06 — 6 am"
 msgstr ""
 
-#: src/Form/Element/DateTime.php:96
+#: src/Form/Element/DateTime.php:103
 msgid "07 — 7 am"
 msgstr ""
 
-#: src/Form/Element/DateTime.php:97
+#: src/Form/Element/DateTime.php:104
 msgid "08 — 8 am"
 msgstr ""
 
-#: src/Form/Element/DateTime.php:98
+#: src/Form/Element/DateTime.php:105
 msgid "09 — 9 am"
 msgstr ""
 
-#: src/Form/Element/DateTime.php:99
+#: src/Form/Element/DateTime.php:106
 msgid "10 — 10 am"
 msgstr ""
 
-#: src/Form/Element/DateTime.php:100
+#: src/Form/Element/DateTime.php:107
 msgid "11 — 11 am"
 msgstr ""
 
-#: src/Form/Element/DateTime.php:101
+#: src/Form/Element/DateTime.php:108
 msgid "12 — 12 pm"
 msgstr ""
 
-#: src/Form/Element/DateTime.php:102
+#: src/Form/Element/DateTime.php:109
 msgid "13 — 1 pm"
 msgstr ""
 
-#: src/Form/Element/DateTime.php:103
+#: src/Form/Element/DateTime.php:110
 msgid "14 — 2 pm"
 msgstr ""
 
-#: src/Form/Element/DateTime.php:104
+#: src/Form/Element/DateTime.php:111
 msgid "15 — 3 pm"
 msgstr ""
 
-#: src/Form/Element/DateTime.php:105
+#: src/Form/Element/DateTime.php:112
 msgid "16 — 4 pm"
 msgstr ""
 
-#: src/Form/Element/DateTime.php:106
+#: src/Form/Element/DateTime.php:113
 msgid "17 — 5 pm"
 msgstr ""
 
-#: src/Form/Element/DateTime.php:107
+#: src/Form/Element/DateTime.php:114
 msgid "18 — 6 pm"
 msgstr ""
 
-#: src/Form/Element/DateTime.php:108
+#: src/Form/Element/DateTime.php:115
 msgid "19 — 7 pm"
 msgstr ""
 
-#: src/Form/Element/DateTime.php:109
+#: src/Form/Element/DateTime.php:116
 msgid "20 — 8 pm"
 msgstr ""
 
-#: src/Form/Element/DateTime.php:110
+#: src/Form/Element/DateTime.php:117
 msgid "21 — 9 pm"
 msgstr ""
 
-#: src/Form/Element/DateTime.php:111
+#: src/Form/Element/DateTime.php:118
 msgid "22 — 10 pm"
 msgstr ""
 
-#: src/Form/Element/DateTime.php:112
+#: src/Form/Element/DateTime.php:119
 msgid "23 — 11 pm"
 msgstr ""
 
