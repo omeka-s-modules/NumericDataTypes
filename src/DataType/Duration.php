@@ -153,7 +153,7 @@ class Duration extends AbstractDataType implements ValueAnnotatingInterface
             return self::$durations[$value];
         }
         // @see https://stackoverflow.com/a/32045167
-        $isMatch = preg_match('/^P(?!$)(?:(?<years>\d+)Y)?(?:(?<months>\d+)M)?(?:(?<days>\d+)D)?(T(?=\d)(?:(?<hours>\d+)H)?(?:(?<minutes>\d+)M)?(?:(?<seconds>\d+)S)?)?$/', $value, $matches);
+        $isMatch = preg_match('/^P(?!$)(?:(?<years>\d+)Y)?(?:(?<months>\d+)M)?(?:(?<days>\d+)D)?(T(?=\d)(?:(?<hours>\d+)H)?(?:(?<minutes>\d+)M)?(?:(?<seconds>\d+)S)?)?$/', (string) $value, $matches);
         if (!$isMatch) {
             throw new \InvalidArgumentException('Invalid duration string, must use ISO 8601 without fractions, negatives, or weeks');
         }
