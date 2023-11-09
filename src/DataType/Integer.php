@@ -75,7 +75,10 @@ class Integer extends AbstractDataType implements ValueAnnotatingInterface
         if (!$this->isValid(['@value' => $value->value()])) {
             return $value->value();
         }
-        return number_format($value->value());
+        // The last argument is a narrow no-break space.
+        // @see https://www.php.net/manual/en/function.number_format.php#126944
+        // @see https://en.wikipedia.org/wiki/International_System_of_Units#cite_ref-generalrules_105-0
+        return number_format($value->value(), 0, ',', ' ');
     }
 
     public function getEntityClass()
