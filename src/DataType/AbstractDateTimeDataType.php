@@ -69,7 +69,7 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
         }
 
         // Match against ISO 8601, allowing for reduced accuracy.
-        $isMatch = preg_match(sprintf('/%s/', self::PATTERN_ISO8601), $value, $matches);
+        $isMatch = preg_match(sprintf('/%s/', self::PATTERN_ISO8601), (string) $value, $matches);
         if (!$isMatch) {
             throw new InvalidArgumentException(sprintf('Invalid ISO 8601 datetime: %s', $value));
         }
