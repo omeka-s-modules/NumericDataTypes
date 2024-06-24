@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Rubén Alcaraz Martínez <rubenalcarazmartinez@gmail.com>, 2023
+# Vladimir, 2024
 # 
 #, fuzzy
 msgid ""
@@ -13,73 +13,73 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-24 15:18-0400\n"
 "PO-Revision-Date: 2018-11-27 19:31+0000\n"
-"Last-Translator: Rubén Alcaraz Martínez <rubenalcarazmartinez@gmail.com>, 2023\n"
-"Language-Team: Catalan (Spain) (https://app.transifex.com/omeka/teams/14184/ca_ES/)\n"
+"Last-Translator: Vladimir, 2024\n"
+"Language-Team: Ukrainian (https://app.transifex.com/omeka/teams/14184/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ca_ES\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: uk\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != 11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || (n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
 
 #: src/DataType/Duration.php:76
 #, php-format
 msgid "%s year"
-msgstr "%s any"
+msgstr ""
 
 #: src/DataType/Duration.php:77
 #, php-format
 msgid "%s years"
-msgstr "%s anys"
+msgstr ""
 
 #: src/DataType/Duration.php:81
 #, php-format
 msgid "%s month"
-msgstr "%s mes"
+msgstr ""
 
 #: src/DataType/Duration.php:82
 #, php-format
 msgid "%s months"
-msgstr "%s mesos"
+msgstr ""
 
 #: src/DataType/Duration.php:86
 #, php-format
 msgid "%s day"
-msgstr "%s día"
+msgstr ""
 
 #: src/DataType/Duration.php:87
 #, php-format
 msgid "%s days"
-msgstr "%s dies"
+msgstr ""
 
 #: src/DataType/Duration.php:91
 #, php-format
 msgid "%s hour"
-msgstr "%s hora"
+msgstr ""
 
 #: src/DataType/Duration.php:92
 #, php-format
 msgid "%s hours"
-msgstr "%s hores"
+msgstr ""
 
 #: src/DataType/Duration.php:96
 #, php-format
 msgid "%s minute"
-msgstr "%s minut"
+msgstr ""
 
 #: src/DataType/Duration.php:97
 #, php-format
 msgid "%s minutes"
-msgstr "%s minuts"
+msgstr ""
 
 #: src/DataType/Duration.php:101
 #, php-format
 msgid "%s second"
-msgstr "%s segon"
+msgstr ""
 
 #: src/DataType/Duration.php:102
 #, php-format
 msgid "%s seconds"
-msgstr "%s segons"
+msgstr ""
 
 #: view/common/faceted-browse/facet-data-form/date-after.phtml:4
 #: view/common/faceted-browse/facet-data-form/date-before.phtml:4
@@ -89,7 +89,7 @@ msgstr "%s segons"
 #: view/common/faceted-browse/facet-data-form/value-greater-than.phtml:6
 #: view/common/faceted-browse/facet-data-form/value-less-than.phtml:6
 msgid "Show all available values."
-msgstr "Mostra tots els valors disponibles."
+msgstr ""
 
 #: view/common/numeric-data-types-advanced-search.phtml:12
 msgid "Date comes on or after"
@@ -101,56 +101,56 @@ msgstr ""
 
 #: view/common/numeric-data-types-advanced-search.phtml:62
 msgid "Duration is greater than"
-msgstr "La durada és major que"
+msgstr ""
 
 #: view/common/numeric-data-types-advanced-search.phtml:86
 msgid "Duration is less than"
-msgstr "La durada  és menor que"
+msgstr ""
 
 #: view/common/numeric-data-types-advanced-search.phtml:110
 msgid "Date in interval"
-msgstr "Data en interval"
+msgstr ""
 
 #: view/common/numeric-data-types-advanced-search.phtml:135
 msgid "Value is greater than"
-msgstr "El valor és major que"
+msgstr ""
 
 #: view/common/numeric-data-types-advanced-search.phtml:159
 msgid "Value is less than"
-msgstr "El valor és menor que"
+msgstr ""
 
 #: view/common/numeric-duration.phtml:9 view/common/numeric-integer.phtml:9
 #: view/common/numeric-interval.phtml:11
 #: view/common/numeric-timestamp.phtml:11
 #, php-format
 msgid "Invalid value: %s"
-msgstr "Valor incorrecte: %s"
+msgstr ""
 
 #: view/common/numeric-duration.phtml:10
 msgid "Value must be a duration"
-msgstr "El valor ha de ser una durada"
+msgstr ""
 
 #: view/common/numeric-duration.phtml:18 view/common/numeric-interval.phtml:21
 #: view/common/numeric-interval.phtml:36
 #: view/common/numeric-timestamp.phtml:20
 msgid "Time"
-msgstr "Temps"
+msgstr "Час"
 
 #: view/common/numeric-integer.phtml:10
 msgid "Value must be an integer"
-msgstr "El valor ha de ser un nombre sencer"
+msgstr ""
 
 #: view/common/numeric-interval.phtml:12
 msgid "Value must be an interval"
-msgstr "El valor ha de ser un interval"
+msgstr ""
 
 #: view/common/numeric-interval.phtml:16
 msgid "Start:"
-msgstr "Inici:"
+msgstr "Початок:"
 
 #: view/common/numeric-interval.phtml:31
 msgid "End:"
-msgstr "Final:"
+msgstr "Кінець:"
 
 #: view/common/numeric-timestamp.phtml:12
 msgid "Value must be a datetime"
@@ -163,19 +163,19 @@ msgstr ""
 
 #: config/module.config.php:66
 msgid "Date/Time (ISO 8601)"
-msgstr "Data/Temps (ISO 8601)"
+msgstr ""
 
 #: config/module.config.php:70
 msgid "Interval (ISO 8601)"
-msgstr "Interval (ISO 8601)"
+msgstr ""
 
 #: config/module.config.php:74
 msgid "Duration (ISO 8601)"
-msgstr "Durada (ISO 8601)"
+msgstr ""
 
 #: config/module.config.php:78 src/DataType/Integer.php:37
 msgid "Integer"
-msgstr "Sencer"
+msgstr "Ціле число"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:19
 msgid "Count of items with property values in a time series"
@@ -189,7 +189,7 @@ msgstr ""
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:38
 msgid "Value property"
-msgstr "Valor de la propietat"
+msgstr "Властивості значення"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:45
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:73
@@ -202,82 +202,82 @@ msgstr "Valor de la propietat"
 #: src/FacetedBrowse/FacetType/ValueLessThan.php:53
 #: src/FacetedBrowse/FacetType/DateBefore.php:54
 msgid "Select one…"
-msgstr "Selecciona un..."
+msgstr "Вибрати один..."
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:54
 msgid "Enter values, separated by new lines."
-msgstr "Introduïu els valors, un a cada línia."
+msgstr "Введіть значення, розділивши їх новими рядками."
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:66
 msgid "Timestamp property"
-msgstr ""
+msgstr "Властивості часової мітки"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:82
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:55
 msgid ""
 "Enter the start of the time series in ISO 8601 format: YYYY-MM-DDTHH:MM:SS"
-msgstr "Introduïu la data inicial en format ISO 8601: YYYY-MM-DDTHH:MM:SS"
+msgstr ""
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:96
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:69
 msgid ""
 "Enter the end of the time series in ISO 8601 format: YYYY-MM-DDTHH:MM:SS"
-msgstr "Introduïu la data final en format ISO 8601: YYYY-MM-DDTHH:MM:SS"
+msgstr ""
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:109
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:82
 msgid "Sample rate"
-msgstr "Freqüència de mostratge"
+msgstr ""
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:111
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:84
 msgid "1 second"
-msgstr "1 segon"
+msgstr "1 секунда"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:112
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:85
 msgid "1 minute"
-msgstr "1 minut"
+msgstr "1 хвилина"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:113
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:86
 msgid "1 hour"
-msgstr "1 hora"
+msgstr "1 година"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:114
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:87
 msgid "1 day"
-msgstr "1 dia"
+msgstr "1 день"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:115
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:88
 msgid "7 days"
-msgstr "7 dies"
+msgstr "7 днів"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:116
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:89
 msgid "1 month"
-msgstr "1 mes"
+msgstr "1 місяць"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:117
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:90
 msgid "6 months"
-msgstr "6 mesos"
+msgstr "6 місяців"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:118
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:91
 msgid "1 year"
-msgstr "1 any"
+msgstr "1 рік"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:119
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:92
 msgid "5 years"
-msgstr "5 anys"
+msgstr "5 років"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:120
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:93
 msgid "10 years"
-msgstr "10 anys"
+msgstr "10 років"
 
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:20
 msgid "Count of items in a time series"
@@ -289,47 +289,47 @@ msgstr ""
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:14
 msgid "Line chart (time series)"
-msgstr "Gràfic de línies (sèrie temporal)"
+msgstr ""
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:36
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:36
 msgid "Line (no points)"
-msgstr "Línia (sense punts)"
+msgstr ""
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:37
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:37
 msgid "Points (no line)"
-msgstr "Punts (sense línia)"
+msgstr ""
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:38
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:38
 msgid "Line and points"
-msgstr "Línia i punts"
+msgstr ""
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:50
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:50
 msgid "Line type"
-msgstr "Tipus de línia"
+msgstr ""
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:52
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:52
 msgid "Linear"
-msgstr "Linear"
+msgstr ""
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:53
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:53
 msgid "MonotoneX"
-msgstr "MonotoneX"
+msgstr ""
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:54
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:54
 msgid "Natural"
-msgstr "Natural"
+msgstr ""
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:55
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:55
 msgid "Step"
-msgstr "Pas"
+msgstr ""
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:56
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:56
@@ -345,37 +345,37 @@ msgstr ""
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:69
 #: src/Datavis/DiagramType/HistogramTimeSeries.php:32
 msgid "Width"
-msgstr "Amplada"
+msgstr "Ширина"
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:82
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:82
 #: src/Datavis/DiagramType/HistogramTimeSeries.php:45
 msgid "Height"
-msgstr "Alçada"
+msgstr "Висота"
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:95
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:95
 #: src/Datavis/DiagramType/HistogramTimeSeries.php:58
 msgid "Margin top"
-msgstr "Margin top"
+msgstr "Відступ зверху"
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:108
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:108
 #: src/Datavis/DiagramType/HistogramTimeSeries.php:71
 msgid "Margin right"
-msgstr "Margin right"
+msgstr "Відступ праворуч"
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:121
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:121
 #: src/Datavis/DiagramType/HistogramTimeSeries.php:84
 msgid "Margin bottom"
-msgstr "Margin bottom"
+msgstr "Відступ внизу"
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:134
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:134
 #: src/Datavis/DiagramType/HistogramTimeSeries.php:97
 msgid "Margin left"
-msgstr "Margin left"
+msgstr "Відступ ліворуч"
 
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:14
 msgid "Grouped line chart (time series)"
@@ -387,27 +387,27 @@ msgstr ""
 
 #: src/Datavis/DiagramType/HistogramTimeSeries.php:14
 msgid "Histogram (time series)"
-msgstr ""
+msgstr "Гістограма (часовий ряд)"
 
 #: src/DataType/AbstractDataType.php:14
 msgid "Numeric"
-msgstr "Numèric"
+msgstr "Число"
 
 #: src/DataType/Duration.php:38
 msgid "Duration"
-msgstr "Durada"
+msgstr "Тривалість"
 
 #: src/DataType/Timestamp.php:23
 msgid "Timestamp"
-msgstr ""
+msgstr "Часова мітка"
 
 #: src/DataType/Interval.php:23
 msgid "Interval"
-msgstr "Interval"
+msgstr "Інтервал"
 
 #: src/FacetedBrowse/FacetType/DateAfter.php:23
 msgid "Date after"
-msgstr ""
+msgstr "Дата після"
 
 #: src/FacetedBrowse/FacetType/DateAfter.php:61
 #: src/FacetedBrowse/FacetType/DateInInterval.php:61
@@ -424,15 +424,15 @@ msgstr ""
 #: src/FacetedBrowse/FacetType/DateInInterval.php:108
 #: src/FacetedBrowse/FacetType/DateBefore.php:108
 msgid "Select a date…"
-msgstr "Seleccioneu una data..."
+msgstr "Вибрати дату..."
 
 #: src/FacetedBrowse/FacetType/ValueGreaterThan.php:22
 msgid "Value greater than"
-msgstr "Valor major que"
+msgstr "Значення більше ніж"
 
 #: src/FacetedBrowse/FacetType/DurationGreaterThan.php:23
 msgid "Duration greater than"
-msgstr "Durada major que"
+msgstr "Тривалість більша ніж"
 
 #: src/FacetedBrowse/FacetType/DurationGreaterThan.php:61
 #: src/FacetedBrowse/FacetType/DurationLessThan.php:61
@@ -444,228 +444,228 @@ msgstr ""
 
 #: src/FacetedBrowse/FacetType/DurationLessThan.php:23
 msgid "Duration less than"
-msgstr "Durada menor que"
+msgstr "Тривалість менша ніж"
 
 #: src/FacetedBrowse/FacetType/ValueLessThan.php:22
 msgid "Value less than"
-msgstr "Valor menor que"
+msgstr "Значення менше ніж"
 
 #: src/FacetedBrowse/FacetType/DateBefore.php:23
 msgid "Date before"
-msgstr "Data anterior"
+msgstr "Дата раніше"
 
 #: src/Form/Element/Duration.php:30 src/Form/Element/Duration.php:31
 msgid "Years"
-msgstr "Anys"
+msgstr "Роки"
 
 #: src/Form/Element/Duration.php:39 src/Form/Element/Duration.php:40
 msgid "Months"
-msgstr "Mesos"
+msgstr "Місяці"
 
 #: src/Form/Element/Duration.php:48 src/Form/Element/Duration.php:49
 msgid "Days"
-msgstr "Dies"
+msgstr "Дні"
 
 #: src/Form/Element/Duration.php:57 src/Form/Element/Duration.php:58
 msgid "Hours"
-msgstr "Hores"
+msgstr "Години"
 
 #: src/Form/Element/Duration.php:66 src/Form/Element/Duration.php:67
 msgid "Minutes"
-msgstr "Minuts"
+msgstr "Хвилини"
 
 #: src/Form/Element/Duration.php:75 src/Form/Element/Duration.php:76
 msgid "Seconds"
-msgstr "Segons"
+msgstr "Секунди"
 
 #: src/Form/Element/DateTime.php:30 src/Form/Element/DateTime.php:31
 msgid "Year"
-msgstr "Any"
+msgstr "Рік"
 
 #: src/Form/Element/DateTime.php:35 src/Form/Element/DateTime.php:36
 msgid "Month"
-msgstr "Mes"
+msgstr "Місяць"
 
 #: src/Form/Element/DateTime.php:40 src/Form/Element/DateTime.php:41
 msgid "Day"
-msgstr "Dia"
+msgstr "День"
 
 #: src/Form/Element/DateTime.php:45 src/Form/Element/DateTime.php:46
 msgid "Hour"
-msgstr "Hora"
+msgstr "Година"
 
 #: src/Form/Element/DateTime.php:50 src/Form/Element/DateTime.php:51
 msgid "Minute"
-msgstr "Minut"
+msgstr "Хвилина"
 
 #: src/Form/Element/DateTime.php:55 src/Form/Element/DateTime.php:56
 msgid "Second"
-msgstr "Segon"
+msgstr ""
 
 #: src/Form/Element/DateTime.php:60 src/Form/Element/DateTime.php:61
 msgid "Offset"
-msgstr ""
+msgstr "Зміщення"
 
 #: src/Form/Element/DateTime.php:68
 msgid "01 — January"
-msgstr "01 — Gener"
+msgstr "01 — Січень"
 
 #: src/Form/Element/DateTime.php:69
 msgid "02 — February"
-msgstr "02 — Febrer"
+msgstr "02 — Лютий"
 
 #: src/Form/Element/DateTime.php:70
 msgid "03 — March"
-msgstr "03 — Març"
+msgstr "03 — Березень"
 
 #: src/Form/Element/DateTime.php:71
 msgid "04 — April"
-msgstr "04 — Abril"
+msgstr "04 — Квітень"
 
 #: src/Form/Element/DateTime.php:72
 msgid "05 — May"
-msgstr "05 — Maig"
+msgstr "05 — Травень"
 
 #: src/Form/Element/DateTime.php:73
 msgid "06 — June"
-msgstr "06 — Juny"
+msgstr "06 — Червень"
 
 #: src/Form/Element/DateTime.php:74
 msgid "07 — July"
-msgstr "07 — Juliol"
+msgstr "07 — Липень"
 
 #: src/Form/Element/DateTime.php:75
 msgid "08 — August"
-msgstr "08 — Agost"
+msgstr "08 — Серпень"
 
 #: src/Form/Element/DateTime.php:76
 msgid "09 — September"
-msgstr "09 — Setembre"
+msgstr "09 — Вересень"
 
 #: src/Form/Element/DateTime.php:77
 msgid "10 — October"
-msgstr "10 — Octubre"
+msgstr "10 — Жовтень"
 
 #: src/Form/Element/DateTime.php:78
 msgid "11 — November"
-msgstr "11 — Novembre"
+msgstr "11 — Листопад"
 
 #: src/Form/Element/DateTime.php:79
 msgid "12 — December"
-msgstr "12 — Desembre"
+msgstr "12 — Грудень"
 
 #: src/Form/Element/DateTime.php:96
 msgid "00 — 12 am"
-msgstr "00 — 12 am"
+msgstr ""
 
 #: src/Form/Element/DateTime.php:97
 msgid "01 — 1 am"
-msgstr "01 — 1 am"
+msgstr ""
 
 #: src/Form/Element/DateTime.php:98
 msgid "02 — 2 am"
-msgstr "02 — 2 am"
+msgstr ""
 
 #: src/Form/Element/DateTime.php:99
 msgid "03 — 3 am"
-msgstr "03 — 3 am"
+msgstr ""
 
 #: src/Form/Element/DateTime.php:100
 msgid "04 — 4 am"
-msgstr "04 — 4 am"
+msgstr ""
 
 #: src/Form/Element/DateTime.php:101
 msgid "05 — 5 am"
-msgstr "05 — 5 am"
+msgstr ""
 
 #: src/Form/Element/DateTime.php:102
 msgid "06 — 6 am"
-msgstr "06 — 6 am"
+msgstr ""
 
 #: src/Form/Element/DateTime.php:103
 msgid "07 — 7 am"
-msgstr "07 — 7 am"
+msgstr ""
 
 #: src/Form/Element/DateTime.php:104
 msgid "08 — 8 am"
-msgstr "08 — 8 am"
+msgstr ""
 
 #: src/Form/Element/DateTime.php:105
 msgid "09 — 9 am"
-msgstr "09 — 9 am"
+msgstr ""
 
 #: src/Form/Element/DateTime.php:106
 msgid "10 — 10 am"
-msgstr "10 — 10 am"
+msgstr ""
 
 #: src/Form/Element/DateTime.php:107
 msgid "11 — 11 am"
-msgstr "11 — 11 am"
+msgstr ""
 
 #: src/Form/Element/DateTime.php:108
 msgid "12 — 12 pm"
-msgstr "12 — 12 pm"
+msgstr ""
 
 #: src/Form/Element/DateTime.php:109
 msgid "13 — 1 pm"
-msgstr "13 — 1 pm"
+msgstr ""
 
 #: src/Form/Element/DateTime.php:110
 msgid "14 — 2 pm"
-msgstr "14 — 2 pm"
+msgstr ""
 
 #: src/Form/Element/DateTime.php:111
 msgid "15 — 3 pm"
-msgstr "15 — 3 pm"
+msgstr ""
 
 #: src/Form/Element/DateTime.php:112
 msgid "16 — 4 pm"
-msgstr "16 — 4 pm"
+msgstr ""
 
 #: src/Form/Element/DateTime.php:113
 msgid "17 — 5 pm"
-msgstr "17 — 5 pm"
+msgstr ""
 
 #: src/Form/Element/DateTime.php:114
 msgid "18 — 6 pm"
-msgstr "18 — 6 pm"
+msgstr ""
 
 #: src/Form/Element/DateTime.php:115
 msgid "19 — 7 pm"
-msgstr "19 — 7 pm"
+msgstr ""
 
 #: src/Form/Element/DateTime.php:116
 msgid "20 — 8 pm"
-msgstr "20 — 8 pm"
+msgstr ""
 
 #: src/Form/Element/DateTime.php:117
 msgid "21 — 9 pm"
-msgstr "21 — 9 pm"
+msgstr ""
 
 #: src/Form/Element/DateTime.php:118
 msgid "22 — 10 pm"
-msgstr "22 — 10 pm"
+msgstr ""
 
 #: src/Form/Element/DateTime.php:119
 msgid "23 — 11 pm"
-msgstr "23 — 11 pm"
+msgstr ""
 
 #: src/Form/Element/ConvertToNumeric.php:22
 msgid "Convert to numeric"
-msgstr "Converteix a numèric"
+msgstr "Перетворити в число"
 
 #: src/Form/Element/ConvertToNumeric.php:33
 msgid "Convert to timestamp"
-msgstr "Converteix a marca horària"
+msgstr "Перетворити в часову мітку"
 
 #: src/Form/Element/ConvertToNumeric.php:34
 msgid "Convert to interval"
-msgstr "Converteix a interval"
+msgstr "Перетворити в інтервал"
 
 #: src/Form/Element/ConvertToNumeric.php:35
 msgid "Convert to duration"
-msgstr "Converteix a durada"
+msgstr "Перетворити в тривалість"
 
 #: src/Form/Element/ConvertToNumeric.php:36
 msgid "Convert to integer"
-msgstr "Converteix a número sencer"
+msgstr "Перетворити в ціле число"
