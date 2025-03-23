@@ -127,27 +127,24 @@ class Module extends AbstractModule
             }
         );
 
-        // @todo: Add numeric advanced search to item set and media.
-        $sharedEventManager->attach(
+        $eventIds = [
             'Omeka\Controller\Admin\Item',
-            'view.advanced_search',
-            function (Event $event) {
-                $partials = $event->getParam('partials');
-                $partials[] = 'common/numeric-data-types-advanced-search';
-                $event->setParam('partials', $partials);
-            }
-        );
-        $sharedEventManager->attach(
+            'Omeka\Controller\Admin\ItemSet',
+            'Omeka\Controller\Admin\Media',
             'Omeka\Controller\Site\Item',
-            'view.advanced_search',
-            function (Event $event) {
-                $partials = $event->getParam('partials');
-                $partials[] = 'common/numeric-data-types-advanced-search';
-                $event->setParam('partials', $partials);
-            }
-        );
+        ];
+        foreach ($eventIds as $eventId) {
+            $sharedEventManager->attach(
+                $eventId,
+                'view.advanced_search',
+                function (Event $event) {
+                    $partials = $event->getParam('partials');
+                    $partials[] = 'common/numeric-data-types-advanced-search';
+                    $event->setParam('partials', $partials);
+                }
+            );
+        }
 
-        // @todo: Add numeric batch actions to item set and media.
         $sharedEventManager->attach(
             'Omeka\Form\ResourceBatchUpdateForm',
             'form.add_elements',
@@ -159,18 +156,25 @@ class Module extends AbstractModule
                 ]);
             }
         );
-        $sharedEventManager->attach(
+        $eventIds = [
             'Omeka\Api\Adapter\ItemAdapter',
-            'api.preprocess_batch_update',
-            function (Event $event) {
-                $data = $event->getParam('data');
-                $rawData = $event->getParam('request')->getContent();
-                if ($this->convertToNumericDataIsValid($rawData)) {
-                    $data['numeric_convert'] = $rawData['numeric_convert'];
+            'Omeka\Api\Adapter\ItemSetAdapter',
+            'Omeka\Api\Adapter\MediaAdapter',
+        ];
+        foreach ($eventIds as $eventId) {
+            $sharedEventManager->attach(
+                $eventId,
+                'api.preprocess_batch_update',
+                function (Event $event) {
+                    $data = $event->getParam('data');
+                    $rawData = $event->getParam('request')->getContent();
+                    if ($this->convertToNumericDataIsValid($rawData)) {
+                        $data['numeric_convert'] = $rawData['numeric_convert'];
+                    }
+                    $event->setParam('data', $data);
                 }
-                $event->setParam('data', $data);
-            }
-        );
+            );
+        }
     }
 
     /**
