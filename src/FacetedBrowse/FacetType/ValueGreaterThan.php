@@ -24,7 +24,7 @@ class ValueGreaterThan implements FacetTypeInterface
 
     public function getResourceTypes() : array
     {
-        return ['items'];
+        return ['items', 'item_sets', 'media'];
     }
 
     public function getMaxFacets() : ?int

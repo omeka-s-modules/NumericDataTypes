@@ -61,37 +61,73 @@ class Module extends AbstractModule
 
     public function attachListeners(SharedEventManagerInterface $sharedEventManager)
     {
-        $sharedEventManager->attach(
+        $eventIds = [
             'Omeka\Api\Adapter\ItemAdapter',
-            'api.search.query',
-            [$this, 'buildQueries']
-        );
-        $sharedEventManager->attach(
-            'Omeka\Api\Adapter\ItemAdapter',
-            'api.search.query',
-            [$this, 'sortQueries']
-        );
-        $sharedEventManager->attach(
-            'Omeka\Api\Adapter\ItemAdapter',
-            'api.hydrate.post',
-            [$this, 'convertToNumeric'],
-            100 // Set a high priority so this runs before saveNumericData().
-        );
-        $sharedEventManager->attach(
-            'Omeka\Api\Adapter\ItemAdapter',
-            'api.hydrate.post',
-            [$this, 'saveNumericData']
-        );
-        $sharedEventManager->attach(
+            'Omeka\Api\Adapter\ItemSetAdapter',
+            'Omeka\Api\Adapter\MediaAdapter',
+        ];
+        foreach ($eventIds as $eventId) {
+            $sharedEventManager->attach(
+                $eventId,
+                'api.search.query',
+                [$this, 'buildQueries']
+            );
+            $sharedEventManager->attach(
+                $eventId,
+                'api.search.query',
+                [$this, 'sortQueries']
+            );
+            $sharedEventManager->attach(
+                $eventId,
+                'api.hydrate.post',
+                [$this, 'convertToNumeric'],
+                100 // Set a high priority so this runs before saveNumericData().
+            );
+            $sharedEventManager->attach(
+                $eventId,
+                'api.hydrate.post',
+                [$this, 'saveNumericData']
+            );
+        }
+
+        $eventIds = [
             'Omeka\Controller\Admin\Item',
+            'Omeka\Controller\Site\Item',
+        ];
+        foreach ($eventIds as $eventId) {
+            $sharedEventManager->attach(
+                $eventId,
+                'view.sort-selector',
+                function (Event $event) {
+                    $sortings = $this->getSortings('Omeka\Entity\Item');
+                    $sortConfig = $event->getParam('sortConfig') ?: [];
+                    $sortConfig = array_merge($sortConfig, $sortings);
+                    $event->setParam('sortConfig', $sortConfig);
+                }
+            );
+        }
+        $sharedEventManager->attach(
+            'Omeka\Controller\Admin\ItemSet',
             'view.sort-selector',
-            [$this, 'addSortings']
+            function (Event $event) {
+                $sortings = $this->getSortings('Omeka\Entity\ItemSet');
+                $sortConfig = $event->getParam('sortConfig') ?: [];
+                $sortConfig = array_merge($sortConfig, $sortings);
+                $event->setParam('sortConfig', $sortConfig);
+            }
         );
         $sharedEventManager->attach(
-            'Omeka\Controller\Site\Item',
+            'Omeka\Controller\Admin\Media',
             'view.sort-selector',
-            [$this, 'addSortings']
+            function (Event $event) {
+                $sortings = $this->getSortings('Omeka\Entity\Media');
+                $sortConfig = $event->getParam('sortConfig') ?: [];
+                $sortConfig = array_merge($sortConfig, $sortings);
+                $event->setParam('sortConfig', $sortConfig);
+            }
         );
+
+        // @todo: Add numeric advanced search to item set and media.
         $sharedEventManager->attach(
             'Omeka\Controller\Admin\Item',
             'view.advanced_search',
@@ -110,6 +146,8 @@ class Module extends AbstractModule
                 $event->setParam('partials', $partials);
             }
         );
+
+        // @todo: Add numeric batch actions to item set and media.
         $sharedEventManager->attach(
             'Omeka\Form\ResourceBatchUpdateForm',
             'form.add_elements',
@@ -315,41 +353,39 @@ class Module extends AbstractModule
     }
 
     /**
-     * Add numeric sort options to sort by form.
+     * Get numeric sort options for sort by form.
      *
-     * @param Event $event
+     * @param string $instanceOf Omeka\Entity\Item, Omeka\Entity\ItemSet, Omeka\Entity\Media
      */
-    public function addSortings(Event $event)
+    public function getSortings($instanceOf)
     {
         $services = $this->getServiceLocator();
-        $translator = $services->get('MvcTranslator');
         $entityManager = $services->get('Omeka\EntityManager');
-
-        $qb = $entityManager->createQueryBuilder();
-        $qb->select(['p.id', 'p.label', 'rtp.dataType'])
-            ->from('Omeka\Entity\ResourceTemplateProperty', 'rtp')
-            ->innerJoin('rtp.property', 'p');
-        $qb->andWhere($qb->expr()->isNotNull('rtp.dataType'));
-        $query = $qb->getQuery();
+        $translator = $services->get('MvcTranslator');
 
         $numericDataTypes = $this->getNumericDataTypes();
-        $numericSortBy = [];
-        foreach ($query->getResult() as $templatePropertyData) {
-            $dataTypes = $templatePropertyData['dataType'] ?? [];
-            foreach ($dataTypes as $dataType) {
-                if (isset($numericDataTypes[$dataType])) {
-                    $value = sprintf('%s:%s', $dataType, $templatePropertyData['id']);
-                    if (!isset($numericSortBy[$value])) {
-                        $numericSortBy[$value] = sprintf('%s (%s)', $translator->translate($templatePropertyData['label']), $dataType);
-                    }
-                }
+        $sortings = [];
+        foreach ($numericDataTypes as $numericDataType) {
+            // Get only those properties that have corresponding numeric data
+            // type values that are assigned to resources of the passed instance.
+            $dql = sprintf('SELECT DISTINCT property.id, property.label
+                FROM %s ndt
+                JOIN ndt.property property
+                JOIN ndt.resource resource
+                WHERE resource INSTANCE OF %s',
+                $numericDataType->getEntityClass(),
+                $instanceOf
+            );
+            $query = $entityManager->createQuery($dql);
+            $properties = $query->getResult();
+            foreach ($properties as $property) {
+                $sortingKey = sprintf('%s:%s', $numericDataType->getName(), $property['id']);
+                $sortingValue = sprintf('%s (%s)', $translator->translate($property['label']), $numericDataType->getName());
+                $sortings[$sortingKey] = $sortingValue;
             }
         }
-        // Sort options alphabetically.
-        asort($numericSortBy);
-        $sortConfig = $event->getParam('sortConfig') ?: [];
-        $sortConfig = array_merge($sortConfig, $numericSortBy);
-        $event->setParam('sortConfig', $sortConfig);
+        asort($sortings);
+        return $sortings;
     }
 
     /**
