@@ -175,6 +175,15 @@ class Module extends AbstractModule
                 }
             );
         }
+        // Add JS to FacetedBrowse category form.
+        $sharedEventManager->attach(
+            'FacetedBrowse\Controller\SiteAdmin\Category',
+            'view.faceted_browse.category_form',
+            function (Event $event) {
+                $view = $event->getTarget();
+                $view->headScript()->appendFile($view->assetUrl('js/faceted-browse/category-form.js', 'NumericDataTypes'));
+            }
+        );
     }
 
     /**
