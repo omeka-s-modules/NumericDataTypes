@@ -9,12 +9,12 @@ use Omeka\Api\Representation\SiteRepresentation;
 
 class LineChartTimeSeriesGrouped implements DiagramTypeInterface
 {
-    public function getLabel() : string
+    public function getLabel(): string
     {
         return 'Grouped line chart (time series)'; // @translate
     }
 
-    public function addElements(SiteRepresentation $site, Fieldset $fieldset) : void
+    public function addElements(SiteRepresentation $site, Fieldset $fieldset): void
     {
         $defaults = [
             'plot_type' => 'line',
@@ -142,7 +142,7 @@ class LineChartTimeSeriesGrouped implements DiagramTypeInterface
         ]);
     }
 
-    public function prepareRender(PhpRenderer $view) : void
+    public function prepareRender(PhpRenderer $view): void
     {
         $view->headScript()->appendFile('https://d3js.org/d3.v6.js');
         $view->headScript()->appendFile('https://d3js.org/d3-collection.v1.min.js');

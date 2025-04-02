@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-24 15:18-0400\n"
+"POT-Creation-Date: 2025-04-02 14:46-0400\n"
 "PO-Revision-Date: 2018-11-27 19:31+0000\n"
 "Last-Translator: Rivo Zängov <eraser@eraser.ee>, 2022\n"
 "Language-Team: Estonian (https://app.transifex.com/omeka/teams/14184/et/)\n"
@@ -156,26 +156,93 @@ msgstr "Lõpp:"
 msgid "Value must be a datetime"
 msgstr "Väärtus peab olema kuupäev-kellaaeg"
 
-#: Module.php:193
-#, php-format
-msgid "NumericDataTypes - invalid %s value for ID %s - %s"
-msgstr "NumericDataTypes - vigane %s ID %s - %sväärtused"
-
-#: config/module.config.php:66
-msgid "Date/Time (ISO 8601)"
-msgstr "Kuupäev/Kellaaeg (ISO 8601)"
-
-#: config/module.config.php:70
-msgid "Interval (ISO 8601)"
-msgstr "Intervall (ISO 8601)"
-
-#: config/module.config.php:74
-msgid "Duration (ISO 8601)"
-msgstr "Kestus (ISO 8601)"
-
-#: config/module.config.php:78 src/DataType/Integer.php:37
+#: src/DataType/Integer.php:37 config/module.config.php:78
 msgid "Integer"
 msgstr "Täisarv"
+
+#: src/DataType/Interval.php:23
+msgid "Interval"
+msgstr "Intervall"
+
+#: src/DataType/Duration.php:38
+msgid "Duration"
+msgstr "Kestus"
+
+#: src/DataType/Timestamp.php:23
+msgid "Timestamp"
+msgstr "Ajatempel"
+
+#: src/DataType/AbstractDataType.php:14
+msgid "Numeric"
+msgstr "Numbriline"
+
+#: src/FacetedBrowse/FacetType/DateInInterval.php:54
+#: src/FacetedBrowse/FacetType/DateAfter.php:54
+#: src/FacetedBrowse/FacetType/DurationLessThan.php:54
+#: src/FacetedBrowse/FacetType/DurationGreaterThan.php:54
+#: src/FacetedBrowse/FacetType/ValueLessThan.php:53
+#: src/FacetedBrowse/FacetType/ValueGreaterThan.php:53
+#: src/FacetedBrowse/FacetType/DateBefore.php:54
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:45
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:73
+#: src/Datavis/DatasetType/CountItemsTimeSeries.php:46
+msgid "Select one…"
+msgstr "Vali üks..."
+
+#: src/FacetedBrowse/FacetType/DateInInterval.php:61
+#: src/FacetedBrowse/FacetType/DateAfter.php:61
+#: src/FacetedBrowse/FacetType/DateBefore.php:61
+msgid ""
+"Enter the date/time values, separated by a new line. For each line, enter "
+"the date/time in ISO 8601 format, followed by a space, followed by the "
+"human-readable date/time."
+msgstr ""
+"Sisesta kuupäeva ja kellaaja väärtused pannes need eraldi ridadele. Sisesta "
+"igale reale kuupäev ja kellaaeg ISO 8601 vormingus, millele järgneb tühik ja"
+" sellele omakorda inimloetav kuupäev ja kellaaeg."
+
+#: src/FacetedBrowse/FacetType/DateInInterval.php:108
+#: src/FacetedBrowse/FacetType/DateAfter.php:108
+#: src/FacetedBrowse/FacetType/DurationLessThan.php:108
+#: src/FacetedBrowse/FacetType/DurationGreaterThan.php:108
+#: src/FacetedBrowse/FacetType/DateBefore.php:108
+msgid "Select a date…"
+msgstr "Vali kuupäev..."
+
+#: src/FacetedBrowse/FacetType/DateAfter.php:23
+msgid "Date after"
+msgstr "Kuupäev pärast"
+
+#: src/FacetedBrowse/FacetType/DurationLessThan.php:23
+msgid "Duration less than"
+msgstr "Lühem kestus kui"
+
+#: src/FacetedBrowse/FacetType/DurationLessThan.php:61
+#: src/FacetedBrowse/FacetType/DurationGreaterThan.php:61
+msgid ""
+"Enter the duration values, separated by a new line. For each line, enter the"
+" duration in ISO 8601 format, followed by a space, followed by the human-"
+"readable duration."
+msgstr ""
+"Sisesta kestuse väärtused pannes need eraldi ridadele. Sisesta igale reale "
+"kestus ISO 8601 vormingus, millele järgneb tühik ja sellele omakorda "
+"inimloetav kestus."
+
+#: src/FacetedBrowse/FacetType/DurationGreaterThan.php:23
+msgid "Duration greater than"
+msgstr "Pikem kestus kui"
+
+#: src/FacetedBrowse/FacetType/ValueLessThan.php:22
+msgid "Value less than"
+msgstr "Väiksem väärtus kui"
+
+#: src/FacetedBrowse/FacetType/ValueGreaterThan.php:22
+msgid "Value greater than"
+msgstr "Suurem väärtus kui"
+
+#: src/FacetedBrowse/FacetType/DateBefore.php:23
+msgid "Date before"
+msgstr "Enne kuupäeva"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:19
 msgid "Count of items with property values in a time series"
@@ -190,19 +257,6 @@ msgstr ""
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:38
 msgid "Value property"
 msgstr "Väärtuse omadus"
-
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:45
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:73
-#: src/Datavis/DatasetType/CountItemsTimeSeries.php:46
-#: src/FacetedBrowse/FacetType/DateAfter.php:54
-#: src/FacetedBrowse/FacetType/ValueGreaterThan.php:53
-#: src/FacetedBrowse/FacetType/DurationGreaterThan.php:54
-#: src/FacetedBrowse/FacetType/DurationLessThan.php:54
-#: src/FacetedBrowse/FacetType/DateInInterval.php:54
-#: src/FacetedBrowse/FacetType/ValueLessThan.php:53
-#: src/FacetedBrowse/FacetType/DateBefore.php:54
-msgid "Select one…"
-msgstr "Vali üks..."
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:54
 msgid "Enter values, separated by new lines."
@@ -287,6 +341,46 @@ msgstr ""
 msgid "Visualize the count of items over a selected period of time."
 msgstr ""
 
+#: src/Datavis/DiagramType/HistogramTimeSeries.php:14
+msgid "Histogram (time series)"
+msgstr ""
+
+#: src/Datavis/DiagramType/HistogramTimeSeries.php:32
+#: src/Datavis/DiagramType/LineChartTimeSeries.php:69
+#: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:69
+msgid "Width"
+msgstr "Laius"
+
+#: src/Datavis/DiagramType/HistogramTimeSeries.php:45
+#: src/Datavis/DiagramType/LineChartTimeSeries.php:82
+#: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:82
+msgid "Height"
+msgstr "Kõrgus"
+
+#: src/Datavis/DiagramType/HistogramTimeSeries.php:58
+#: src/Datavis/DiagramType/LineChartTimeSeries.php:95
+#: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:95
+msgid "Margin top"
+msgstr ""
+
+#: src/Datavis/DiagramType/HistogramTimeSeries.php:71
+#: src/Datavis/DiagramType/LineChartTimeSeries.php:108
+#: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:108
+msgid "Margin right"
+msgstr ""
+
+#: src/Datavis/DiagramType/HistogramTimeSeries.php:84
+#: src/Datavis/DiagramType/LineChartTimeSeries.php:121
+#: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:121
+msgid "Margin bottom"
+msgstr ""
+
+#: src/Datavis/DiagramType/HistogramTimeSeries.php:97
+#: src/Datavis/DiagramType/LineChartTimeSeries.php:134
+#: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:134
+msgid "Margin left"
+msgstr ""
+
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:14
 msgid "Line chart (time series)"
 msgstr ""
@@ -341,42 +435,6 @@ msgstr ""
 msgid "StepBefore"
 msgstr ""
 
-#: src/Datavis/DiagramType/LineChartTimeSeries.php:69
-#: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:69
-#: src/Datavis/DiagramType/HistogramTimeSeries.php:32
-msgid "Width"
-msgstr "Laius"
-
-#: src/Datavis/DiagramType/LineChartTimeSeries.php:82
-#: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:82
-#: src/Datavis/DiagramType/HistogramTimeSeries.php:45
-msgid "Height"
-msgstr "Kõrgus"
-
-#: src/Datavis/DiagramType/LineChartTimeSeries.php:95
-#: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:95
-#: src/Datavis/DiagramType/HistogramTimeSeries.php:58
-msgid "Margin top"
-msgstr ""
-
-#: src/Datavis/DiagramType/LineChartTimeSeries.php:108
-#: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:108
-#: src/Datavis/DiagramType/HistogramTimeSeries.php:71
-msgid "Margin right"
-msgstr ""
-
-#: src/Datavis/DiagramType/LineChartTimeSeries.php:121
-#: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:121
-#: src/Datavis/DiagramType/HistogramTimeSeries.php:84
-msgid "Margin bottom"
-msgstr ""
-
-#: src/Datavis/DiagramType/LineChartTimeSeries.php:134
-#: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:134
-#: src/Datavis/DiagramType/HistogramTimeSeries.php:97
-msgid "Margin left"
-msgstr ""
-
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:14
 msgid "Grouped line chart (time series)"
 msgstr ""
@@ -384,105 +442,6 @@ msgstr ""
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:34
 msgid "Plot type"
 msgstr ""
-
-#: src/Datavis/DiagramType/HistogramTimeSeries.php:14
-msgid "Histogram (time series)"
-msgstr ""
-
-#: src/DataType/AbstractDataType.php:14
-msgid "Numeric"
-msgstr "Numbriline"
-
-#: src/DataType/Duration.php:38
-msgid "Duration"
-msgstr "Kestus"
-
-#: src/DataType/Timestamp.php:23
-msgid "Timestamp"
-msgstr "Ajatempel"
-
-#: src/DataType/Interval.php:23
-msgid "Interval"
-msgstr "Intervall"
-
-#: src/FacetedBrowse/FacetType/DateAfter.php:23
-msgid "Date after"
-msgstr "Kuupäev pärast"
-
-#: src/FacetedBrowse/FacetType/DateAfter.php:61
-#: src/FacetedBrowse/FacetType/DateInInterval.php:61
-#: src/FacetedBrowse/FacetType/DateBefore.php:61
-msgid ""
-"Enter the date/time values, separated by a new line. For each line, enter "
-"the date/time in ISO 8601 format, followed by a space, followed by the "
-"human-readable date/time."
-msgstr ""
-"Sisesta kuupäeva ja kellaaja väärtused pannes need eraldi ridadele. Sisesta "
-"igale reale kuupäev ja kellaaeg ISO 8601 vormingus, millele järgneb tühik ja"
-" sellele omakorda inimloetav kuupäev ja kellaaeg."
-
-#: src/FacetedBrowse/FacetType/DateAfter.php:108
-#: src/FacetedBrowse/FacetType/DurationGreaterThan.php:108
-#: src/FacetedBrowse/FacetType/DurationLessThan.php:108
-#: src/FacetedBrowse/FacetType/DateInInterval.php:108
-#: src/FacetedBrowse/FacetType/DateBefore.php:108
-msgid "Select a date…"
-msgstr "Vali kuupäev..."
-
-#: src/FacetedBrowse/FacetType/ValueGreaterThan.php:22
-msgid "Value greater than"
-msgstr "Suurem väärtus kui"
-
-#: src/FacetedBrowse/FacetType/DurationGreaterThan.php:23
-msgid "Duration greater than"
-msgstr "Pikem kestus kui"
-
-#: src/FacetedBrowse/FacetType/DurationGreaterThan.php:61
-#: src/FacetedBrowse/FacetType/DurationLessThan.php:61
-msgid ""
-"Enter the duration values, separated by a new line. For each line, enter the"
-" duration in ISO 8601 format, followed by a space, followed by the human-"
-"readable duration."
-msgstr ""
-"Sisesta kestuse väärtused pannes need eraldi ridadele. Sisesta igale reale "
-"kestus ISO 8601 vormingus, millele järgneb tühik ja sellele omakorda "
-"inimloetav kestus."
-
-#: src/FacetedBrowse/FacetType/DurationLessThan.php:23
-msgid "Duration less than"
-msgstr "Lühem kestus kui"
-
-#: src/FacetedBrowse/FacetType/ValueLessThan.php:22
-msgid "Value less than"
-msgstr "Väiksem väärtus kui"
-
-#: src/FacetedBrowse/FacetType/DateBefore.php:23
-msgid "Date before"
-msgstr "Enne kuupäeva"
-
-#: src/Form/Element/Duration.php:30 src/Form/Element/Duration.php:31
-msgid "Years"
-msgstr "Aastat"
-
-#: src/Form/Element/Duration.php:39 src/Form/Element/Duration.php:40
-msgid "Months"
-msgstr "Kuud"
-
-#: src/Form/Element/Duration.php:48 src/Form/Element/Duration.php:49
-msgid "Days"
-msgstr "Päeva"
-
-#: src/Form/Element/Duration.php:57 src/Form/Element/Duration.php:58
-msgid "Hours"
-msgstr "undi"
-
-#: src/Form/Element/Duration.php:66 src/Form/Element/Duration.php:67
-msgid "Minutes"
-msgstr "Minutit"
-
-#: src/Form/Element/Duration.php:75 src/Form/Element/Duration.php:76
-msgid "Seconds"
-msgstr "Sekundit"
 
 #: src/Form/Element/DateTime.php:30 src/Form/Element/DateTime.php:31
 msgid "Year"
@@ -656,6 +615,30 @@ msgstr "22 — 10 pl"
 msgid "23 — 11 pm"
 msgstr "23 — 11 pl"
 
+#: src/Form/Element/Duration.php:30 src/Form/Element/Duration.php:31
+msgid "Years"
+msgstr "Aastat"
+
+#: src/Form/Element/Duration.php:39 src/Form/Element/Duration.php:40
+msgid "Months"
+msgstr "Kuud"
+
+#: src/Form/Element/Duration.php:48 src/Form/Element/Duration.php:49
+msgid "Days"
+msgstr "Päeva"
+
+#: src/Form/Element/Duration.php:57 src/Form/Element/Duration.php:58
+msgid "Hours"
+msgstr "undi"
+
+#: src/Form/Element/Duration.php:66 src/Form/Element/Duration.php:67
+msgid "Minutes"
+msgstr "Minutit"
+
+#: src/Form/Element/Duration.php:75 src/Form/Element/Duration.php:76
+msgid "Seconds"
+msgstr "Sekundit"
+
 #: src/Form/Element/ConvertToNumeric.php:22
 msgid "Convert to numeric"
 msgstr "Konverdi arvuks"
@@ -675,3 +658,20 @@ msgstr "Konverdi kestuseks"
 #: src/Form/Element/ConvertToNumeric.php:36
 msgid "Convert to integer"
 msgstr "Konverdi täisarvuks"
+
+#: config/module.config.php:66
+msgid "Date/Time (ISO 8601)"
+msgstr "Kuupäev/Kellaaeg (ISO 8601)"
+
+#: config/module.config.php:70
+msgid "Interval (ISO 8601)"
+msgstr "Intervall (ISO 8601)"
+
+#: config/module.config.php:74
+msgid "Duration (ISO 8601)"
+msgstr "Kestus (ISO 8601)"
+
+#: Module.php:244
+#, php-format
+msgid "NumericDataTypes - invalid %s value for ID %s - %s"
+msgstr "NumericDataTypes - vigane %s ID %s - %sväärtused"

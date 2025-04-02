@@ -9,12 +9,12 @@ use Omeka\Api\Representation\SiteRepresentation;
 
 class LineChartTimeSeries implements DiagramTypeInterface
 {
-    public function getLabel() : string
+    public function getLabel(): string
     {
         return 'Line chart (time series)'; // @translate
     }
 
-    public function addElements(SiteRepresentation $site, Fieldset $fieldset) : void
+    public function addElements(SiteRepresentation $site, Fieldset $fieldset): void
     {
         $defaults = [
             'plot_type' => 'line',
@@ -142,7 +142,7 @@ class LineChartTimeSeries implements DiagramTypeInterface
         ]);
     }
 
-    public function prepareRender(PhpRenderer $view) : void
+    public function prepareRender(PhpRenderer $view): void
     {
         $view->headScript()->appendFile('https://d3js.org/d3.v6.js');
         $view->headScript()->appendFile($view->assetUrl('js/diagram-render/line_chart_time_series.js', 'Datavis'));

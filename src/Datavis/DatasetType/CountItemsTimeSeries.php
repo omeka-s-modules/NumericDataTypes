@@ -15,22 +15,22 @@ use Omeka\Job\Exception;
 
 class CountItemsTimeSeries extends AbstractDatasetType
 {
-    public function getLabel() : string
+    public function getLabel(): string
     {
         return 'Count of items in a time series'; // @translate
     }
 
-    public function getDescription() : ?string
+    public function getDescription(): ?string
     {
         return 'Visualize the count of items over a selected period of time.'; // @translate
     }
 
-    public function getDiagramTypeNames() : array
+    public function getDiagramTypeNames(): array
     {
         return ['line_chart_time_series', 'histogram_time_series'];
     }
 
-    public function addElements(SiteRepresentation $site, Fieldset $fieldset) : void
+    public function addElements(SiteRepresentation $site, Fieldset $fieldset): void
     {
         $fieldset->add([
             'type' => PropertySelect::class,
@@ -101,7 +101,7 @@ class CountItemsTimeSeries extends AbstractDatasetType
         ]);
     }
 
-    public function getDataset(ServiceManager $services, DatavisVisRepresentation $vis) : array
+    public function getDataset(ServiceManager $services, DatavisVisRepresentation $vis): array
     {
         $em = $services->get('Omeka\EntityManager');
         $datasetData = $vis->datasetData();

@@ -18,27 +18,27 @@ class DateAfter implements FacetTypeInterface
         $this->formElements = $formElements;
     }
 
-    public function getLabel() : string
+    public function getLabel(): string
     {
         return 'Date after'; // @translate
     }
 
-    public function getResourceTypes() : array
+    public function getResourceTypes(): array
     {
         return ['items', 'item_sets', 'media'];
     }
 
-    public function getMaxFacets() : ?int
+    public function getMaxFacets(): ?int
     {
         return 1;
     }
 
-    public function prepareDataForm(PhpRenderer $view) : void
+    public function prepareDataForm(PhpRenderer $view): void
     {
         $view->headScript()->appendFile($view->assetUrl('js/faceted-browse/facet-data-form/date-after.js', 'NumericDataTypes'));
     }
 
-    public function renderDataForm(PhpRenderer $view, array $data) : string
+    public function renderDataForm(PhpRenderer $view, array $data): string
     {
         // Property ID
         $propertyId = $this->formElements->get(NumericPropertySelect::class);
@@ -71,12 +71,12 @@ class DateAfter implements FacetTypeInterface
         ]);
     }
 
-    public function prepareFacet(PhpRenderer $view) : void
+    public function prepareFacet(PhpRenderer $view): void
     {
         $view->headScript()->appendFile($view->assetUrl('js/faceted-browse/facet-render/date-after.js', 'NumericDataTypes'));
     }
 
-    public function renderFacet(PhpRenderer $view, FacetedBrowseFacetRepresentation $facet) : string
+    public function renderFacet(PhpRenderer $view, FacetedBrowseFacetRepresentation $facet): string
     {
         $values = $facet->data('values');
         $values = explode("\n", $values);

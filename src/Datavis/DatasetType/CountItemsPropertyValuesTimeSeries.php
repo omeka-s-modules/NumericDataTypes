@@ -14,22 +14,22 @@ use Omeka\Form\Element\PropertySelect;
 
 class CountItemsPropertyValuesTimeSeries extends AbstractDatasetType
 {
-    public function getLabel() : string
+    public function getLabel(): string
     {
         return 'Count of items with property values in a time series'; // @translate
     }
 
-    public function getDescription() : ?string
+    public function getDescription(): ?string
     {
         return 'Visualize the count of items that have selected values of a selected property over a selected period of time.'; // @translate
     }
 
-    public function getDiagramTypeNames() : array
+    public function getDiagramTypeNames(): array
     {
         return ['line_chart_time_series_grouped'];
     }
 
-    public function addElements(SiteRepresentation $site, Fieldset $fieldset) : void
+    public function addElements(SiteRepresentation $site, Fieldset $fieldset): void
     {
         $fieldset->add([
             'type' => PropertySelect::class,
@@ -128,7 +128,7 @@ class CountItemsPropertyValuesTimeSeries extends AbstractDatasetType
         ]);
     }
 
-    public function getDataset(ServiceManager $services, DatavisVisRepresentation $vis) : array
+    public function getDataset(ServiceManager $services, DatavisVisRepresentation $vis): array
     {
         $em = $services->get('Omeka\EntityManager');
         $datasetData = $vis->datasetData();
