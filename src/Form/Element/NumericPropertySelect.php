@@ -11,6 +11,8 @@ class NumericPropertySelect extends Select
      */
     protected $entityManager;
 
+    protected $valueOptionsCache;
+
     /**
      * @param EntityManager $entityManager
      */
@@ -34,6 +36,11 @@ class NumericPropertySelect extends Select
      */
     public function getValueOptions(): array
     {
+        if (isset($this->valueOptionsCache)) {
+            // Get value options from cache.
+            return $this->valueOptionsCache;
+        }
+
         $dataTypes = $this->getOption('numeric_data_type');
         $disambiguate = $this->getOption('numeric_data_type_disambiguate');
 
@@ -105,6 +112,9 @@ class NumericPropertySelect extends Select
         usort($valueOptions, function ($a, $b) {
             return strcasecmp($a['label'], $b['label']);
         });
-        return $valueOptions;
+
+        // Set value options to cache.
+        $this->valueOptionsCache = $valueOptions;
+        return $this->valueOptionsCache;
     }
 }

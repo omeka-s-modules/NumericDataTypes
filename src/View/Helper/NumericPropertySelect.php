@@ -27,7 +27,7 @@ class NumericPropertySelect extends AbstractHelper
      * Render a select menu containing numeric properties.
      *
      * @param array $spec
-     * @return string
+     * @return string|null Returns null if the element has no property value options
      */
     public function __invoke(array $spec = [])
     {
@@ -37,6 +37,6 @@ class NumericPropertySelect extends AbstractHelper
         }
         $factory = new Factory($this->formElementManager);
         $element = $factory->createElement($spec);
-        return $this->getView()->formSelect($element);
+        return $element->getValueOptions() ? $this->getView()->formSelect($element) : null;
     }
 }
