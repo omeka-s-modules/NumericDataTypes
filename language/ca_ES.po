@@ -4,16 +4,16 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Rubén Alcaraz Martínez <rubenalcarazmartinez@gmail.com>, 2024
+# Rubén Alcaraz Martínez <rubenalcarazmartinez@gmail.com>, 2025
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-02 14:46-0400\n"
+"POT-Creation-Date: 2025-08-14 14:09-0400\n"
 "PO-Revision-Date: 2018-11-27 19:31+0000\n"
-"Last-Translator: Rubén Alcaraz Martínez <rubenalcarazmartinez@gmail.com>, 2024\n"
+"Last-Translator: Rubén Alcaraz Martínez <rubenalcarazmartinez@gmail.com>, 2025\n"
 "Language-Team: Catalan (Spain) (https://app.transifex.com/omeka/teams/14184/ca_ES/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -91,31 +91,31 @@ msgstr "%s segons"
 msgid "Show all available values."
 msgstr "Mostra tots els valors disponibles."
 
-#: view/common/numeric-data-types-advanced-search.phtml:12
+#: view/common/numeric-data-types-advanced-search.phtml:100
 msgid "Date comes on or after"
-msgstr ""
+msgstr "La data és igual o posterior a"
 
-#: view/common/numeric-data-types-advanced-search.phtml:37
+#: view/common/numeric-data-types-advanced-search.phtml:116
 msgid "Date comes on or before"
-msgstr ""
+msgstr "La data és igual o anterior a"
 
-#: view/common/numeric-data-types-advanced-search.phtml:62
+#: view/common/numeric-data-types-advanced-search.phtml:132
 msgid "Duration is greater than"
 msgstr "La durada és major que"
 
-#: view/common/numeric-data-types-advanced-search.phtml:86
+#: view/common/numeric-data-types-advanced-search.phtml:148
 msgid "Duration is less than"
 msgstr "La durada  és menor que"
 
-#: view/common/numeric-data-types-advanced-search.phtml:110
+#: view/common/numeric-data-types-advanced-search.phtml:164
 msgid "Date in interval"
 msgstr "Data en interval"
 
-#: view/common/numeric-data-types-advanced-search.phtml:135
+#: view/common/numeric-data-types-advanced-search.phtml:180
 msgid "Value is greater than"
 msgstr "El valor és major que"
 
-#: view/common/numeric-data-types-advanced-search.phtml:159
+#: view/common/numeric-data-types-advanced-search.phtml:196
 msgid "Value is less than"
 msgstr "El valor és menor que"
 
@@ -154,7 +154,7 @@ msgstr "Final:"
 
 #: view/common/numeric-timestamp.phtml:12
 msgid "Value must be a datetime"
-msgstr ""
+msgstr "El valor ha de ser una data i hora"
 
 #: src/DataType/Integer.php:37 config/module.config.php:78
 msgid "Integer"
@@ -211,7 +211,7 @@ msgstr "Seleccioneu una data..."
 
 #: src/FacetedBrowse/FacetType/DateAfter.php:23
 msgid "Date after"
-msgstr ""
+msgstr "Data posterior"
 
 #: src/FacetedBrowse/FacetType/DurationLessThan.php:23
 msgid "Duration less than"
@@ -246,13 +246,15 @@ msgstr "Data anterior"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:19
 msgid "Count of items with property values in a time series"
-msgstr ""
+msgstr "Recompte d'elements amb valors de propietat en una sèrie temporal"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:24
 msgid ""
 "Visualize the count of items that have selected values of a selected "
 "property over a selected period of time."
 msgstr ""
+"Visualitza el recompte d'elements que tenen valors seleccionats d'una "
+"propietat seleccionada durant un període de temps determinat."
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:38
 msgid "Value property"
@@ -264,7 +266,7 @@ msgstr "Introduïu els valors, un a cada línia."
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:66
 msgid "Timestamp property"
-msgstr ""
+msgstr "Propietat de marca temporal"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:82
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:55
@@ -335,11 +337,12 @@ msgstr "10 anys"
 
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:20
 msgid "Count of items in a time series"
-msgstr ""
+msgstr "Recompte d'elements en una sèrie temporal"
 
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:25
 msgid "Visualize the count of items over a selected period of time."
 msgstr ""
+"Visualitza el recompte d'elements durant un període de temps seleccionat."
 
 #: src/Datavis/DiagramType/HistogramTimeSeries.php:14
 msgid "Histogram (time series)"
@@ -428,12 +431,12 @@ msgstr "Pas"
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:56
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:56
 msgid "StepAfter"
-msgstr ""
+msgstr "Pas posterior"
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:57
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:57
 msgid "StepBefore"
-msgstr ""
+msgstr "Pas anterior"
 
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:14
 msgid "Grouped line chart (time series)"
@@ -469,7 +472,7 @@ msgstr "Segon"
 
 #: src/Form/Element/DateTime.php:60 src/Form/Element/DateTime.php:61
 msgid "Offset"
-msgstr ""
+msgstr "Offset"
 
 #: src/Form/Element/DateTime.php:68
 msgid "01 — January"
@@ -674,4 +677,4 @@ msgstr "Durada (ISO 8601)"
 #: Module.php:244
 #, php-format
 msgid "NumericDataTypes - invalid %s value for ID %s - %s"
-msgstr ""
+msgstr "NumericDataTypes - invàlid %s valor per a l'ID %s - %s"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-02 14:46-0400\n"
+"POT-Creation-Date: 2025-08-14 14:09-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -87,31 +87,31 @@ msgstr ""
 msgid "Show all available values."
 msgstr ""
 
-#: view/common/numeric-data-types-advanced-search.phtml:12
+#: view/common/numeric-data-types-advanced-search.phtml:100
 msgid "Date comes on or after"
 msgstr ""
 
-#: view/common/numeric-data-types-advanced-search.phtml:37
+#: view/common/numeric-data-types-advanced-search.phtml:116
 msgid "Date comes on or before"
 msgstr ""
 
-#: view/common/numeric-data-types-advanced-search.phtml:62
+#: view/common/numeric-data-types-advanced-search.phtml:132
 msgid "Duration is greater than"
 msgstr ""
 
-#: view/common/numeric-data-types-advanced-search.phtml:86
+#: view/common/numeric-data-types-advanced-search.phtml:148
 msgid "Duration is less than"
 msgstr ""
 
-#: view/common/numeric-data-types-advanced-search.phtml:110
+#: view/common/numeric-data-types-advanced-search.phtml:164
 msgid "Date in interval"
 msgstr ""
 
-#: view/common/numeric-data-types-advanced-search.phtml:135
+#: view/common/numeric-data-types-advanced-search.phtml:180
 msgid "Value is greater than"
 msgstr ""
 
-#: view/common/numeric-data-types-advanced-search.phtml:159
+#: view/common/numeric-data-types-advanced-search.phtml:196
 msgid "Value is less than"
 msgstr ""
 

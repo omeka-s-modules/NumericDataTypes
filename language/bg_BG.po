@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-02 14:46-0400\n"
+"POT-Creation-Date: 2025-08-14 14:09-0400\n"
 "PO-Revision-Date: 2018-11-27 19:31+0000\n"
 "Last-Translator: Tzvetan Tzvetanski <ceibg.org@gmail.com>, 2021\n"
 "Language-Team: Bulgarian (Bulgaria) (https://app.transifex.com/omeka/teams/14184/bg_BG/)\n"
@@ -91,31 +91,31 @@ msgstr "%s секунди"
 msgid "Show all available values."
 msgstr ""
 
-#: view/common/numeric-data-types-advanced-search.phtml:12
+#: view/common/numeric-data-types-advanced-search.phtml:100
 msgid "Date comes on or after"
 msgstr ""
 
-#: view/common/numeric-data-types-advanced-search.phtml:37
+#: view/common/numeric-data-types-advanced-search.phtml:116
 msgid "Date comes on or before"
 msgstr ""
 
-#: view/common/numeric-data-types-advanced-search.phtml:62
+#: view/common/numeric-data-types-advanced-search.phtml:132
 msgid "Duration is greater than"
 msgstr "Продължителността е по - голяма от"
 
-#: view/common/numeric-data-types-advanced-search.phtml:86
+#: view/common/numeric-data-types-advanced-search.phtml:148
 msgid "Duration is less than"
 msgstr "Продължителността е по-малка от"
 
-#: view/common/numeric-data-types-advanced-search.phtml:110
+#: view/common/numeric-data-types-advanced-search.phtml:164
 msgid "Date in interval"
 msgstr "Дата в интервал"
 
-#: view/common/numeric-data-types-advanced-search.phtml:135
+#: view/common/numeric-data-types-advanced-search.phtml:180
 msgid "Value is greater than"
 msgstr "Стойността е по-голяма от"
 
-#: view/common/numeric-data-types-advanced-search.phtml:159
+#: view/common/numeric-data-types-advanced-search.phtml:196
 msgid "Value is less than"
 msgstr "Стойността е по-малка от"
 
