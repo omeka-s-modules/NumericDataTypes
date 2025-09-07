@@ -37,7 +37,7 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
      * include colons as separators. This follows the standard's best practices,
      * which notes that "The basic format should be avoided in plain text."
      */
-    const PATTERN_ISO8601 = '^(?<date>(?<year>-?\d{4,})(-(?<month>\d{2}))?(-(?<day>\d{2}))?)(?<time>(T(?<hour>\d{2}))?(:(?<minute>\d{2}))?(:(?<second>\d{2}))?)(?<offset>((?<offset_hour>[+-]\d{2})?(:(?<offset_minute>\d{2}))?)|Z?)$';
+    const PATTERN_ISO8601 = '^(?<date>(?<year>-?\d{4,})(-(?<month>\d{2}))?(-(?<day>\d{2}))?)(?<time>(T(?<hour>\d{2}))?(:(?<minute>\d{2}))?(:(?<second>\d{2}))?)(?<offset>((?<offset_hour>[+-]\d{2})?(:?(?<offset_minute>\d{2}))?)|Z?)$';
 
     /**
      * @var array Cache of date/times
