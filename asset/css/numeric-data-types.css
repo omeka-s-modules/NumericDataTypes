@@ -47,7 +47,12 @@ label.numeric-toggle-time:before {
     flex-wrap: wrap;
 }
 
-.numeric-datetime-inputs > * {
+.numeric-date-inputs {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.numeric-date-inputs > * {
     flex-grow: 1;
 }
 
