@@ -50,6 +50,8 @@ label.numeric-toggle-time:before {
 .numeric-date-inputs {
     display: flex;
     flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 4px;
 }
 
 .numeric-date-inputs > * {
@@ -59,6 +61,7 @@ label.numeric-toggle-time:before {
 .numeric-datetime-inputs select {
     margin: 0;
     width: auto;
+    max-width: 100%;
 }
 
 .numeric-datetime-inputs input {
@@ -80,11 +83,6 @@ input.numeric-datetime-year {
     height: 1em;
 }
 
-.numeric-datetime-inputs input:not(:last-child),
-.numeric-datetime-inputs select:not(:last-child) {
-    margin-right: 4px;
-}
-
 .sidebar .numeric-datetime-inputs input:not(:last-child),
 .sidebar .numeric-datetime-inputs select:not(:last-child) {
     margin-bottom: .5rem;
@@ -102,9 +100,14 @@ input.numeric-datetime-year {
 }
 
 .numeric-integer-integer[type="number"] {
-    margin-top: .25rem;
-    width: auto;
+    margin-top: .5rem;
 }
-.sidebar [data-data-type="numeric:integer"] .input-footer .actions {
-    flex-direction: row;
+
+#resource-values div.value[data-data-type="numeric:integer"] {
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sidebar .numeric-integer {
+    flex-grow: 1;
 }
