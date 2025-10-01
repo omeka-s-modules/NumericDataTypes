@@ -3,6 +3,7 @@ label.numeric-toggle-time.button {
     align-items: center;
     width: auto;
     padding: 6px;
+    margin: 0;
     max-width: max-content;
 }
 
@@ -65,10 +66,9 @@ label.numeric-toggle-time:before {
 }
 
 .numeric-datetime-inputs input {
-    min-width: 4em;
     width: 8em;
+    max-width: 100%;
     margin: 0;
-    height: 100%;
 }
 
 input.numeric-datetime-year {
