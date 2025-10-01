@@ -13,7 +13,7 @@ $formSelect->addTranslatableAttribute('aria-label');
     </div>
     <?php echo $this->formHidden($element->getValueElement()); ?>
     <div class="numeric-datetime-inputs numeric-interval-start">
-        <span><?php echo $this->translate('Start:'); ?></span>
+        <span class="start-end"><?php echo $this->translate('Start:'); ?></span>
         <div class="numeric-date-inputs">
             <?php echo $formNumber($element->getYearElement()); ?>
             <?php echo $formSelect($element->getMonthElement()); ?>
@@ -28,7 +28,7 @@ $formSelect->addTranslatableAttribute('aria-label');
         </div>
     </div>
     <div class="numeric-datetime-inputs numeric-interval-end">
-        <span><?php echo $this->translate('End:'); ?></span>
+        <span class="start-end"><?php echo $this->translate('End:'); ?></span>
         <div class="numeric-date-inputs">
             <?php echo $formNumber($element->getYearElement()); ?>
             <?php echo $formSelect($element->getMonthElement()); ?>

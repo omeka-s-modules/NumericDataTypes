@@ -35,14 +35,12 @@ label.numeric-toggle-time:before {
 
 .field .inputs select[class*="numeric"],
 .field .inputs select[name*="numeric"] {
-    margin-right: .25rem;
     display: inline-block;
     height: auto;
 }
 
 .field .inputs [class*="numeric"]:not(div),
 .field .inputs [name*="numeric"]:not(div) {
-    margin: .25rem .25rem .25rem 0;
     height: auto;
     margin-top: 6px;
     flex-wrap: wrap;
@@ -92,10 +90,7 @@ input.numeric-datetime-year {
     margin-top: 0;
 }
 
-.value[data-data-type="numeric:timestamp"] .input-body,
-.value[data-data-type="numeric:interval"] .input-body,
-.value[data-data-type="numeric:duration"] .input-body,
-.value[data-data-type="numeric:integer"] .input-body {
+.value[data-data-type*="numeric"] .input-body {
     background-color: transparent;
 }
 
@@ -103,11 +98,28 @@ input.numeric-datetime-year {
     margin-top: .5rem;
 }
 
-#resource-values div.value[data-data-type="numeric:integer"] {
+.resource-form div.value[data-data-type="numeric:integer"] {
     align-items: center;
     justify-content: space-between;
 }
 
+.resource-form div.value[data-data-type*="numeric"] .input-body {
+    padding: .5rem;
+}
+
+.resource-form .start-end {
+    line-height: 1;
+}
+
+.sidebar .start-end,
+.numeric-interval-start {
+    margin-bottom: .5rem;
+}
+
 .sidebar .numeric-integer {
     flex-grow: 1;
+}
+
+.sidebar .numeric-interval-start {
+    margin-bottom: 2rem;
 }
