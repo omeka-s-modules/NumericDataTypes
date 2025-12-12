@@ -94,8 +94,11 @@ input.numeric-datetime-year {
     background-color: transparent;
 }
 
-.numeric-integer-integer[type="number"] {
+.numeric-integer-integer[type="number"],
+.inputs .input-body input.numeric-integer-integer[type="text"] {
     margin-top: .5rem;
+    background-color: #fff;
+    width: auto;
 }
 
 .resource-form div.value[data-data-type="numeric:integer"] {
