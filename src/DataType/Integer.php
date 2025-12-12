@@ -2,6 +2,7 @@
 namespace NumericDataTypes\DataType;
 
 use Doctrine\ORM\QueryBuilder;
+use NumberFormatter;
 use NumericDataTypes\Entity\NumericDataTypesNumber;
 use NumericDataTypes\Form\Element\Integer as IntegerElement;
 use Omeka\Api\Adapter\AbstractEntityAdapter;
@@ -41,12 +42,12 @@ class Integer extends AbstractDataType implements ValueAnnotatingInterface
     const DECIMAL_SCALE = 16;
 
     /**
-     * The regex pattern for a valid number
+     * The regex pattern for a valid number.
      *
      * A valid number is an integer or decimal. A decimal must be within the
      * limits of precision and scale.
      */
-    const NUMBER_PATTERN = '^-?(\d{0,16})((\.)(\d{1,16}))?$';
+    const NUMBER_PATTERN = '^-?(?<whole_part>\d{0,16})((?<decimal_separator>\.)(?<fractional_part>\d{1,16}))?$';
 
     public function getName()
     {
@@ -102,13 +103,46 @@ class Integer extends AbstractDataType implements ValueAnnotatingInterface
         if (!$this->isValid(['@value' => $value->value()])) {
             return $value->value();
         }
-        // Must use PREG_UNMATCHED_AS_NULL to ensure consistent matches array size.
-        preg_match(sprintf('/%s/', self::NUMBER_PATTERN), $value->value(), $matches, PREG_UNMATCHED_AS_NULL);
-        // Set a thin space as the thousands_separator, as per ISO standard.
-        $wholePart = number_format($matches[1], 0, null, ' ');
-        $decimalSeparator = $matches[3];
-        $fractionalPart = $matches[4];
-        return $wholePart . $decimalSeparator . $fractionalPart;
+        return $this->numberFormat($value->value(), $view->lang());
+    }
+
+    /**
+     * Get a number formatted for a locale.
+     */
+    public function numberFormat(string $number, string $locale)
+    {
+        if (!extension_loaded('intl')) {
+           return $number;
+        }
+        // Use NumberFormatter to format the numeric string. Note that we must
+        // format each part of the number separately because the formatter will
+        // truncate numbers that exceed PHP's maximum float precision.
+        $formatter = new NumberFormatter($locale, NumberFormatter::DECIMAL);
+        // We must use PREG_UNMATCHED_AS_NULL to ensure consistent $matches
+        // array size.
+        preg_match(
+            sprintf('/%s/', self::NUMBER_PATTERN),
+            $number,
+            $matches,
+            PREG_UNMATCHED_AS_NULL
+        );
+        $formattedNumber = [];
+        if ('' !== $matches['whole_part'] && null !== $matches['whole_part']) {
+            // Use the locale's conventional grouping separator.
+            $formattedNumber[] = $formatter->format($matches['whole_part']);
+        } else {
+            // Include a leading zero for readability.
+            $formattedNumber[] = '0';
+        }
+        if ('' !== $matches['decimal_separator'] && null !== $matches['decimal_separator']) {
+            // Use the locale's conventional decimal separator.
+            $formattedNumber[] = $formatter->getSymbol(NumberFormatter::DECIMAL_SEPARATOR_SYMBOL);
+        }
+        if ('' !== $matches['fractional_part'] && null !== $matches['fractional_part']) {
+            // Remove trailing zeros for readability.
+            $formattedNumber[] = rtrim($matches['fractional_part'], '0');
+        }
+        return implode('', $formattedNumber);
     }
 
     public function getEntityClass()
