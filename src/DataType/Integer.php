@@ -12,6 +12,12 @@ use Omeka\Entity\Value;
 use Omeka\DataType\ValueAnnotatingInterface;
 use Laminas\View\Renderer\PhpRenderer;
 
+/**
+ * The "Number" data type.
+ *
+ * This data type enables both integers and decimals. The class name is
+ * "Integer" and the data type name is "numeric:integer" for historical reasons.
+ */
 class Integer extends AbstractDataType implements ValueAnnotatingInterface
 {
     /**
