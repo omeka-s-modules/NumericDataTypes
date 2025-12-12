@@ -39,9 +39,9 @@ class Integer extends AbstractDataType implements ValueAnnotatingInterface
      * Decimal precision and scale.
      *
      * Precision is the total count of significant digits in the whole number,
-     * on both sides of the decimal point. Scale is the count of decimal digits
-     * in the fractional part, to the right of the decimal point. This is
-     * defined in the database as `decimal(32,16))` and enforced in code via
+     * on both sides of the decimal point. Scale is the count of digits in the
+     * decimal part, to the right of the decimal point. This is defined in the
+     * database as `decimal(32,16))` and enforced in code via
      * `self::NUMBER_PATTERN`.
      */
     const DECIMAL_PRECISION = 32;
@@ -53,7 +53,7 @@ class Integer extends AbstractDataType implements ValueAnnotatingInterface
      * A valid number is an integer or decimal. A decimal must be within the
      * limits of precision and scale.
      */
-    const NUMBER_PATTERN = '^-?(?<whole_part>\d{0,16})((?<decimal_separator>\.)(?<fractional_part>\d{1,16}))?$';
+    const NUMBER_PATTERN = '^(?<integer_part>-?(\d{0,16}))((?<decimal_separator>\.)(?<decimal_part>\d{1,16}))?$';
 
     public function getName()
     {
@@ -133,9 +133,9 @@ class Integer extends AbstractDataType implements ValueAnnotatingInterface
             PREG_UNMATCHED_AS_NULL
         );
         $formattedNumber = [];
-        if ('' !== $matches['whole_part'] && null !== $matches['whole_part']) {
+        if ('' !== $matches['integer_part'] && null !== $matches['integer_part']) {
             // Use the locale's conventional grouping separator.
-            $formattedNumber[] = $formatter->format($matches['whole_part']);
+            $formattedNumber[] = $formatter->format($matches['integer_part']);
         } else {
             // Include a leading zero for readability.
             $formattedNumber[] = '0';
@@ -144,9 +144,9 @@ class Integer extends AbstractDataType implements ValueAnnotatingInterface
             // Use the locale's conventional decimal separator.
             $formattedNumber[] = $formatter->getSymbol(NumberFormatter::DECIMAL_SEPARATOR_SYMBOL);
         }
-        if ('' !== $matches['fractional_part'] && null !== $matches['fractional_part']) {
+        if ('' !== $matches['decimal_part'] && null !== $matches['decimal_part']) {
             // Remove trailing zeros for readability.
-            $formattedNumber[] = rtrim($matches['fractional_part'], '0');
+            $formattedNumber[] = rtrim($matches['decimal_part'], '0');
         }
         return implode('', $formattedNumber);
     }
