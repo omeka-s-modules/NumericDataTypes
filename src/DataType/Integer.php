@@ -23,9 +23,30 @@ class Integer extends AbstractDataType implements ValueAnnotatingInterface
      * settle on browser limitations.
      *
      * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MIN_SAFE_INTEGER
+     * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER
      */
     const MIN_SAFE_INT = -9007199254740991;
     const MAX_SAFE_INT = 9007199254740991;
+
+    /**
+     * Decimal precision and scale.
+     *
+     * Precision is the total count of significant digits in the whole number,
+     * on both sides of the decimal point. Scale is the count of decimal digits
+     * in the fractional part, to the right of the decimal point. This is
+     * defined in the database as `decimal(32,16))` and enforced in code via
+     * `self::NUMBER_PATTERN`.
+     */
+    const DECIMAL_PRECISION = 32;
+    const DECIMAL_SCALE = 16;
+
+    /**
+     * The regex pattern for a valid number
+     *
+     * A valid number is an integer or decimal. A decimal must be within the
+     * limits of precision and scale.
+     */
+    const NUMBER_PATTERN = '^-?(\d{0,16})((\.)(\d{1,16}))?$';
 
     public function getName()
     {
@@ -34,7 +55,7 @@ class Integer extends AbstractDataType implements ValueAnnotatingInterface
 
     public function getLabel()
     {
-        return 'Integer'; // @translate
+        return 'Number'; // @translate
     }
 
     public function getJsonLd(ValueRepresentation $value)
@@ -42,9 +63,14 @@ class Integer extends AbstractDataType implements ValueAnnotatingInterface
         if (!$this->isValid(['@value' => $value->value()])) {
             return ['@value' => $value->value()];
         }
+        if (strpos($value->value(), '.')) {
+            $type = 'http://www.w3.org/2001/XMLSchema#decimal';
+        } else {
+            $type = 'http://www.w3.org/2001/XMLSchema#integer';
+        }
         return [
-            '@value' => (int) $value->value(),
-            '@type' => 'http://www.w3.org/2001/XMLSchema#integer',
+            '@value' => $value->value(),
+            '@type' => $type,
         ];
     }
 
@@ -67,7 +93,8 @@ class Integer extends AbstractDataType implements ValueAnnotatingInterface
     {
         return is_numeric($valueObject['@value'])
             && ((int) $valueObject['@value'] <= self::MAX_SAFE_INT)
-            && ((int) $valueObject['@value'] >= self::MIN_SAFE_INT);
+            && ((int) $valueObject['@value'] >= self::MIN_SAFE_INT)
+            && preg_match(sprintf('/%s/', self::NUMBER_PATTERN), (string) $valueObject['@value']);
     }
 
     public function render(PhpRenderer $view, ValueRepresentation $value, $options = [])
@@ -75,10 +102,13 @@ class Integer extends AbstractDataType implements ValueAnnotatingInterface
         if (!$this->isValid(['@value' => $value->value()])) {
             return $value->value();
         }
-        // The last argument is a narrow no-break space.
-        // @see https://www.php.net/manual/en/function.number_format.php#126944
-        // @see https://en.wikipedia.org/wiki/International_System_of_Units#cite_ref-generalrules_105-0
-        return number_format($value->value(), 0, ',', ' ');
+        // Must use PREG_UNMATCHED_AS_NULL to ensure consistent matches array size.
+        preg_match(sprintf('/%s/', self::NUMBER_PATTERN), $value->value(), $matches, PREG_UNMATCHED_AS_NULL);
+        // Set a thin space as the thousands_separator, as per ISO standard.
+        $wholePart = number_format($matches[1], 0, null, ' ');
+        $decimalSeparator = $matches[3];
+        $fractionalPart = $matches[4];
+        return $wholePart . $decimalSeparator . $fractionalPart;
     }
 
     public function getEntityClass()
@@ -88,7 +118,7 @@ class Integer extends AbstractDataType implements ValueAnnotatingInterface
 
     public function setEntityValues(NumericDataTypesNumber $entity, Value $value)
     {
-        $entity->setValue((int) $value->getValue());
+        $entity->setValue($value->getValue());
     }
 
     /**
@@ -105,16 +135,14 @@ class Integer extends AbstractDataType implements ValueAnnotatingInterface
             $value = $query['numeric']['int']['lt']['val'];
             $propertyId = $query['numeric']['int']['lt']['pid'] ?? null;
             if ($this->isValid(['@value' => $value])) {
-                $number = (int) $value;
-                $this->addLessThanQuery($adapter, $qb, $propertyId, $number);
+                $this->addLessThanQuery($adapter, $qb, $propertyId, $value);
             }
         }
         if (isset($query['numeric']['int']['gt']['val'])) {
             $value = $query['numeric']['int']['gt']['val'];
             $propertyId = $query['numeric']['int']['gt']['pid'] ?? null;
             if ($this->isValid(['@value' => $value])) {
-                $number = (int) $value;
-                $this->addGreaterThanQuery($adapter, $qb, $propertyId, $number);
+                $this->addGreaterThanQuery($adapter, $qb, $propertyId, $value);
             }
         }
     }

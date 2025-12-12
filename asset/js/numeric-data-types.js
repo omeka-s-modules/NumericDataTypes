@@ -298,16 +298,25 @@ var NumericDataTypes = {
         }
         numericContainer.addClass('numeric-enabled');
         var int = container.find('.numeric-integer-integer');
+        var setInvalidInput = function() {
+            var invalidValue = numericContainer.find('.invalid-value');
+            int[0].setCustomValidity(invalidValue.data('customValidity'));
+            invalidValue.text(invalidValue.data('invalidMessage').replace('%s', v.val()));
+        };
         int.on('input', function(e) {
             int[0].setCustomValidity('');
             v.val(int.val());
         });
-        if ($.isNumeric(v.val())) {
+        int.on('invalid', function(e) {
+            setInvalidInput();
+        });
+        // Use the pattern attribute to validate using regular expression.
+        var re = new RegExp(int.attr('pattern'));
+        var matches = re.exec(v.val());
+        if (matches) {
             int.val(v.val());
         } else if ('' !== v.val()) {
-            var invalidValue = numericContainer.find('.invalid-value');
-            int[0].setCustomValidity(invalidValue.data('customValidity'));
-            invalidValue.text(invalidValue.data('invalidMessage').replace('%s', v.val()));
+            setInvalidInput();
         }
     }
 };

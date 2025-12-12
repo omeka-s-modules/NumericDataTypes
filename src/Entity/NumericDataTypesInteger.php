@@ -7,13 +7,13 @@ namespace NumericDataTypes\Entity;
 class NumericDataTypesInteger extends NumericDataTypesNumber
 {
     /**
-     * @Column(type="bigint")
+     * @Column(type="decimal", precision=32, scale=16)
      */
     protected $value;
 
     public function setValue($value)
     {
-        $this->value = (int) $value;
+        $this->value = $value;
     }
 
     public function getValue()
