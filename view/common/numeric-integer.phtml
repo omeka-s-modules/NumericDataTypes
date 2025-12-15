@@ -7,7 +7,7 @@ $formText->addTranslatableAttribute('aria-label');
 <div class="numeric-integer">
     <div class="error invalid-value"
         data-invalid-message="<?php echo $this->escapeHtml($this->translate('Invalid value: %s')); ?>"
-        data-custom-validity="<?php echo $this->escapeHtml($this->translate('Value must be a integer or decimal; the number digits to the left and right of a decimal cannot exceed 16')); ?>">
+        data-custom-validity="<?php echo $this->escapeHtml($this->translate('Value must be an integer or decimal; the number must not be less than -9007199254740991 or greater than 9007199254740991; the number of digits to the left and right of a decimal cannot exceed 16.')); ?>">
     </div>
     <?php echo $this->formHidden($element->getValueElement()); ?>
     <div class="numeric-integer-inputs">

@@ -306,6 +306,11 @@ var NumericDataTypes = {
         int.on('input', function(e) {
             int[0].setCustomValidity('');
             v.val(int.val());
+            // Verify that the number is safe. This does not account for it
+            // exceeding the limits with decimals, but that's an edge case.
+            if (!Number.isSafeInteger(parseInt(int.val(), 10))) {
+                int[0].setCustomValidity(false);
+            }
         });
         int.on('invalid', function(e) {
             setInvalidInput();
