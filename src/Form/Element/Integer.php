@@ -19,7 +19,7 @@ class Integer extends Element
             ->setAttributes([
                 'class' => 'numeric-integer-integer',
                 'pattern' => IntegerDataType::NUMBER_PATTERN,
-                'aria-label' => 'Value', // @translate
+                'aria-label' => 'Number', // @translate
             ]);
     }
 

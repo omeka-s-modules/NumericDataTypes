@@ -297,23 +297,19 @@ var NumericDataTypes = {
             return; // Enable only once.
         }
         numericContainer.addClass('numeric-enabled');
+        var invalidValue = numericContainer.find('.invalid-value');
         var int = container.find('.numeric-integer-integer');
-        var setInvalidInput = function() {
-            var invalidValue = numericContainer.find('.invalid-value');
-            int[0].setCustomValidity(invalidValue.data('customValidity'));
-            invalidValue.text(invalidValue.data('invalidMessage').replace('%s', v.val()));
-        };
         int.on('input', function(e) {
             int[0].setCustomValidity('');
             v.val(int.val());
             // Verify that the number is safe. This does not account for it
             // exceeding the limits with decimals, but that's an edge case.
             if (!Number.isSafeInteger(parseInt(int.val(), 10))) {
-                int[0].setCustomValidity(false);
+                int[0].setCustomValidity(invalidValue.data('customValidity'));
             }
         });
         int.on('invalid', function(e) {
-            setInvalidInput();
+            int[0].setCustomValidity(invalidValue.data('customValidity'));
         });
         // Use the pattern attribute to validate using regular expression.
         var re = new RegExp(int.attr('pattern'));
@@ -321,7 +317,8 @@ var NumericDataTypes = {
         if (matches) {
             int.val(v.val());
         } else if ('' !== v.val()) {
-            setInvalidInput();
+            int[0].setCustomValidity(invalidValue.data('customValidity'));
+            invalidValue.text(invalidValue.data('invalidMessage').replace('%s', v.val()));
         }
     }
 };

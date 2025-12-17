@@ -145,8 +145,7 @@ class Integer extends AbstractDataType implements ValueAnnotatingInterface
             $formattedNumber[] = $formatter->getSymbol(NumberFormatter::DECIMAL_SEPARATOR_SYMBOL);
         }
         if ('' !== $matches['decimal_part'] && null !== $matches['decimal_part']) {
-            // Remove trailing zeros for readability.
-            $formattedNumber[] = rtrim($matches['decimal_part'], '0');
+            $formattedNumber[] = $matches['decimal_part'];
         }
         return implode('', $formattedNumber);
     }
