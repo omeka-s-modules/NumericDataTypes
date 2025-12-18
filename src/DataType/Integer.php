@@ -53,7 +53,7 @@ class Integer extends AbstractDataType implements ValueAnnotatingInterface
      * A valid number is an integer or decimal. A decimal must be within the
      * limits of precision and scale.
      */
-    const NUMBER_PATTERN = '^(?<integer_part>-?(\d{0,16}))((?<decimal_separator>\.)(?<decimal_part>\d{1,16}))?$';
+    const NUMBER_PATTERN = '^(?<integer_part>-?(\d{0,16}))?((?<decimal_separator>\.)(?<decimal_part>\d{1,16}))?$';
 
     public function getName()
     {

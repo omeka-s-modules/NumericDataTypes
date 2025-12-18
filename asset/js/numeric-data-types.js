@@ -298,28 +298,45 @@ var NumericDataTypes = {
         }
         numericContainer.addClass('numeric-enabled');
         var invalidValue = numericContainer.find('.invalid-value');
-        var int = container.find('.numeric-integer-integer');
-        int.on('input', function(e) {
-            int[0].setCustomValidity('');
-            v.val(int.val());
-            // Verify that the number is safe. This does not account for it
-            // exceeding the limits with decimals, but that's an edge case.
-            if (!Number.isSafeInteger(parseInt(int.val(), 10))) {
-                int[0].setCustomValidity(invalidValue.data('customValidity'));
+        var input = container.find('.numeric-integer-integer');
+        var numberIsValid = function(number) {
+            if ('' === number) {
+                // An empty string is always valid.
+                return true;
             }
-        });
-        int.on('invalid', function(e) {
-            int[0].setCustomValidity(invalidValue.data('customValidity'));
-        });
-        // Use the pattern attribute to validate using regular expression.
-        var re = new RegExp(int.attr('pattern'));
-        var matches = re.exec(v.val());
-        if (matches) {
-            int.val(v.val());
-        } else if ('' !== v.val()) {
-            int[0].setCustomValidity(invalidValue.data('customValidity'));
+            var re = new RegExp(input.attr('pattern'));
+            var matches = re.exec(number);
+            if (null === matches) {
+                // The number must match against the pattern.
+                return false;
+            }
+            if (matches.groups.integer_part && !Number.isSafeInteger(parseInt(matches.groups.integer_part, 10))) {
+                // The integer part of the number must be safe. This does not
+                // account for it exceeding the limits with decimals, but that's
+                // an edge case.
+                return false;
+            }
+            return true;
+        };
+        // Validate the number before copying it to the input.
+        if (numberIsValid(v.val())) {
+            input.val(v.val());
+        } else {
+            input[0].setCustomValidity(invalidValue.data('customValidity'));
             invalidValue.text(invalidValue.data('invalidMessage').replace('%s', v.val()));
         }
+        input.on('input', function(e) {
+            input[0].setCustomValidity('');
+            v.val(input.val());
+            if (!numberIsValid(input.val())) {
+                input[0].setCustomValidity(invalidValue.data('customValidity'))
+            }
+            // Report the validity message, if any, as the user types.
+            input[0].reportValidity();
+        });
+        input.on('invalid', function(e) {
+            input[0].setCustomValidity(invalidValue.data('customValidity'));
+        });
     }
 };
 
