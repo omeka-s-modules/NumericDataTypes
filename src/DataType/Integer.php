@@ -2,6 +2,7 @@
 namespace NumericDataTypes\DataType;
 
 use Doctrine\ORM\QueryBuilder;
+use NumberFormatter;
 use NumericDataTypes\Entity\NumericDataTypesNumber;
 use NumericDataTypes\Form\Element\Integer as IntegerElement;
 use Omeka\Api\Adapter\AbstractEntityAdapter;
@@ -11,6 +12,12 @@ use Omeka\Entity\Value;
 use Omeka\DataType\ValueAnnotatingInterface;
 use Laminas\View\Renderer\PhpRenderer;
 
+/**
+ * The "Number" data type.
+ *
+ * This data type enables both integers and decimals. The class name is
+ * "Integer" and the data type name is "numeric:integer" for historical reasons.
+ */
 class Integer extends AbstractDataType implements ValueAnnotatingInterface
 {
     /**
@@ -23,9 +30,30 @@ class Integer extends AbstractDataType implements ValueAnnotatingInterface
      * settle on browser limitations.
      *
      * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MIN_SAFE_INTEGER
+     * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER
      */
     const MIN_SAFE_INT = -9007199254740991;
     const MAX_SAFE_INT = 9007199254740991;
+
+    /**
+     * Decimal precision and scale.
+     *
+     * Precision is the total count of significant digits in the whole number,
+     * on both sides of the decimal point. Scale is the count of digits in the
+     * decimal part, to the right of the decimal point. This is defined in the
+     * database as `decimal(32,16))` and enforced in code via
+     * `self::NUMBER_PATTERN`.
+     */
+    const DECIMAL_PRECISION = 32;
+    const DECIMAL_SCALE = 16;
+
+    /**
+     * The regex pattern for a valid number.
+     *
+     * A valid number is an integer or decimal. A decimal must be within the
+     * limits of precision and scale.
+     */
+    const NUMBER_PATTERN = '^(?<integer_part>-?(\d{0,16}))?((?<decimal_separator>\.)(?<decimal_part>\d{1,16}))?$';
 
     public function getName()
     {
@@ -34,7 +62,7 @@ class Integer extends AbstractDataType implements ValueAnnotatingInterface
 
     public function getLabel()
     {
-        return 'Integer'; // @translate
+        return 'Number'; // @translate
     }
 
     public function getJsonLd(ValueRepresentation $value)
@@ -42,9 +70,14 @@ class Integer extends AbstractDataType implements ValueAnnotatingInterface
         if (!$this->isValid(['@value' => $value->value()])) {
             return ['@value' => $value->value()];
         }
+        if (strpos($value->value(), '.')) {
+            $type = 'http://www.w3.org/2001/XMLSchema#decimal';
+        } else {
+            $type = 'http://www.w3.org/2001/XMLSchema#integer';
+        }
         return [
-            '@value' => (int) $value->value(),
-            '@type' => 'http://www.w3.org/2001/XMLSchema#integer',
+            '@value' => $value->value(),
+            '@type' => $type,
         ];
     }
 
@@ -67,7 +100,8 @@ class Integer extends AbstractDataType implements ValueAnnotatingInterface
     {
         return is_numeric($valueObject['@value'])
             && ((int) $valueObject['@value'] <= self::MAX_SAFE_INT)
-            && ((int) $valueObject['@value'] >= self::MIN_SAFE_INT);
+            && ((int) $valueObject['@value'] >= self::MIN_SAFE_INT)
+            && preg_match(sprintf('/%s/', self::NUMBER_PATTERN), (string) $valueObject['@value']);
     }
 
     public function render(PhpRenderer $view, ValueRepresentation $value, $options = [])
@@ -75,10 +109,45 @@ class Integer extends AbstractDataType implements ValueAnnotatingInterface
         if (!$this->isValid(['@value' => $value->value()])) {
             return $value->value();
         }
-        // The last argument is a narrow no-break space.
-        // @see https://www.php.net/manual/en/function.number_format.php#126944
-        // @see https://en.wikipedia.org/wiki/International_System_of_Units#cite_ref-generalrules_105-0
-        return number_format($value->value(), 0, ',', ' ');
+        return $this->numberFormat($value->value(), $view->lang());
+    }
+
+    /**
+     * Get a number formatted for a locale.
+     */
+    public function numberFormat(string $number, string $locale)
+    {
+        if (!extension_loaded('intl')) {
+           return $number;
+        }
+        // Use NumberFormatter to format the numeric string. Note that we must
+        // format each part of the number separately because the formatter will
+        // truncate numbers that exceed PHP's maximum float precision.
+        $formatter = new NumberFormatter($locale, NumberFormatter::DECIMAL);
+        // We must use PREG_UNMATCHED_AS_NULL to ensure consistent $matches
+        // array size.
+        preg_match(
+            sprintf('/%s/', self::NUMBER_PATTERN),
+            $number,
+            $matches,
+            PREG_UNMATCHED_AS_NULL
+        );
+        $formattedNumber = [];
+        if ('' !== $matches['integer_part'] && null !== $matches['integer_part']) {
+            // Use the locale's conventional grouping separator.
+            $formattedNumber[] = $formatter->format($matches['integer_part']);
+        } else {
+            // Include a leading zero for readability.
+            $formattedNumber[] = '0';
+        }
+        if ('' !== $matches['decimal_separator'] && null !== $matches['decimal_separator']) {
+            // Use the locale's conventional decimal separator.
+            $formattedNumber[] = $formatter->getSymbol(NumberFormatter::DECIMAL_SEPARATOR_SYMBOL);
+        }
+        if ('' !== $matches['decimal_part'] && null !== $matches['decimal_part']) {
+            $formattedNumber[] = $matches['decimal_part'];
+        }
+        return implode('', $formattedNumber);
     }
 
     public function getEntityClass()
@@ -88,7 +157,7 @@ class Integer extends AbstractDataType implements ValueAnnotatingInterface
 
     public function setEntityValues(NumericDataTypesNumber $entity, Value $value)
     {
-        $entity->setValue((int) $value->getValue());
+        $entity->setValue($value->getValue());
     }
 
     /**
@@ -105,16 +174,14 @@ class Integer extends AbstractDataType implements ValueAnnotatingInterface
             $value = $query['numeric']['int']['lt']['val'];
             $propertyId = $query['numeric']['int']['lt']['pid'] ?? null;
             if ($this->isValid(['@value' => $value])) {
-                $number = (int) $value;
-                $this->addLessThanQuery($adapter, $qb, $propertyId, $number);
+                $this->addLessThanQuery($adapter, $qb, $propertyId, $value);
             }
         }
         if (isset($query['numeric']['int']['gt']['val'])) {
             $value = $query['numeric']['int']['gt']['val'];
             $propertyId = $query['numeric']['int']['gt']['pid'] ?? null;
             if ($this->isValid(['@value' => $value])) {
-                $number = (int) $value;
-                $this->addGreaterThanQuery($adapter, $qb, $propertyId, $number);
+                $this->addGreaterThanQuery($adapter, $qb, $propertyId, $value);
             }
         }
     }

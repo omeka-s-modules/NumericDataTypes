@@ -18,19 +18,22 @@ class Module extends AbstractModule
 
     public function install(ServiceLocatorInterface $services)
     {
+        $sql = <<<'SQL'
+CREATE TABLE numeric_data_types_integer (id INT AUTO_INCREMENT NOT NULL, resource_id INT NOT NULL, property_id INT NOT NULL, value NUMERIC(32, 16) NOT NULL, INDEX IDX_6D39C79089329D25 (resource_id), INDEX IDX_6D39C790549213EC (property_id), INDEX property_value (property_id, value), INDEX value (value), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB;
+CREATE TABLE numeric_data_types_duration (id INT AUTO_INCREMENT NOT NULL, resource_id INT NOT NULL, property_id INT NOT NULL, value BIGINT NOT NULL, INDEX IDX_E1B5FC6089329D25 (resource_id), INDEX IDX_E1B5FC60549213EC (property_id), INDEX property_value (property_id, value), INDEX value (value), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB;
+CREATE TABLE numeric_data_types_timestamp (id INT AUTO_INCREMENT NOT NULL, resource_id INT NOT NULL, property_id INT NOT NULL, value BIGINT NOT NULL, INDEX IDX_7367AFAA89329D25 (resource_id), INDEX IDX_7367AFAA549213EC (property_id), INDEX property_value (property_id, value), INDEX value (value), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB;
+CREATE TABLE numeric_data_types_interval (id INT AUTO_INCREMENT NOT NULL, resource_id INT NOT NULL, property_id INT NOT NULL, value BIGINT NOT NULL, value2 BIGINT NOT NULL, INDEX IDX_7E2C936B89329D25 (resource_id), INDEX IDX_7E2C936B549213EC (property_id), INDEX property_value (property_id, value), INDEX value (value), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB;
+ALTER TABLE numeric_data_types_integer ADD CONSTRAINT FK_6D39C79089329D25 FOREIGN KEY (resource_id) REFERENCES resource (id) ON DELETE CASCADE;
+ALTER TABLE numeric_data_types_integer ADD CONSTRAINT FK_6D39C790549213EC FOREIGN KEY (property_id) REFERENCES property (id) ON DELETE CASCADE;
+ALTER TABLE numeric_data_types_duration ADD CONSTRAINT FK_E1B5FC6089329D25 FOREIGN KEY (resource_id) REFERENCES resource (id) ON DELETE CASCADE;
+ALTER TABLE numeric_data_types_duration ADD CONSTRAINT FK_E1B5FC60549213EC FOREIGN KEY (property_id) REFERENCES property (id) ON DELETE CASCADE;
+ALTER TABLE numeric_data_types_timestamp ADD CONSTRAINT FK_7367AFAA89329D25 FOREIGN KEY (resource_id) REFERENCES resource (id) ON DELETE CASCADE;
+ALTER TABLE numeric_data_types_timestamp ADD CONSTRAINT FK_7367AFAA549213EC FOREIGN KEY (property_id) REFERENCES property (id) ON DELETE CASCADE;
+ALTER TABLE numeric_data_types_interval ADD CONSTRAINT FK_7E2C936B89329D25 FOREIGN KEY (resource_id) REFERENCES resource (id) ON DELETE CASCADE;
+ALTER TABLE numeric_data_types_interval ADD CONSTRAINT FK_7E2C936B549213EC FOREIGN KEY (property_id) REFERENCES property (id) ON DELETE CASCADE;
+SQL;
         $conn = $services->get('Omeka\Connection');
-        $conn->exec('CREATE TABLE numeric_data_types_duration (id INT AUTO_INCREMENT NOT NULL, resource_id INT NOT NULL, property_id INT NOT NULL, value BIGINT NOT NULL, INDEX IDX_E1B5FC6089329D25 (resource_id), INDEX IDX_E1B5FC60549213EC (property_id), INDEX property_value (property_id, value), INDEX value (value), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB;');
-        $conn->exec('CREATE TABLE numeric_data_types_integer (id INT AUTO_INCREMENT NOT NULL, resource_id INT NOT NULL, property_id INT NOT NULL, value BIGINT NOT NULL, INDEX IDX_6D39C79089329D25 (resource_id), INDEX IDX_6D39C790549213EC (property_id), INDEX property_value (property_id, value), INDEX value (value), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB;');
-        $conn->exec('CREATE TABLE numeric_data_types_timestamp (id INT AUTO_INCREMENT NOT NULL, resource_id INT NOT NULL, property_id INT NOT NULL, value BIGINT NOT NULL, INDEX IDX_7367AFAA89329D25 (resource_id), INDEX IDX_7367AFAA549213EC (property_id), INDEX property_value (property_id, value), INDEX value (value), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB;');
-        $conn->exec('CREATE TABLE numeric_data_types_interval (id INT AUTO_INCREMENT NOT NULL, resource_id INT NOT NULL, property_id INT NOT NULL, value BIGINT NOT NULL, value2 BIGINT NOT NULL, INDEX IDX_7E2C936B89329D25 (resource_id), INDEX IDX_7E2C936B549213EC (property_id), INDEX property_value (property_id, value), INDEX value (value), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB;');
-        $conn->exec('ALTER TABLE numeric_data_types_duration ADD CONSTRAINT FK_E1B5FC6089329D25 FOREIGN KEY (resource_id) REFERENCES resource (id) ON DELETE CASCADE;');
-        $conn->exec('ALTER TABLE numeric_data_types_duration ADD CONSTRAINT FK_E1B5FC60549213EC FOREIGN KEY (property_id) REFERENCES property (id) ON DELETE CASCADE;');
-        $conn->exec('ALTER TABLE numeric_data_types_integer ADD CONSTRAINT FK_6D39C79089329D25 FOREIGN KEY (resource_id) REFERENCES resource (id) ON DELETE CASCADE;');
-        $conn->exec('ALTER TABLE numeric_data_types_integer ADD CONSTRAINT FK_6D39C790549213EC FOREIGN KEY (property_id) REFERENCES property (id) ON DELETE CASCADE;');
-        $conn->exec('ALTER TABLE numeric_data_types_timestamp ADD CONSTRAINT FK_7367AFAA89329D25 FOREIGN KEY (resource_id) REFERENCES resource (id) ON DELETE CASCADE;');
-        $conn->exec('ALTER TABLE numeric_data_types_timestamp ADD CONSTRAINT FK_7367AFAA549213EC FOREIGN KEY (property_id) REFERENCES property (id) ON DELETE CASCADE;');
-        $conn->exec('ALTER TABLE numeric_data_types_interval ADD CONSTRAINT FK_7E2C936B89329D25 FOREIGN KEY (resource_id) REFERENCES resource (id) ON DELETE CASCADE;');
-        $conn->exec('ALTER TABLE numeric_data_types_interval ADD CONSTRAINT FK_7E2C936B549213EC FOREIGN KEY (property_id) REFERENCES property (id) ON DELETE CASCADE;');
+        $conn->exec($sql);
     }
 
     public function uninstall(ServiceLocatorInterface $services)
@@ -56,6 +59,14 @@ class Module extends AbstractModule
             $conn->exec('CREATE TABLE numeric_data_types_duration (id INT AUTO_INCREMENT NOT NULL, resource_id INT NOT NULL, property_id INT NOT NULL, value BIGINT NOT NULL, INDEX IDX_E1B5FC6089329D25 (resource_id), INDEX IDX_E1B5FC60549213EC (property_id), INDEX property_value (property_id, value), INDEX value (value), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB;');
             $conn->exec('ALTER TABLE numeric_data_types_duration ADD CONSTRAINT FK_E1B5FC6089329D25 FOREIGN KEY (resource_id) REFERENCES resource (id) ON DELETE CASCADE;');
             $conn->exec('ALTER TABLE numeric_data_types_duration ADD CONSTRAINT FK_E1B5FC60549213EC FOREIGN KEY (property_id) REFERENCES property (id) ON DELETE CASCADE;');
+        }
+        if (Comparator::lessThan($oldVersion, '1.14.0')) {
+            // Changing from BIGINT to NUMERIC(32,16) should be safe because all
+            // existing values should fit within the specified precision and
+            // scale. This is because, prior to this update, the
+            // "numeric:integer" data type enforced a compatible minimum and
+            // maximum.
+            $conn->exec('ALTER TABLE numeric_data_types_integer CHANGE value value NUMERIC(32, 16) NOT NULL;');
         }
     }
 
