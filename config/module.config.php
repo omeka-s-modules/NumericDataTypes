@@ -43,7 +43,6 @@ return [
             'formNumericInterval' => NumericDataTypes\View\Helper\Interval::class,
             'formNumericDuration' => NumericDataTypes\View\Helper\Duration::class,
             'formNumericInteger' => NumericDataTypes\View\Helper\Integer::class,
-            'formNumericConvertToNumeric' => NumericDataTypes\View\Helper\ConvertToNumeric::class,
         ],
         'factories' => [
             'numericPropertySelect' => NumericDataTypes\Service\ViewHelper\NumericPropertySelectFactory::class,
@@ -57,7 +56,6 @@ return [
     'form_elements' => [
         'factories' => [
             'NumericDataTypes\Form\Element\NumericPropertySelect' => NumericDataTypes\Service\Form\Element\NumericPropertySelectFactory::class,
-            'NumericDataTypes\Form\Element\ConvertToNumeric' => NumericDataTypes\Service\Form\Element\ConvertToNumericFactory::class,
         ],
     ],
     'csv_import' => [

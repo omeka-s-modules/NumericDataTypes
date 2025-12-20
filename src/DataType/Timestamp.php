@@ -7,11 +7,12 @@ use NumericDataTypes\Form\Element\Timestamp as TimestampElement;
 use Omeka\Api\Adapter\AbstractEntityAdapter;
 use Omeka\Api\Adapter\AdapterInterface;
 use Omeka\Api\Representation\ValueRepresentation;
+use Omeka\DataType\ConversionTargetInterface;
 use Omeka\DataType\ValueAnnotatingInterface;
 use Omeka\Entity\Value;
 use Laminas\View\Renderer\PhpRenderer;
 
-class Timestamp extends AbstractDateTimeDataType implements ValueAnnotatingInterface
+class Timestamp extends AbstractDateTimeDataType implements ValueAnnotatingInterface, ConversionTargetInterface
 {
     public function getName()
     {
@@ -25,7 +26,7 @@ class Timestamp extends AbstractDateTimeDataType implements ValueAnnotatingInter
 
     public function getJsonLd(ValueRepresentation $value)
     {
-        if (!$this->isValid(['@value' => $value->value()])) {
+        if (!$this->dateTimeIsValid($value->value())) {
             return ['@value' => $value->value()];
         }
         $date = $this->getDateTimeFromValue($value->value());
@@ -65,8 +66,13 @@ class Timestamp extends AbstractDateTimeDataType implements ValueAnnotatingInter
 
     public function isValid(array $valueObject)
     {
+        return $this->dateTimeIsValid($valueObject['@value']);
+    }
+
+    public function dateTimeIsValid($datetime)
+    {
         try {
-            $this->getDateTimeFromValue($valueObject['@value']);
+            $this->getDateTimeFromValue($datetime);
         } catch (\InvalidArgumentException $e) {
             return false;
         }
@@ -85,7 +91,7 @@ class Timestamp extends AbstractDateTimeDataType implements ValueAnnotatingInter
 
     public function render(PhpRenderer $view, ValueRepresentation $value, $options = [])
     {
-        if (!$this->isValid(['@value' => $value->value()])) {
+        if (!$this->dateTimeIsValid($value->value())) {
             return $value->value();
         }
         $options['lang'] ??= $view->lang();
@@ -121,7 +127,7 @@ class Timestamp extends AbstractDateTimeDataType implements ValueAnnotatingInter
         if (isset($query['numeric']['ts']['lt']['val'])) {
             $value = $query['numeric']['ts']['lt']['val'];
             $propertyId = $query['numeric']['ts']['lt']['pid'] ?? null;
-            if ($this->isValid(['@value' => $value])) {
+            if ($this->dateTimeIsValid($value)) {
                 $date = $this->getDateTimeFromValue($value);
                 $number = $date['date']->getTimestamp();
                 $this->addLessThanQuery($adapter, $qb, $propertyId, $number);
@@ -130,7 +136,7 @@ class Timestamp extends AbstractDateTimeDataType implements ValueAnnotatingInter
         if (isset($query['numeric']['ts']['gt']['val'])) {
             $value = $query['numeric']['ts']['gt']['val'];
             $propertyId = $query['numeric']['ts']['gt']['pid'] ?? null;
-            if ($this->isValid(['@value' => $value])) {
+            if ($this->dateTimeIsValid($value)) {
                 $date = $this->getDateTimeFromValue($value);
                 $number = $date['date']->getTimestamp();
                 $this->addGreaterThanQuery($adapter, $qb, $propertyId, $number);
@@ -139,7 +145,7 @@ class Timestamp extends AbstractDateTimeDataType implements ValueAnnotatingInter
         if (isset($query['numeric']['ts']['lte']['val'])) {
             $value = $query['numeric']['ts']['lte']['val'];
             $propertyId = $query['numeric']['ts']['lte']['pid'] ?? null;
-            if ($this->isValid(['@value' => $value])) {
+            if ($this->dateTimeIsValid($value)) {
                 $date = $this->getDateTimeFromValue($value);
                 $number = $date['date']->getTimestamp();
                 $this->addLessThanOrEqualToQuery($adapter, $qb, $propertyId, $number);
@@ -148,7 +154,7 @@ class Timestamp extends AbstractDateTimeDataType implements ValueAnnotatingInter
         if (isset($query['numeric']['ts']['gte']['val'])) {
             $value = $query['numeric']['ts']['gte']['val'];
             $propertyId = $query['numeric']['ts']['gte']['pid'] ?? null;
-            if ($this->isValid(['@value' => $value])) {
+            if ($this->dateTimeIsValid($value)) {
                 $date = $this->getDateTimeFromValue($value);
                 $number = $date['date']->getTimestamp();
                 $this->addGreaterThanOrEqualToQuery($adapter, $qb, $propertyId, $number);
@@ -179,5 +185,14 @@ class Timestamp extends AbstractDateTimeDataType implements ValueAnnotatingInter
     public function valueAnnotationForm(PhpRenderer $view)
     {
         return $this->form($view);
+    }
+
+    public function convert(Value $valueObject, string $dataTypeTarget): bool
+    {
+        $value = $valueObject->getValue();
+        if ($this->dateTimeIsValid($value)) {
+            return true;
+        }
+        return false;
     }
 }

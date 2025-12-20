@@ -7,11 +7,12 @@ use NumericDataTypes\Form\Element\Interval as IntervalElement;
 use Omeka\Api\Adapter\AbstractEntityAdapter;
 use Omeka\Api\Adapter\AdapterInterface;
 use Omeka\Api\Representation\ValueRepresentation;
+use Omeka\DataType\ConversionTargetInterface;
 use Omeka\DataType\ValueAnnotatingInterface;
 use Omeka\Entity\Value;
 use Laminas\View\Renderer\PhpRenderer;
 
-class Interval extends AbstractDateTimeDataType implements ValueAnnotatingInterface
+class Interval extends AbstractDateTimeDataType implements ValueAnnotatingInterface, ConversionTargetInterface
 {
     public function getName()
     {
@@ -35,6 +36,11 @@ class Interval extends AbstractDateTimeDataType implements ValueAnnotatingInterf
         return $view->formElement($element);
     }
 
+    public function isValid(array $valueObject)
+    {
+        return $this->intervalIsValid($valueObject['@value']);
+    }
+
     /**
      * Is an interval value valid?
      *
@@ -47,9 +53,9 @@ class Interval extends AbstractDateTimeDataType implements ValueAnnotatingInterf
      *
      * @param array $valueObject
      */
-    public function isValid(array $valueObject)
+    public function intervalIsValid($interval)
     {
-        $intervalPoints = explode('/', $valueObject['@value']);
+        $intervalPoints = explode('/', $interval);
         if (2 !== count($intervalPoints)) {
             // There must be a <start> point and an <end> point.
             return false;
@@ -88,7 +94,7 @@ class Interval extends AbstractDateTimeDataType implements ValueAnnotatingInterf
 
     public function render(PhpRenderer $view, ValueRepresentation $value, $options = [])
     {
-        if (!$this->isValid(['@value' => $value->value()])) {
+        if (!$this->intervalIsValid($value->value())) {
             return $value->value();
         }
         $options['lang'] ??= $view->lang();
@@ -171,5 +177,14 @@ class Interval extends AbstractDateTimeDataType implements ValueAnnotatingInterf
     public function valueAnnotationForm(PhpRenderer $view)
     {
         return $this->form($view);
+    }
+
+    public function convert(Value $valueObject, string $dataTypeTarget): bool
+    {
+        $value = $valueObject->getValue();
+        if ($this->intervalIsValid($value)) {
+            return true;
+        }
+        return false;
     }
 }

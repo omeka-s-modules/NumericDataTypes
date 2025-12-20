@@ -3,7 +3,6 @@ namespace NumericDataTypes;
 
 use Composer\Semver\Comparator;
 use Doctrine\Common\Collections\Criteria;
-use NumericDataTypes\Form\Element\ConvertToNumeric;
 use Omeka\Module\AbstractModule;
 use Laminas\EventManager\Event;
 use Laminas\EventManager\SharedEventManagerInterface;
@@ -91,12 +90,6 @@ SQL;
             $sharedEventManager->attach(
                 $eventId,
                 'api.hydrate.post',
-                [$this, 'convertToNumeric'],
-                100 // Set a high priority so this runs before saveNumericData().
-            );
-            $sharedEventManager->attach(
-                $eventId,
-                'api.hydrate.post',
                 [$this, 'saveNumericData']
             );
         }
@@ -156,36 +149,6 @@ SQL;
             );
         }
 
-        $sharedEventManager->attach(
-            'Omeka\Form\ResourceBatchUpdateForm',
-            'form.add_elements',
-            function (Event $event) {
-                $form = $event->getTarget();
-                $form->add([
-                    'type' => ConvertToNumeric::class,
-                    'name' => 'numeric_convert',
-                ]);
-            }
-        );
-        $eventIds = [
-            'Omeka\Api\Adapter\ItemAdapter',
-            'Omeka\Api\Adapter\ItemSetAdapter',
-            'Omeka\Api\Adapter\MediaAdapter',
-        ];
-        foreach ($eventIds as $eventId) {
-            $sharedEventManager->attach(
-                $eventId,
-                'api.preprocess_batch_update',
-                function (Event $event) {
-                    $data = $event->getParam('data');
-                    $rawData = $event->getParam('request')->getContent();
-                    if ($this->convertToNumericDataIsValid($rawData)) {
-                        $data['numeric_convert'] = $rawData['numeric_convert'];
-                    }
-                    $event->setParam('data', $data);
-                }
-            );
-        }
         // Add JS to FacetedBrowse category form.
         $sharedEventManager->attach(
             'FacetedBrowse\Controller\SiteAdmin\Category',
@@ -195,69 +158,6 @@ SQL;
                 $view->headScript()->appendFile($view->assetUrl('js/faceted-browse/category-form.js', 'NumericDataTypes'));
             }
         );
-    }
-
-    /**
-     * Convert property values to the specified numeric data type.
-     *
-     * This will work for Item, ItemSet, and Media resources.
-     *
-     * @param Event $event
-     */
-    public function convertToNumeric(Event $event)
-    {
-        $entity = $event->getParam('entity');
-        if ($entity instanceof \Omeka\Entity\Item) {
-            $resource = 'items';
-        } elseif ($entity instanceof \Omeka\Entity\ItemSet) {
-            $resource = 'item_sets';
-        } elseif ($entity instanceof \Omeka\Entity\Media) {
-            $resource = 'media';
-        } else {
-            return; // This is not a resource entity.
-        }
-
-        $data = $event->getParam('request')->getContent();
-        if (!$this->convertToNumericDataIsValid($data)) {
-            return; // This is not a convert-to-numeric request.
-        }
-
-        $propertyId = (int) $data['numeric_convert']['property'];
-        $type = $data['numeric_convert']['type'];
-
-        $services = $this->getServiceLocator();
-        $entityManager = $services->get('Omeka\EntityManager');
-        $dataType = $services->get('Omeka\DataTypeManager')->get($type);
-        $adapter = $services->get('Omeka\ApiAdapterManager')->get($resource);
-        $logger = $services->get('Omeka\Logger');
-
-        // Get the property entity.
-        $dql = 'SELECT p FROM Omeka\Entity\Property p WHERE p.id = :id';
-        $property = $entityManager->createQuery($dql)
-            ->setParameter('id', $propertyId)
-            ->getOneOrNullResult();
-        if (null === $property) {
-            return; // The property doesn't exist. Do nothing.
-        }
-
-        // Only convert literal values of the specified property.
-        $criteria = Criteria::create()
-            ->where(Criteria::expr()->eq('property', $property))
-            ->andWhere(Criteria::expr()->eq('type', 'literal'));
-        $values = $entity->getValues()->matching($criteria);
-        foreach ($values as $value) {
-            $valueObject = ['@value' => $value->getValue()];
-            if ($dataType->isValid($valueObject)) {
-                $value->setType($type);
-                $dataType->hydrate($valueObject, $value, $adapter);
-            } else {
-                $message = sprintf(
-                    'NumericDataTypes - invalid %s value for ID %s - %s', // @translate
-                    $type, $entity->getId(), $value->getValue()
-                );
-                $logger->notice($message);
-            }
-        }
     }
 
     /**
@@ -427,22 +327,5 @@ SQL;
             }
         }
         return $numericDataTypes;
-    }
-
-    /**
-     * Does the passed data contain valid convert-to-numeric data?
-     *
-     * @param array $data
-     * return bool
-     */
-    public function convertToNumericDataIsValid(array $data)
-    {
-        $validTypes = array_keys($this->getNumericDataTypes());
-        return (
-            isset($data['numeric_convert']['property'])
-            && is_numeric($data['numeric_convert']['property'])
-            && isset($data['numeric_convert']['type'])
-            && in_array($data['numeric_convert']['type'], $validTypes)
-        );
     }
 }
