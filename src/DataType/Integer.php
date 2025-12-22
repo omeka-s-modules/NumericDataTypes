@@ -9,6 +9,7 @@ use Omeka\Api\Adapter\AbstractEntityAdapter;
 use Omeka\Api\Adapter\AdapterInterface;
 use Omeka\Api\Representation\ValueRepresentation;
 use Omeka\Entity\Value;
+use Omeka\DataType\ConversionTargetInterface;
 use Omeka\DataType\ValueAnnotatingInterface;
 use Laminas\View\Renderer\PhpRenderer;
 
@@ -18,7 +19,7 @@ use Laminas\View\Renderer\PhpRenderer;
  * This data type enables both integers and decimals. The class name is
  * "Integer" and the data type name is "numeric:integer" for historical reasons.
  */
-class Integer extends AbstractDataType implements ValueAnnotatingInterface
+class Integer extends AbstractDataType implements ValueAnnotatingInterface, ConversionTargetInterface
 {
     /**
      * Minimum and maximum integers.
@@ -67,7 +68,7 @@ class Integer extends AbstractDataType implements ValueAnnotatingInterface
 
     public function getJsonLd(ValueRepresentation $value)
     {
-        if (!$this->isValid(['@value' => $value->value()])) {
+        if (!$this->numberIsValid($value->value())) {
             return ['@value' => $value->value()];
         }
         if (strpos($value->value(), '.')) {
@@ -98,15 +99,20 @@ class Integer extends AbstractDataType implements ValueAnnotatingInterface
 
     public function isValid(array $valueObject)
     {
-        return is_numeric($valueObject['@value'])
-            && ((int) $valueObject['@value'] <= self::MAX_SAFE_INT)
-            && ((int) $valueObject['@value'] >= self::MIN_SAFE_INT)
-            && preg_match(sprintf('/%s/', self::NUMBER_PATTERN), (string) $valueObject['@value']);
+        return $this->numberIsValid($valueObject['@value']);
+    }
+
+    public function numberIsValid($number)
+    {
+        return is_numeric($number)
+            && ((int) $number <= self::MAX_SAFE_INT)
+            && ((int) $number >= self::MIN_SAFE_INT)
+            && preg_match(sprintf('/%s/', self::NUMBER_PATTERN), (string) $number);
     }
 
     public function render(PhpRenderer $view, ValueRepresentation $value, $options = [])
     {
-        if (!$this->isValid(['@value' => $value->value()])) {
+        if (!$this->numberIsValid($value->value())) {
             return $value->value();
         }
         return $this->numberFormat($value->value(), $view->lang());
@@ -173,14 +179,14 @@ class Integer extends AbstractDataType implements ValueAnnotatingInterface
         if (isset($query['numeric']['int']['lt']['val'])) {
             $value = $query['numeric']['int']['lt']['val'];
             $propertyId = $query['numeric']['int']['lt']['pid'] ?? null;
-            if ($this->isValid(['@value' => $value])) {
+            if ($this->numberIsValid($value)) {
                 $this->addLessThanQuery($adapter, $qb, $propertyId, $value);
             }
         }
         if (isset($query['numeric']['int']['gt']['val'])) {
             $value = $query['numeric']['int']['gt']['val'];
             $propertyId = $query['numeric']['int']['gt']['pid'] ?? null;
-            if ($this->isValid(['@value' => $value])) {
+            if ($this->numberIsValid($value)) {
                 $this->addGreaterThanQuery($adapter, $qb, $propertyId, $value);
             }
         }
@@ -209,5 +215,14 @@ class Integer extends AbstractDataType implements ValueAnnotatingInterface
     public function valueAnnotationForm(PhpRenderer $view)
     {
         return $this->form($view);
+    }
+
+    public function convert(Value $valueObject, string $dataTypeTarget): bool
+    {
+        $value = $valueObject->getValue();
+        if ($this->numberIsValid($value)) {
+            return true;
+        }
+        return false;
     }
 }

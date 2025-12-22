@@ -26,10 +26,6 @@ class FormElementDelegatorFactory implements DelegatorFactoryInterface
             \NumericDataTypes\Form\Element\Integer::class,
             'formNumericInteger'
         );
-        $formElement->addClass(
-            \NumericDataTypes\Form\Element\ConvertToNumeric::class,
-            'formNumericConvertToNumeric'
-        );
         return $formElement;
     }
 }

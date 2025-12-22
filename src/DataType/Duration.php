@@ -9,10 +9,11 @@ use Omeka\Entity\Value;
 use Omeka\Api\Adapter\AbstractEntityAdapter;
 use Omeka\Api\Adapter\AdapterInterface;
 use Omeka\Api\Representation\ValueRepresentation;
+use Omeka\DataType\ConversionTargetInterface;
 use Omeka\DataType\ValueAnnotatingInterface;
 use Laminas\View\Renderer\PhpRenderer;
 
-class Duration extends AbstractDataType implements ValueAnnotatingInterface
+class Duration extends AbstractDataType implements ValueAnnotatingInterface, ConversionTargetInterface
 {
     /**
      * Seconds in a timespan
@@ -47,8 +48,13 @@ class Duration extends AbstractDataType implements ValueAnnotatingInterface
 
     public function isValid(array $valueObject)
     {
+        return $this->durationIsValid($valueObject['@value']);
+    }
+
+    public function durationIsValid($duration)
+    {
         try {
-            $this->getDurationFromValue($valueObject['@value']);
+            $this->getDurationFromValue($duration);
         } catch (\InvalidArgumentException $e) {
             return false;
         }
@@ -66,7 +72,7 @@ class Duration extends AbstractDataType implements ValueAnnotatingInterface
 
     public function render(PhpRenderer $view, ValueRepresentation $value, $options = [])
     {
-        if (!$this->isValid(['@value' => $value->value()])) {
+        if (!$this->durationIsValid($value->value())) {
             return $value->value();
         }
         $duration = $this->getDurationFromValue($value->value());
@@ -111,7 +117,7 @@ class Duration extends AbstractDataType implements ValueAnnotatingInterface
 
     public function getJsonLd(ValueRepresentation $value)
     {
-        if (!$this->isValid(['@value' => $value->value()])) {
+        if (!$this->durationIsValid($value->value())) {
             return ['@value' => $value->value()];
         }
         return [
@@ -192,7 +198,7 @@ class Duration extends AbstractDataType implements ValueAnnotatingInterface
         if (isset($query['numeric']['dur']['lt']['val'])) {
             $value = $query['numeric']['dur']['lt']['val'];
             $propertyId = $query['numeric']['dur']['lt']['pid'] ?? null;
-            if ($this->isValid(['@value' => $value])) {
+            if ($this->durationIsValid($value)) {
                 $duration = $this->getDurationFromValue($value);
                 $number = $duration['total_seconds'];
                 $this->addLessThanQuery($adapter, $qb, $propertyId, $number);
@@ -201,7 +207,7 @@ class Duration extends AbstractDataType implements ValueAnnotatingInterface
         if (isset($query['numeric']['dur']['gt']['val'])) {
             $value = $query['numeric']['dur']['gt']['val'];
             $propertyId = $query['numeric']['dur']['gt']['pid'] ?? null;
-            if ($this->isValid(['@value' => $value])) {
+            if ($this->durationIsValid($value)) {
                 $duration = $this->getDurationFromValue($value);
                 $number = $duration['total_seconds'];
                 $this->addGreaterThanQuery($adapter, $qb, $propertyId, $number);
@@ -232,5 +238,14 @@ class Duration extends AbstractDataType implements ValueAnnotatingInterface
     public function valueAnnotationForm(PhpRenderer $view)
     {
         return $this->form($view);
+    }
+
+    public function convert(Value $valueObject, string $dataTypeTarget): bool
+    {
+        $value = $valueObject->getValue();
+        if ($this->durationIsValid($value)) {
+            return true;
+        }
+        return false;
     }
 }
