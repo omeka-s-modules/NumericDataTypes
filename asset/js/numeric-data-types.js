@@ -196,7 +196,8 @@ var NumericDataTypes = {
         if (numericContainer.hasClass('numeric-enabled')) {
             return; // Enable only once.
         }
-        numericContainer.addClass('numeric-enabled')
+        numericContainer.addClass('numeric-enabled');
+        var invalidValue = numericContainer.find('.invalid-value');
         var yStart = container.find('.numeric-interval-start .numeric-datetime-year');
         var mStart = container.find('.numeric-interval-start .numeric-datetime-month');
         var dStart = container.find('.numeric-interval-start .numeric-datetime-day');
@@ -211,12 +212,12 @@ var NumericDataTypes = {
         var miEnd = container.find('.numeric-interval-end .numeric-datetime-minute');
         var sEnd = container.find('.numeric-interval-end .numeric-datetime-second');
         var oEnd = container.find('.numeric-interval-end .numeric-datetime-offset');
-        yStart.add(mStart).add(dStart).add(hStart).add(miStart).add(sStart).add(oStart).add(yEnd).add(mEnd).add(dEnd).add(hEnd).add(miEnd).add(sEnd).add(oEnd).on('input', function(e) {
-            yStart[0].setCustomValidity('');
-            NumericDataTypes.setIntervalValue(v, yStart, mStart, dStart, hStart, miStart, sStart, oStart, yEnd, mEnd, dEnd, hEnd, miEnd, sEnd, oEnd);
-        });
-        // Match against ISO 8601, allowing for reduced accuracy.
-        var matches = /^(-?\d{4,})(-(\d{2}))?(-(\d{2}))?(T(\d{2}))?(:(\d{2}))?(:(\d{2}))?([+-]\d{2}:\d{2})?\/(-?\d{4,})(-(\d{2}))?(-(\d{2}))?(T(\d{2}))?(:(\d{2}))?(:(\d{2}))?([+-]\d{2}:\d{2})?$/.exec(v.val());
+        var getMatches = function(interval) {
+            var pattern = /^(-?\d{4,})(-(\d{2}))?(-(\d{2}))?(T(\d{2}))?(:(\d{2}))?(:(\d{2}))?([+-]\d{2}:\d{2})?\/(-?\d{4,})(-(\d{2}))?(-(\d{2}))?(T(\d{2}))?(:(\d{2}))?(:(\d{2}))?([+-]\d{2}:\d{2})?$/;
+            var re = new RegExp(pattern);
+            return re.exec(interval);
+        };
+        var matches = getMatches(v.val());
         if (matches) {
             // Set existing date/time during initial load.
             yStart.val(parseInt(matches[1]));
@@ -234,7 +235,6 @@ var NumericDataTypes = {
             sEnd.val(matches[23] ? parseInt(matches[23]) : null);
             oEnd.val(matches[24] ? matches[24] : null);
         } else if ('' !== v.val()) {
-            var invalidValue = numericContainer.find('.invalid-value');
             yStart[0].setCustomValidity(invalidValue.data('customValidity'));
             invalidValue.text(invalidValue.data('invalidMessage').replace('%s', v.val()));
         }
@@ -243,6 +243,15 @@ var NumericDataTypes = {
         hStart.val() ? timeInputsStart.show() : timeInputsStart.hide();
         var timeInputsEnd = hEnd.closest('.numeric-time-inputs');
         hEnd.val() ? timeInputsEnd.show() : timeInputsEnd.hide();
+        // Populate hidden input on user input.
+        yStart.add(mStart).add(dStart).add(hStart).add(miStart).add(sStart).add(oStart).add(yEnd).add(mEnd).add(dEnd).add(hEnd).add(miEnd).add(sEnd).add(oEnd).on('input', function(e) {
+            yStart[0].setCustomValidity('');
+            NumericDataTypes.setIntervalValue(v, yStart, mStart, dStart, hStart, miStart, sStart, oStart, yEnd, mEnd, dEnd, hEnd, miEnd, sEnd, oEnd);
+            var matches = getMatches(v.val());
+            if (null === matches) {
+                yStart[0].setCustomValidity(invalidValue.data('customValidity'));
+            }
+        });
     },
     /**
      * Enable the duration controls.

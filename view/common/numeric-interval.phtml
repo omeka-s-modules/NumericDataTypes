@@ -9,7 +9,7 @@ $formSelect->addTranslatableAttribute('aria-label');
 <div class="numeric-interval">
     <div class="error invalid-value"
         data-invalid-message="<?php echo $this->escapeHtml($this->translate('Invalid value: %s')); ?>"
-        data-custom-validity="<?php echo $this->escapeHtml($this->translate('Value must be an interval')); ?>">
+        data-custom-validity="<?php echo $this->escapeHtml($this->translate('Value must be a valid interval with a start and an end.')); ?>">
     </div>
     <?php echo $this->formHidden($element->getValueElement()); ?>
     <div class="numeric-datetime-inputs numeric-interval-start">
