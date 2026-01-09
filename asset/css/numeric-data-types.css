@@ -39,8 +39,8 @@ label.numeric-toggle-time:before {
     height: auto;
 }
 
-.field .inputs [class*="numeric"]:not(div),
-.field .inputs [name*="numeric"]:not(div) {
+.field .inputs .values [class*="numeric"]:not(div),
+.field .inputs .values [name*="numeric"]:not(div) {
     height: auto;
     margin-top: 6px;
     flex-wrap: wrap;
