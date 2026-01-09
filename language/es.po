@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-14 14:09-0400\n"
+"POT-Creation-Date: 2026-01-09 15:47-0500\n"
 "PO-Revision-Date: 2018-11-27 19:31+0000\n"
 "Last-Translator: 2b019265641dfb6bf87696b9851ef6cd_2798cfc <e6832017c56bb8e26082a549400c6ce9_896430>, 2021\n"
 "Language-Team: Spanish (https://app.transifex.com/omeka/teams/14184/es/)\n"
@@ -23,62 +23,62 @@ msgstr ""
 "Language: es\n"
 "Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
-#: src/DataType/Duration.php:76
+#: src/DataType/Duration.php:82
 #, php-format
 msgid "%s year"
 msgstr "%s año"
 
-#: src/DataType/Duration.php:77
+#: src/DataType/Duration.php:83
 #, php-format
 msgid "%s years"
 msgstr "%s años"
 
-#: src/DataType/Duration.php:81
+#: src/DataType/Duration.php:87
 #, php-format
 msgid "%s month"
 msgstr "%s mes"
 
-#: src/DataType/Duration.php:82
+#: src/DataType/Duration.php:88
 #, php-format
 msgid "%s months"
 msgstr "%s meses"
 
-#: src/DataType/Duration.php:86
+#: src/DataType/Duration.php:92
 #, php-format
 msgid "%s day"
 msgstr "%s día"
 
-#: src/DataType/Duration.php:87
+#: src/DataType/Duration.php:93
 #, php-format
 msgid "%s days"
 msgstr "%s días"
 
-#: src/DataType/Duration.php:91
+#: src/DataType/Duration.php:97
 #, php-format
 msgid "%s hour"
 msgstr "%s hora"
 
-#: src/DataType/Duration.php:92
+#: src/DataType/Duration.php:98
 #, php-format
 msgid "%s hours"
 msgstr "%s horas"
 
-#: src/DataType/Duration.php:96
+#: src/DataType/Duration.php:102
 #, php-format
 msgid "%s minute"
 msgstr "%s minuto"
 
-#: src/DataType/Duration.php:97
+#: src/DataType/Duration.php:103
 #, php-format
 msgid "%s minutes"
 msgstr "%s minutos"
 
-#: src/DataType/Duration.php:101
+#: src/DataType/Duration.php:107
 #, php-format
 msgid "%s second"
 msgstr "%s segundo"
 
-#: src/DataType/Duration.php:102
+#: src/DataType/Duration.php:108
 #, php-format
 msgid "%s seconds"
 msgstr "%s segundos"
@@ -114,12 +114,12 @@ msgid "Date in interval"
 msgstr "Fecha en intervalo"
 
 #: view/common/numeric-data-types-advanced-search.phtml:180
-msgid "Value is greater than"
-msgstr "El valor es mayor que"
+msgid "Number is greater than"
+msgstr ""
 
 #: view/common/numeric-data-types-advanced-search.phtml:196
-msgid "Value is less than"
-msgstr "El valor es menor que"
+msgid "Number is less than"
+msgstr ""
 
 #: view/common/numeric-duration.phtml:9 view/common/numeric-integer.phtml:9
 #: view/common/numeric-interval.phtml:11
@@ -139,12 +139,15 @@ msgid "Time"
 msgstr "Hora"
 
 #: view/common/numeric-integer.phtml:10
-msgid "Value must be an integer"
-msgstr "El valor debe contener un número entero"
+msgid ""
+"Value must be an integer or decimal; the number must not be less than "
+"-9007199254740991 or greater than 9007199254740991; the number of digits to "
+"either the left or right side of a decimal cannot exceed 16."
+msgstr ""
 
 #: view/common/numeric-interval.phtml:12
-msgid "Value must be an interval"
-msgstr "El valor debe contener un intervalo"
+msgid "Value must be a valid interval with a start and an end."
+msgstr ""
 
 #: view/common/numeric-interval.phtml:16
 msgid "Start:"
@@ -158,19 +161,19 @@ msgstr "Fin:"
 msgid "Value must be a datetime"
 msgstr "El valor debe contener una fecha y hora"
 
-#: src/DataType/Integer.php:37 config/module.config.php:78
-msgid "Integer"
-msgstr "Número entero"
+#: src/DataType/Integer.php:66 src/Form/Element/Integer.php:22
+msgid "Number"
+msgstr ""
 
-#: src/DataType/Interval.php:23
+#: src/DataType/Interval.php:24
 msgid "Interval"
 msgstr "Intervalo"
 
-#: src/DataType/Duration.php:38
+#: src/DataType/Duration.php:39
 msgid "Duration"
 msgstr "Duración"
 
-#: src/DataType/Timestamp.php:23
+#: src/DataType/Timestamp.php:24
 msgid "Timestamp"
 msgstr "Marca de tiempo"
 
@@ -641,41 +644,18 @@ msgstr "Minutos"
 msgid "Seconds"
 msgstr "Segundos"
 
-#: src/Form/Element/ConvertToNumeric.php:22
-msgid "Convert to numeric"
-msgstr "Convertir a numérico"
-
-#: src/Form/Element/ConvertToNumeric.php:33
-msgid "Convert to timestamp"
-msgstr "Convertir a marca de tiempo"
-
-#: src/Form/Element/ConvertToNumeric.php:34
-msgid "Convert to interval"
-msgstr "Convertir a intervalo"
-
-#: src/Form/Element/ConvertToNumeric.php:35
-msgid "Convert to duration"
-msgstr "Convertir a duración"
-
-#: src/Form/Element/ConvertToNumeric.php:36
-msgid "Convert to integer"
-msgstr "Convertir a número entero"
-
-#: config/module.config.php:66
+#: config/module.config.php:64
 msgid "Date/Time (ISO 8601)"
 msgstr "Fecha / hora (ISO 8601)"
 
-#: config/module.config.php:70
+#: config/module.config.php:68
 msgid "Interval (ISO 8601)"
 msgstr "Intervalo (ISO 8601)"
 
-#: config/module.config.php:74
+#: config/module.config.php:72
 msgid "Duration (ISO 8601)"
 msgstr "Duración (ISO 8601)"
 
-#: Module.php:244
-#, php-format
-msgid "NumericDataTypes - invalid %s value for ID %s - %s"
-msgstr ""
-"Tipos de datos numéricos (NumericDataTypes) - valor %s inválido para la ID "
-"%s - %s"
+#: config/module.config.php:76
+msgid "Integer"
+msgstr "Número entero"

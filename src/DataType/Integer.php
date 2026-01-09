@@ -124,7 +124,7 @@ class Integer extends AbstractDataType implements ValueAnnotatingInterface, Conv
     public function numberFormat(string $number, string $locale)
     {
         if (!extension_loaded('intl')) {
-           return $number;
+            return $number;
         }
         // Use NumberFormatter to format the numeric string. Note that we must
         // format each part of the number separately because the formatter will

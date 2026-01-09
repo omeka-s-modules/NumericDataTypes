@@ -7,7 +7,7 @@ use Interop\Container\ContainerInterface;
 
 class DateBeforeFactory implements FactoryInterface
 {
-    public function __invoke(ContainerInterface $services, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $services, $requestedName, ?array $options = null)
     {
         return new DateBefore($services->get('FormElementManager'));
     }
