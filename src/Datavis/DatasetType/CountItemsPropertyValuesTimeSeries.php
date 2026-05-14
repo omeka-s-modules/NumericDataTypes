@@ -6,6 +6,7 @@ use Datavis\DatasetType\AbstractDatasetType;
 use DateInterval;
 use DatePeriod;
 use DateTime;
+use DateTimeZone;
 use Laminas\Form\Element;
 use Laminas\Form\Fieldset;
 use Laminas\ServiceManager\ServiceManager;
@@ -133,8 +134,8 @@ class CountItemsPropertyValuesTimeSeries extends AbstractDatasetType
         $em = $services->get('Omeka\EntityManager');
         $datasetData = $vis->datasetData();
 
-        $start = DateTime::createFromFormat('Y-m-d\TH:i:s', $datasetData['start']);
-        $end = DateTime::createFromFormat('Y-m-d\TH:i:s', $datasetData['end']);
+        $start = new DateTime($datasetData['start'], new DateTimeZone('UTC'));
+        $end = new DateTime($datasetData['end'], new DateTimeZone('UTC'));
 
         // Get the sample range according to the sample rate.
         switch ($datasetData['sample_rate']) {
