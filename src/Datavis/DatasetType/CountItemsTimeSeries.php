@@ -5,11 +5,10 @@ use Datavis\Api\Representation\DatavisVisRepresentation;
 use Datavis\DatasetType\AbstractDatasetType;
 use DateInterval;
 use DatePeriod;
-use DateTime;
-use DateTimeZone;
 use Laminas\Form\Element;
 use Laminas\Form\Fieldset;
 use Laminas\ServiceManager\ServiceManager;
+use NumericDataTypes\DataType\Timestamp;
 use Omeka\Api\Representation\SiteRepresentation;
 use Omeka\Form\Element\PropertySelect;
 use Omeka\Job\Exception;
@@ -67,7 +66,8 @@ class CountItemsTimeSeries extends AbstractDatasetType
             'name' => 'end',
             'options' => [
                 'label' => 'End', // @translate
-                'info' => 'Enter the end of the time series in ISO 8601 format: YYYY-MM-DDTHH:MM:SS', // @translate
+                'info' => 'Enter the end of the time series in full ISO 8601 format: <code>YYYY-MM-DDTHH:MM:SS</code>. This is an exclusive upper bound — to include all items through the year 1900, enter <code>1901-01-01T00:00:00</code>.', // @translate
+                'escape_info' => false,
             ],
             'attributes' => [
                 'id' => 'end',
@@ -107,8 +107,8 @@ class CountItemsTimeSeries extends AbstractDatasetType
         $em = $services->get('Omeka\EntityManager');
         $datasetData = $vis->datasetData();
 
-        $start = new DateTime($datasetData['start'], new DateTimeZone('UTC'));
-        $end = new DateTime($datasetData['end'], new DateTimeZone('UTC'));
+        $start = Timestamp::getDateTimeFromValue($datasetData['start'])['date'];
+        $end = Timestamp::getDateTimeFromValue($datasetData['end'])['date'];
 
         // Get the sample range according to the sample rate.
         switch ($datasetData['sample_rate']) {
@@ -147,10 +147,7 @@ class CountItemsTimeSeries extends AbstractDatasetType
         }
         $interval = DateInterval::createFromDateString($interval);
         $period = new DatePeriod($start, $interval, $end);
-        $sampleRange = [];
-        foreach ($period as $dateTime) {
-            $sampleRange[] = $dateTime;
-        }
+        $sampleRange = iterator_to_array($period);
 
         $dql = '
         SELECT COUNT(DISTINCT t.resource)
@@ -165,11 +162,9 @@ class CountItemsTimeSeries extends AbstractDatasetType
 
         $dataset = [];
         foreach ($sampleRange as $index => $dateTime) {
-            if (!isset($sampleRange[$index + 1])) {
-                continue; // End on the second to the last datetime.
-            }
+            $bucketEnd = $sampleRange[$index + 1] ?? $end;
             $query->setParameter('start', $dateTime->getTimestamp());
-            $query->setParameter('end', $sampleRange[$index + 1]->getTimestamp());
+            $query->setParameter('end', $bucketEnd->getTimestamp());
             $dataset[] = [
                 'label' => $dateTime->format('Y-m-d\TH:i:s'),
                 'value' => (int) $query->getSingleScalarResult(),
