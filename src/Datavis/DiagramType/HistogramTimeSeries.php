@@ -6,6 +6,7 @@ use Laminas\Form\Element;
 use Laminas\Form\Fieldset;
 use Laminas\View\Renderer\PhpRenderer;
 use Omeka\Api\Representation\SiteRepresentation;
+use Omeka\Form\Element as OmekaElement;
 
 class HistogramTimeSeries implements DiagramTypeInterface
 {
@@ -23,6 +24,7 @@ class HistogramTimeSeries implements DiagramTypeInterface
             'margin_right' => 30,
             'margin_bottom' => 100,
             'margin_left' => 60,
+            'color_fill' => '#69b3a2',
         ];
 
         $fieldset->add([
@@ -100,6 +102,19 @@ class HistogramTimeSeries implements DiagramTypeInterface
                 'min' => 0,
                 'value' => $defaults['margin_left'],
                 'placeholder' => $defaults['margin_left'],
+                'required' => true,
+            ],
+        ]);
+        $fieldset->add([
+            'type' => OmekaElement\ColorPicker::class,
+            'name' => 'color_fill',
+            'options' => [
+                'label' => 'Color fill', // @translate
+                'info' => 'Enter a three- or six-digit hexadecimal color. You can use any online hex color picker to select the color. The default is <code>#69b3a2</code>', // @translate
+                'escape_info' => false,
+            ],
+            'attributes' => [
+                'value' => $defaults['color_fill'],
                 'required' => true,
             ],
         ]);
