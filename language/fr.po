@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-10 10:30-0400\n"
+"POT-Creation-Date: 2026-05-20 11:34-0400\n"
 "PO-Revision-Date: 2018-11-27 19:31+0000\n"
 "Last-Translator: Daniel Berthereau <daniel.transifex@berthereau.net>, 2023\n"
 "Language-Team: French (https://app.transifex.com/omeka/teams/14184/fr/)\n"
@@ -189,8 +189,8 @@ msgstr "Numérique"
 #: src/FacetedBrowse/FacetType/ValueLessThan.php:53
 #: src/FacetedBrowse/FacetType/ValueGreaterThan.php:53
 #: src/FacetedBrowse/FacetType/DateBefore.php:54
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:45
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:73
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:44
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:72
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:46
 msgid "Select one…"
 msgstr "En choisir une…"
@@ -268,15 +268,15 @@ msgstr ""
 msgid "Value property"
 msgstr "Propriété de la valeur"
 
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:54
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:53
 msgid "Enter values, separated by new lines."
 msgstr "Saisissez des valeurs, séparées par des retours à la ligne."
 
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:66
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:65
 msgid "Timestamp property"
 msgstr "Propriété d’horodatage"
 
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:82
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:81
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:55
 msgid ""
 "Enter the start of the time series in ISO 8601 format: YYYY-MM-DDTHH:MM:SS"
@@ -284,66 +284,66 @@ msgstr ""
 "Saisissez le début de l’intervalle de temps, au format ISO 8061 : AAAA-MM-"
 "JJTHH:MM:SS"
 
-#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:96
+#: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:95
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:69
 msgid ""
-"Enter the end of the time series in ISO 8601 format: YYYY-MM-DDTHH:MM:SS"
+"Enter the end of the time series in full ISO 8601 format: <code>YYYY-MM-"
+"DDTHH:MM:SS</code>. This is an exclusive upper bound — to include all items "
+"through the year 1900, enter <code>1901-01-01T00:00:00</code>."
 msgstr ""
-"Saisissez la fin de l’intervalle de temps, au format ISO 8061 : AAAA-MM-"
-"JJTHH:MM:SS"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:109
-#: src/Datavis/DatasetType/CountItemsTimeSeries.php:82
+#: src/Datavis/DatasetType/CountItemsTimeSeries.php:83
 msgid "Sample rate"
 msgstr "Fréquence d’échantillonnage"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:111
-#: src/Datavis/DatasetType/CountItemsTimeSeries.php:84
+#: src/Datavis/DatasetType/CountItemsTimeSeries.php:85
 msgid "1 second"
 msgstr "1 seconde"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:112
-#: src/Datavis/DatasetType/CountItemsTimeSeries.php:85
+#: src/Datavis/DatasetType/CountItemsTimeSeries.php:86
 msgid "1 minute"
 msgstr "1 minute"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:113
-#: src/Datavis/DatasetType/CountItemsTimeSeries.php:86
+#: src/Datavis/DatasetType/CountItemsTimeSeries.php:87
 msgid "1 hour"
 msgstr "1 heure"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:114
-#: src/Datavis/DatasetType/CountItemsTimeSeries.php:87
+#: src/Datavis/DatasetType/CountItemsTimeSeries.php:88
 msgid "1 day"
 msgstr "1 jour"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:115
-#: src/Datavis/DatasetType/CountItemsTimeSeries.php:88
+#: src/Datavis/DatasetType/CountItemsTimeSeries.php:89
 msgid "7 days"
 msgstr "7 jours"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:116
-#: src/Datavis/DatasetType/CountItemsTimeSeries.php:89
+#: src/Datavis/DatasetType/CountItemsTimeSeries.php:90
 msgid "1 month"
 msgstr "1 mois"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:117
-#: src/Datavis/DatasetType/CountItemsTimeSeries.php:90
+#: src/Datavis/DatasetType/CountItemsTimeSeries.php:91
 msgid "6 months"
 msgstr "6 mois"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:118
-#: src/Datavis/DatasetType/CountItemsTimeSeries.php:91
+#: src/Datavis/DatasetType/CountItemsTimeSeries.php:92
 msgid "1 year"
 msgstr "1 an"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:119
-#: src/Datavis/DatasetType/CountItemsTimeSeries.php:92
+#: src/Datavis/DatasetType/CountItemsTimeSeries.php:93
 msgid "5 years"
 msgstr "5 ans"
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:120
-#: src/Datavis/DatasetType/CountItemsTimeSeries.php:93
+#: src/Datavis/DatasetType/CountItemsTimeSeries.php:94
 msgid "10 years"
 msgstr "10 ans"
 
@@ -355,45 +355,55 @@ msgstr "Nombre de contenus dans un intervalle de temps"
 msgid "Visualize the count of items over a selected period of time."
 msgstr "Voir le nombre de contenus dans une période définie."
 
-#: src/Datavis/DiagramType/HistogramTimeSeries.php:14
+#: src/Datavis/DiagramType/HistogramTimeSeries.php:15
 msgid "Histogram (time series)"
 msgstr "Histogramme (intervalle de temps)"
 
-#: src/Datavis/DiagramType/HistogramTimeSeries.php:32
+#: src/Datavis/DiagramType/HistogramTimeSeries.php:34
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:69
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:69
 msgid "Width"
 msgstr "Largeur"
 
-#: src/Datavis/DiagramType/HistogramTimeSeries.php:45
+#: src/Datavis/DiagramType/HistogramTimeSeries.php:47
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:82
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:82
 msgid "Height"
 msgstr "Hauteur"
 
-#: src/Datavis/DiagramType/HistogramTimeSeries.php:58
+#: src/Datavis/DiagramType/HistogramTimeSeries.php:60
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:95
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:95
 msgid "Margin top"
 msgstr "Marge supérieure"
 
-#: src/Datavis/DiagramType/HistogramTimeSeries.php:71
+#: src/Datavis/DiagramType/HistogramTimeSeries.php:73
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:108
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:108
 msgid "Margin right"
 msgstr "Marge droite"
 
-#: src/Datavis/DiagramType/HistogramTimeSeries.php:84
+#: src/Datavis/DiagramType/HistogramTimeSeries.php:86
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:121
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:121
 msgid "Margin bottom"
 msgstr "Marge inférieure"
 
-#: src/Datavis/DiagramType/HistogramTimeSeries.php:97
+#: src/Datavis/DiagramType/HistogramTimeSeries.php:99
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:134
 #: src/Datavis/DiagramType/LineChartTimeSeriesGrouped.php:134
 msgid "Margin left"
 msgstr "Marge gauche"
+
+#: src/Datavis/DiagramType/HistogramTimeSeries.php:112
+msgid "Color fill"
+msgstr ""
+
+#: src/Datavis/DiagramType/HistogramTimeSeries.php:113
+msgid ""
+"Enter a three- or six-digit hexadecimal color. You can use any online hex "
+"color picker to select the color. The default is <code>#69b3a2</code>"
+msgstr ""
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:14
 msgid "Line chart (time series)"
