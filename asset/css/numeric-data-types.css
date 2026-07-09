@@ -24,13 +24,9 @@ label.numeric-toggle-time:before {
     display: flex;
     flex-wrap: wrap;
     height: auto;
-    width: 100%;
+    max-width: 100%;
     margin-left: 0;
     margin-right: 0;
-}
-
-.numeric-datetime-inputs div {
-    margin-top: .25rem !important;
 }
 
 .field .inputs select[class*="numeric"],
