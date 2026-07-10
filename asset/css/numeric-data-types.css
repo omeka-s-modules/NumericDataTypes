@@ -49,10 +49,6 @@ label.numeric-toggle-time:before {
     gap: 4px;
 }
 
-.numeric-date-inputs > * {
-    flex-grow: 1;
-}
-
 .numeric-datetime-inputs select {
     margin: 0;
     width: auto;
