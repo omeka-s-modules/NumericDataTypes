@@ -2,7 +2,6 @@ label.numeric-toggle-time.button {
     display: inline-flex;
     align-items: center;
     width: auto;
-    padding: 6px;
     margin: 0;
     max-width: max-content;
 }
