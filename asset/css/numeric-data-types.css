@@ -48,6 +48,10 @@ label.numeric-toggle-time:before {
     gap: 4px;
 }
 
+.numeric-datetime-inputs {
+    gap: 1rem;
+}
+
 .numeric-datetime-inputs select {
     margin: 0;
     width: auto;
@@ -70,6 +74,10 @@ input.numeric-datetime-year {
     margin-right: 0;
     cursor: pointer;
     height: 1em;
+}
+
+.numeric-time-inputs {
+    gap: .25rem;
 }
 
 .sidebar .numeric-datetime-inputs input:not(:last-child),
