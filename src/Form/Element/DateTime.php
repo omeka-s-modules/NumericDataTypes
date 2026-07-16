@@ -27,37 +27,35 @@ class DateTime extends Element
                 'step' => 1,
                 'min' => TimestampDataType::YEAR_MIN,
                 'max' => TimestampDataType::YEAR_MAX,
-                'placeholder' => 'Year', // @translate
-                'aria-label' => 'Year', // @translate
             ]);
         $this->monthElement = (new Element\Select('month'))
             ->setAttribute('class', 'numeric-datetime-month')
-            ->setEmptyOption('Month') // @translate
+            ->setEmptyOption('')
             ->setAttribute('aria-label', 'Month') // @translate
             ->setValueOptions($this->getMonthValueOptions());
         $this->dayElement = (new Element\Select('day'))
             ->setAttribute('class', 'numeric-datetime-day')
-            ->setEmptyOption('Day') // @translate
+            ->setEmptyOption('')
             ->setAttribute('aria-label', 'Day') // @translate
             ->setValueOptions($this->getDayValueOptions());
         $this->hourElement = (new Element\Select('hour'))
             ->setAttribute('class', 'numeric-datetime-hour')
-            ->setEmptyOption('Hour') // @translate
+            ->setEmptyOption('')
             ->setAttribute('aria-label', 'Hour') // @translate
             ->setValueOptions($this->getHourValueOptions());
         $this->minuteElement = (new Element\Select('minute'))
             ->setAttribute('class', 'numeric-datetime-minute')
-            ->setEmptyOption('Minute') // @translate
+            ->setEmptyOption('')
             ->setAttribute('aria-label', 'Minute') // @translate
             ->setValueOptions($this->getMinuteSecondValueOptions());
         $this->secondElement = (new Element\Select('second'))
             ->setAttribute('class', 'numeric-datetime-second')
-            ->setEmptyOption('Second') // @translate
+            ->setEmptyOption('')
             ->setAttribute('aria-label', 'Second') // @translate
             ->setValueOptions($this->getMinuteSecondValueOptions());
         $this->offsetElement = (new Element\Select('offset'))
             ->setAttribute('class', 'numeric-datetime-offset')
-            ->setEmptyOption('Offset') // @translate
+            ->setEmptyOption('')
             ->setAttribute('aria-label', 'Offset') // @translate
             ->setValueOptions($this->getOffsetValueOptions());
     }

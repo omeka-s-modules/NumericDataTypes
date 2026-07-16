@@ -46,15 +46,12 @@ label.numeric-toggle-time:before {
     flex-wrap: wrap;
 }
 
-.numeric-date-inputs {
+.numeric-date-inputs,
+.numeric-time-inputs {
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
-    gap: 4px;
-}
-
-.numeric-date-inputs > * {
-    flex-grow: 1;
+    gap: 1rem;
 }
 
 .numeric-datetime-inputs select {
@@ -125,4 +122,14 @@ input.numeric-datetime-year {
 
 .sidebar .numeric-interval-start {
     margin-bottom: 2rem;
+}
+
+#advanced-search .inputs .numeric-date-inputs > label:not(.numeric-toggle-time),
+#advanced-search .inputs .numeric-time-inputs > label {
+    width: auto;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
 }
