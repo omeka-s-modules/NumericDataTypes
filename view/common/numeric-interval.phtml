@@ -15,31 +15,73 @@ $formSelect->addTranslatableAttribute('aria-label');
     <div class="numeric-datetime-inputs numeric-interval-start">
         <span class="start-end"><?php echo $this->translate('Start:'); ?></span>
         <div class="numeric-date-inputs">
-            <?php echo $formNumber($element->getYearElement()); ?>
-            <?php echo $formSelect($element->getMonthElement()); ?>
-            <?php echo $formSelect($element->getDayElement()); ?>
+            <label>
+                <?php echo $this->translate('Year'); ?>
+                <?php echo $formNumber($element->getYearElement()); ?>
+            </label>
+            <label>
+                <?php echo $this->translate('Month'); ?>
+                <?php echo $formSelect($element->getMonthElement()); ?>
+            </label>
+            <label>
+                <?php echo $this->translate('Day'); ?>
+                <?php echo $formSelect($element->getDayElement()); ?>
+            </label>
             <label class="numeric-toggle-time button" title="<?php echo $this->translate('Time'); ?>"><input type="checkbox" name="numeric-toggle-time-checkbox" aria-label="<?php echo $this->translate('Time'); ?>"></label>
         </div>
         <div class="numeric-time-inputs">
-            <?php echo $formSelect($element->getHourElement()); ?>
-            <?php echo $formSelect($element->getMinuteElement()); ?>
-            <?php echo $formSelect($element->getSecondElement()); ?>
-            <?php echo $formSelect($element->getOffsetElement()); ?>
+            <label>
+                <?php echo $this->translate('Hour'); ?>
+                <?php echo $formSelect($element->getHourElement()); ?>
+            </label>
+            <label>
+                <?php echo $this->translate('Minute'); ?>
+                <?php echo $formSelect($element->getMinuteElement()); ?>
+            </label>
+            <label>
+                <?php echo $this->translate('Second'); ?>
+                <?php echo $formSelect($element->getSecondElement()); ?>
+            </label>
+            <label>
+                <?php echo $this->translate('Offset'); ?>
+                <?php echo $formSelect($element->getOffsetElement()); ?>
+            </label>
         </div>
     </div>
     <div class="numeric-datetime-inputs numeric-interval-end">
         <span class="start-end"><?php echo $this->translate('End:'); ?></span>
         <div class="numeric-date-inputs">
-            <?php echo $formNumber($element->getYearElement()); ?>
-            <?php echo $formSelect($element->getMonthElement()); ?>
-            <?php echo $formSelect($element->getDayElement()); ?>
+            <label>
+                <?php echo $this->translate('Year'); ?>
+                <?php echo $formNumber($element->getYearElement()); ?>
+            </label>
+            <label>
+                <?php echo $this->translate('Month'); ?>
+                <?php echo $formSelect($element->getMonthElement()); ?>
+            </label>
+            <label>
+                <?php echo $this->translate('Day'); ?>
+                <?php echo $formSelect($element->getDayElement()); ?>
+            </label>
             <label class="numeric-toggle-time button" title="<?php echo $this->translate('Time'); ?>"><input type="checkbox" name="numeric-toggle-time-checkbox" aria-label="<?php echo $this->translate('Time'); ?>"></label>
         </div>
         <div class="numeric-time-inputs">
-            <?php echo $formSelect($element->getHourElement()); ?>
-            <?php echo $formSelect($element->getMinuteElement()); ?>
-            <?php echo $formSelect($element->getSecondElement()); ?>
-            <?php echo $formSelect($element->getOffsetElement()); ?>
+            <label>
+                <?php echo $this->translate('Hour'); ?>
+                <?php echo $formSelect($element->getHourElement()); ?>
+            </label>
+            <label>
+                <?php echo $this->translate('Minute'); ?>
+                <?php echo $formSelect($element->getMinuteElement()); ?>
+            </label>
+            <label>
+                <?php echo $this->translate('Second'); ?>
+                <?php echo $formSelect($element->getSecondElement()); ?>
+            </label>
+            <label>
+                <?php echo $this->translate('Offset'); ?>
+                <?php echo $formSelect($element->getOffsetElement()); ?>
+            </label>
         </div>
     </div>
 </div>

@@ -12,15 +12,33 @@ $formNumber->addTranslatableAttribute('aria-label');
     <?php echo $this->formHidden($element->getValueElement()); ?>
     <div class="numeric-datetime-inputs">
         <div class="numeric-date-inputs">
-            <?php echo $formNumber($element->getYearsElement()); ?>
-            <?php echo $formNumber($element->getMonthsElement()); ?>
-            <?php echo $formNumber($element->getDaysElement()); ?>
+            <label>
+                <?php echo $this->translate('Years'); ?>
+                <?php echo $formNumber($element->getYearsElement()); ?>
+            </label>
+            <label>
+                <?php echo $this->translate('Months'); ?>
+                <?php echo $formNumber($element->getMonthsElement()); ?>
+            </label>
+            <label>
+                <?php echo $this->translate('Days'); ?>
+                <?php echo $formNumber($element->getDaysElement()); ?>
+            </label>
             <label class="numeric-toggle-time button" title="<?php echo $this->translate('Time'); ?>"><input type="checkbox" name="numeric-toggle-time-checkbox" aria-label="<?php echo $this->translate('Time'); ?>"></label>
         </div>
         <div class="numeric-time-inputs">
-            <?php echo $formNumber($element->getHoursElement()); ?>
-            <?php echo $formNumber($element->getMinutesElement()); ?>
-            <?php echo $formNumber($element->getSecondsElement()); ?>
+            <label>
+                <?php echo $this->translate('Hours'); ?>
+                <?php echo $formNumber($element->getHoursElement()); ?>
+            </label>
+            <label>
+                <?php echo $this->translate('Minutes'); ?>
+                <?php echo $formNumber($element->getMinutesElement()); ?>
+            </label>
+            <label>
+                <?php echo $this->translate('Seconds'); ?>
+                <?php echo $formNumber($element->getSecondsElement()); ?>
+            </label>
         </div>
     </div>
 </div>
