@@ -107,6 +107,10 @@ return [
             'line_chart_time_series_grouped' => NumericDataTypes\Datavis\DiagramType\LineChartTimeSeriesGrouped::class,
         ],
     ],
+    'js_translate_strings' => [
+        'A facet must have a property.', // @translate
+        'Cannot add all', // @translate
+    ],
     'router' => [
         'routes' => [
             'admin' => [

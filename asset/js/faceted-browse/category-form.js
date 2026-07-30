@@ -28,10 +28,10 @@ $(document).on('click', '#add-all', function(e) {
             numericAddAll('#date-before-values');
             break;
         case 'value_greater_than':
-            alert('Cannot add all');
+            alert(Omeka.jsTranslate('Cannot add all'));
             break;
         case 'value_less_than':
-            alert('Cannot add all');
+            alert(Omeka.jsTranslate('Cannot add all'));
             break;
         case 'duration_greater_than':
             numericAddAll('#duration-greater-than-values');
@@ -40,7 +40,9 @@ $(document).on('click', '#add-all', function(e) {
             numericAddAll('#duration-less-than-values');
             break;
         case 'date_in_interval':
-            numericAddAll('#date-in-interval-values');
+            // This facet needs a single date/time per line, but the available
+            // values are intervals, which it cannot use.
+            alert(Omeka.jsTranslate('Cannot add all'));
             break;
     }
 });

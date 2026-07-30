@@ -58,7 +58,7 @@ class DateInInterval implements FacetTypeInterface
         $values->setName('values');
         $values->setOptions([
             'label' => 'Values', // @translate
-            'info' => 'Enter the date/time values, separated by a new line. For each line, enter the date/time in ISO 8601 format, followed by a space, followed by the human-readable date/time.', // @translate
+            'info' => 'Enter one value per line: a single date/time in ISO 8601 format, a space, then the human-readable date/time. For example "1935-06-15 15 June 1935". Date ranges are not accepted. A partial date means its first moment, so "1930" is 1 January 1930.', // @translate
         ]);
         $values->setAttributes([
             'id' => 'date-in-interval-values',
