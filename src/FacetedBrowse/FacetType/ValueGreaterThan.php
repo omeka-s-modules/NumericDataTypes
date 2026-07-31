@@ -1,6 +1,7 @@
 <?php
 namespace NumericDataTypes\FacetedBrowse\FacetType;
 
+use Doctrine\ORM\EntityManager;
 use FacetedBrowse\Api\Representation\FacetedBrowseFacetRepresentation;
 use FacetedBrowse\FacetType\FacetTypeInterface;
 use Laminas\Form\Element as LaminasElement;
@@ -10,11 +11,18 @@ use NumericDataTypes\Form\Element\NumericPropertySelect;
 
 class ValueGreaterThan implements FacetTypeInterface
 {
+    use ShowAllTrait;
+
+    const NUMERIC_DATA_TYPE = 'numeric:integer';
+
     protected $formElements;
 
-    public function __construct(ServiceLocatorInterface $formElements)
+    protected $entityManager;
+
+    public function __construct(ServiceLocatorInterface $formElements, EntityManager $entityManager)
     {
         $this->formElements = $formElements;
+        $this->entityManager = $entityManager;
     }
 
     public function getLabel(): string
@@ -84,6 +92,7 @@ class ValueGreaterThan implements FacetTypeInterface
         ]);
 
         return $view->partial('common/faceted-browse/facet-data-form/value-greater-than', [
+            'facetType' => $this,
             'propertyId' => $propertyId,
             'min' => $min,
             'max' => $max,

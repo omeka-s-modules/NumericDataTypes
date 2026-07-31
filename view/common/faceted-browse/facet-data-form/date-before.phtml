@@ -1,9 +1,13 @@
 <?php echo $this->formRow($elementPropertyId); ?>
 <?php echo $this->formRow($elementValues); ?>
 <?php echo $this->partial('show-all', [
-    'label' => $this->translate('Show all available values.'),
+    'facetType' => $facetType,
+    'label' => $this->translate('Show available values'),
     'url' => $this->url('admin/site/slug/numeric-data-types-faceted-browse', ['controller' => 'index', 'action' => 'timestamp-values'], true),
     'queryParams' => [
+        // Flat for this module's controller, nested for FacetedBrowse's.
         'property_id' => '#date-before-property-id',
+        'facet_data[property_id]' => '#date-before-property-id',
     ],
+    'addAll' => ['target' => '#date-before-values', 'mode' => 'textarea'],
 ]); ?>

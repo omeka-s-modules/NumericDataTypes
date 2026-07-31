@@ -3,9 +3,13 @@
 <?php echo $this->formRow($max); ?>
 <?php echo $this->formRow($step); ?>
 <?php echo $this->partial('show-all', [
-    'label' => $this->translate('Show all available values.'),
+    'facetType' => $facetType,
+    'label' => $this->translate('Show available values'),
     'url' => $this->url('admin/site/slug/numeric-data-types-faceted-browse', ['controller' => 'index', 'action' => 'integer-values'], true),
     'queryParams' => [
+        // Flat for this module's controller, nested for FacetedBrowse's.
         'property_id' => '#value-less-than-property-id',
+        'facet_data[property_id]' => '#value-less-than-property-id',
     ],
+    'addAll' => false,
 ]); ?>
