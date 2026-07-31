@@ -56,8 +56,9 @@ label.numeric-toggle-time:before {
     max-width: 100%;
 }
 
-.numeric-datetime-inputs input {
-    width: 8em;
+.numeric-datetime-inputs input,
+.numeric-integer-integer {
+    width: 6em;
     max-width: 100%;
     margin: 0;
 }
@@ -124,13 +125,7 @@ input.numeric-datetime-year {
     margin-bottom: 2rem;
 }
 
-#advanced-search #numeric-greater-than .inputs,
-#advanced-search #numeric-less-than .inputs {
-    gap: .5rem .25rem;
-}
-
-#advanced-search .inputs .numeric-date-inputs > label:not(.numeric-toggle-time),
-#advanced-search .inputs .numeric-time-inputs > label {
+#advanced-search .inputs label:not(.numeric-toggle-time) {
     width: auto;
     margin: 0;
     padding: 0;

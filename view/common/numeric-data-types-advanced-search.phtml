@@ -148,8 +148,11 @@ $intLtSelect = $this->numericPropertySelect([
         <label for=""><?php echo $this->translate('Duration is less than'); ?></label>
     </div>
     <div class="inputs">
+        <label>
+            <?php echo $this->translate('Property'); ?>
+            <?php echo $durLtSelect; ?>
+        </label>
         <?php
-        echo $durLtSelect;
         $element = new DurationElement('numeric[dur][lt][val]');
         $element->setValue($query['numeric']['dur']['lt']['val'] ?? null);
         echo $this->formElement($element);
@@ -164,8 +167,11 @@ $intLtSelect = $this->numericPropertySelect([
         <label for=""><?php echo $this->translate('Date in interval'); ?></label>
     </div>
     <div class="inputs">
+        <label>
+            <?php echo $this->translate('Property'); ?>
+            <?php echo $ivlPidSelect; ?>
+        </label>
         <?php
-        echo $ivlPidSelect;
         $element = new TimestampElement('numeric[ivl][val]');
         $element->setValue($query['numeric']['ivl']['val'] ?? null);
         echo $this->formElement($element);
@@ -180,12 +186,18 @@ $intLtSelect = $this->numericPropertySelect([
         <label for=""><?php echo $this->translate('Number is greater than'); ?></label>
     </div>
     <div class="inputs">
-        <?php
-        echo $intGtSelect;
-        $element = new IntegerElement('numeric[int][gt][val]');
-        $element->setValue($query['numeric']['int']['gt']['val'] ?? null);
-        echo $this->formElement($element);
-        ?>
+        <label>
+            <?php echo $this->translate('Property'); ?>
+            <?php echo $intGtSelect; ?>
+        </label>
+        <label>
+            <?php echo $this->translate('Value'); ?>
+            <?php
+            $element = new IntegerElement('numeric[int][gt][val]');
+            $element->setValue($query['numeric']['int']['gt']['val'] ?? null);
+            echo $this->formElement($element);
+            ?>
+        </label>
     </div>
 </div>
 <?php endif; ?>
@@ -196,12 +208,18 @@ $intLtSelect = $this->numericPropertySelect([
         <label for=""><?php echo $this->translate('Number is less than'); ?></label>
     </div>
     <div class="inputs">
-        <?php
-        echo $intLtSelect;
-        $element = new IntegerElement('numeric[int][lt][val]');
-        $element->setValue($query['numeric']['int']['lt']['val'] ?? null);
-        echo $this->formElement($element);
-        ?>
+        <label>
+            <?php echo $this->translate('Property'); ?>
+            <?php echo $intLtSelect; ?>
+        </label>
+        <label>
+            <?php echo $this->translate('Value'); ?>
+            <?php
+            $element = new IntegerElement('numeric[int][lt][val]');
+            $element->setValue($query['numeric']['int']['lt']['val'] ?? null);
+            echo $this->formElement($element);
+            ?>
+        </label>
     </div>
 </div>
 <?php endif; ?>
