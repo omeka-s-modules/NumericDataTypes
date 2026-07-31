@@ -26,6 +26,7 @@ label.numeric-toggle-time:before {
     max-width: 100%;
     margin-left: 0;
     margin-right: 0;
+    gap: .5rem 1rem;
 }
 
 .field .inputs select[class*="numeric"],
@@ -123,6 +124,11 @@ input.numeric-datetime-year {
     margin-bottom: 2rem;
 }
 
+#advanced-search #numeric-greater-than .inputs,
+#advanced-search #numeric-less-than .inputs {
+    gap: .5rem .25rem;
+}
+
 #advanced-search .inputs .numeric-date-inputs > label:not(.numeric-toggle-time),
 #advanced-search .inputs .numeric-time-inputs > label {
     width: auto;
@@ -131,4 +137,9 @@ input.numeric-datetime-year {
     display: flex;
     flex-wrap: wrap;
     gap: .5rem;
+    align-items: center;
+}
+
+.error.invalid-value:empty {
+    display: none;
 }
