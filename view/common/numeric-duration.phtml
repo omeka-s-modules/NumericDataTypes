@@ -5,11 +5,6 @@ $formNumber = clone($this->plugin('formNumber'));
 $formNumber->addTranslatableAttribute('aria-label');
 ?>
 <div class="numeric-duration">
-    <div class="error invalid-value"
-        data-invalid-message="<?php echo $this->escapeHtml($this->translate('Invalid value: %s')); ?>"
-        data-custom-validity="<?php echo $this->escapeHtml($this->translate('Value must be a duration')); ?>">
-    </div>
-    <?php echo $this->formHidden($element->getValueElement()); ?>
     <div class="numeric-datetime-inputs">
         <div class="numeric-date-inputs">
             <label>
@@ -41,5 +36,9 @@ $formNumber->addTranslatableAttribute('aria-label');
             </label>
         </div>
     </div>
+    <div class="error invalid-value"
+        data-invalid-message="<?php echo $this->escapeHtml($this->translate('Invalid value: %s')); ?>"
+        data-custom-validity="<?php echo $this->escapeHtml($this->translate('Value must be a duration')); ?>"></div>
+    <?php echo $this->formHidden($element->getValueElement()); ?>
 </div>
 

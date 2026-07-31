@@ -7,11 +7,6 @@ $formSelect = clone($this->plugin('formSelect'));
 $formSelect->addTranslatableAttribute('aria-label');
 ?>
 <div class="numeric-timestamp">
-    <div class="error invalid-value"
-        data-invalid-message="<?php echo $this->escapeHtml($this->translate('Invalid value: %s')); ?>"
-        data-custom-validity="<?php echo $this->escapeHtml($this->translate('Value must be a datetime')); ?>">
-    </div>
-    <?php echo $this->formHidden($element->getValueElement()); ?>
     <div class="numeric-datetime-inputs">
         <div class="numeric-date-inputs">
             <label>
@@ -43,4 +38,8 @@ $formSelect->addTranslatableAttribute('aria-label');
             </label>
         </div>
     </div>
+    <div class="error invalid-value"
+        data-invalid-message="<?php echo $this->escapeHtml($this->translate('Invalid value: %s')); ?>"
+        data-custom-validity="<?php echo $this->escapeHtml($this->translate('Value must be a datetime')); ?>"></div>
+    <?php echo $this->formHidden($element->getValueElement()); ?>
 </div>
