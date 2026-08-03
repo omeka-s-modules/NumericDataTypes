@@ -102,8 +102,11 @@ $intLtSelect = $this->numericPropertySelect([
         <label for=""><?php echo $this->translate('Date comes on or after'); ?></label>
     </div>
     <div class="inputs">
+        <label>
+            <?php echo $this->translate('Property'); ?>
+            <?php echo $tsGteSelect; ?>
+        </label>
         <?php
-        echo $tsGteSelect;
         $element = new TimestampElement('numeric[ts][gte][val]');
         $element->setValue($query['numeric']['ts']['gte']['val'] ?? null);
         echo $this->formElement($element);
@@ -118,8 +121,11 @@ $intLtSelect = $this->numericPropertySelect([
         <label for=""><?php echo $this->translate('Date comes on or before'); ?></label>
     </div>
     <div class="inputs">
+        <label>
+            <?php echo $this->translate('Property'); ?>
+            <?php echo $tsLteSelect; ?>
+        </label>
         <?php
-        echo $tsLteSelect;
         $element = new TimestampElement('numeric[ts][lte][val]');
         $element->setValue($query['numeric']['ts']['lte']['val'] ?? null);
         echo $this->formElement($element);
@@ -134,8 +140,11 @@ $intLtSelect = $this->numericPropertySelect([
         <label for=""><?php echo $this->translate('Duration is greater than'); ?></label>
     </div>
     <div class="inputs">
+        <label>
+            <?php echo $this->translate('Property'); ?>
+            <?php echo $durGtSelect; ?>
+        </label>
         <?php
-        echo $durGtSelect;
         $element = new DurationElement('numeric[dur][gt][val]');
         $element->setValue($query['numeric']['dur']['gt']['val'] ?? null);
         echo $this->formElement($element);
