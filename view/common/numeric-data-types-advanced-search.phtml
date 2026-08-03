@@ -5,7 +5,9 @@ use NumericDataTypes\Form\Element\Integer as IntegerElement;
 
 $this->headScript()->appendFile($this->assetUrl('js/numeric-data-types.js', 'NumericDataTypes'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/numeric-data-types.css', 'NumericDataTypes'));
-
+if ($this->status()->isAdminRequest()) {
+    $this->headLink()->appendStylesheet($this->assetUrl('css/numeric-data-types-admin.css', 'NumericDataTypes'));
+}
 $tsGteSelect = $this->numericPropertySelect([
     'name' => 'numeric[ts][gte][pid]',
     'attributes' => [

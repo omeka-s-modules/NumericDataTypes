@@ -1,5 +1,8 @@
 <?php
 $this->headLink()->appendStylesheet($this->assetUrl('css/numeric-data-types.css', 'NumericDataTypes'));
+if ($this->status()->isAdminRequest()) {
+    $this->headLink()->appendStylesheet($this->assetUrl('css/numeric-data-types-admin.css', 'NumericDataTypes'));
+}
 $this->headScript()->appendFile($this->assetUrl('js/numeric-data-types.js', 'NumericDataTypes'));
 $formNumber = clone($this->plugin('formNumber'));
 $formNumber->addTranslatableAttribute('aria-label');
@@ -19,7 +22,7 @@ $formNumber->addTranslatableAttribute('aria-label');
                 <?php echo $this->translate('Days'); ?>
                 <?php echo $formNumber($element->getDaysElement()); ?>
             </label>
-            <label class="numeric-toggle-time button" title="<?php echo $this->translate('Time'); ?>"><input type="checkbox" name="numeric-toggle-time-checkbox" aria-label="<?php echo $this->translate('Time'); ?>"></label>
+            <label class="numeric-toggle-time button" title="<?php echo $this->translate('Time'); ?>"><input type="checkbox" class="numeric-toggle-time-checkbox" name="numeric-toggle-time-checkbox" aria-label="<?php echo $this->translate('Time'); ?>"></label>
         </div>
         <div class="numeric-time-inputs">
             <label>
