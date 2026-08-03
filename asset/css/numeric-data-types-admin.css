@@ -1,3 +1,7 @@
+[id*="numeric"] .chosen-container {
+    width: auto !important;
+}
+
 .numeric-interval-start,
 .numeric-interval-end {
     align-items: center;
