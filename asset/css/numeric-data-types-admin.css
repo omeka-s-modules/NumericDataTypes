@@ -20,12 +20,9 @@ select[class*="numeric"] {
 
 .numeric-date-inputs > label,
 .numeric-time-inputs > label {
-    display: inline-flex;
     width: auto;
-    align-items: center;
     margin: 0;
     padding: 0;
-    gap: .5rem;
 }
 
 .numeric-date-inputs > label input,

@@ -4,6 +4,7 @@ label.numeric-toggle-time.button {
     width: auto;
     margin: 0;
     max-width: max-content;
+    align-self: flex-end;
 }
 
 label.numeric-toggle-time:before {
@@ -17,6 +18,7 @@ label.numeric-toggle-time:before {
 [id*="numeric-"] .inputs {
     display: flex;
     flex-wrap: wrap;
+    align-items: flex-end;
 }
 
 .inputs div[class*="numeric"] {
@@ -56,7 +58,7 @@ label.numeric-toggle-time:before {
     max-width: 100%;
 }
 
-.numeric-datetime-inputs input,
+input[class*=numeric],
 .numeric-integer-integer {
     width: 6em;
     max-width: 100%;
@@ -129,10 +131,12 @@ input.numeric-datetime-year {
     width: auto;
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: .5rem;
-    align-items: center;
+}
+
+#advanced-search .inputs label:not(.numeric-toggle-time) input,
+#advanced-search .inputs label:not(.numeric-toggle-time) select,
+#advanced-search .inputs label:not(.numeric-toggle-time) .chosen-container {
+    display: block;
 }
 
 .error.invalid-value:empty {
