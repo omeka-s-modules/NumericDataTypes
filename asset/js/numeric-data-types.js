@@ -381,6 +381,6 @@ $(function() {
     });
     // Toggle visibility of time inputs.
     $(document).on('change', '.numeric-toggle-time input[type="checkbox"]', function() {
-        $(this).closest('.numeric-timestamp,.numeric-duration').find('.numeric-time-inputs').toggle();
+        $(this).closest('.numeric-date-inputs').next('.numeric-time-inputs').toggle();
     });
 });

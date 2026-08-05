@@ -127,15 +127,15 @@ input.numeric-datetime-year {
     margin-bottom: 2rem;
 }
 
-#advanced-search .inputs label:not(.numeric-toggle-time) {
+.inputs [class*=numeric] label:not(.numeric-toggle-time) {
     width: auto;
     margin: 0;
     padding: 0;
 }
 
-#advanced-search .inputs label:not(.numeric-toggle-time) input,
-#advanced-search .inputs label:not(.numeric-toggle-time) select,
-#advanced-search .inputs label:not(.numeric-toggle-time) .chosen-container {
+.inputs [class*=numeric] label:not(.numeric-toggle-time) input,
+.inputs [class*=numeric] label:not(.numeric-toggle-time) select,
+.inputs [class*=numeric] label:not(.numeric-toggle-time) .chosen-container {
     display: block;
 }
 
