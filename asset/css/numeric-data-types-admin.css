@@ -1,5 +1,6 @@
 [id*="numeric"] .chosen-container {
-    width: auto !important;
+    display: block;
+    width: max-content !important;
 }
 
 .numeric-interval-start,

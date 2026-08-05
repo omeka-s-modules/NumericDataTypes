@@ -127,7 +127,7 @@ input.numeric-datetime-year {
     margin-bottom: 2rem;
 }
 
-.inputs [class*=numeric] label:not(.numeric-toggle-time) {
+[class*=numeric].inputs label:not(.numeric-toggle-time) {
     width: auto;
     margin: 0;
     padding: 0;
@@ -135,7 +135,8 @@ input.numeric-datetime-year {
 
 .inputs [class*=numeric] label:not(.numeric-toggle-time) input,
 .inputs [class*=numeric] label:not(.numeric-toggle-time) select,
-.inputs [class*=numeric] label:not(.numeric-toggle-time) .chosen-container {
+.inputs [class*=numeric] label:not(.numeric-toggle-time) .chosen-container,
+[class*=numeric].inputs label:not(.numeric-toggle-time) .chosen-container {
     display: block;
 }
 
