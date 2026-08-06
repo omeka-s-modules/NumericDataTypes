@@ -58,15 +58,10 @@ label.numeric-toggle-time:before {
     max-width: 100%;
 }
 
-input[class*=numeric],
-.numeric-integer-integer {
+input[class*=numeric] {
     width: 6em;
     max-width: 100%;
     margin: 0;
-}
-
-input.numeric-datetime-year {
-    width: 5em;
 }
 
 .numeric-datetime-inputs input[type="checkbox"] {
@@ -142,4 +137,8 @@ input.numeric-datetime-year {
 
 .error.invalid-value:empty {
     display: none;
+}
+
+.numeric-integer-integer {
+    width: 6em !important;
 }
