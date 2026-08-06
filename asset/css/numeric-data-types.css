@@ -15,6 +15,10 @@ label.numeric-toggle-time:before {
     text-indent: 0;
 }
 
+label.numeric-toggle-time input[type="checkbox"] {
+    width: auto;
+}
+
 [id*="numeric-"] .inputs {
     display: flex;
     flex-wrap: wrap;
@@ -29,12 +33,6 @@ label.numeric-toggle-time:before {
     margin-left: 0;
     margin-right: 0;
     gap: .5rem 1rem;
-}
-
-.field .inputs select[class*="numeric"],
-.field .inputs select[name*="numeric"] {
-    display: inline-block;
-    height: auto;
 }
 
 .field .inputs .values [class*="numeric"]:not(div),
@@ -128,9 +126,9 @@ input[class*=numeric] {
     padding: 0;
 }
 
-.inputs [class*=numeric] label:not(.numeric-toggle-time) input,
-.inputs [class*=numeric] label:not(.numeric-toggle-time) select,
-.inputs [class*=numeric] label:not(.numeric-toggle-time) .chosen-container,
+[class*=numeric] label:not(.numeric-toggle-time) input,
+[class*=numeric] label:not(.numeric-toggle-time) select,
+[class*=numeric] label:not(.numeric-toggle-time) .chosen-container,
 [class*=numeric].inputs label:not(.numeric-toggle-time) .chosen-container {
     display: block;
 }
