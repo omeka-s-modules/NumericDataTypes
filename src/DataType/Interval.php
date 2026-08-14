@@ -51,7 +51,12 @@ class Interval extends AbstractDateTimeDataType implements ValueAnnotatingInterf
      * allows for concise representations of the end time point, but we do not
      * so we can reuse existing code.
      *
-     * @param array $valueObject
+     * Both points must parse as ISO 8601 and the start must fall before the
+     * end. The end resolves to its last possible instant, so '1900/1900' is a
+     * valid interval covering that whole year rather than a zero-length one.
+     *
+     * @param string $interval
+     * @return bool
      */
     public function intervalIsValid($interval)
     {
@@ -123,6 +128,13 @@ class Interval extends AbstractDateTimeDataType implements ValueAnnotatingInterf
         $entity->setValue2($dateEnd['date']->getTimestamp());
     }
 
+    /**
+     * numeric => [
+     *   ivl => [
+     *     val => <date>, pid => <propertyID>,
+     *   ],
+     * ]
+     */
     public function buildQuery(AdapterInterface $adapter, QueryBuilder $qb, array $query)
     {
         if (isset($query['numeric']['ivl']['val'])) {
