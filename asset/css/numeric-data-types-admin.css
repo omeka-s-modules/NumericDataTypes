@@ -1,0 +1,45 @@
+[id*="numeric"] .chosen-container {
+    display: block;
+    width: max-content !important;
+}
+
+.numeric-interval-start,
+.numeric-interval-end {
+    align-items: center;
+    margin-bottom: 0;
+}
+
+.start-end {
+    min-width: 3.5rem;
+}
+
+input[class*="numeric"],
+button[class*="numeric"],
+select[class*="numeric"] {
+    margin: 0 !important;
+}
+
+.numeric-date-inputs > label,
+.numeric-time-inputs > label {
+    width: auto;
+    margin: 0;
+    padding: 0;
+}
+
+.numeric-date-inputs > label input,
+.numeric-time-inputs > label input {
+    margin: 0;
+}
+
+.numeric-toggle-time.button {
+    padding: 0 .5rem !important;
+    min-height: 36px;
+    line-height: 36px;
+    margin: 0 !important;
+}
+
+[data-data-type*="numeric"].value .input-body {
+    gap: .5rem;
+    display: flex;
+    flex-wrap: wrap;
+}

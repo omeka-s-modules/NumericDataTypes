@@ -2,9 +2,9 @@ label.numeric-toggle-time.button {
     display: inline-flex;
     align-items: center;
     width: auto;
-    padding: 6px;
     margin: 0;
     max-width: max-content;
+    align-self: flex-end;
 }
 
 label.numeric-toggle-time:before {
@@ -15,28 +15,24 @@ label.numeric-toggle-time:before {
     text-indent: 0;
 }
 
+label.numeric-toggle-time input[type="checkbox"] {
+    width: auto;
+}
+
 [id*="numeric-"] .inputs {
     display: flex;
     flex-wrap: wrap;
+    align-items: flex-end;
 }
 
 .inputs div[class*="numeric"] {
     display: flex;
     flex-wrap: wrap;
     height: auto;
-    width: 100%;
+    max-width: 100%;
     margin-left: 0;
     margin-right: 0;
-}
-
-.numeric-datetime-inputs div {
-    margin-top: .25rem !important;
-}
-
-.field .inputs select[class*="numeric"],
-.field .inputs select[name*="numeric"] {
-    display: inline-block;
-    height: auto;
+    gap: .5rem 1rem;
 }
 
 .field .inputs .values [class*="numeric"]:not(div),
@@ -46,15 +42,12 @@ label.numeric-toggle-time:before {
     flex-wrap: wrap;
 }
 
-.numeric-date-inputs {
+.numeric-date-inputs,
+.numeric-time-inputs {
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
-    gap: 4px;
-}
-
-.numeric-date-inputs > * {
-    flex-grow: 1;
+    gap: 1rem;
 }
 
 .numeric-datetime-inputs select {
@@ -63,14 +56,10 @@ label.numeric-toggle-time:before {
     max-width: 100%;
 }
 
-.numeric-datetime-inputs input {
-    width: 8em;
+input[class*=numeric] {
+    width: 6em;
     max-width: 100%;
     margin: 0;
-}
-
-input.numeric-datetime-year {
-    width: 5em;
 }
 
 .numeric-datetime-inputs input[type="checkbox"] {
@@ -79,6 +68,10 @@ input.numeric-datetime-year {
     margin-right: 0;
     cursor: pointer;
     height: 1em;
+}
+
+.numeric-time-inputs {
+    gap: .25rem;
 }
 
 .sidebar .numeric-datetime-inputs input:not(:last-child),
@@ -125,4 +118,25 @@ input.numeric-datetime-year {
 
 .sidebar .numeric-interval-start {
     margin-bottom: 2rem;
+}
+
+[class*=numeric].inputs label:not(.numeric-toggle-time) {
+    width: auto;
+    margin: 0;
+    padding: 0;
+}
+
+[class*=numeric] label:not(.numeric-toggle-time) input,
+[class*=numeric] label:not(.numeric-toggle-time) select,
+[class*=numeric] label:not(.numeric-toggle-time) .chosen-container,
+[class*=numeric].inputs label:not(.numeric-toggle-time) .chosen-container {
+    display: block;
+}
+
+.error.invalid-value:empty {
+    display: none;
+}
+
+.numeric-integer-integer {
+    width: 6em !important;
 }

@@ -47,20 +47,39 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
     /**
      * Get relevant date/time information from an ISO 8601 value.
      *
-     * Sets the decomposed date/time, format patterns, and the DateTime and
-     * IntlCalendar objects to an array and returns the array.
+     * Returns an array holding the value decomposed into its datetime
+     * components, the format patterns used to render it, and a DateTime
+     * object. Parsing doubles as validation, so an invalid value throws
+     * rather than returning.
      *
-     * Use $defaultFirst to set the default of each datetime component to its
-     * first (true) or last (false) possible integer, if the specific component
-     * is not passed with the value.
+     * Optional components are stored twice: the raw key is null when the value
+     * omitted it, and the '_normalized' key is always set, filling omissions
+     * per $defaultFirst. The year has no normalized counterpart, since a value
+     * must include one. The DateTime is built from the normalized values, so
+     * read the raw ones to see what was actually entered.
      *
-     * Also used to validate the datetime since validation is a side effect of
-     * parsing the value into its component datetime pieces.
+     * $dateTime['year'] is the year as entered, which we assume follows the
+     * historical convention: no year 0, so '-0099' means 99 BCE.
+     * $dateTime['date'] is a DateTime on the astronomical year of the same
+     * number, since the year is passed to DateTime::setDate() unchanged and
+     * PHP's calendar counts a year 0, making it 100 BCE. The stored value
+     * string keeps the entered year while indexed timestamps are built from
+     * the DateTime, so the two persisted forms use different conventions.
+     *
+     * That one-year difference is consistent rather than correct. Searching
+     * for '-0099' runs the search value through this same method, so it picks
+     * up the same error and still matches the right items. Sorting survives
+     * too: only BCE values shift, all by the same amount, and shifting them
+     * earlier cannot reorder them against CE values. Code that computes a date
+     * on its own and compares it to an indexed timestamp will be a year off.
      *
      * @throws InvalidArgumentException
-     * @param string $value An ISO 8601 string
-     * @param bool $defaultFirst
-     * @return array
+     * @param string $value An ISO 8601 string, possibly of reduced accuracy
+     * @param bool $defaultFirst Default omitted components to their first
+     *     (true) or last (false) possible value. Pass false for the end of a
+     *     range so it covers its whole period: '-0400' becomes 31 December
+     *     23:59:59 of that year rather than its first instant.
+     * @return array The decomposed datetime, its format patterns, and a DateTime
      */
     public static function getDateTimeFromValue($value, $defaultFirst = true)
     {
@@ -202,31 +221,37 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
     /**
      * Get a formatted (human-readable) date/time from an ISO 8601 value.
      *
-     * Uses the standard DateTime format if the intl extension is not loaded or
-     * the date is outside bounds. (Note that IntlCalendar only supports range
-     * ~5.8M BCE to ~5.8M CE.) Otherwise this uses IntlDateFormatter and
-     * IntlCalendar to localize the date/time.
+     * Localizes the date/time with IntlDateFormatter and IntlCalendar. Falls
+     * back to DateTime's own formatting when the intl extension is missing, or
+     * when the year is outside the roughly +/-5.8M range IntlCalendar
+     * supports, beyond which it silently wraps to an unrelated year.
      *
-     * Use $defaultFirst to set the default of each datetime component to its
-     * first (true) or last (false) possible integer, if the specific component
-     * is not passed with the value.
+     * Year 0 renders as a bare "0" with no era. It is the one value the two
+     * numberings disagree about: ISO 8601 reads 0000 as 1 BCE, while the
+     * historical numbering we assume for entered years has no year 0. Showing
+     * the astronomical year commits to neither and keeps it distinct from
+     * -0001, which renders "1 BC" but indexes a year earlier.
      *
      * @see https://unicode-org.github.io/icu-docs/apidoc/dev/icu4j/com/ibm/icu/util/Calendar.html
-     * @param string $value An ISO 8601 string
-     * @param bool $defaultFirst
-     * @param ?string $locale
-     * @return string
+     * @throws InvalidArgumentException
+     * @param string $value An ISO 8601 string, possibly of reduced accuracy
+     * @param bool $defaultFirst Default omitted components to their first
+     *     (true) or last (false) possible value; see getDateTimeFromValue()
+     * @param array $options Supports 'lang' to set the formatting locale
+     * @return string The localized date/time, at the accuracy the value carried
      */
     public static function getFormattedDateTimeFromValue($value, $defaultFirst = true, $options = [])
     {
         $dateTime = self::getDateTimeFromValue($value, $defaultFirst);
 
+        // Past this, IntlCalendar silently wraps to an unrelated year.
         $isOutsideBounds = ((5800000 < $dateTime['year']) || (-5800000 > $dateTime['year']));
         if (!extension_loaded('intl') || $isOutsideBounds) {
             return $dateTime['date']->format($dateTime['format_render']);
         }
 
-        // Configure IntlDateFormatter.
+        // Date and time types are NONE because setPattern() below supplies the
+        // format. The offset becomes the timezone only when the value had one.
         $intlDateFormatter = new IntlDateFormatter(
             $options['lang'] ?? null,
             IntlDateFormatter::NONE,
@@ -241,17 +266,32 @@ abstract class AbstractDateTimeDataType extends AbstractDataType
         } else {
             $format = $dateTime['format_render_intl'];
         }
-        if (0 <= $dateTime['year']) {
-            // No need to include the era for positive years. It is implied.
+        if (0 < $dateTime['year']) {
+            // No need for the era from year 1 on, since CE is implied. This
+            // only strips a space-separated era token, so locales that place it
+            // against the year (ja is 'Gy年') keep it.
             $format = str_replace([' G', 'G '], '', $format);
-        } else {
-            // IntlDateFormatter substracts one year for negative years because
-            // year 0 doesn't exist, so it is added for display.
+        } elseif (0 > $dateTime['year']) {
+            // We assume users enter a negative year to match the historical
+            // BCE year number, so that -5 reads as 5 BCE. This adjusted year
+            // is passed to IntlCalendar::set() below, which numbers years
+            // astronomically (extended year 0 is 1 BCE), so one is added to
+            // line the two up.
             ++$dateTime['year'];
+        } else {
+            // The two numberings disagree about year 0: ISO 8601 reads 0000 as
+            // 1 BCE, while the historical numbering we assume for entered years
+            // has no year 0 at all. Labelling it "1 BC" would hide a real
+            // difference, since 0000 and -0001 index a year apart, so render
+            // the astronomical year instead ('u' rather than 'y G') for a bare
+            // "0" that collides with nothing. The era is removed wherever it
+            // sits, since some locales place it against the year (ja is 'Gy年')
+            // where the strip above would not match it.
+            $format = preg_replace('/\s*G+\s*/', '', $format);
+            $format = str_replace('y', 'u', $format);
         }
         $intlDateFormatter->setPattern($format);
 
-        // Configure IntlCalendar.
         $intlCalendar = IntlCalendar::createInstance(
             $dateTime['offset_value'] ? sprintf('GMT%s', $dateTime['offset_normalized']) : null
         );

@@ -6,6 +6,14 @@ use Omeka\Entity\Property;
 use Omeka\Entity\Resource;
 
 /**
+ * A numeric index over resource values, used for sorting and filtering.
+ *
+ * These tables are a derived cache, not a supported interface. They are rebuilt
+ * from the values on api.hydrate.post, and the value string remains the record
+ * of what was entered. Nothing outside this module should read them directly;
+ * anything that does is undocumented and unsupported, and their contents may
+ * change without notice.
+ *
  * @MappedSuperclass
  * @Table(
  *     indexes={

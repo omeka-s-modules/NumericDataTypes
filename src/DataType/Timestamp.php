@@ -95,7 +95,7 @@ class Timestamp extends AbstractDateTimeDataType implements ValueAnnotatingInter
             return $value->value();
         }
         $options['lang'] ??= $view->lang();
-        return $this->getFormattedDateTimeFromValue($value->value(), $options);
+        return $this->getFormattedDateTimeFromValue($value->value(), true, $options);
     }
 
     public function getFulltextText(PhpRenderer $view, ValueRepresentation $value)

@@ -5,7 +5,9 @@ use NumericDataTypes\Form\Element\Integer as IntegerElement;
 
 $this->headScript()->appendFile($this->assetUrl('js/numeric-data-types.js', 'NumericDataTypes'));
 $this->headLink()->appendStylesheet($this->assetUrl('css/numeric-data-types.css', 'NumericDataTypes'));
-
+if ($this->status()->isAdminRequest()) {
+    $this->headLink()->appendStylesheet($this->assetUrl('css/numeric-data-types-admin.css', 'NumericDataTypes'));
+}
 $tsGteSelect = $this->numericPropertySelect([
     'name' => 'numeric[ts][gte][pid]',
     'attributes' => [
@@ -99,9 +101,12 @@ $intLtSelect = $this->numericPropertySelect([
     <div class="field-meta">
         <label for=""><?php echo $this->translate('Date comes on or after'); ?></label>
     </div>
-    <div class="inputs">
+    <div class="numeric-timestamp inputs">
+        <label>
+            <?php echo $this->translate('Property'); ?>
+            <?php echo $tsGteSelect; ?>
+        </label>
         <?php
-        echo $tsGteSelect;
         $element = new TimestampElement('numeric[ts][gte][val]');
         $element->setValue($query['numeric']['ts']['gte']['val'] ?? null);
         echo $this->formElement($element);
@@ -115,9 +120,12 @@ $intLtSelect = $this->numericPropertySelect([
     <div class="field-meta">
         <label for=""><?php echo $this->translate('Date comes on or before'); ?></label>
     </div>
-    <div class="inputs">
+    <div class="numeric-timestamp inputs">
+        <label>
+            <?php echo $this->translate('Property'); ?>
+            <?php echo $tsLteSelect; ?>
+        </label>
         <?php
-        echo $tsLteSelect;
         $element = new TimestampElement('numeric[ts][lte][val]');
         $element->setValue($query['numeric']['ts']['lte']['val'] ?? null);
         echo $this->formElement($element);
@@ -131,9 +139,12 @@ $intLtSelect = $this->numericPropertySelect([
     <div class="field-meta">
         <label for=""><?php echo $this->translate('Duration is greater than'); ?></label>
     </div>
-    <div class="inputs">
+    <div class="numeric-duration inputs">
+        <label>
+            <?php echo $this->translate('Property'); ?>
+            <?php echo $durGtSelect; ?>
+        </label>
         <?php
-        echo $durGtSelect;
         $element = new DurationElement('numeric[dur][gt][val]');
         $element->setValue($query['numeric']['dur']['gt']['val'] ?? null);
         echo $this->formElement($element);
@@ -147,9 +158,12 @@ $intLtSelect = $this->numericPropertySelect([
     <div class="field-meta">
         <label for=""><?php echo $this->translate('Duration is less than'); ?></label>
     </div>
-    <div class="inputs">
+    <div class="numeric-duration inputs">
+        <label>
+            <?php echo $this->translate('Property'); ?>
+            <?php echo $durLtSelect; ?>
+        </label>
         <?php
-        echo $durLtSelect;
         $element = new DurationElement('numeric[dur][lt][val]');
         $element->setValue($query['numeric']['dur']['lt']['val'] ?? null);
         echo $this->formElement($element);
@@ -163,9 +177,12 @@ $intLtSelect = $this->numericPropertySelect([
     <div class="field-meta">
         <label for=""><?php echo $this->translate('Date in interval'); ?></label>
     </div>
-    <div class="inputs">
+    <div class="numeric-timestamp inputs">
+        <label>
+            <?php echo $this->translate('Property'); ?>
+            <?php echo $ivlPidSelect; ?>
+        </label>
         <?php
-        echo $ivlPidSelect;
         $element = new TimestampElement('numeric[ivl][val]');
         $element->setValue($query['numeric']['ivl']['val'] ?? null);
         echo $this->formElement($element);
@@ -179,13 +196,19 @@ $intLtSelect = $this->numericPropertySelect([
     <div class="field-meta">
         <label for=""><?php echo $this->translate('Number is greater than'); ?></label>
     </div>
-    <div class="inputs">
-        <?php
-        echo $intGtSelect;
-        $element = new IntegerElement('numeric[int][gt][val]');
-        $element->setValue($query['numeric']['int']['gt']['val'] ?? null);
-        echo $this->formElement($element);
-        ?>
+    <div class="numeric-integer inputs">
+        <label>
+            <?php echo $this->translate('Property'); ?>
+            <?php echo $intGtSelect; ?>
+        </label>
+        <label>
+            <?php echo $this->translate('Value'); ?>
+            <?php
+            $element = new IntegerElement('numeric[int][gt][val]');
+            $element->setValue($query['numeric']['int']['gt']['val'] ?? null);
+            echo $this->formElement($element);
+            ?>
+        </label>
     </div>
 </div>
 <?php endif; ?>
@@ -195,13 +218,19 @@ $intLtSelect = $this->numericPropertySelect([
     <div class="field-meta">
         <label for=""><?php echo $this->translate('Number is less than'); ?></label>
     </div>
-    <div class="inputs">
-        <?php
-        echo $intLtSelect;
-        $element = new IntegerElement('numeric[int][lt][val]');
-        $element->setValue($query['numeric']['int']['lt']['val'] ?? null);
-        echo $this->formElement($element);
-        ?>
+    <div class="numeric-integer inputs">
+        <label>
+            <?php echo $this->translate('Property'); ?>
+            <?php echo $intLtSelect; ?>
+        </label>
+        <label>
+            <?php echo $this->translate('Value'); ?>
+            <?php
+            $element = new IntegerElement('numeric[int][lt][val]');
+            $element->setValue($query['numeric']['int']['lt']['val'] ?? null);
+            echo $this->formElement($element);
+            ?>
+        </label>
     </div>
 </div>
 <?php endif; ?>
