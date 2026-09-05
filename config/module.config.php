@@ -109,7 +109,8 @@ return [
     ],
     'js_translate_strings' => [
         'A facet must have a property.', // @translate
-        'Cannot add all', // @translate
+        'Cannot add all. This facet is configured with a minimum, maximum and step rather than a list of values.', // @translate
+        'Cannot add all. This facet needs a single date or time per line, but the available values are intervals.', // @translate
     ],
     'router' => [
         'routes' => [

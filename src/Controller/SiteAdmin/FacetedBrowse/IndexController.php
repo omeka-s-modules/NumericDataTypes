@@ -5,8 +5,22 @@ use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\ServiceManager\ServiceManager;
 use Laminas\View\Model\ViewModel;
 
+/**
+ * Legacy endpoints for the "show all available values" table.
+ *
+ * Retained for installs whose FacetedBrowse predates getShowAllValues(): there the
+ * data forms supply a "url" and the table is fetched from here. These actions are
+ * shims over that same method, so there is one query implementation — but this
+ * route carries no page ID, so it assumes items and gets item set and media pages
+ * wrong. Upgrading FacetedBrowse is the fix.
+ */
 class IndexController extends AbstractActionController
 {
+    /**
+     * Cap matching FacetedBrowse's own, so both paths behave alike.
+     */
+    const SHOW_ALL_LIMIT = 1000;
+
     protected $services;
 
     public function __construct(ServiceManager $services)
@@ -16,81 +30,60 @@ class IndexController extends AbstractActionController
 
     public function timestampValuesAction()
     {
-        $dql = '
-        SELECT v.value label, COUNT(v.value) has_count
-        FROM Omeka\Entity\Value v
-        WHERE v.type = :type
-        AND v.property = :propertyId
-        AND v.resource IN (:ids)
-        GROUP BY label
-        ORDER BY label ASC';
-        return $this->getShowAllTable('numeric:timestamp', $dql);
+        return $this->getShowAllTable('date_after');
     }
 
     public function durationValuesAction()
     {
-        $dql = '
-        SELECT v.value label, COUNT(v.value) has_count
-        FROM Omeka\Entity\Value v
-        WHERE v.type = :type
-        AND v.property = :propertyId
-        AND v.resource IN (:ids)
-        GROUP BY label
-        ORDER BY label ASC';
-        return $this->getShowAllTable('numeric:duration', $dql);
+        return $this->getShowAllTable('duration_greater_than');
     }
 
     public function intervalValuesAction()
     {
-        $dql = '
-        SELECT v.value label, COUNT(v.value) has_count
-        FROM Omeka\Entity\Value v
-        WHERE v.type = :type
-        AND v.property = :propertyId
-        AND v.resource IN (:ids)
-        GROUP BY label
-        ORDER BY label ASC';
-        return $this->getShowAllTable('numeric:interval', $dql);
+        return $this->getShowAllTable('date_in_interval');
     }
 
     public function integerValuesAction()
     {
-        // For ordering to work, we must cast string values to int by forcing a
-        // cast using + 0.
-        $dql = '
-        SELECT v.value + 0 label, COUNT(v.value) has_count
-        FROM Omeka\Entity\Value v
-        WHERE v.type = :type
-        AND v.property = :propertyId
-        AND v.resource IN (:ids)
-        GROUP BY label
-        ORDER BY label ASC';
-        return $this->getShowAllTable('numeric:integer', $dql);
+        return $this->getShowAllTable('value_greater_than');
     }
 
-    protected function getShowAllTable($dataType, $dql)
+    /**
+     * Delegate to a facet type's getShowAllValues().
+     *
+     * The facet type named here is whichever one shares this data type's query;
+     * types that pair up, such as "date after" and "date before", return
+     * identical rows, so either serves.
+     */
+    protected function getShowAllTable($facetTypeName)
     {
-        $propertyId = $this->params()->fromQuery('property_id');
         $query = $this->params()->fromQuery('category_query');
         parse_str($query, $query);
         $query['site_id'] = $this->currentSite()->id();
 
         $api = $this->services->get('Omeka\ApiManager');
-        $em = $this->services->get('Omeka\EntityManager');
 
-        // Get the IDs of all items that satisfy the category query.
-        $ids = $api->search('items', $query, ['returnScalar' => 'id'])->getContent();
+        // Assumes items; see the class docblock.
+        $resourceIds = $api->search('items', $query, ['returnScalar' => 'id'])->getContent();
 
-        $query = $em->createQuery($dql)
-            ->setParameter('type', $dataType)
-            ->setParameter('propertyId', $propertyId)
-            ->setParameter('ids', $ids);
-        $values = $query->getResult();
+        $facetType = $this->services->get('FacetedBrowse\FacetTypeManager')->get($facetTypeName);
+        $rows = $facetType->getShowAllValues([
+            'resource_type' => 'items',
+            'resource_entity_class' => 'Omeka\Entity\Item',
+            // Doctrine cannot calculate IN() against an empty array.
+            'resource_ids' => $resourceIds ?: [0],
+            'data' => ['property_id' => $this->params()->fromQuery('property_id')],
+            'sort_by' => 'label',
+            'sort_order' => 'asc',
+            'limit' => self::SHOW_ALL_LIMIT,
+        ]);
 
+        // No sortBy/sortOrder: this path offers no sort control, and the table
+        // should not claim a direction FacetedBrowse did not choose.
         $view = new ViewModel;
         $view->setTerminal(true);
         $view->setTemplate('faceted-browse/site-admin/category/show-all-table');
-        $view->setVariable('rows', $values);
+        $view->setVariable('rows', $rows);
         return $view;
     }
 }

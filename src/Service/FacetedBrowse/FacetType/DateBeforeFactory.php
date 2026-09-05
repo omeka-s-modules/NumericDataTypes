@@ -9,6 +9,6 @@ class DateBeforeFactory implements FactoryInterface
 {
     public function __invoke(ContainerInterface $services, $requestedName, ?array $options = null)
     {
-        return new DateBefore($services->get('FormElementManager'));
+        return new DateBefore($services->get('FormElementManager'), $services->get('Omeka\EntityManager'));
     }
 }

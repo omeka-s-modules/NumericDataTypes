@@ -1,6 +1,7 @@
 <?php
 namespace NumericDataTypes\FacetedBrowse\FacetType;
 
+use Doctrine\ORM\EntityManager;
 use FacetedBrowse\Api\Representation\FacetedBrowseFacetRepresentation;
 use FacetedBrowse\FacetType\FacetTypeInterface;
 use Laminas\Form\Element as LaminasElement;
@@ -11,11 +12,18 @@ use NumericDataTypes\Form\Element\NumericPropertySelect;
 
 class DurationLessThan implements FacetTypeInterface
 {
+    use ShowAllTrait;
+
+    const NUMERIC_DATA_TYPE = 'numeric:duration';
+
     protected $formElements;
 
-    public function __construct(ServiceLocatorInterface $formElements)
+    protected $entityManager;
+
+    public function __construct(ServiceLocatorInterface $formElements, EntityManager $entityManager)
     {
         $this->formElements = $formElements;
+        $this->entityManager = $entityManager;
     }
 
     public function getLabel(): string
@@ -66,6 +74,7 @@ class DurationLessThan implements FacetTypeInterface
             'value' => $data['values'] ?? null,
         ]);
         return $view->partial('common/faceted-browse/facet-data-form/duration-less-than', [
+            'facetType' => $this,
             'elementPropertyId' => $propertyId,
             'elementValues' => $values,
         ]);
