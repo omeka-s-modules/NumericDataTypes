@@ -33,9 +33,13 @@ $formSelect->addTranslatableAttribute('aria-label');
         <?php echo $this->translate('Minute'); ?>
         <?php echo $formSelect($element->getMinuteElement()); ?>
     </label>
-        <label>
+    <label>
         <?php echo $this->translate('Second'); ?>
         <?php echo $formSelect($element->getSecondElement()); ?>
+    </label>
+    <label>
+        <?php echo $this->translate('Offset'); ?>
+        <?php echo $formSelect($element->getOffsetElement()); ?>
     </label>
 </div>
 <div class="error invalid-value"
