@@ -94,19 +94,6 @@ input[class*=numeric] {
     width: auto;
 }
 
-.resource-form div.value[data-data-type="numeric:integer"] {
-    align-items: center;
-    justify-content: space-between;
-}
-
-.resource-form div.value[data-data-type*="numeric"] .input-body {
-    padding: .5rem;
-}
-
-.resource-form .start-end {
-    line-height: 1;
-}
-
 .sidebar .start-end,
 .numeric-interval-start {
     margin-bottom: .5rem;
@@ -135,8 +122,4 @@ input[class*=numeric] {
 
 .error.invalid-value:empty {
     display: none;
-}
-
-.numeric-integer-integer {
-    width: 6em !important;
 }

@@ -43,3 +43,19 @@ select[class*="numeric"] {
     display: flex;
     flex-wrap: wrap;
 }
+
+.numeric-integer-integer {
+    align-self: flex-start;
+}
+
+.resource-form div.value[data-data-type="numeric:integer"] {
+    align-items: center;
+}
+
+.resource-form div.value[data-data-type*="numeric"] .input-body {
+    padding: .5rem;
+}
+
+.resource-form .start-end {
+    line-height: 1;
+}
