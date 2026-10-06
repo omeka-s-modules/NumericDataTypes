@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-20 11:34-0400\n"
+"POT-Creation-Date: 2026-10-06 10:56-0400\n"
 "PO-Revision-Date: 2018-11-27 19:31+0000\n"
 "Last-Translator: Rubén Alcaraz Martínez <rubenalcarazmartinez@gmail.com>, 2026\n"
 "Language-Team: Catalan (Spain) (https://app.transifex.com/omeka/teams/14184/ca_ES/)\n"
@@ -81,62 +81,85 @@ msgstr "%s segon"
 msgid "%s seconds"
 msgstr "%s segons"
 
-#: view/common/faceted-browse/facet-data-form/date-after.phtml:4
-#: view/common/faceted-browse/facet-data-form/date-before.phtml:4
-#: view/common/faceted-browse/facet-data-form/date-in-interval.phtml:4
-#: view/common/faceted-browse/facet-data-form/duration-greater-than.phtml:4
-#: view/common/faceted-browse/facet-data-form/duration-less-than.phtml:4
-#: view/common/faceted-browse/facet-data-form/value-greater-than.phtml:6
-#: view/common/faceted-browse/facet-data-form/value-less-than.phtml:6
-msgid "Show all available values."
-msgstr "Mostra tots els valors disponibles."
+#: view/common/faceted-browse/facet-data-form/date-after.phtml:5
+#: view/common/faceted-browse/facet-data-form/date-before.phtml:5
+#: view/common/faceted-browse/facet-data-form/date-in-interval.phtml:5
+#: view/common/faceted-browse/facet-data-form/duration-greater-than.phtml:5
+#: view/common/faceted-browse/facet-data-form/duration-less-than.phtml:5
+#: view/common/faceted-browse/facet-data-form/value-greater-than.phtml:7
+#: view/common/faceted-browse/facet-data-form/value-less-than.phtml:7
+msgid "Show available values"
+msgstr ""
 
-#: view/common/numeric-data-types-advanced-search.phtml:100
+#: view/common/numeric-data-types-advanced-search.phtml:102
 msgid "Date comes on or after"
 msgstr "La data és igual o posterior a"
 
-#: view/common/numeric-data-types-advanced-search.phtml:116
+#: view/common/numeric-data-types-advanced-search.phtml:121
 msgid "Date comes on or before"
 msgstr "La data és igual o anterior a"
 
-#: view/common/numeric-data-types-advanced-search.phtml:132
+#: view/common/numeric-data-types-advanced-search.phtml:140
 msgid "Duration is greater than"
 msgstr "La durada és major que"
 
-#: view/common/numeric-data-types-advanced-search.phtml:148
+#: view/common/numeric-data-types-advanced-search.phtml:159
 msgid "Duration is less than"
 msgstr "La durada  és menor que"
 
-#: view/common/numeric-data-types-advanced-search.phtml:164
+#: view/common/numeric-data-types-advanced-search.phtml:178
 msgid "Date in interval"
 msgstr "Data en interval"
 
-#: view/common/numeric-data-types-advanced-search.phtml:180
+#: view/common/numeric-data-types-advanced-search.phtml:197
 msgid "Number is greater than"
 msgstr "El número és superior a"
 
-#: view/common/numeric-data-types-advanced-search.phtml:196
+#: view/common/numeric-data-types-advanced-search.phtml:219
 msgid "Number is less than"
 msgstr "El número és inferior a"
 
-#: view/common/numeric-duration.phtml:9 view/common/numeric-integer.phtml:9
-#: view/common/numeric-interval.phtml:11
-#: view/common/numeric-timestamp.phtml:11
+#: view/common/numeric-duration.phtml:12
+msgid "Years"
+msgstr "Anys"
+
+#: view/common/numeric-duration.phtml:16
+msgid "Months"
+msgstr "Mesos"
+
+#: view/common/numeric-duration.phtml:20
+msgid "Days"
+msgstr "Dies"
+
+#: view/common/numeric-duration.phtml:23 view/common/numeric-interval.phtml:28
+#: view/common/numeric-interval.phtml:64
+#: view/common/numeric-timestamp.phtml:25
+msgid "Time"
+msgstr "Temps"
+
+#: view/common/numeric-duration.phtml:27
+msgid "Hours"
+msgstr "Hores"
+
+#: view/common/numeric-duration.phtml:31
+msgid "Minutes"
+msgstr "Minuts"
+
+#: view/common/numeric-duration.phtml:35
+msgid "Seconds"
+msgstr "Segons"
+
+#: view/common/numeric-duration.phtml:40 view/common/numeric-integer.phtml:15
+#: view/common/numeric-interval.phtml:86
 #, php-format
 msgid "Invalid value: %s"
 msgstr "Valor incorrecte: %s"
 
-#: view/common/numeric-duration.phtml:10
+#: view/common/numeric-duration.phtml:41
 msgid "Value must be a duration"
 msgstr "El valor ha de ser una durada"
 
-#: view/common/numeric-duration.phtml:18 view/common/numeric-interval.phtml:21
-#: view/common/numeric-interval.phtml:36
-#: view/common/numeric-timestamp.phtml:20
-msgid "Time"
-msgstr "Temps"
-
-#: view/common/numeric-integer.phtml:10
+#: view/common/numeric-integer.phtml:16
 msgid ""
 "Value must be an integer or decimal; the number must not be less than "
 "-9007199254740991 or greater than 9007199254740991; the number of digits to "
@@ -146,19 +169,54 @@ msgstr ""
 "a -9007199254740991 ni superior a 9007199254740991; el nombre de dígits a "
 "l'esquerra o a la dreta del separador decimal no pot superar els 16."
 
-#: view/common/numeric-interval.phtml:12
-msgid "Value must be a valid interval with a start and an end."
-msgstr "El valor ha de ser un interval vàlid amb un inici i un final."
-
-#: view/common/numeric-interval.phtml:16
+#: view/common/numeric-interval.phtml:14
 msgid "Start:"
 msgstr "Inici:"
 
-#: view/common/numeric-interval.phtml:31
+#: view/common/numeric-interval.phtml:17 view/common/numeric-interval.phtml:53
+#: view/common/numeric-timestamp.phtml:14
+msgid "Year"
+msgstr "Any"
+
+#: view/common/numeric-interval.phtml:21 view/common/numeric-interval.phtml:57
+#: view/common/numeric-timestamp.phtml:18
+msgid "Month"
+msgstr "Mes"
+
+#: view/common/numeric-interval.phtml:25 view/common/numeric-interval.phtml:61
+#: view/common/numeric-timestamp.phtml:22
+msgid "Day"
+msgstr "Dia"
+
+#: view/common/numeric-interval.phtml:32 view/common/numeric-interval.phtml:68
+#: view/common/numeric-timestamp.phtml:29
+msgid "Hour"
+msgstr "Hora"
+
+#: view/common/numeric-interval.phtml:36 view/common/numeric-interval.phtml:72
+#: view/common/numeric-timestamp.phtml:33
+msgid "Minute"
+msgstr "Minut"
+
+#: view/common/numeric-interval.phtml:40 view/common/numeric-interval.phtml:76
+#: view/common/numeric-timestamp.phtml:37
+msgid "Second"
+msgstr "Segon"
+
+#: view/common/numeric-interval.phtml:44 view/common/numeric-interval.phtml:80
+#: view/common/numeric-timestamp.phtml:41
+msgid "Offset"
+msgstr "Offset"
+
+#: view/common/numeric-interval.phtml:50
 msgid "End:"
 msgstr "Final:"
 
-#: view/common/numeric-timestamp.phtml:12
+#: view/common/numeric-interval.phtml:87
+msgid "Value must be a valid interval with a start and an end."
+msgstr "El valor ha de ser un interval vàlid amb un inici i un final."
+
+#: view/common/numeric-timestamp.phtml:46
 msgid "Value must be a datetime"
 msgstr "El valor ha de ser una data i hora"
 
@@ -182,22 +240,41 @@ msgstr "Marca de temps"
 msgid "Numeric"
 msgstr "Numèric"
 
-#: src/FacetedBrowse/FacetType/DateInInterval.php:54
-#: src/FacetedBrowse/FacetType/DateAfter.php:54
-#: src/FacetedBrowse/FacetType/DurationLessThan.php:54
-#: src/FacetedBrowse/FacetType/DurationGreaterThan.php:54
-#: src/FacetedBrowse/FacetType/ValueLessThan.php:53
-#: src/FacetedBrowse/FacetType/ValueGreaterThan.php:53
-#: src/FacetedBrowse/FacetType/DateBefore.php:54
+#: src/FacetedBrowse/FacetType/DateInInterval.php:62
+#: src/FacetedBrowse/FacetType/DateAfter.php:62
+#: src/FacetedBrowse/FacetType/DurationLessThan.php:62
+#: src/FacetedBrowse/FacetType/DurationGreaterThan.php:62
+#: src/FacetedBrowse/FacetType/ValueLessThan.php:61
+#: src/FacetedBrowse/FacetType/ValueGreaterThan.php:61
+#: src/FacetedBrowse/FacetType/DateBefore.php:62
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:44
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:72
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:46
 msgid "Select one…"
 msgstr "Selecciona un..."
 
-#: src/FacetedBrowse/FacetType/DateInInterval.php:61
-#: src/FacetedBrowse/FacetType/DateAfter.php:61
-#: src/FacetedBrowse/FacetType/DateBefore.php:61
+#: src/FacetedBrowse/FacetType/DateInInterval.php:69
+msgid ""
+"Enter one value per line: a single date/time in ISO 8601 format, a space, "
+"then the human-readable date/time. For example \"1935-06-15 15 June 1935\". "
+"Date ranges are not accepted. A partial date means its first moment, so "
+"\"1930\" is 1 January 1930."
+msgstr ""
+
+#: src/FacetedBrowse/FacetType/DateInInterval.php:117
+#: src/FacetedBrowse/FacetType/DateAfter.php:117
+#: src/FacetedBrowse/FacetType/DurationLessThan.php:117
+#: src/FacetedBrowse/FacetType/DurationGreaterThan.php:117
+#: src/FacetedBrowse/FacetType/DateBefore.php:117
+msgid "Select a date…"
+msgstr "Seleccioneu una data..."
+
+#: src/FacetedBrowse/FacetType/DateAfter.php:31
+msgid "Date after"
+msgstr "Data posterior"
+
+#: src/FacetedBrowse/FacetType/DateAfter.php:69
+#: src/FacetedBrowse/FacetType/DateBefore.php:69
 msgid ""
 "Enter the date/time values, separated by a new line. For each line, enter "
 "the date/time in ISO 8601 format, followed by a space, followed by the "
@@ -207,24 +284,12 @@ msgstr ""
 "línia, introduïu la data/hora en el format ISO 8601, seguit d'un espai i "
 "seguit de la data/hora llegible per humans."
 
-#: src/FacetedBrowse/FacetType/DateInInterval.php:108
-#: src/FacetedBrowse/FacetType/DateAfter.php:108
-#: src/FacetedBrowse/FacetType/DurationLessThan.php:108
-#: src/FacetedBrowse/FacetType/DurationGreaterThan.php:108
-#: src/FacetedBrowse/FacetType/DateBefore.php:108
-msgid "Select a date…"
-msgstr "Seleccioneu una data..."
-
-#: src/FacetedBrowse/FacetType/DateAfter.php:23
-msgid "Date after"
-msgstr "Data posterior"
-
-#: src/FacetedBrowse/FacetType/DurationLessThan.php:23
+#: src/FacetedBrowse/FacetType/DurationLessThan.php:31
 msgid "Duration less than"
 msgstr "Durada menor que"
 
-#: src/FacetedBrowse/FacetType/DurationLessThan.php:61
-#: src/FacetedBrowse/FacetType/DurationGreaterThan.php:61
+#: src/FacetedBrowse/FacetType/DurationLessThan.php:69
+#: src/FacetedBrowse/FacetType/DurationGreaterThan.php:69
 msgid ""
 "Enter the duration values, separated by a new line. For each line, enter the"
 " duration in ISO 8601 format, followed by a space, followed by the human-"
@@ -234,19 +299,19 @@ msgstr ""
 "línia, introduïu la durada en format ISO 8601, seguit d'un espai i seguit de"
 " la durada llegible per humans."
 
-#: src/FacetedBrowse/FacetType/DurationGreaterThan.php:23
+#: src/FacetedBrowse/FacetType/DurationGreaterThan.php:31
 msgid "Duration greater than"
 msgstr "Durada major que"
 
-#: src/FacetedBrowse/FacetType/ValueLessThan.php:22
+#: src/FacetedBrowse/FacetType/ValueLessThan.php:30
 msgid "Value less than"
 msgstr "Valor menor que"
 
-#: src/FacetedBrowse/FacetType/ValueGreaterThan.php:22
+#: src/FacetedBrowse/FacetType/ValueGreaterThan.php:30
 msgid "Value greater than"
 msgstr "Valor major que"
 
-#: src/FacetedBrowse/FacetType/DateBefore.php:23
+#: src/FacetedBrowse/FacetType/DateBefore.php:31
 msgid "Date before"
 msgstr "Data anterior"
 
@@ -287,6 +352,10 @@ msgid ""
 "DDTHH:MM:SS</code>. This is an exclusive upper bound — to include all items "
 "through the year 1900, enter <code>1901-01-01T00:00:00</code>."
 msgstr ""
+"Introduïu el final de la sèrie temporal en format ISO 8601 complet: "
+"<code>YYYY-MM-DDTHH:MM:SS</code>. Es tracta d'un límit superior exclusiu — "
+"Per incloure tots els elements fins a l'any 1900 inclòs, introduïu "
+"<code>1901-01-01T00:00:00</code>."
 
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:109
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:83
@@ -394,13 +463,16 @@ msgstr "Margin left"
 
 #: src/Datavis/DiagramType/HistogramTimeSeries.php:112
 msgid "Color fill"
-msgstr ""
+msgstr "Color d'emplenament"
 
 #: src/Datavis/DiagramType/HistogramTimeSeries.php:113
 msgid ""
 "Enter a three- or six-digit hexadecimal color. You can use any online hex "
 "color picker to select the color. The default is <code>#69b3a2</code>"
 msgstr ""
+"Introduïu un color hexadecimal de tres o sis dígits. Podeu utilitzar "
+"qualsevol selector de colors hexadecimal en línia per triar el color. El "
+"valor predeterminat és <code>#69b3a2</code>"
 
 #: src/Datavis/DiagramType/LineChartTimeSeries.php:14
 msgid "Line chart (time series)"
@@ -464,201 +536,149 @@ msgstr "Diagrama de línies agrupades (sèrie de temporal)"
 msgid "Plot type"
 msgstr "Tipus de diagrama"
 
-#: src/Form/Element/DateTime.php:30 src/Form/Element/DateTime.php:31
-msgid "Year"
-msgstr "Any"
-
-#: src/Form/Element/DateTime.php:35 src/Form/Element/DateTime.php:36
-msgid "Month"
-msgstr "Mes"
-
-#: src/Form/Element/DateTime.php:40 src/Form/Element/DateTime.php:41
-msgid "Day"
-msgstr "Dia"
-
-#: src/Form/Element/DateTime.php:45 src/Form/Element/DateTime.php:46
-msgid "Hour"
-msgstr "Hora"
-
-#: src/Form/Element/DateTime.php:50 src/Form/Element/DateTime.php:51
-msgid "Minute"
-msgstr "Minut"
-
-#: src/Form/Element/DateTime.php:55 src/Form/Element/DateTime.php:56
-msgid "Second"
-msgstr "Segon"
-
-#: src/Form/Element/DateTime.php:60 src/Form/Element/DateTime.php:61
-msgid "Offset"
-msgstr "Offset"
-
-#: src/Form/Element/DateTime.php:68
+#: src/Form/Element/DateTime.php:66
 msgid "01 — January"
 msgstr "01 — Gener"
 
-#: src/Form/Element/DateTime.php:69
+#: src/Form/Element/DateTime.php:67
 msgid "02 — February"
 msgstr "02 — Febrer"
 
-#: src/Form/Element/DateTime.php:70
+#: src/Form/Element/DateTime.php:68
 msgid "03 — March"
 msgstr "03 — Març"
 
-#: src/Form/Element/DateTime.php:71
+#: src/Form/Element/DateTime.php:69
 msgid "04 — April"
 msgstr "04 — Abril"
 
-#: src/Form/Element/DateTime.php:72
+#: src/Form/Element/DateTime.php:70
 msgid "05 — May"
 msgstr "05 — Maig"
 
-#: src/Form/Element/DateTime.php:73
+#: src/Form/Element/DateTime.php:71
 msgid "06 — June"
 msgstr "06 — Juny"
 
-#: src/Form/Element/DateTime.php:74
+#: src/Form/Element/DateTime.php:72
 msgid "07 — July"
 msgstr "07 — Juliol"
 
-#: src/Form/Element/DateTime.php:75
+#: src/Form/Element/DateTime.php:73
 msgid "08 — August"
 msgstr "08 — Agost"
 
-#: src/Form/Element/DateTime.php:76
+#: src/Form/Element/DateTime.php:74
 msgid "09 — September"
 msgstr "09 — Setembre"
 
-#: src/Form/Element/DateTime.php:77
+#: src/Form/Element/DateTime.php:75
 msgid "10 — October"
 msgstr "10 — Octubre"
 
-#: src/Form/Element/DateTime.php:78
+#: src/Form/Element/DateTime.php:76
 msgid "11 — November"
 msgstr "11 — Novembre"
 
-#: src/Form/Element/DateTime.php:79
+#: src/Form/Element/DateTime.php:77
 msgid "12 — December"
 msgstr "12 — Desembre"
 
-#: src/Form/Element/DateTime.php:96
+#: src/Form/Element/DateTime.php:94
 msgid "00 — 12 am"
 msgstr "00 — 12 am"
 
-#: src/Form/Element/DateTime.php:97
+#: src/Form/Element/DateTime.php:95
 msgid "01 — 1 am"
 msgstr "01 — 1 am"
 
-#: src/Form/Element/DateTime.php:98
+#: src/Form/Element/DateTime.php:96
 msgid "02 — 2 am"
 msgstr "02 — 2 am"
 
-#: src/Form/Element/DateTime.php:99
+#: src/Form/Element/DateTime.php:97
 msgid "03 — 3 am"
 msgstr "03 — 3 am"
 
-#: src/Form/Element/DateTime.php:100
+#: src/Form/Element/DateTime.php:98
 msgid "04 — 4 am"
 msgstr "04 — 4 am"
 
-#: src/Form/Element/DateTime.php:101
+#: src/Form/Element/DateTime.php:99
 msgid "05 — 5 am"
 msgstr "05 — 5 am"
 
-#: src/Form/Element/DateTime.php:102
+#: src/Form/Element/DateTime.php:100
 msgid "06 — 6 am"
 msgstr "06 — 6 am"
 
-#: src/Form/Element/DateTime.php:103
+#: src/Form/Element/DateTime.php:101
 msgid "07 — 7 am"
 msgstr "07 — 7 am"
 
-#: src/Form/Element/DateTime.php:104
+#: src/Form/Element/DateTime.php:102
 msgid "08 — 8 am"
 msgstr "08 — 8 am"
 
-#: src/Form/Element/DateTime.php:105
+#: src/Form/Element/DateTime.php:103
 msgid "09 — 9 am"
 msgstr "09 — 9 am"
 
-#: src/Form/Element/DateTime.php:106
+#: src/Form/Element/DateTime.php:104
 msgid "10 — 10 am"
 msgstr "10 — 10 am"
 
-#: src/Form/Element/DateTime.php:107
+#: src/Form/Element/DateTime.php:105
 msgid "11 — 11 am"
 msgstr "11 — 11 am"
 
-#: src/Form/Element/DateTime.php:108
+#: src/Form/Element/DateTime.php:106
 msgid "12 — 12 pm"
 msgstr "12 — 12 pm"
 
-#: src/Form/Element/DateTime.php:109
+#: src/Form/Element/DateTime.php:107
 msgid "13 — 1 pm"
 msgstr "13 — 1 pm"
 
-#: src/Form/Element/DateTime.php:110
+#: src/Form/Element/DateTime.php:108
 msgid "14 — 2 pm"
 msgstr "14 — 2 pm"
 
-#: src/Form/Element/DateTime.php:111
+#: src/Form/Element/DateTime.php:109
 msgid "15 — 3 pm"
 msgstr "15 — 3 pm"
 
-#: src/Form/Element/DateTime.php:112
+#: src/Form/Element/DateTime.php:110
 msgid "16 — 4 pm"
 msgstr "16 — 4 pm"
 
-#: src/Form/Element/DateTime.php:113
+#: src/Form/Element/DateTime.php:111
 msgid "17 — 5 pm"
 msgstr "17 — 5 pm"
 
-#: src/Form/Element/DateTime.php:114
+#: src/Form/Element/DateTime.php:112
 msgid "18 — 6 pm"
 msgstr "18 — 6 pm"
 
-#: src/Form/Element/DateTime.php:115
+#: src/Form/Element/DateTime.php:113
 msgid "19 — 7 pm"
 msgstr "19 — 7 pm"
 
-#: src/Form/Element/DateTime.php:116
+#: src/Form/Element/DateTime.php:114
 msgid "20 — 8 pm"
 msgstr "20 — 8 pm"
 
-#: src/Form/Element/DateTime.php:117
+#: src/Form/Element/DateTime.php:115
 msgid "21 — 9 pm"
 msgstr "21 — 9 pm"
 
-#: src/Form/Element/DateTime.php:118
+#: src/Form/Element/DateTime.php:116
 msgid "22 — 10 pm"
 msgstr "22 — 10 pm"
 
-#: src/Form/Element/DateTime.php:119
+#: src/Form/Element/DateTime.php:117
 msgid "23 — 11 pm"
 msgstr "23 — 11 pm"
-
-#: src/Form/Element/Duration.php:30 src/Form/Element/Duration.php:31
-msgid "Years"
-msgstr "Anys"
-
-#: src/Form/Element/Duration.php:39 src/Form/Element/Duration.php:40
-msgid "Months"
-msgstr "Mesos"
-
-#: src/Form/Element/Duration.php:48 src/Form/Element/Duration.php:49
-msgid "Days"
-msgstr "Dies"
-
-#: src/Form/Element/Duration.php:57 src/Form/Element/Duration.php:58
-msgid "Hours"
-msgstr "Hores"
-
-#: src/Form/Element/Duration.php:66 src/Form/Element/Duration.php:67
-msgid "Minutes"
-msgstr "Minuts"
-
-#: src/Form/Element/Duration.php:75 src/Form/Element/Duration.php:76
-msgid "Seconds"
-msgstr "Segons"
 
 #: config/module.config.php:64
 msgid "Date/Time (ISO 8601)"
@@ -675,3 +695,19 @@ msgstr "Durada (ISO 8601)"
 #: config/module.config.php:76
 msgid "Integer"
 msgstr "Sencer"
+
+#: config/module.config.php:111
+msgid "A facet must have a property."
+msgstr ""
+
+#: config/module.config.php:112
+msgid ""
+"Cannot add all. This facet is configured with a minimum, maximum and step "
+"rather than a list of values."
+msgstr ""
+
+#: config/module.config.php:113
+msgid ""
+"Cannot add all. This facet needs a single date or time per line, but the "
+"available values are intervals."
+msgstr ""

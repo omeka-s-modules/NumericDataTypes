@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-20 11:34-0400\n"
+"POT-Creation-Date: 2026-10-06 10:56-0400\n"
 "PO-Revision-Date: 2018-11-27 19:31+0000\n"
 "Last-Translator: Tamás Dombos, 2023\n"
 "Language-Team: Hungarian (Hungary) (https://app.transifex.com/omeka/teams/14184/hu_HU/)\n"
@@ -81,81 +81,139 @@ msgstr "%s másodperc"
 msgid "%s seconds"
 msgstr "%s másodperc"
 
-#: view/common/faceted-browse/facet-data-form/date-after.phtml:4
-#: view/common/faceted-browse/facet-data-form/date-before.phtml:4
-#: view/common/faceted-browse/facet-data-form/date-in-interval.phtml:4
-#: view/common/faceted-browse/facet-data-form/duration-greater-than.phtml:4
-#: view/common/faceted-browse/facet-data-form/duration-less-than.phtml:4
-#: view/common/faceted-browse/facet-data-form/value-greater-than.phtml:6
-#: view/common/faceted-browse/facet-data-form/value-less-than.phtml:6
-msgid "Show all available values."
-msgstr "Összes elérhető érték mutatása."
+#: view/common/faceted-browse/facet-data-form/date-after.phtml:5
+#: view/common/faceted-browse/facet-data-form/date-before.phtml:5
+#: view/common/faceted-browse/facet-data-form/date-in-interval.phtml:5
+#: view/common/faceted-browse/facet-data-form/duration-greater-than.phtml:5
+#: view/common/faceted-browse/facet-data-form/duration-less-than.phtml:5
+#: view/common/faceted-browse/facet-data-form/value-greater-than.phtml:7
+#: view/common/faceted-browse/facet-data-form/value-less-than.phtml:7
+msgid "Show available values"
+msgstr ""
 
-#: view/common/numeric-data-types-advanced-search.phtml:100
+#: view/common/numeric-data-types-advanced-search.phtml:102
 msgid "Date comes on or after"
 msgstr "Dátum ez a nap vagy később"
 
-#: view/common/numeric-data-types-advanced-search.phtml:116
+#: view/common/numeric-data-types-advanced-search.phtml:121
 msgid "Date comes on or before"
 msgstr "Dátum ez a nap vagy korábban"
 
-#: view/common/numeric-data-types-advanced-search.phtml:132
+#: view/common/numeric-data-types-advanced-search.phtml:140
 msgid "Duration is greater than"
 msgstr "Hosszabb, mint"
 
-#: view/common/numeric-data-types-advanced-search.phtml:148
+#: view/common/numeric-data-types-advanced-search.phtml:159
 msgid "Duration is less than"
 msgstr "Rövidebb, mint"
 
-#: view/common/numeric-data-types-advanced-search.phtml:164
+#: view/common/numeric-data-types-advanced-search.phtml:178
 msgid "Date in interval"
 msgstr "Ez a dátum az intervallumba esik"
 
-#: view/common/numeric-data-types-advanced-search.phtml:180
+#: view/common/numeric-data-types-advanced-search.phtml:197
 msgid "Number is greater than"
 msgstr ""
 
-#: view/common/numeric-data-types-advanced-search.phtml:196
+#: view/common/numeric-data-types-advanced-search.phtml:219
 msgid "Number is less than"
 msgstr ""
 
-#: view/common/numeric-duration.phtml:9 view/common/numeric-integer.phtml:9
-#: view/common/numeric-interval.phtml:11
-#: view/common/numeric-timestamp.phtml:11
+#: view/common/numeric-duration.phtml:12
+msgid "Years"
+msgstr "Év"
+
+#: view/common/numeric-duration.phtml:16
+msgid "Months"
+msgstr "Hónap"
+
+#: view/common/numeric-duration.phtml:20
+msgid "Days"
+msgstr "Nap"
+
+#: view/common/numeric-duration.phtml:23 view/common/numeric-interval.phtml:28
+#: view/common/numeric-interval.phtml:64
+#: view/common/numeric-timestamp.phtml:25
+msgid "Time"
+msgstr "Idő"
+
+#: view/common/numeric-duration.phtml:27
+msgid "Hours"
+msgstr "Óra"
+
+#: view/common/numeric-duration.phtml:31
+msgid "Minutes"
+msgstr "Perc"
+
+#: view/common/numeric-duration.phtml:35
+msgid "Seconds"
+msgstr "Másodperc"
+
+#: view/common/numeric-duration.phtml:40 view/common/numeric-integer.phtml:15
+#: view/common/numeric-interval.phtml:86
 #, php-format
 msgid "Invalid value: %s"
 msgstr "Érvénytelen érték: %s"
 
-#: view/common/numeric-duration.phtml:10
+#: view/common/numeric-duration.phtml:41
 msgid "Value must be a duration"
 msgstr "Az értéknek időtartamnak kell lennie"
 
-#: view/common/numeric-duration.phtml:18 view/common/numeric-interval.phtml:21
-#: view/common/numeric-interval.phtml:36
-#: view/common/numeric-timestamp.phtml:20
-msgid "Time"
-msgstr "Idő"
-
-#: view/common/numeric-integer.phtml:10
+#: view/common/numeric-integer.phtml:16
 msgid ""
 "Value must be an integer or decimal; the number must not be less than "
 "-9007199254740991 or greater than 9007199254740991; the number of digits to "
 "either the left or right side of a decimal cannot exceed 16."
 msgstr ""
 
-#: view/common/numeric-interval.phtml:12
-msgid "Value must be a valid interval with a start and an end."
-msgstr ""
-
-#: view/common/numeric-interval.phtml:16
+#: view/common/numeric-interval.phtml:14
 msgid "Start:"
 msgstr "Kezdete:"
 
-#: view/common/numeric-interval.phtml:31
+#: view/common/numeric-interval.phtml:17 view/common/numeric-interval.phtml:53
+#: view/common/numeric-timestamp.phtml:14
+msgid "Year"
+msgstr "Év"
+
+#: view/common/numeric-interval.phtml:21 view/common/numeric-interval.phtml:57
+#: view/common/numeric-timestamp.phtml:18
+msgid "Month"
+msgstr "Hónap"
+
+#: view/common/numeric-interval.phtml:25 view/common/numeric-interval.phtml:61
+#: view/common/numeric-timestamp.phtml:22
+msgid "Day"
+msgstr "Nap"
+
+#: view/common/numeric-interval.phtml:32 view/common/numeric-interval.phtml:68
+#: view/common/numeric-timestamp.phtml:29
+msgid "Hour"
+msgstr "Óra"
+
+#: view/common/numeric-interval.phtml:36 view/common/numeric-interval.phtml:72
+#: view/common/numeric-timestamp.phtml:33
+msgid "Minute"
+msgstr "Perc"
+
+#: view/common/numeric-interval.phtml:40 view/common/numeric-interval.phtml:76
+#: view/common/numeric-timestamp.phtml:37
+msgid "Second"
+msgstr "Másodperc"
+
+#: view/common/numeric-interval.phtml:44 view/common/numeric-interval.phtml:80
+#: view/common/numeric-timestamp.phtml:41
+msgid "Offset"
+msgstr "Időeltolódás"
+
+#: view/common/numeric-interval.phtml:50
 msgid "End:"
 msgstr "Vége:"
 
-#: view/common/numeric-timestamp.phtml:12
+#: view/common/numeric-interval.phtml:87
+msgid "Value must be a valid interval with a start and an end."
+msgstr ""
+
+#: view/common/numeric-timestamp.phtml:46
 msgid "Value must be a datetime"
 msgstr "Az értéknek egész dátum és időnek kell lennie"
 
@@ -179,65 +237,72 @@ msgstr "Dátum/idő"
 msgid "Numeric"
 msgstr "Szám"
 
-#: src/FacetedBrowse/FacetType/DateInInterval.php:54
-#: src/FacetedBrowse/FacetType/DateAfter.php:54
-#: src/FacetedBrowse/FacetType/DurationLessThan.php:54
-#: src/FacetedBrowse/FacetType/DurationGreaterThan.php:54
-#: src/FacetedBrowse/FacetType/ValueLessThan.php:53
-#: src/FacetedBrowse/FacetType/ValueGreaterThan.php:53
-#: src/FacetedBrowse/FacetType/DateBefore.php:54
+#: src/FacetedBrowse/FacetType/DateInInterval.php:62
+#: src/FacetedBrowse/FacetType/DateAfter.php:62
+#: src/FacetedBrowse/FacetType/DurationLessThan.php:62
+#: src/FacetedBrowse/FacetType/DurationGreaterThan.php:62
+#: src/FacetedBrowse/FacetType/ValueLessThan.php:61
+#: src/FacetedBrowse/FacetType/ValueGreaterThan.php:61
+#: src/FacetedBrowse/FacetType/DateBefore.php:62
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:44
 #: src/Datavis/DatasetType/CountItemsPropertyValuesTimeSeries.php:72
 #: src/Datavis/DatasetType/CountItemsTimeSeries.php:46
 msgid "Select one…"
 msgstr "Válasszon egyet…"
 
-#: src/FacetedBrowse/FacetType/DateInInterval.php:61
-#: src/FacetedBrowse/FacetType/DateAfter.php:61
-#: src/FacetedBrowse/FacetType/DateBefore.php:61
+#: src/FacetedBrowse/FacetType/DateInInterval.php:69
+msgid ""
+"Enter one value per line: a single date/time in ISO 8601 format, a space, "
+"then the human-readable date/time. For example \"1935-06-15 15 June 1935\". "
+"Date ranges are not accepted. A partial date means its first moment, so "
+"\"1930\" is 1 January 1930."
+msgstr ""
+
+#: src/FacetedBrowse/FacetType/DateInInterval.php:117
+#: src/FacetedBrowse/FacetType/DateAfter.php:117
+#: src/FacetedBrowse/FacetType/DurationLessThan.php:117
+#: src/FacetedBrowse/FacetType/DurationGreaterThan.php:117
+#: src/FacetedBrowse/FacetType/DateBefore.php:117
+msgid "Select a date…"
+msgstr "Dátum kiválasztása…"
+
+#: src/FacetedBrowse/FacetType/DateAfter.php:31
+msgid "Date after"
+msgstr "Dátum később, mint"
+
+#: src/FacetedBrowse/FacetType/DateAfter.php:69
+#: src/FacetedBrowse/FacetType/DateBefore.php:69
 msgid ""
 "Enter the date/time values, separated by a new line. For each line, enter "
 "the date/time in ISO 8601 format, followed by a space, followed by the "
 "human-readable date/time."
 msgstr ""
 
-#: src/FacetedBrowse/FacetType/DateInInterval.php:108
-#: src/FacetedBrowse/FacetType/DateAfter.php:108
-#: src/FacetedBrowse/FacetType/DurationLessThan.php:108
-#: src/FacetedBrowse/FacetType/DurationGreaterThan.php:108
-#: src/FacetedBrowse/FacetType/DateBefore.php:108
-msgid "Select a date…"
-msgstr "Dátum kiválasztása…"
-
-#: src/FacetedBrowse/FacetType/DateAfter.php:23
-msgid "Date after"
-msgstr "Dátum később, mint"
-
-#: src/FacetedBrowse/FacetType/DurationLessThan.php:23
+#: src/FacetedBrowse/FacetType/DurationLessThan.php:31
 msgid "Duration less than"
 msgstr "Időtartam rövidebb, mint"
 
-#: src/FacetedBrowse/FacetType/DurationLessThan.php:61
-#: src/FacetedBrowse/FacetType/DurationGreaterThan.php:61
+#: src/FacetedBrowse/FacetType/DurationLessThan.php:69
+#: src/FacetedBrowse/FacetType/DurationGreaterThan.php:69
 msgid ""
 "Enter the duration values, separated by a new line. For each line, enter the"
 " duration in ISO 8601 format, followed by a space, followed by the human-"
 "readable duration."
 msgstr ""
 
-#: src/FacetedBrowse/FacetType/DurationGreaterThan.php:23
+#: src/FacetedBrowse/FacetType/DurationGreaterThan.php:31
 msgid "Duration greater than"
 msgstr "Időtartam hosszabb, mint"
 
-#: src/FacetedBrowse/FacetType/ValueLessThan.php:22
+#: src/FacetedBrowse/FacetType/ValueLessThan.php:30
 msgid "Value less than"
 msgstr "Érték kisebb, mint"
 
-#: src/FacetedBrowse/FacetType/ValueGreaterThan.php:22
+#: src/FacetedBrowse/FacetType/ValueGreaterThan.php:30
 msgid "Value greater than"
 msgstr "Érték nagyobb, mint"
 
-#: src/FacetedBrowse/FacetType/DateBefore.php:23
+#: src/FacetedBrowse/FacetType/DateBefore.php:31
 msgid "Date before"
 msgstr "Dátum korábbi, mint"
 
@@ -452,201 +517,149 @@ msgstr ""
 msgid "Plot type"
 msgstr ""
 
-#: src/Form/Element/DateTime.php:30 src/Form/Element/DateTime.php:31
-msgid "Year"
-msgstr "Év"
-
-#: src/Form/Element/DateTime.php:35 src/Form/Element/DateTime.php:36
-msgid "Month"
-msgstr "Hónap"
-
-#: src/Form/Element/DateTime.php:40 src/Form/Element/DateTime.php:41
-msgid "Day"
-msgstr "Nap"
-
-#: src/Form/Element/DateTime.php:45 src/Form/Element/DateTime.php:46
-msgid "Hour"
-msgstr "Óra"
-
-#: src/Form/Element/DateTime.php:50 src/Form/Element/DateTime.php:51
-msgid "Minute"
-msgstr "Perc"
-
-#: src/Form/Element/DateTime.php:55 src/Form/Element/DateTime.php:56
-msgid "Second"
-msgstr "Másodperc"
-
-#: src/Form/Element/DateTime.php:60 src/Form/Element/DateTime.php:61
-msgid "Offset"
-msgstr "Időeltolódás"
-
-#: src/Form/Element/DateTime.php:68
+#: src/Form/Element/DateTime.php:66
 msgid "01 — January"
 msgstr "01 — január"
 
-#: src/Form/Element/DateTime.php:69
+#: src/Form/Element/DateTime.php:67
 msgid "02 — February"
 msgstr "02 — február"
 
-#: src/Form/Element/DateTime.php:70
+#: src/Form/Element/DateTime.php:68
 msgid "03 — March"
 msgstr "03 — március"
 
-#: src/Form/Element/DateTime.php:71
+#: src/Form/Element/DateTime.php:69
 msgid "04 — April"
 msgstr "04 — április"
 
-#: src/Form/Element/DateTime.php:72
+#: src/Form/Element/DateTime.php:70
 msgid "05 — May"
 msgstr "05 — május"
 
-#: src/Form/Element/DateTime.php:73
+#: src/Form/Element/DateTime.php:71
 msgid "06 — June"
 msgstr "06 — június"
 
-#: src/Form/Element/DateTime.php:74
+#: src/Form/Element/DateTime.php:72
 msgid "07 — July"
 msgstr "07 — július"
 
-#: src/Form/Element/DateTime.php:75
+#: src/Form/Element/DateTime.php:73
 msgid "08 — August"
 msgstr "08 — augusztus"
 
-#: src/Form/Element/DateTime.php:76
+#: src/Form/Element/DateTime.php:74
 msgid "09 — September"
 msgstr "09 — szeptember"
 
-#: src/Form/Element/DateTime.php:77
+#: src/Form/Element/DateTime.php:75
 msgid "10 — October"
 msgstr "10 — október"
 
-#: src/Form/Element/DateTime.php:78
+#: src/Form/Element/DateTime.php:76
 msgid "11 — November"
 msgstr "11 — november"
 
-#: src/Form/Element/DateTime.php:79
+#: src/Form/Element/DateTime.php:77
 msgid "12 — December"
 msgstr "12 — december"
 
-#: src/Form/Element/DateTime.php:96
+#: src/Form/Element/DateTime.php:94
 msgid "00 — 12 am"
 msgstr "00 — 0 óra"
 
-#: src/Form/Element/DateTime.php:97
+#: src/Form/Element/DateTime.php:95
 msgid "01 — 1 am"
 msgstr "01 — 1 óra"
 
-#: src/Form/Element/DateTime.php:98
+#: src/Form/Element/DateTime.php:96
 msgid "02 — 2 am"
 msgstr "02 — 2 óra"
 
-#: src/Form/Element/DateTime.php:99
+#: src/Form/Element/DateTime.php:97
 msgid "03 — 3 am"
 msgstr "03 — 3 óra"
 
-#: src/Form/Element/DateTime.php:100
+#: src/Form/Element/DateTime.php:98
 msgid "04 — 4 am"
 msgstr "04 — 4 óra"
 
-#: src/Form/Element/DateTime.php:101
+#: src/Form/Element/DateTime.php:99
 msgid "05 — 5 am"
 msgstr "05 — 5 óra"
 
-#: src/Form/Element/DateTime.php:102
+#: src/Form/Element/DateTime.php:100
 msgid "06 — 6 am"
 msgstr "06 — 6 óra"
 
-#: src/Form/Element/DateTime.php:103
+#: src/Form/Element/DateTime.php:101
 msgid "07 — 7 am"
 msgstr "07 — 7 óra"
 
-#: src/Form/Element/DateTime.php:104
+#: src/Form/Element/DateTime.php:102
 msgid "08 — 8 am"
 msgstr "08 — 8 óra"
 
-#: src/Form/Element/DateTime.php:105
+#: src/Form/Element/DateTime.php:103
 msgid "09 — 9 am"
 msgstr "09 — 9 óra"
 
-#: src/Form/Element/DateTime.php:106
+#: src/Form/Element/DateTime.php:104
 msgid "10 — 10 am"
 msgstr "10 — 10 óra"
 
-#: src/Form/Element/DateTime.php:107
+#: src/Form/Element/DateTime.php:105
 msgid "11 — 11 am"
 msgstr "11 — 11 óra"
 
-#: src/Form/Element/DateTime.php:108
+#: src/Form/Element/DateTime.php:106
 msgid "12 — 12 pm"
 msgstr "12 — 12 óra"
 
-#: src/Form/Element/DateTime.php:109
+#: src/Form/Element/DateTime.php:107
 msgid "13 — 1 pm"
 msgstr "13 — 13 óra"
 
-#: src/Form/Element/DateTime.php:110
+#: src/Form/Element/DateTime.php:108
 msgid "14 — 2 pm"
 msgstr "14 — 14 óra"
 
-#: src/Form/Element/DateTime.php:111
+#: src/Form/Element/DateTime.php:109
 msgid "15 — 3 pm"
 msgstr "15 — 15 óra"
 
-#: src/Form/Element/DateTime.php:112
+#: src/Form/Element/DateTime.php:110
 msgid "16 — 4 pm"
 msgstr "16 — 16 óra"
 
-#: src/Form/Element/DateTime.php:113
+#: src/Form/Element/DateTime.php:111
 msgid "17 — 5 pm"
 msgstr "17 — 17 óra"
 
-#: src/Form/Element/DateTime.php:114
+#: src/Form/Element/DateTime.php:112
 msgid "18 — 6 pm"
 msgstr "18 — 18 óra"
 
-#: src/Form/Element/DateTime.php:115
+#: src/Form/Element/DateTime.php:113
 msgid "19 — 7 pm"
 msgstr "19 — 19 óra"
 
-#: src/Form/Element/DateTime.php:116
+#: src/Form/Element/DateTime.php:114
 msgid "20 — 8 pm"
 msgstr "20 — 20 óra"
 
-#: src/Form/Element/DateTime.php:117
+#: src/Form/Element/DateTime.php:115
 msgid "21 — 9 pm"
 msgstr "21 — 21 óra"
 
-#: src/Form/Element/DateTime.php:118
+#: src/Form/Element/DateTime.php:116
 msgid "22 — 10 pm"
 msgstr "22 — 22 óra"
 
-#: src/Form/Element/DateTime.php:119
+#: src/Form/Element/DateTime.php:117
 msgid "23 — 11 pm"
 msgstr "23 — 23 óra"
-
-#: src/Form/Element/Duration.php:30 src/Form/Element/Duration.php:31
-msgid "Years"
-msgstr "Év"
-
-#: src/Form/Element/Duration.php:39 src/Form/Element/Duration.php:40
-msgid "Months"
-msgstr "Hónap"
-
-#: src/Form/Element/Duration.php:48 src/Form/Element/Duration.php:49
-msgid "Days"
-msgstr "Nap"
-
-#: src/Form/Element/Duration.php:57 src/Form/Element/Duration.php:58
-msgid "Hours"
-msgstr "Óra"
-
-#: src/Form/Element/Duration.php:66 src/Form/Element/Duration.php:67
-msgid "Minutes"
-msgstr "Perc"
-
-#: src/Form/Element/Duration.php:75 src/Form/Element/Duration.php:76
-msgid "Seconds"
-msgstr "Másodperc"
 
 #: config/module.config.php:64
 msgid "Date/Time (ISO 8601)"
@@ -663,3 +676,19 @@ msgstr "Időtartam (ISO 8601)"
 #: config/module.config.php:76
 msgid "Integer"
 msgstr "Egész szám"
+
+#: config/module.config.php:111
+msgid "A facet must have a property."
+msgstr ""
+
+#: config/module.config.php:112
+msgid ""
+"Cannot add all. This facet is configured with a minimum, maximum and step "
+"rather than a list of values."
+msgstr ""
+
+#: config/module.config.php:113
+msgid ""
+"Cannot add all. This facet needs a single date or time per line, but the "
+"available values are intervals."
+msgstr ""
